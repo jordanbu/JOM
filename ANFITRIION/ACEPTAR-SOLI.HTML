@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Host Dashboard - Request Approval (V1)</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-light": "#F8F9FC",
+                        secondary: "#6B7280",
+                        warning: "#F59E0B",
+                        divider: "#E5E7EB",
+                        title: "#1F2937"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'large': "16px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: theme('colors.background-light');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: theme('colors.divider');
+            border-radius: 10px;
+        }
+        .active-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.primary');
+        }
+        .content-block {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid theme('colors.divider');
+        }
+        h1 {
+            @apply text-[28px] font-bold leading-tight;
+        }
+        .body-text {
+            @apply text-[14px] leading-relaxed;
+        }
+        .price-text {
+            @apply text-[20px] font-bold text-primary;
+        }
+        .btn-primary {
+            @apply bg-primary text-white font-bold text-[16px] hover:bg-[#4A44B0] transition-colors shadow-sm;
+        }
+        .btn-secondary {
+            @apply bg-white border border-divider text-slate-900 font-bold text-[16px] hover:bg-slate-50 transition-colors;
+        }
+    </style>
+</head>
+
+<body class="text-slate-900 min-h-screen">
+    <header
+        class="h-16 w-full flex items-center justify-between px-8 bg-white border-b border-divider fixed top-0 left-0 z-[60]">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs">jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 text-sm font-medium text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español (BO)</span>
+            </div>
+            <button class="text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+            </button>
+            <div
+                class="flex items-center gap-2 p-1 pl-3 border border-divider rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600">menu</span>
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex h-screen pt-16">
+        <aside class="w-[240px] bg-white border-r border-divider flex-shrink-0">
+            <nav class="px-4 py-6 space-y-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    <span class="text-[14px]">Hoy</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">campaign</span>
+                    <span class="text-[14px]">Anuncios</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <span class="text-[14px]">Calendario</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-50 text-primary font-semibold" href="#">
+                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                    <span class="text-[14px]">Mensajería</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                    <span class="text-[14px]">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+        <main class="flex-1 overflow-hidden p-8 flex justify-center">
+            <div
+                class="w-full max-w-[1200px] bg-white rounded-large border border-divider flex overflow-visible shadow-sm relative">
+                <div class="w-[360px] border-r border-divider flex flex-col bg-white shrink-0">
+                    <div class="p-6 flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Solicitudes</h2>
+                        <button class="p-2 hover:bg-slate-50 rounded-full">
+                            <span class="material-symbols-outlined text-slate-600">filter_list</span>
+                        </button>
+                    </div>
+                    <div class="flex-1 overflow-y-auto custom-scrollbar">
+                        <div class="relative p-6 border-b border-divider cursor-pointer bg-slate-50/50">
+                            <div class="active-indicator"></div>
+                            <div class="flex gap-4">
+                                <img alt="Maria" class="w-12 h-12 rounded-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <span class="font-bold text-[14px] truncate">María</span>
+                                        <span class="text-[12px] text-slate-400 whitespace-nowrap">Hace 4 horas</span>
+                                    </div>
+                                    <p class="text-[14px] font-semibold text-slate-900 truncate">Solicitud de reserva
+                                    </p>
+                                    <p class="text-[13px] text-slate-500 truncate mb-2">Depto en you Smart by Equipetrol
+                                    </p>
+                                    <div
+                                        class="inline-flex items-center gap-1 bg-[#FEF3C7] text-[#D97706] px-2 py-0.5 rounded text-[11px] font-bold">
+                                        <span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        Quedan 19 horas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 border-b border-divider hover:bg-slate-50 cursor-pointer">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-full bg-slate-100 flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <span class="body-text font-medium truncate">Jordi</span>
+                                        <span class="text-[12px] text-slate-400 whitespace-nowrap">Hace 6 horas</span>
+                                    </div>
+                                    <p class="text-[14px] text-slate-900 truncate">Solicitud de reserva</p>
+                                    <p class="text-[13px] text-slate-500 truncate">Elegante Depto Stratto piso 9</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col bg-white">
+                    <div class="flex-1 overflow-y-auto custom-scrollbar relative">
+                        <div class="max-w-[800px] mx-auto px-8 pt-10 pb-28 relative overflow-hidden">
+                            <!-- Slide-in approve panel: improved style -->
+                            <div id="approve-panel"
+                                class="absolute top-0 right-0 h-full w-full transform translate-x-full transition-transform duration-300 ease-in-out z-50 shadow-lg bg-white">
+                                <div class="p-6 h-full flex flex-col">
+                                    <div class="max-w-full mx-auto w-full">
+                                        <div class="bg-white rounded-large p-6 shadow-sm h-full flex flex-col">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 rounded-large bg-primary flex items-center justify-center text-white">
+                                                    <span class="material-symbols-outlined text-[20px]">payments</span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <h2 class="text-[22px] md:text-[28px] font-extrabold text-title">¿Quieres aprobar la solicitud de reserva?</h2>
+                                                    <p class="text-sm text-slate-600 mt-2">Al aprobar esta solicitud, el huésped podrá realizar el pago para confirmar la reserva. El alojamiento se reservará únicamente cuando el pago sea completado.</p>
+                                                </div>
+                                                <button id="approve-panel-close" class="text-slate-400 hover:text-slate-700 text-[20px] ml-2">✕</button>
+                                            </div>
+
+                                            <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <div class="bg-slate-50 border border-divider rounded-large p-4">
+                                                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Fechas</p>
+                                                    <p class="text-base font-semibold text-title">30 ago - 10 sep</p>
+                                                </div>
+                                                <div class="bg-slate-50 border border-divider rounded-large p-4">
+                                                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Huéspedes</p>
+                                                    <p class="text-base font-semibold text-title">1 adulto</p>
+                                                </div>
+                                                <div class="col-span-1 md:col-span-1 bg-white border border-divider rounded-large p-4 flex items-center justify-between">
+                                                    <div>
+                                                        <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Total estimado</p>
+                                                        <p class="text-xl md:text-2xl font-extrabold text-title">BOB 2.000,00</p>
+                                                    </div>
+                                                    <div class="text-sm text-slate-500">Estimado</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-5 bg-white border border-divider rounded-large p-4">
+                                                <p class="font-semibold mb-2">Mensaje del huésped</p>
+                                                <div class="bg-slate-50 p-3 rounded-lg mb-2">
+                                                    <p class="body-text text-slate-800">María dijo: Buenas tardes</p>
+                                                </div>
+                                                <p class="text-xs text-slate-400">12:08 p.m.</p>
+                                            </div>
+
+                                            <div class="mt-6 flex flex-col gap-3">
+                                                <button id="approve-panel-confirm" class="w-full h-12 rounded-large btn-primary">Sí, aprobar solicitud</button>
+                                                <button id="approve-panel-cancel" class="w-full h-12 rounded-large btn-secondary">Cancelar</button>
+                                            </div>
+
+                                            <p class="text-xs text-slate-500 mt-4">Podrás comunicarte con el huésped mientras se completa el pago.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mb-8">
+                                <h1 class="text-[28px] font-bold">María hizo una solicitud</h1>
+                                <img alt="Maria" class="w-14 h-14 rounded-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                            </div>
+                            <div class="content-block">
+                                <div class="grid grid-cols-3 gap-8">
+                                    <div>
+                                        <p class="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-1">
+                                            Fechas</p>
+                                        <p class="body-text font-medium">30 ago - 10 sep</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-1">
+                                            Huéspedes</p>
+                                        <p class="body-text font-medium">1 huésped</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-1">
+                                            Total</p>
+                                        <p class="price-text text-primary">BOB 2.000,00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-block">
+                                <div class="flex flex-col gap-2 max-w-[85%]">
+                                    <div class="bg-[#F3F4F6] p-4 rounded-2xl rounded-tl-none">
+                                        <p class="body-text text-slate-800">María dijo: Buenas tardes</p>
+                                    </div>
+                                    <span class="text-[11px] text-slate-400 ml-1">12:08 p.m.</span>
+                                </div>
+                            </div>
+                            <div class="content-block">
+                                <div class="flex flex-col gap-3 max-w-[400px]">
+                                    <button
+                                        class="w-full h-12 bg-primary text-white rounded-lg font-bold text-[15px] hover:bg-[#4A44B0] transition-colors shadow-sm js-open-approve-panel">
+                                        Aceptar solicitud
+                                    </button>
+                                    <button
+                                        class="w-full h-12 bg-white border border-divider text-slate-900 rounded-lg font-bold text-[15px] hover:bg-slate-50 transition-colors">
+                                        Rechazar
+                                    </button>
+                                    <p class="text-[13px] text-slate-500 mt-1">Decide en un plazo de 18:20:13 para
+                                        mantener tu índice de respuesta.</p>
+                                </div>
+                            </div>
+                            <div class="content-block">
+                                <h3 class="body-text font-bold mb-4">Acerca de María de los Ángeles</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400 text-[20px]">star</span>
+                                        <span class="body-text">4.9 de valoración</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-slate-400 text-[20px]">verified_user</span>
+                                        <span class="body-text">Identidad verificada</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-slate-400 text-[20px]">location_on</span>
+                                        <span class="body-text">Vive en La Paz, Bolivia</span>
+                                    </div>
+                                </div>
+                                <button class="mt-6 text-primary font-bold text-[14px] hover:underline">Mostrar el
+                                    perfil</button>
+                            </div>
+                            <div class="content-block">
+                                <h3 class="body-text font-bold mb-4">Detalles de la reserva</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-start py-1">
+                                        <div>
+                                            <p class="body-text font-semibold">Huéspedes</p>
+                                            <p class="body-text text-slate-500">1 adulto</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-start py-1">
+                                        <div>
+                                            <p class="body-text font-semibold">Check-in</p>
+                                            <p class="body-text text-slate-500">Vie, 30 de ago. de 2025</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-start py-1">
+                                        <div>
+                                            <p class="body-text font-semibold">Check-out</p>
+                                            <p class="body-text text-slate-500">Mar, 10 de sep. de 2025</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="mt-6 text-primary font-bold text-[14px] hover:underline">Mostrar el
+                                    calendario</button>
+                            </div>
+                            <div class="content-block border-none">
+                                <h3 class="body-text font-bold mb-4">Ganancias potenciales</h3>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between body-text">
+                                        <span class="text-slate-600">1 noche x 120,00 BOB</span>
+                                        <span>120,00 BOB</span>
+                                    </div>
+                                    <div class="flex justify-between body-text">
+                                        <span class="text-slate-600">Comisión por servicio de JOM</span>
+                                        <span class="text-red-500">-10,00 BOB</span>
+                                    </div>
+                                    <div class="flex justify-between pt-3 border-t border-divider font-bold">
+                                        <span class="body-text">Total (BOB)</span>
+                                        <span class="price-text">110,00 BOB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- Fixed primary button anchored to bottom of this content card (centered, full-width of content) -->
+                            <div id="fixed-reply-bar" class="absolute left-0 right-0 bottom-0 bg-white border-t border-divider p-4 flex items-center justify-center">
+                                <button id="fixed-reply-open" class="btn-primary h-12 w-full">Enviar mensaje</button>
+                            </div>
+
+                            ...existing code...
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- (old panel removed - replaced with panel inside card to overlap list) -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openButtons = document.querySelectorAll('.js-open-approve-panel');
+            const panel = document.getElementById('approve-panel');
+            const closeBtn = document.getElementById('approve-panel-close');
+            const cancelBtn = document.getElementById('approve-panel-cancel');
+            const confirmBtn = document.getElementById('approve-panel-confirm');
+
+            function openPanel() {
+                panel.classList.remove('translate-x-full');
+                panel.classList.add('translate-x-0');
+            }
+
+            function closePanel() {
+                panel.classList.remove('translate-x-0');
+                panel.classList.add('translate-x-full');
+            }
+
+            openButtons.forEach(btn => btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPanel();
+            }));
+
+            closeBtn.addEventListener('click', closePanel);
+            cancelBtn.addEventListener('click', closePanel);
+
+            // Confirm action placeholder - you can wire this to actual logic
+            confirmBtn.addEventListener('click', () => {
+                // For now, close the panel and you can add further behavior (API call, state change)
+                closePanel();
+                alert('Solicitud aprobada (simulado)');
+            });
+
+            // Fixed reply button handler (opens chat / composes message)
+            const fixedOpen = document.getElementById('fixed-reply-open');
+            if (fixedOpen) {
+                fixedOpen.addEventListener('click', () => {
+                    // Simulate opening a message composer or navigating to chat
+                    alert('Abrir chat con María (simulado)');
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

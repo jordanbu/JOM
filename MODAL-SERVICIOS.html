@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Official JOM Services Modal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "16px",
+                        "xl": "1.5rem",
+                        "jom-modal": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="font-display min-h-screen flex items-center justify-center p-4 bg-background-light dark:bg-background-dark">
+    <div class="fixed inset-0 bg-black/10 dark:bg-black/40 backdrop-blur-xl transition-all"></div>
+    <div class="relative w-full max-w-[560px] bg-white dark:bg-zinc-900 rounded-jom-modal shadow-2xl z-10 overflow-hidden">
+        <div class="absolute right-4 top-4">
+            <button
+                class="w-11 h-11 flex items-center justify-center text-jom-gray-500 hover:bg-jom-gray-50 dark:hover:bg-zinc-800 rounded-full transition-colors duration-200">
+                <span class="material-symbols-outlined text-[24px]">close</span>
+            </button>
+        </div>
+        <div class="p-8">
+            <div class="mb-8 text-center">
+                <h1 class="text-jom-gray-900 dark:text-white text-[20px] font-semibold leading-tight">
+                    Servicios
+                </h1>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">wifi</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Wifi</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">cooking</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Cocina</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">ac_unit</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Aire acondicionado</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">hot_tub</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Agua caliente</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">local_parking</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Estacionamiento gratuito</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">local_laundry_service</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Lavadora</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">tv</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Televisión</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">laptop_mac</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[16px] font-normal">Zona de trabajo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

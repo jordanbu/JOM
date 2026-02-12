@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Reserva Confirmada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-background-dark">
+    <header class="w-full border-b border-jom-gray-200 dark:border-zinc-700 h-20 bg-white dark:bg-zinc-900 sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-content-width py-12">
+        <div class="flex flex-col lg:flex-row gap-16">
+            <div class="flex-1">
+                <div class="mb-6">
+                    <span
+                        class="px-4 py-1.5 bg-slate-100 text-slate-600 text-sm font-semibold rounded-full">Reserva Finalizada</span>
+                </div>
+                <div class="grid grid-cols-4 grid-rows-2 gap-3 h-[400px] mb-8 overflow-hidden rounded-card">
+                    <div class="col-span-2 row-span-2">
+                        <img alt="Living room"
+                            class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0c8mt8g4YgQsrM7uKrV8CCq_Ve_5DNHioDgOLv37Mj0Q6EvISdlyqnDfqXhy1BP3li1Fb51iP-IK1cIgZrqM35_Up0yZxk5m4CacnUamx9q7QHkB6BGGKLkbwgaNBWfMrtTXwrBE5DwsYLlMCCLfidHXPv0ioXqIKdWxJ10RhUfP1DyNEkJ4CwNXAllOLWfHD6McW6nraKkhFF0tCuOwNE1sMECBX5q0-TJb0vt0oNnIR6cgPqpeFo2fN_GYiHCIAK8jGoQ9Xl9G5" />
+                    </div>
+                    <div class="col-span-1 row-span-1">
+                        <img alt="Bedroom"
+                            class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZwSg1evV2FHreNE240zSHTX-ozUgYZJWKN2eHz-v1HcRbzio1ctxJHqSkr0NzK8UnnSW7kAhHO-giZLDbjwH8ADFeqhKJc8IlbfbR0GQlFkw_NEBp4B9OhNmkFWKRj_NFV8bMhfG9oRECol9Q-XsL2Xx1i3lz_Sq2ja-d_wH0j_8JR3qfn_kd46pR8KuoOiWxl9qYuPSFQWOpuCY9uSVoIabYg9jtWJcU23YNQWdMdQ-I8MuZVvBn3PZxe94CNWb95JK8GAAwJnfv" />
+                    </div>
+                    <div class="col-span-1 row-span-1">
+                        <img alt="Kitchen"
+                            class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNBRlWxT7dZH70RuqfYTVl-akowhF0zPVl_kcwy3nVNrUETNo1jTYpiC0FFbnb0G6XpzghNYoAx2eZXUql2jWE1htD-qZoxujKO4UbPVRCWi0CQ6tE58qPkyOJ23YU-hnIjYP0LtGDjAZkTeM-kx3Adb-D1WkoiBpjcd4IJX6kEKGiT8kAGzPOmN1umObeYa-VdLzGmGqbJ9MdEmQY84ubAG2M7xVhkPicxCAPS25BsK5pexbnGKNOmfj2xq0yk_maOIjF5RroGOY9" />
+                    </div>
+                    <div class="col-span-2 row-span-1">
+                        <img alt="Detail"
+                            class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0jGkCdJlTR_dImlV4Sxy28h6h_mP-C_dX-6nM1h5EiVpQhaZbCPT7TRWPPYlr81nvuV6vZQzyjBK_PIE0_psaUzhZUIny4eB6Scb9dC6_nVgZ8coetDjrYTqurFKrW57yMIHnsZ-xdJi_3F2KCMN8xFcXFc22BlAlov_1ruvNX1yULw6cIcrKf5452P7nMTWddHjICuirBLn_TnkZ4WYatb9MtUXQOXD0dO0iFKUEm8z9Cq6b2xz5gJehARykoFh3BFTqg1opDYnu" />
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h1
+                        class="text-[28px] font-semibold leading-tight text-neutral-text mb-2">
+                        Stratto Departamento</h1>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-neutral-bg flex items-center justify-center overflow-hidden">
+                            <img alt="Host Profile" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEwDJosCD45FtTyZdT5z485H7qbsTUAYYpQiUn0DfBId8Z8DkKg8o5dzPf7t1NtiJ-2t91F3ygdseDK-nGxVHzMb6DZV_Tn-1J3A2fq2YoTwmW7R53Z5rns6HwlK4Fg4Wqrbpo8CVZWT-orA_PRjrO3Gel2GS7baHj9v84FXFQ7RNbhgV6scWDCyGwg3rDdOS_c7Li4ppfDgcYKDUcaqgWQ5_eH7bdew9r1ggqB6sT6O3f0XEPQWC7_1gr8lRlNmtiVLKjgzs4Unu2" />
+                        </div>
+                        <div>
+                            <p class="font-medium">Jordan Avir Burgos Cabrera</p>
+                            <p class="text-sm text-neutral-secondary">Bolivia</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="grid grid-cols-2 bg-neutral-bg rounded-card border border-neutral-border mb-6 overflow-hidden">
+                    <div class="p-4 border-r border-neutral-border">
+                        <p class="text-[14px] font-semibold text-neutral-secondary mb-1">llegada</p>
+                        <p class="font-semibold">lun, 26 ene</p>
+                        <p class="text-sm text-neutral-secondary">10:00</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[14px] font-semibold text-neutral-secondary mb-1">salida</p>
+                        <p class="font-semibold">mar, 27 ene</p>
+                        <p class="text-sm text-neutral-secondary">07:00</p>
+                    </div>
+                </div>
+                <div class="space-y-4 mb-12">
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">forum</span>
+                        <div>
+                            <p class="text-[14px] font-semibold text-neutral-secondary mb-4">Mensajes con
+                                el anfitrión</p>
+                            <a href="#" class="text-[14px] font-medium text-primary hover:underline">Jordan Avir Burgos Cabrera</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">home</span>
+                        <div>
+                            <p class="text-[14px] font-semibold text-neutral-secondary mb-2">Hospedaje</p>
+                            <a href="#" class="text-[14px] font-medium text-primary hover:underline">Stratto Departamento</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <h2 class="text-[18px] font-semibold mb-6">Detalles de la reservación</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-medium mb-1">¿Quién te acompañó?</p>
+                            <p class="text-sm text-neutral-secondary">1 huésped(es)</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <h2 class="text-[18px] font-semibold mb-6">Políticas de cancelación</h2>
+                    <div class="space-y-4">
+                        <p class="text-sm text-neutral-secondary leading-relaxed">
+                            Los huéspedes recibieron un reembolso completo si cancelaron hasta un día antes del
+                            check-in.
+                        </p>
+                        <button class="text-[14px] font-medium text-primary hover:underline">Sigue leyendo</button>
+                    </div>
+                </section>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <h2 class="text-[18px] font-semibold mb-6">Reglas e instrucciones</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-medium mb-1">Reglas de la casa</p>
+                            <p class="text-sm text-neutral-secondary">1 huésped(es) como máximo, no se
+                                admiten mascotas</p>
+                        </div>
+                        <button class="text-[14px] font-medium text-primary hover:underline">Mostrar más</button>
+                    </div>
+                </section>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-[18px] font-semibold">Anfitrión: Jordan Avir Burgos Cabrera</h2>
+                        <div class="w-12 h-12 rounded-full overflow-hidden">
+                            <img alt="Host Profile" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT6GVOctIq526VjFXwP3FljfSZ3pYauyVVNm_IG7KuimzZHp5i7Dc20IgLuWLLpIg-6U7UabjXJJzY8NbM6JSqaRoTCz_dYbSTtmykkkGL_XpScSmxSy13DC6Gsw8rk8d33HYIYC6tzfBoE8IUCm4bNi1_7pUYFuyIEY1Wfrl0w6bCK_dbFR673LCJ1uVWy6aug6r7p_eCXEKFolH9kCSiFBEaBcVktYyQsJ_hWmmWKj3SKLg53t9bV72L8VdtkZMPvwT5zJgxUmCI" />
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="font-medium">Acerca del anfitrión</p>
+                        <p class="text-sm text-neutral-secondary">Sin información disponible</p>
+                    </div>
+                </section>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <h2 class="text-[18px] font-semibold mb-6">Información de precio</h2>
+                    <div class="space-y-2">
+                        <p class="text-sm text-neutral-secondary">Monto pagado</p>
+                        <p class="text-[20px] font-bold text-neutral-text">1.15 BOB.</p>
+                    </div>
+                </section>
+                <div class="h-px bg-neutral-border mb-12"></div>
+                <section class="mb-12">
+                    <h2 class="text-[18px] font-semibold mb-6">Obtén asistencia en todo momento</h2>
+                    <div class="space-y-4">
+                        <p class="text-sm text-neutral-secondary">
+                            Si necesitas ayuda, estamos disponibles 24/7 desde cualquier parte del mundo.
+                        </p>
+                        <button class="text-[14px] font-medium text-primary hover:underline">Contactarme con el Servicio al cliente
+                            de JOM</button>
+                    </div>
+                </section>
+            </div>
+            <aside class="w-full lg:w-[360px]">
+                <div
+                    class="sticky top-[120px] max-h-[calc(100vh-140px)] overflow-y-auto p-6 bg-white border border-neutral-border rounded-card shadow-sm">
+                    <div class="space-y-6 mb-8">
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-neutral-border -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Solicitud de reserva
+                                </p>
+                                <p class="text-xs text-neutral-secondary">enviada</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-neutral-border -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Confirmación de solicitud</p>
+                                <p class="text-xs text-neutral-secondary">confirmada</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-neutral-border -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Paga la reserva
+                                </p>
+                                <p class="text-xs text-neutral-secondary">pagada</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-neutral-border -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Check-in</p>
+                                <p class="text-xs text-neutral-secondary">completado</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-neutral-border -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Check-out</p>
+                                <p class="text-xs text-neutral-secondary">completado</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 relative">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-soft-highlight flex items-center justify-center relative z-10">
+                                    <span class="material-symbols-outlined text-neutral-secondary text-[16px]">check</span>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-neutral-text">Reseña</p>
+                                <p class="text-xs text-neutral-secondary">pendiente</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <button
+                            class="w-full h-12 bg-primary hover:bg-ui-primary-hover text-white font-semibold rounded-jom transition-colors">
+                            Escribir una reseña
+                        </button>
+                        <p class="text-center">
+                            <a class="text-[14px] font-medium text-primary underline hover:text-ui-primary-hover transition-colors" href="#">Política de
+                                cancelación</a>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <footer
+        class="bg-neutral-bg border-t border-neutral-border py-12 mt-12">
+        <div class="max-content-width">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-6 text-sm text-neutral-secondary">
+                    <span>© 2024 JOM SRL. Todos los derechos reservados.</span>
+                    <a class="hover:underline" href="#">Privacidad</a>
+                    <a class="hover:underline" href="#">Términos</a>
+                    <a class="hover:underline" href="#">Mapa del sitio</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="flex items-center gap-1 text-sm font-semibold text-neutral-secondary hover:text-neutral-text transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">language</span>
+                        Español (BO)
+                    </button>
+                    <button class="flex items-center gap-1 text-sm font-semibold text-neutral-secondary hover:text-neutral-text transition-colors">
+                        BS (Bolivianos)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Búsqueda de Propiedades</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "ui-primary": "#5B55C8",
+                        "ui-primary-hover": "#4A45B0",
+                        "soft-highlight": "#EFEEFF",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-border": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
+        .map-container {
+            height: auto;
+            max-height: calc(100vh - 160px);
+            margin-top: 32px;
+            margin-bottom: 32px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        @media (max-width: 1024px) {
+            .map-container {
+                max-height: 400px;
+                margin-top: 16px;
+                margin-bottom: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <section
+        class="max-content-width py-6 border-b border-neutral-border flex items-center justify-between lg:hidden">
+        <h3 class="text-[20px] font-semibold tracking-tight text-neutral-text">5 Hospedaje(s) disponible(s)</h3>
+        <button
+            class="flex items-center gap-2 px-6 py-2.5 border border-neutral-border rounded-jom text-neutral-text font-medium hover:bg-neutral-bg transition-colors">
+            <span class="material-symbols-outlined text-lg">tune</span>
+            <span class="text-sm tracking-wide">FILTROS</span>
+        </button>
+    </section>
+    <main class="max-content-width flex flex-col lg:flex-row min-h-screen">
+        <div class="w-full lg:w-[60%] py-8 custom-scrollbar">
+            <!-- Search + Filters aligned to top-left of results -->
+            <div class="flex items-center gap-4 mb-6">
+                <div
+                    class="flex-1 bg-white border border-neutral-border rounded-full p-2 flex items-center">
+                    <button class="flex-1 px-3 text-left border-r border-neutral-border">
+                        <p class="text-[10px] font-bold text-neutral-secondary uppercase tracking-wider">Ubicación</p>
+                        <p class="text-sm font-medium text-neutral-text truncate">Santa Cruz de la Sierra</p>
+                    </button>
+                    <button class="px-3 text-left border-r border-neutral-border">
+                        <p class="text-[10px] font-bold text-neutral-secondary uppercase tracking-wider">Llegada</p>
+                        <p class="text-sm font-medium text-neutral-text text-nowrap">03 feb</p>
+                    </button>
+                    <button class="px-3 text-left border-r border-neutral-border">
+                        <p class="text-[10px] font-bold text-neutral-secondary uppercase tracking-wider">Salida</p>
+                        <p class="text-sm font-medium text-neutral-text text-nowrap">13 feb</p>
+                    </button>
+                    <button class="px-3 text-left mr-2">
+                        <p class="text-[10px] font-bold text-neutral-secondary uppercase tracking-wider">Huéspedes</p>
+                        <p class="text-sm font-medium text-neutral-text text-nowrap">1 Adt</p>
+                    </button>
+                    <button
+                        class="w-10 h-10 bg-primary hover:bg-ui-primary-hover text-white rounded-full flex items-center justify-center flex-shrink-0 transition-colors">
+                        <span class="material-symbols-outlined text-xl">search</span>
+                    </button>
+                </div>
+                <button
+                    class="flex items-center gap-2 px-4 py-2 border border-neutral-border rounded-jom text-neutral-text font-medium hover:bg-neutral-bg transition-colors">
+                    <span class="material-symbols-outlined text-lg">tune</span>
+                    <span class="text-sm tracking-wide">FILTROS</span>
+                </button>
+            </div>
+            <div class="mb-6">
+                <p class="text-sm text-neutral-secondary">5 Hospedaje(s) disponible(s)</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-20">
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[4/3] rounded-card overflow-hidden mb-4">
+                        <img alt="Modern Apartment"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpv-l1Bnzm1CvmA5G6tDO8pS5_lY4LIk_g2NI0wilr5nEgVpw8P-5vgy_djoNFUwd7t_nfdCmm5baso6k11m2k47r_PE2QS_wBWZrqPOLgUIy64wfF4y3E8DsVrNd-gpEuU-wMD8dQXl5PlnGbbkipshafolbm23sJ1tkhf0spywzTi52_sX_m0p14IQ1IMHveUxxVcHotl9Eol6APW6vq_C2jO1JoLMUNvzVabtbMNuaqWQ3A0bZEtB-hkEODdjzmBBQ1DJFIpu4S" />
+                        <button
+                            class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors">
+                            <span class="material-symbols-outlined text-neutral-text">favorite_border</span>
+                        </button>
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-[16px] font-semibold text-neutral-text truncate">av. santos
+                                domount, Bolivia</h3>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-primary text-lg fill-1">star</span>
+                                <span class="text-sm font-medium text-neutral-text">0.0</span>
+                            </div>
+                        </div>
+                        <p class="text-neutral-secondary text-[14px] font-normal">Departamento lujoso</p>
+                        <p class="pt-2">
+                            <span class="text-[20px] font-bold text-neutral-text">450 BOB</span>
+                            <span class="text-neutral-secondary text-sm">/noche</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[4/3] rounded-card overflow-hidden mb-4">
+                        <img alt="Boulevard House"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4g5G3IxcN-Q3bexm3FaDY_zgaN8EHQNoAjnPnxLF1vuRbe-o66CUC_mivVhpKCxytR_eMozbrkeJe0n1CXdTrAzPF7eF8wawlZBxvqULpgWYSRxqN-BsYsCREtELZqgn0tvXLdLdl85OW_0NXhx-_E-ptQGyJLi4FkMcRwVlxag54hnf2jqUIJJtllDdhBliE0TfIoB8SeHQHIxfF7H30Vjul60h0gEBl-0gCEYbyBD0Ghzk7dnf4ojqlhJ03J52gyrxMprb5CG94" />
+                        <button
+                            class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors">
+                            <span class="material-symbols-outlined text-primary fill-1">favorite</span>
+                        </button>
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-[16px] font-semibold text-neutral-text truncate">Boulevard Las
+                                Brisas, Bolivia</h3>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-primary text-lg fill-1">star</span>
+                                <span class="text-sm font-medium text-neutral-text">0.0</span>
+                            </div>
+                        </div>
+                        <p class="text-neutral-secondary text-[14px] font-normal">Casa para días nuevos</p>
+                        <p class="pt-2">
+                            <span class="text-[20px] font-bold text-neutral-text">200 BOB</span>
+                            <span class="text-neutral-secondary text-sm">/noche</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer">
+                    <div
+                        class="relative aspect-[4/3] rounded-card overflow-hidden mb-4 bg-neutral-bg">
+                        <div class="w-full h-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-5xl text-neutral-secondary">image</span>
+                        </div>
+                        <button
+                            class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors">
+                            <span class="material-symbols-outlined text-neutral-secondary">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-[16px] font-semibold text-neutral-text truncate">Calle 6,
+                                Bolivia</h3>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-primary text-lg fill-1">star</span>
+                                <span class="text-sm font-medium text-neutral-text">4.0</span>
+                            </div>
+                        </div>
+                        <p class="text-neutral-secondary text-[14px] font-normal">STRATTO DEPARTAMENTO</p>
+                        <p class="pt-2">
+                            <span class="text-[20px] font-bold text-neutral-text">1 BOB</span>
+                            <span class="text-neutral-secondary text-sm">/noche</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[4/3] rounded-card overflow-hidden mb-4">
+                        <img alt="Cozy Interior"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTVcWb1DN50DVZnOLzDpCX4YfnaOrRA2DnMwVYMfueiEHeaM7Shcb248fj2MlKEoE9XD3jTPT48u3i8AWMVdQ2xJ3cXsXjAJvaCWd7teDCbfUfh7WYt6EC9E7M-9v8E8ogDT_RYf7-1VluGmEknsktrJmrX5GhHFG-Bqh9SBDllvKfG9SY2EsekF9jlgQEsBfM7VHK_3Uglv3E20ltrQxpo1cgkaupc6Ai-r5zdyxWYeWjohAlSQ-4iK2u2hqsjR8982yLV-rGsCt8" />
+                        <button
+                            class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors">
+                            <span class="material-symbols-outlined text-neutral-secondary">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-[16px] font-semibold text-neutral-text truncate">6070 Avenue
+                                Prolongacion</h3>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-primary text-lg fill-1">star</span>
+                                <span class="text-sm font-medium text-neutral-text">4.0</span>
+                            </div>
+                        </div>
+                        <p class="text-neutral-secondary text-[14px] font-normal">Casa moderna de 2 pisos</p>
+                        <p class="pt-2">
+                            <span class="text-[20px] font-bold text-neutral-text">400 BOB</span>
+                            <span class="text-neutral-secondary text-sm">/noche</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="w-full lg:w-[40%] sticky top-20 map-container bg-neutral-bg relative overflow-hidden">
+            <img alt="Map background placeholder"
+                class="w-full h-full object-cover opacity-50 grayscale mix-blend-multiply"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXjegMxZLDP-8-4r4w4r55eny2ouhFojC23_fstEjpxX5SEjCoLVcOxswGpfxTv-catEKLzsVBGwQaGHfeOlSaw165AFuTEeJkpW4nmR0rMathHa4IWd-DTGFRhVt7YNlO99ihKy0EyxapXE4-XhIpqGBjU4gijM13mIrXUM0wKvRtrkFHnhz6ABc5sF34QOpwNi-dofSI0Ced-021rRzYEBTNGoY1YRXetfk1o-pOBNj0IN5GRYSOClGMjVi4QMsrosj4RgAQ19dR" />
+            <div class="absolute top-[30%] left-[20%] group">
+                <div
+                    class="bg-white px-3 py-1.5 rounded-full shadow-lg border border-neutral-border font-bold text-sm cursor-pointer hover:scale-110 transition-transform">
+                    BOB 450
+                </div>
+            </div>
+            <div class="absolute top-[45%] left-[55%] group">
+                <div
+                    class="bg-primary hover:bg-ui-primary-hover text-white px-3 py-1.5 rounded-full shadow-lg font-bold text-sm flex items-center gap-1 cursor-pointer hover:scale-110 transition-all">
+                    BOB 200 <span class="material-symbols-outlined text-xs">favorite</span>
+                </div>
+            </div>
+            <div class="absolute top-[60%] left-[40%] group">
+                <div
+                    class="bg-white px-3 py-1.5 rounded-full shadow-lg border border-neutral-border font-bold text-sm cursor-pointer hover:scale-110 transition-transform">
+                    BOB 22
+                </div>
+            </div>
+            <div class="absolute right-6 bottom-10 flex flex-col gap-2">
+                <button
+                    class="w-10 h-10 bg-white rounded-jom shadow-lg flex items-center justify-center border border-neutral-border hover:bg-neutral-bg transition-colors">
+                    <span class="material-symbols-outlined text-neutral-text">add</span>
+                </button>
+                <button
+                    class="w-10 h-10 bg-white rounded-jom shadow-lg flex items-center justify-center border border-neutral-border hover:bg-neutral-bg transition-colors">
+                    <span class="material-symbols-outlined text-neutral-text">remove</span>
+                </button>
+            </div>
+            <button
+                class="absolute left-6 bottom-10 px-4 py-2 bg-white rounded-full shadow-lg flex items-center gap-2 border border-neutral-border font-medium text-sm hover:bg-neutral-bg transition-colors">
+                <span class="material-symbols-outlined text-base text-neutral-text">near_me</span>
+                <span class="text-neutral-text">Mostrar mi ubicación</span>
+            </button>
+        </div>
+    </main>
+    <footer class="bg-neutral-bg pt-16 pb-8 border-t border-neutral-border">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <div class="text-primary font-bold text-2xl tracking-tight">jom</div>
+                    <p class="text-neutral-secondary text-sm leading-relaxed max-w-xs">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-sm uppercase tracking-wider text-neutral-text">Compañía</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Sobre Jom</a></li>
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Cómo trabajamos</a></li>
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-sm uppercase tracking-wider text-neutral-text">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Privacidad y cookies</a></li>
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Términos y condiciones</a></li>
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Política de cancelación</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-sm uppercase tracking-wider text-neutral-text">Soporte</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Centro de Ayuda</a></li>
+                        <li><a class="text-neutral-secondary hover:text-primary transition-colors text-sm"
+                                href="#">Confianza y seguridad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-neutral-border flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-neutral-secondary text-sm">
+                    © 2026 JOM SRL. Todos los derechos reservados.
+                </div>
+                <div class="flex items-center gap-6">
+                    <button
+                        class="flex items-center gap-2 text-sm text-neutral-text font-medium hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-base">language</span>
+                        Español (BO)
+                    </button>
+                    <div class="flex gap-4 ml-4">
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary cursor-pointer hover:text-primary transition-colors">social_leaderboard</span>
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary cursor-pointer hover:text-primary transition-colors">camera_alt</span>
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary cursor-pointer hover:text-primary transition-colors">alternate_email</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
+        <button class="bg-neutral-text hover:bg-[#0F172A] text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-2xl font-medium transition-colors">
+            <span class="material-symbols-outlined">map</span>
+            Ver mapa
+        </button>
+    </div>
+
+</body>
+
+</html>

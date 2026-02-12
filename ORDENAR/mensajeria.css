@@ -1,0 +1,132 @@
+/* Mensajería - Estilos específicos */
+
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.hide-scrollbar::-webkit-scrollbar { 
+    display: none; 
+}
+
+.hide-scrollbar { 
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+/* Contenedor con ancho máximo */
+.max-content-width {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* Menú desplegable */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 8px;
+    min-width: 200px;
+    z-index: 50;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: #4B5563;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 150ms ease-in-out;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-item:hover {
+    background-color: #F3F4F6;
+    color: #5B55C8;
+    border-left-color: #5B55C8;
+    padding-left: 16px;
+}
+
+/* Contenedor de mensajes */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 0;
+}
+
+/* Burbujas de mensaje */
+.message-bubble {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message-received {
+    background-color: #F3F4F6;
+    color: #1F2937;
+    align-self: flex-start;
+}
+
+.message-sent {
+    background-color: #5B55C8;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Lista de conversaciones */
+.conversation-item {
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+}
+
+.conversation-item:hover {
+    background-color: #F3F4F6;
+}
+
+.conversation-item.active {
+    background-color: #EFEEFF;
+    border-left: 3px solid #5B55C8;
+}
+
+/* Ocultar scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Badge de notificación */
+.notification-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: #5B55C8;
+    color: white;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+}

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>JOM - Reserva tu Hospedaje</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "ui-primary": "#5B55C8",
+                        "ui-primary-hover": "#4A45B0",
+                        "soft-highlight": "#EFEEFF",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-border": "#E5E7EB",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1F2937;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .search-shadow {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        .menu-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .menu-sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .favorite-active .material-symbols-outlined {
+            color: #5B55C8 !important;
+            font-variation-settings: 'FILL' 1 !important;
+        }
+        
+        .login-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .login-sheet.active {
+            transform: translateY(0);
+        }
+        
+        .register-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .register-sheet.active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Mobile Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-neutral-border">
+        <div class="px-4 h-14 flex items-center justify-between">
+            <div class="text-primary font-bold text-xl tracking-tight">jom</div>
+            <div class="flex items-center gap-2">
+                <button onclick="openLoginModal()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
+                    <span class="material-symbols-outlined text-neutral-text">account_circle</span>
+                </button>
+                <button onclick="toggleMenu()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
+                    <span class="material-symbols-outlined text-neutral-text">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-[#F8F9FC] to-[#EFEEFF] pt-8 pb-8 overflow-hidden">
+        <div class="px-4 flex flex-col items-center text-center">
+            <h1 class="text-2xl font-semibold text-neutral-text mb-2 leading-tight">
+                Reserva tu <span class="text-primary">Hospedaje</span>
+            </h1>
+            <p class="text-neutral-secondary text-sm mb-6">Descubre lugares increíbles</p>
+            
+            <!-- Search Bar -->
+            <div id="searchBar" class="w-full max-w-md">
+                <button onclick="openSearchModal()" class="w-full bg-white rounded-full p-3 flex items-center gap-3 text-left shadow-lg active:scale-98 transition-all">
+                    <span class="material-symbols-outlined text-neutral-secondary">search</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-neutral-text">¿A dónde vas?</p>
+                        <p class="text-xs text-neutral-secondary">Cualquier fecha · Huéspedes</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sticky Search Bar (appears on scroll) -->
+    <div id="stickySearch" class="fixed top-14 left-0 right-0 z-40 bg-white border-b border-neutral-border search-shadow transform -translate-y-full transition-transform duration-300">
+        <div class="px-4 py-3">
+            <button onclick="openSearchModal()" class="w-full bg-neutral-bg rounded-full p-3 flex items-center gap-3 text-left active:scale-98 transition-transform">
+                <span class="material-symbols-outlined text-neutral-secondary">search</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold text-neutral-text">¿A dónde vas?</p>
+                    <p class="text-xs text-neutral-secondary">Cualquier fecha · Huéspedes</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Property Cards -->
+    <main class="px-4 py-6 pb-8">
+        <h2 class="text-lg font-semibold text-neutral-text mb-4">Descubre hospedajes</h2>
+        <div class="grid grid-cols-1 gap-6">
+            <div class="flex flex-col gap-2 cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-card overflow-hidden bg-neutral-bg">
+                    <img alt="Cochabamba"
+                        class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center active:scale-90 transition-transform favorite-active">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden flex-1 pr-2">
+                        <h3 class="text-[15px] font-semibold text-neutral-text truncate">Cochabamba, Bolivia</h3>
+                        <p class="text-sm text-neutral-secondary truncate">Apartamento Enorme y simpatico</p>
+                    </div>
+                    <div class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-xs font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px] fill-1">star</span>
+                        4.1
+                    </div>
+                </div>
+                <p class="text-[15px] font-bold text-neutral-text">560 BOB <span class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-2 cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-card overflow-hidden bg-neutral-bg">
+                    <img alt="Tarija"
+                        class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                    <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center active:scale-90 transition-transform">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden flex-1 pr-2">
+                        <h3 class="text-[15px] font-semibold text-neutral-text truncate">Tarija, Bolivia</h3>
+                        <p class="text-sm text-neutral-secondary truncate">Tarija Hermosa Casa</p>
+                    </div>
+                    <div class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-xs font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px] fill-1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[15px] font-bold text-neutral-text">600 BOB <span class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-2 cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-card overflow-hidden bg-neutral-bg">
+                    <img alt="Santa Cruz"
+                        class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50 favorite-active" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Santa Cruz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Casa con buena ubicación</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">700 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Santa Cruz"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNhAftdmNzN8iMp9QO6GRTHK8LbPxXRX2b_75fbzJchQCytC8j4H5rcEXa1f0TJwf6nq7yxOVuunzRPw1Kjb7uv98b6RqquSP3nMWKrLIhSO3-zYihA1DYV6sG-1KhQXLUUG3nzRMLdxCA4_xqrhp7krZ_GWT34iTKvIGQuHI56I7mCPS1M1459O8NcDJlTz-P20CxNfQ14Qgz-n2ekJ42JxLCGQoPPIf9hoUIf3IcmIuqLES_dyoshzWfSH9hndENnkGVCAbjp3x" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Santa Cruz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Hermosa Casa de 3 dormitorios</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">550 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="La Paz"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50">
+                        <span class="material-symbols-outlined text-[20px] text-[#6B7280]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">La Paz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Vista panorámica de la ciudad</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.8
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">480 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Sucre"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50 favorite-active">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Sucre, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Hostal Tradicional Colonial</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.5
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">350 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Beni"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50">
+                        <span class="material-symbols-outlined text-[20px] text-[#6B7280]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Beni, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Eco-lodge en la selva</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.9
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">850 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Potosí"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50 favorite-active">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Potosí, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Suite en Salar de Uyuni</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        5.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">1200 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+        </div>
+    </main>
+
+    <!-- Menu Sidebar (slides from right, covers 3/4 of screen) -->
+    <div id="menuOverlay" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/40" onclick="toggleMenu()"></div>
+        <div class="menu-sidebar absolute top-0 right-0 bottom-0 w-3/4 max-w-sm bg-white shadow-2xl overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-neutral-border z-10">
+                <div class="flex items-center justify-between p-4">
+                    <div class="text-primary font-bold text-xl">jom</div>
+                    <button onclick="toggleMenu()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <!-- User Section -->
+                <button onclick="openLoginModal(); toggleMenu();" class="w-full flex items-center gap-4 pb-4 text-left">
+                    <div class="w-14 h-14 bg-neutral-bg rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl text-neutral-secondary">account_circle</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-neutral-text">Iniciar sesión</p>
+                        <p class="text-sm text-neutral-secondary">Gestiona tu cuenta</p>
+                    </div>
+                </button>
+                
+                <!-- Register Button -->
+                <button onclick="openRegisterModal(); toggleMenu();" class="w-full flex items-center gap-4 pb-6 border-b border-neutral-border text-left">
+                    <div class="w-14 h-14 bg-neutral-bg rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl text-neutral-secondary">person_add</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-neutral-text">Registrarse</p>
+                        <p class="text-sm text-neutral-secondary">Crea tu cuenta gratis</p>
+                    </div>
+                </button>
+
+                <!-- Main Menu -->
+                <nav class="space-y-1">
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">home</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Inicio</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">search</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Explorar</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">favorite_border</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Favoritos</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">event</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Mis viajes</span>
+                    </a>
+                </nav>
+
+                <div class="border-t border-neutral-border pt-4 space-y-1">
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">settings</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Configuración</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">help</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Ayuda</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">language</span>
+                        <span class="text-[15px] font-medium text-neutral-text">Idioma: Español (BO)</span>
+                    </a>
+                </div>
+
+                <!-- Host Section -->
+                <div class="bg-soft-highlight rounded-card p-4 space-y-2">
+                    <h3 class="font-semibold text-neutral-text">¿Quieres ser anfitrión?</h3>
+                    <p class="text-sm text-neutral-secondary">Comparte tu espacio y comienza a ganar dinero</p>
+                    <button class="w-full bg-primary text-white py-2.5 rounded-jom font-medium hover:bg-ui-primary-hover transition-colors">
+                        Comenzar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 z-[100] hidden">
+        <div class="fixed inset-0 backdrop-blur-xl bg-black/40" onclick="closeRegisterModal()"></div>
+        <div class="fixed inset-0 flex items-end sm:items-center justify-center">
+            <div class="relative w-full sm:max-w-[440px] bg-white sm:rounded-lg rounded-t-[24px] shadow-2xl overflow-hidden register-sheet">
+                <div class="absolute right-2 top-2 z-10">
+                    <button onclick="closeRegisterModal()"
+                        class="w-11 h-11 flex items-center justify-center text-jom-gray-500 hover:bg-jom-gray-50 rounded-full transition-colors active:scale-90">
+                        <span class="material-symbols-outlined text-[24px]">close</span>
+                    </button>
+                </div>
+                <div class="px-6 sm:px-8 py-8 sm:py-6 flex flex-col items-center max-h-screen overflow-y-auto">
+                    <div class="w-12 h-12 bg-jom-gray-50 rounded-full flex items-center justify-center mb-6 mt-2">
+                        <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">person_add</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h1 class="text-jom-gray-900 text-[24px] sm:text-[28px] font-semibold leading-tight">
+                            ¡Únete a JoM!
+                        </h1>
+                        <p class="text-jom-gray-500 text-sm sm:text-base font-normal mt-1">
+                            Crea tu cuenta y comienza a reservar
+                        </p>
+                    </div>
+                    <form class="w-full" onsubmit="return false;">
+                        <div class="space-y-4">
+                            <!-- Nombre -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Nombre</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">person</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-4 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Nombre" type="text" required />
+                                </div>
+                            </div>
+                            
+                            <!-- Apellido -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Apellido</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">badge</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-4 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Apellido" type="text" required />
+                                </div>
+                            </div>
+                            
+                            <!-- Correo electrónico -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Correo electrónico</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-4 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Correo electrónico" type="email" required />
+                                </div>
+                            </div>
+                            
+                            <!-- Número de teléfono -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Número de teléfono</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">phone</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-4 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Número de teléfono" type="tel" required />
+                                </div>
+                            </div>
+                            
+                            <!-- Contraseña -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Contraseña</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">lock</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-11 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Contraseña" type="password" required />
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Confirmar Contraseña -->
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Confirmar contraseña</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">lock_reset</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-11 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Confirmar contraseña" type="password" required />
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <button
+                                class="w-full h-[52px] sm:h-12 bg-primary hover:bg-primary-hover text-white font-semibold rounded-jom-input transition-colors duration-200 shadow-sm active:scale-[0.98] text-base"
+                                type="submit">
+                                Crear cuenta
+                            </button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p class="text-[12px] text-jom-gray-500 leading-relaxed">
+                                Al continuar aceptas nuestros 
+                                <a href="#" class="text-primary hover:underline">Términos y condiciones</a> 
+                                y la 
+                                <a href="#" class="text-primary hover:underline">Política de privacidad</a>
+                            </p>
+                        </div>
+                    </form>
+                    <div class="w-full flex items-center gap-4 my-6">
+                        <div class="flex-grow h-[1px] bg-jom-gray-200"></div>
+                        <span class="text-[14px] text-jom-gray-500 font-normal">o</span>
+                        <div class="flex-grow h-[1px] bg-jom-gray-200"></div>
+                    </div>
+                    <button
+                        class="w-full h-[52px] sm:h-12 flex items-center justify-center gap-3 bg-white border border-jom-gray-200 rounded-jom-input hover:bg-jom-gray-50 transition-colors duration-200 active:scale-[0.98] text-base">
+                        <svg height="18" viewBox="0 0 18 18" width="18">
+                            <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4"></path>
+                            <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5614C11.2418 14.1014 10.2109 14.4205 9 14.4205C6.65591 14.4205 4.67182 12.8373 3.96409 10.71H0.957275V13.0418C2.43818 15.9832 5.48182 18 9 18Z" fill="#34A853"></path>
+                            <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54773 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"></path>
+                            <path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.48182 0 2.43818 2.01682 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"></path>
+                        </svg>
+                        <span class="text-jom-gray-900 font-medium">Continuar con Google</span>
+                    </button>
+                    <div class="mt-8 mb-2 text-center">
+                        <p class="text-[14px] text-jom-gray-500">
+                            ¿Ya tienes una cuenta?
+                            <a onclick="closeRegisterModal(); setTimeout(openLoginModal, 350);" class="text-primary font-semibold hover:underline transition-all cursor-pointer">Inicia sesión</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login Modal
+        function openLoginModal() {
+            const modal = document.getElementById('loginModal');
+            const sheet = modal.querySelector('.login-sheet');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                sheet.classList.add('active');
+            }, 10);
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('loginModal');
+            const sheet = modal.querySelector('.login-sheet');
+            sheet.classList.remove('active');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Register Modal
+        function openRegisterModal() {
+            const modal = document.getElementById('registerModal');
+            const sheet = modal.querySelector('.register-sheet');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                sheet.classList.add('active');
+            }, 10);
+        }
+
+        function closeRegisterModal() {
+            const modal = document.getElementById('registerModal');
+            const sheet = modal.querySelector('.register-sheet');
+            sheet.classList.remove('active');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Menu Sidebar
+        function toggleMenu() {
+            const overlay = document.getElementById('menuOverlay');
+            const sidebar = overlay.querySelector('.menu-sidebar');
+            
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    sidebar.classList.add('active');
+                }, 10);
+            } else {
+                sidebar.classList.remove('active');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function openSearchModal() {
+            alert('Abrir modal de búsqueda');
+        }
+
+        // Sticky search on scroll
+        let lastScroll = 0;
+        const stickySearch = document.getElementById('stickySearch');
+        const searchBar = document.getElementById('searchBar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const searchBarBottom = searchBar.offsetTop + searchBar.offsetHeight;
+            
+            if (currentScroll > searchBarBottom) {
+                stickySearch.classList.remove('-translate-y-full');
+                stickySearch.classList.add('translate-y-0');
+            } else {
+                stickySearch.classList.add('-translate-y-full');
+                stickySearch.classList.remove('translate-y-0');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+    
+    <footer class="bg-neutral-bg border-t border-neutral-border pt-12 pb-8">
+        <div class="px-4">
+            <!-- Logo y descripción -->
+            <div class="flex flex-col gap-4 mb-10">
+                <div class="flex items-center gap-2">
+                    <div class="size-6 text-primary">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-black tracking-tight text-primary">jom</span>
+                </div>
+                <p class="text-neutral-secondary text-sm leading-relaxed max-w-sm">
+                    Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia.
+                </p>
+            </div>
+
+            <!-- Links en grid 2 columnas -->
+            <div class="grid grid-cols-2 gap-x-8 gap-y-8 mb-10">
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-neutral-text font-semibold text-sm mb-1">Compañía</h4>
+                    <a class="text-neutral-secondary text-sm" href="#">Sobre Jom</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Cómo trabajamos</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Contáctanos</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-neutral-text font-semibold text-sm mb-1">Soporte</h4>
+                    <a class="text-neutral-secondary text-sm" href="#">Centro de Ayuda</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Confianza</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Seguridad</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-neutral-text font-semibold text-sm mb-1">Legal</h4>
+                    <a class="text-neutral-secondary text-sm" href="#">Privacidad</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Términos</a>
+                    <a class="text-neutral-secondary text-sm" href="#">Cancelación</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-neutral-text font-semibold text-sm mb-1">Idioma</h4>
+                    <button class="text-neutral-secondary text-sm text-left flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">language</span>
+                        Español (BO)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-neutral-border pt-6 text-center">
+                <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-[100] hidden">
+        <div class="fixed inset-0 backdrop-blur-xl bg-black/40" onclick="closeLoginModal()"></div>
+        <div class="fixed inset-0 flex items-end sm:items-center justify-center">
+            <div class="relative w-full sm:max-w-[440px] bg-white sm:rounded-lg rounded-t-[24px] shadow-2xl overflow-hidden login-sheet">
+                <div class="absolute right-2 top-2 z-10">
+                    <button onclick="closeLoginModal()"
+                        class="w-11 h-11 flex items-center justify-center text-jom-gray-500 hover:bg-jom-gray-50 rounded-full transition-colors active:scale-90">
+                        <span class="material-symbols-outlined text-[24px]">close</span>
+                    </button>
+                </div>
+                <div class="px-6 sm:px-8 py-8 sm:py-6 flex flex-col items-center max-h-screen overflow-y-auto">
+                    <div class="w-12 h-12 bg-jom-gray-50 rounded-full flex items-center justify-center mb-6 mt-2">
+                        <span class="material-symbols-outlined text-jom-gray-500 text-[24px]">login</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h1 class="text-jom-gray-900 text-[24px] sm:text-[28px] font-semibold leading-tight">
+                            ¡Bienvenido a JoM!
+                        </h1>
+                        <p class="text-jom-gray-500 text-sm sm:text-base font-normal mt-1">
+                            Ingresa tus credenciales para continuar
+                        </p>
+                    </div>
+                    <form class="w-full" onsubmit="return false;">
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Correo electrónico</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-4 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Correo electrónico" type="email" />
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="sr-only">Contraseña</label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">lock</span>
+                                    </div>
+                                    <input
+                                        class="block w-full h-[48px] sm:h-[44px] pl-11 pr-11 bg-white border border-jom-gray-200 rounded-jom-input text-jom-gray-900 placeholder:text-jom-gray-500 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base"
+                                        placeholder="Contraseña" type="password" />
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-jom-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mt-2">
+                            <a class="text-primary text-[14px] font-medium hover:underline transition-all" href="#">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <button
+                                class="w-full h-[52px] sm:h-12 bg-primary hover:bg-primary-hover text-white font-semibold rounded-jom-input transition-colors duration-200 shadow-sm active:scale-[0.98] text-base"
+                                type="submit">
+                                Iniciar sesión
+                            </button>
+                        </div>
+                    </form>
+                    <div class="w-full flex items-center gap-4 my-6">
+                        <div class="flex-grow h-[1px] bg-jom-gray-200"></div>
+                        <span class="text-[14px] text-jom-gray-500 font-normal">o</span>
+                        <div class="flex-grow h-[1px] bg-jom-gray-200"></div>
+                    </div>
+                    <button
+                        class="w-full h-[52px] sm:h-12 flex items-center justify-center gap-3 bg-white border border-jom-gray-200 rounded-jom-input hover:bg-jom-gray-50 transition-colors duration-200 active:scale-[0.98] text-base">
+                        <svg height="18" viewBox="0 0 18 18" width="18">
+                            <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4"></path>
+                            <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5614C11.2418 14.1014 10.2109 14.4205 9 14.4205C6.65591 14.4205 4.67182 12.8373 3.96409 10.71H0.957275V13.0418C2.43818 15.9832 5.48182 18 9 18Z" fill="#34A853"></path>
+                            <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54773 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"></path>
+                            <path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.48182 0 2.43818 2.01682 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"></path>
+                        </svg>
+                        <span class="text-jom-gray-900 font-medium">Continuar con Google</span>
+                    </button>
+                    <div class="mt-8 mb-2 text-center">
+                        <p class="text-[14px] text-jom-gray-500">
+                            ¿No tienes una cuenta?
+                            <a onclick="closeLoginModal(); setTimeout(openRegisterModal, 350);" class="text-primary font-semibold hover:underline transition-all cursor-pointer">Regístrate gratis</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

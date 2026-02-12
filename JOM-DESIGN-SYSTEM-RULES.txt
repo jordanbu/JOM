@@ -1,0 +1,900 @@
+================================================================================
+JOM — SISTEMA DE DISEÑO COMPLETO
+Versión 1.1 — FINAL
+Estado: CERRADO
+================================================================================
+
+Aplicable a:
+- Diseño UI
+- Revisión de pantallas
+- Prompts de Stitch
+- Desarrollo frontend
+
+================================================================================
+1️⃣ COLOR SYSTEM
+================================================================================
+
+PRINCIPIO FUNDAMENTAL (NO CAMBIA)
+--------------------------------
+En JOM, el color no decora.
+El color guía acciones, estados y foco.
+
+El atractivo visual principal son:
+- Las fotografías
+- El contenido
+
+El UI ordena y acompaña, no compite.
+
+PALETA OFICIAL (ACTUALIZADA)
+----------------------------
+
+🟣 Brand Color (IDENTIDAD)
+JOM Brand Lilac: #5A4B9E
+
+🔒 Uso:
+- Logo
+- Marca
+- Elementos institucionales
+- Referencias de identidad
+
+📌 No es el color principal de acción.
+   Es identidad, no energía.
+
+🟣 UI Primary (COLOR DE ACCIÓN)
+JOM UI Primary: #5B55C8
+
+Este es ahora el color más importante del sistema UI.
+
+Variantes permitidas del UI Primary:
+- Hover / Active: #4A45B0
+- Soft Highlight (tint): #EFEEFF
+
+❌ No se crean otros tonos.
+❌ No se ajusta "a ojo".
+
+USOS PERMITIDOS DEL UI PRIMARY (OBLIGATORIO)
+--------------------------------------------
+El #5B55C8 se usa SOLO para:
+
+✔ Acciones primarias
+  - Botón principal ("Reservar", "Comprobar disponibilidad")
+  - CTA principal
+
+✔ Estados activos
+  - Tab activo
+  - Filtro activo
+  - Checkbox / radio seleccionado
+  - Input enfocado (focus ring)
+
+✔ Selecciones
+  - Rango de fechas en calendario
+  - Elemento seleccionado
+  - Indicadores activos
+
+USOS PROHIBIDOS DEL UI PRIMARY
+------------------------------
+❌ Fondos de página
+❌ Secciones completas
+❌ Cards completas
+❌ Bloques decorativos
+❌ Footer dominante
+❌ Backgrounds grandes
+
+Si el UI Primary ocupa más del 20% de la pantalla → está mal aplicado.
+
+COLORES NEUTROS (SIN CAMBIOS)
+-----------------------------
+Estos conforman 80–85% del UI.
+
+⚪ Fondo principal: #FFFFFF
+⚪ Fondo secundario (cards / secciones): #F8F9FC
+⚫ Texto principal: #1F2937
+⚫ Texto secundario: #6B7280
+⚫ Texto deshabilitado: #9CA3AF
+➖ Bordes / divisores: #E5E7EB
+
+COLORES DE SISTEMA (INTOCABLES)
+-------------------------------
+Nunca se tiñen con lila.
+
+🟢 Success: #16A34A
+🟡 Warning: #F59E0B
+🔴 Error: #DC2626
+
+JERARQUÍA DE COLOR (REGLA DE DECISIÓN)
+--------------------------------------
+Antes de aplicar color, siempre:
+
+¿Esto es una acción o una selección?
+- Sí → UI Primary (#5B55C8)
+- No → neutro
+
+Si hay duda → neutro.
+
+PROPORCIÓN DE USO (NO NEGOCIABLE)
+---------------------------------
+🟣 UI Primary + Brand: 15–20%
+⚪ Neutros: 80–85%
+
+Esto garantiza:
+- Confianza
+- Limpieza
+- Escalabilidad
+- Coherencia visual
+
+EJEMPLOS
+--------
+✔ Correcto:
+  - Botón "Reservar" en #5B55C8
+  - Fecha seleccionada con fondo #EFEEFF
+  - Tab activo subrayado en #5B55C8
+  - Focus ring lila suave
+
+❌ Incorrecto:
+  - Card morada
+  - Sección morada
+  - Footer morado intenso
+  - Background de página morado
+
+================================================================================
+2️⃣ TYPOGRAPHY SYSTEM
+================================================================================
+
+PRINCIPIO FUNDAMENTAL
+---------------------
+En JOM, la tipografía debe desaparecer.
+Si se nota demasiado, está mal usada.
+
+La tipografía:
+- Guía jerarquía
+- Mejora legibilidad
+- Transmite confianza
+NO decora.
+
+FUENTE DEFINITIVA (DECISIÓN TOMADA)
+-----------------------------------
+✅ Fuente principal: Inter — Google Fonts
+
+📌 Motivos (criterio profesional):
+- Excelente legibilidad en web
+- Diseñada para interfaces, no branding
+- Funciona muy bien con números (precios, fechas)
+- Escala perfecto desktop / mobile
+- Usada en productos grandes (Stripe, Notion, Airbnb-like stacks)
+
+❌ No se usan:
+- Fuentes decorativas
+- Serif
+- Mezclas de tipografías
+
+En JOM se usa UNA sola familia tipográfica.
+
+JERARQUÍA TIPOGRÁFICA OFICIAL (ACTUALIZADA)
+-------------------------------------------
+
+🅷1 — Título principal (listing title)
+Font-size: 28px
+Font-weight: 600
+Line-height: 1.25
+Color: #1F2937
+
+Uso:
+- Título del anuncio (detalle de alojamiento)
+
+❌ No usar:
+- En cards pequeñas
+- En bloques secundarios
+
+📌 Valor fijo para mantener múltiplos de 4 y coherencia con el sistema de spacing.
+
+Títulos 22px, 24px
+Font-weight: 600
+Color: #1F2937
+
+🅷2 — Títulos de sección
+Font-size: 18px
+Font-weight: 600
+Line-height: 1.3
+Color: #1F2937
+
+Uso:
+- "Servicios"
+- "Reseñas"
+- "Ubicación"
+- "Conoce al anfitrión"
+
+🅷3 — Subtítulos / bloques
+Font-size: 16px
+Font-weight: 600
+Line-height: 1.35
+Color: #1F2937
+
+Uso:
+- Sub-secciones
+- Headers de cards
+- Labels importantes
+
+🅱️ Body — Texto principal
+Font-size: 14px
+Font-weight: 400–500
+Line-height: 1.5–1.6
+Color: #1F2937
+
+Uso:
+- Descripciones
+- Texto informativo
+- Detalles del alojamiento
+
+📌 Nunca menor a 16px en desktop.
+
+🅼 Meta / Secondary text
+Font-size: 12px
+Font-weight: 400
+Line-height: 1.4
+Color: #6B7280
+
+Uso:
+- Reviews count
+- Ubicación secundaria
+- Labels
+- Fechas, metadata
+
+🅳 Disabled / Hint text
+Font-size: 12px
+Font-weight: 400
+Line-height: 1.4
+Color: #9CA3AF
+
+Uso:
+- Estados deshabilitados
+- Ayuda secundaria
+
+PRECIOS (REGLA ESPECIAL)
+------------------------
+Los precios NO usan color para destacar.
+Se destacan por tamaño y peso.
+
+Precio principal:
+- Font-size: 20px
+- Font-weight: 700
+- Color: #1F2937
+
+📌 El lila NO se usa para precios.
+
+BOTONES (TIPOGRAFÍA)
+--------------------
+Texto de botón:
+- Font-size: 16px
+- Font-weight: 600
+- Letter-spacing: normal
+
+✔ Texto siempre legible
+❌ Nada de uppercase forzado
+❌ No bold extremo
+
+LINKS
+-----
+Font-size: 14px
+Font-weight: 500
+Color: #5B55C8
+Text-decoration: none
+
+Hover:
+- Color: #4A45B0
+- Text-decoration: underline (sutil)
+
+REGLAS DE USO (IMPORTANTÍSIMAS)
+-------------------------------
+✔ SÍ:
+  - Jerarquía por tamaño y peso
+  - Aire entre bloques de texto
+  - Anchos de texto controlados
+
+❌ NO:
+  - Cambiar colores para jerarquía
+  - Mezclar fuentes
+  - Usar bold "a ojo"
+  - Textos largos sin respiración
+
+ANCHO DE TEXTO (LEGIBILIDAD)
+----------------------------
+Bloques de texto largos:
+- max-width: 640–720px
+
+Evitar líneas muy largas en desktop.
+Esto hace que el contenido se sienta premium y legible.
+
+REGLA DE ORO TIPOGRÁFICA
+------------------------
+Si necesitás color para que un texto se note,
+el problema es jerarquía, no color.
+
+================================================================================
+3️⃣ SPACING & LAYOUT SYSTEM
+================================================================================
+
+PRINCIPIO FUNDAMENTAL
+---------------------
+El espacio es el principal recurso visual de JOM.
+Si algo se ve mal, casi siempre es spacing, no color.
+
+En JOM:
+- El espacio ordena
+- El espacio jerarquiza
+- El espacio da sensación premium
+
+Nunca se "acomoda a ojo".
+
+SISTEMA BASE DE ESPACIADO (NO NEGOCIABLE)
+-----------------------------------------
+📏 Sistema oficial: 8pt Spacing System
+
+Todos los espacios deben ser múltiplos de:
+4px / 8px / 16px / 24px / 32px / 48px / 64px
+
+❌ No usar valores arbitrarios (13px, 19px, 27px, etc.).
+
+ESTRUCTURA GENERAL DE PÁGINA (DESKTOP WEB)
+------------------------------------------
+🖥️ Canvas
+- Desktop base: 1440px
+- Max content width: 1120–1200px
+- Contenido centrado
+
+📐 Márgenes laterales
+- Desktop: 24–32px
+- Mobile: 16px
+- Nunca contenido "pegado" al borde
+
+LAYOUT & MARGINS
+----------------
+Principio general:
+El producto NO utiliza un único margen global.
+El sistema define tipos de contenedor según la densidad de información
+y el objetivo de la interfaz, garantizando consistencia visual sin
+sacrificar usabilidad.
+
+1️⃣ Container · STANDARD
+Uso: Interfaces de lectura, decisión y foco principal.
+
+Aplica a:
+- Detalle de anuncio
+- Checkout / pago
+- Login / registro
+- Páginas informativas y de perfil simple
+
+Reglas técnicas:
+- max-width: 1200px
+- padding-left / right: 32px
+- Ritmo visual relajado
+- Mayor aire lateral
+
+Objetivo UX: claridad, comodidad de lectura y jerarquía visual.
+
+2️⃣ Container · DENSE
+Uso: Interfaces con alta carga de información funcional.
+
+Aplica a:
+- Mensajería (host / guest)
+- Reservas y listados
+- Panel del anfitrión
+- Configuración de cuenta
+- Tablas y vistas administrativas
+
+Reglas técnicas:
+- max-width: 1320px – 1360px
+- padding-left / right: 24px
+- Mayor aprovechamiento del espacio horizontal
+- No se reduce tipografía, solo se ajusta layout
+
+Objetivo UX: maximizar información visible sin sensación de saturación.
+
+3️⃣ Container · FULL (uso controlado)
+Uso: Casos especiales de vistas divididas o data-heavy.
+
+Aplica a:
+- Split view (mensajes + panel lateral)
+- Calendarios complejos
+- Tablas extensas con filtros
+
+Reglas técnicas:
+- width: 100%
+- padding-left / right: 16px – 24px
+- Uso obligatorio de:
+  - Columnas claras
+  - Divisiones visuales
+  - Fondos diferenciados
+
+RITMO VERTICAL (ESTO ES CLAVE)
+------------------------------
+
+Separación entre secciones principales: 24px
+Ejemplos:
+- Galería → Descripción
+- Descripción → Servicios
+- Servicios → Reseñas
+- Reseñas → Ubicación
+
+Separación entre subsecciones: 24px
+Ejemplos:
+- Título de sección → contenido
+- Bloques internos
+
+Separación entre elementos pequeños: 8–16px
+Ejemplos:
+- Ícono + texto
+- Inputs dentro de un form
+- Texto + botón
+
+📌 Si no sabés qué valor usar → 24px.
+
+Especificaciones de espaciados entre divisores y secciones:
+La suma de los 24px del margen de la sección principal +
+los 24px de los divisores = 48px de separación
+
+CARDS (REGLAS OFICIALES)
+------------------------
+Padding interno:
+- Mínimo: 16px
+- Ideal: 24px
+- Nunca cards "apretadas"
+
+Separación entre cards: 24–32px
+
+Border radius: 16px
+Un solo radio para todo el sistema.
+
+LAYOUT DE DOS COLUMNAS (DESKTOP)
+--------------------------------
+Columna principal (contenido):
+- Ancho flexible
+- Respeta max-width de texto
+
+Columna secundaria (booking card):
+- Ancho aproximado: 360–400px
+- Sticky on scroll
+- Separación respecto al contenido: 32px
+
+📌 La booking card debe sentirse anclada, no flotando.
+
+FORMULARIOS E INPUTS
+--------------------
+Altura mínima: 44px
+Separación entre inputs: 16px
+Grupo de form (ej. fecha + huéspedes): 24px
+
+BOTONES (ESPACIADO)
+-------------------
+Altura:
+- 48px (desktop)
+- 44–48px (mobile)
+
+Padding horizontal: 16–24px
+
+TEXTO Y BLOQUES DE CONTENIDO
+----------------------------
+Ancho máximo de texto largo: 640–720px
+Evita líneas muy largas.
+
+Separación texto–texto:
+- Párrafo → párrafo: 16px
+- Título → texto: 16–24px
+
+DIVIDERS Y SEPARADORES
+----------------------
+Uso:
+- Para separar bloques de contenido relacionados
+- Nunca abusar
+
+Espaciado:
+- 24px arriba
+- 24px abajo
+
+Color: #E5E7EB
+
+REGLAS DE ORO (GUÁRDALAS)
+-------------------------
+❌ No usar spacing arbitrario
+✔ Siempre múltiplos de 8
+✔ Más espacio > más color
+❌ No "apretar" para que entre más
+✔ Si algo se ve mal, primero revisá spacing
+
+================================================================================
+4️⃣ COMPONENTS SYSTEM
+================================================================================
+
+PRINCIPIO FUNDAMENTAL
+---------------------
+En JOM, los componentes no se "diseñan".
+Se reutilizan.
+
+Si un componente se ve distinto en dos lugares → está mal.
+
+BOTONES (COMPONENTE CRÍTICO)
+----------------------------
+
+🎯 Botón Primario
+Uso: una acción principal por vista
+
+Estilo:
+- Background: #5B55C8
+- Text: #FFFFFF
+- Height: 48px
+- Border-radius: 12px
+- Font-size: 16px
+
+Estados:
+Hover: #4A45B0
+Active: #4A45B0
+Disabled:
+  - Background: #E5E7EB
+  - Text: #9CA3AF
+Loading:
+  - Spinner inline
+  - Botón deshabilitado
+
+❌ Nunca más de un botón primario visible por sección.
+
+◻️ Botón Secundario
+Uso: acciones complementarias
+
+Estilo:
+- Background: #FFFFFF
+- Border: 1px solid #E5E7EB
+- Text: #1F2937
+- Height: 48px
+- Radius: 12px
+
+Hover:
+- Background: #F8F9FC
+
+🔴 Botón Eliminar
+Uso: acciones destructivas
+
+Estilo:
+- Background: #DC2626 (System Error)
+- Border: Ninguno
+- Text: #FFFFFF
+- Height: 48px
+- Radius: 12px
+
+Hover:
+- Background: #B91C1C
+
+🔗 Botón Link
+Uso: acciones menores
+
+Estilo:
+- Text color: #5B55C8
+- Font-weight: 500
+- Sin background
+
+Hover: underline sutil
+
+INPUTS & FORM CONTROLS
+----------------------
+
+🧾 Input base
+Estilo:
+- Height: 44px
+- Background: #FFFFFF
+- Border: 1px solid #E5E7EB
+- Border-radius: 12px
+- Padding horizontal: 12–16px
+- Font-size: 16px
+
+Estados:
+Focus:
+  - Border: #5B55C8
+  - Focus ring sutil (no glow fuerte)
+
+Error:
+  - Border: #DC2626
+  - Helper text rojo
+
+Disabled:
+  - Background: #F8F9FC
+  - Text: #9CA3AF
+
+📅 Date Picker / Dropdown
+- Misma altura que input
+- Mismo radius
+- Íconos neutros
+- Estado seleccionado usa #EFEEFF
+
+CARDS
+-----
+
+🧱 Card estándar
+Uso: agrupar contenido relacionado
+
+Estilo:
+- Background: #FFFFFF
+- Border: 1px solid #E5E7EB
+- Border-radius: 16px
+- Padding: 16–24px
+- Shadow: muy sutil (si se usa)
+
+MODALS
+------
+
+🪟 Modal estándar
+Uso: selección, confirmación, formularios
+
+Estructura:
+- Header (título + close)
+- Body (scroll interno)
+- Footer (acciones)
+
+Estilo:
+- Background: #FFFFFF
+- Radius: 16px
+- Padding: 24px
+- Max-width desktop: 560–640px
+
+TABS
+----
+
+🗂️ Tabs estándar
+Estilo:
+- Text color: #6B7280
+- Active:
+  - Text: #5B55C8
+  - Indicator line inferior: #5B55C8
+- Font-size: 16px
+- Font-weight active: 600
+
+❌ No backgrounds de color en tabs.
+
+CHECKBOXES / RADIOS
+-------------------
+Estilo:
+- Default: border #E5E7EB
+- Selected:
+  - Fill: #5B55C8
+  - Check blanco
+- Size accesible (click ≥ 44px área total)
+
+ICONOGRAFÍA
+-----------
+📌 Reglas:
+- Estilo: outline / line icons
+- Color default: #6B7280
+- Active: #5B55C8
+- Tamaños consistentes (16 / 20 / 24px)
+
+❌ No íconos decorativos
+❌ No íconos multicolor
+
+DIVIDERS
+--------
+Estilo:
+- Color: #E5E7EB
+- Grosor: 1px
+- Spacing vertical: 24px
+
+Uso solo para:
+- Separar bloques relacionados
+- No para "decorar"
+
+SHADOWS (CONTROLADAS)
+---------------------
+Usar muy poco.
+
+Shadow estándar:
+0 1px 3px rgba(0,0,0,0.06)
+
+❌ No sombras fuertes
+❌ No sombras en todo
+
+ESTADOS DEL SISTEMA
+-------------------
+Success / Error / Warning:
+- Usar colores del sistema
+- Icon + texto
+- Nunca fondo lila
+
+REGLAS DE ORO (NO SE ROMPEN)
+----------------------------
+❌ No crear variantes "especiales"
+✔ Reutilizar siempre
+✔ Un CTA principal por vista
+❌ No color para decorar
+✔ Si algo "se ve distinto", está mal
+
+================================================================================
+5️⃣ INTERACTION & STATES SYSTEM
+================================================================================
+
+PRINCIPIO FUNDAMENTAL
+---------------------
+En JOM, las interacciones deben sentirse naturales,
+no "diseñadas".
+
+Si una interacción:
+- Distrae
+- Se nota demasiado
+- Parece animación por animar
+→ está mal.
+
+HOVER STATES (DESKTOP)
+----------------------
+
+🖱️ Botón Primario
+- Background: #4A45B0
+- Cursor: pointer
+- Transition: 150–200ms ease
+
+❌ No scale grande
+❌ No bounce
+❌ No glow
+
+🖱️ Botón Secundario
+- Background: #F8F9FC
+- Border permanece
+
+🖱️ Links
+- Subrayado sutil
+- Color hover: #4A45B0
+
+🖱️ Cards (clickables)
+- Shadow ligeramente más visible
+- No mover posición
+- No scale > 1.01
+
+FOCUS STATES (ACCESIBILIDAD)
+----------------------------
+
+⌨️ Inputs / Selects
+- Border: #5B55C8
+- Focus ring sutil (2px máx)
+- Nunca glow fuerte
+
+📌 El focus debe ser visible pero elegante.
+
+⌨️ Botones
+- Outline fino en UI Primary
+- No cambiar tamaño
+
+ACTIVE / PRESSED STATES
+-----------------------
+Botones:
+- Background se oscurece ligeramente
+- Duración corta (100–150ms)
+
+📌 Sensación de "click real", no animación.
+
+LOADING STATES (MUY IMPORTANTE)
+-------------------------------
+
+⏳ Botón en loading
+- Spinner inline
+- Texto puede ocultarse o mantenerse
+- Botón deshabilitado
+
+❌ No overlays gigantes
+❌ No loaders full screen si no es crítico
+
+⏳ Page loading
+- Skeletons (preferido)
+- Nunca spinner eterno sin feedback
+
+DISABLED STATES
+---------------
+Botones:
+- Background: #E5E7EB
+- Text: #9CA3AF
+- Cursor: not-allowed
+
+Inputs:
+- Background: #F8F9FC
+- Border: #E5E7EB
+- Text: #9CA3AF
+
+📌 Disabled debe verse claramente, no "igual pero apagado".
+
+EMPTY STATES
+------------
+Uso:
+Cuando no hay:
+- Resultados
+- Reseñas
+- Favoritos
+- Historial
+
+Estilo:
+- Texto claro
+- Ícono simple (outline)
+- CTA secundario (si aplica)
+
+❌ No ilustraciones grandes
+❌ No humor excesivo
+
+Ejemplo tono:
+"Aún no hay reseñas para este alojamiento."
+
+ERROR STATES
+------------
+Errores de formulario:
+- Border rojo (#DC2626)
+- Texto de ayuda claro
+- Mensaje humano, no técnico
+
+❌ No alertas agresivas
+❌ No shake exagerado
+
+Errores de sistema:
+- Mensaje claro
+- Acción posible (reintentar)
+- No culpar al usuario
+
+SUCCESS STATES
+--------------
+Confirmaciones:
+- Texto claro
+- Ícono verde (#16A34A)
+- No animaciones innecesarias
+
+Ejemplo:
+"Reserva confirmada"
+
+TRANSITIONS (GLOBAL)
+--------------------
+Duración estándar: 150–200ms ease
+
+Aplicable a:
+- Hover
+- Focus
+- Open/close modals
+- Dropdowns
+
+❌ No animaciones largas
+❌ No easing raro
+
+MODALS & OVERLAYS
+-----------------
+Apertura:
+- Fade + slide muy sutil
+- Background overlay oscuro suave (no negro puro)
+
+Cierre:
+- Reverso del open
+- Escape key habilitado
+
+MOBILE INTERACTIONS (REGLA CLAVE)
+---------------------------------
+- No hover
+- Touch targets ≥ 44px
+- Feedback visual inmediato
+- CTA sticky en flujos críticos
+
+REGLAS DE ORO (GUÁRDALAS)
+-------------------------
+❌ No animar por animar
+✔ Feedback inmediato siempre
+✔ Estados claros > efectos
+❌ No esconder errores
+✔ Menos movimiento = más confianza
+
+================================================================================
+🔒 ESTADO DEL SISTEMA DE DISEÑO JOM
+================================================================================
+
+✔ Color System — CERRADO
+✔ Typography — CERRADO
+✔ Spacing & Layout — CERRADO
+✔ Components — CERRADO
+✔ Interaction & States — CERRADO
+
+👉 El sistema UI de JOM está COMPLETO.
+
+A partir de ahora:
+- Toda corrección usa estos valores
+- Stitch debe respetar este sistema
+- Frontend no improvisa
+- Revisión de pantallas sigue estas reglas
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================

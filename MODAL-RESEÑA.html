@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Official Ratings &amp; Reviews Modal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "jom-gold": "#F59E0B",
+                        "jom-gray-900": "#1f2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#4B5563",
+                        "jom-gray-500": "#6b7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#e5e7eb",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#f8f9fc",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "lg": "16px",
+                        "jom-modal": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/10 dark:bg-black/40 backdrop-blur-xl"></div>
+    <div
+        class="relative w-full max-w-[1032px] bg-white dark:bg-zinc-900 rounded-lg shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
+        <div class="relative px-6 py-6 border-b border-jom-gray-200 dark:border-zinc-700">
+            <h1 class="text-jom-gray-900 dark:text-white text-lg font-semibold text-center">Reseñas</h1>
+            <button
+                class="absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-jom-gray-500 dark:text-zinc-400 hover:bg-jom-gray-50 dark:hover:bg-zinc-800 rounded-full transition-all duration-200">
+                <span class="material-symbols-outlined text-[24px]">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col md:flex-row flex-1 overflow-hidden">
+            <div class="w-full md:w-[40%] p-6 md:pr-10 border-r border-jom-gray-200 dark:border-zinc-700 overflow-y-auto custom-scrollbar">
+                <div class="flex items-center gap-2 mb-8">
+                    <span class="material-symbols-outlined text-primary text-[32px] filled">star</span>
+                    <span class="text-jom-gray-900 dark:text-white text-[20px] font-bold">3.00</span>
+                    <span class="text-jom-gray-500 dark:text-zinc-400 text-xs ml-1">· 6 reseñas</span>
+                </div>
+                <div class="space-y-3 mb-10">
+                    <h3 class="text-base font-semibold text-jom-gray-900 dark:text-white mb-4">Valoración general</h3>
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-medium w-3 text-jom-gray-900 dark:text-white">5</span>
+                        <div class="flex-1 h-1.5 bg-jom-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-jom-gray-900 dark:bg-zinc-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-medium w-3 text-jom-gray-900 dark:text-white">4</span>
+                        <div class="flex-1 h-1.5 bg-jom-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-jom-gray-900 dark:bg-zinc-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-medium w-3 text-jom-gray-900 dark:text-white">3</span>
+                        <div class="flex-1 h-1.5 bg-jom-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-jom-gray-900 dark:bg-zinc-400 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-medium w-3 text-jom-gray-900 dark:text-white">2</span>
+                        <div class="flex-1 h-1.5 bg-jom-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-jom-gray-900 dark:bg-zinc-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-medium w-3 text-jom-gray-900 dark:text-white">1</span>
+                        <div class="flex-1 h-1.5 bg-jom-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-jom-gray-900 dark:bg-zinc-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">mop</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Limpieza</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                    <div class="flex items-center justify-between pb-4 border-b border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">verified_user</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Exactitud</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                    <div class="flex items-center justify-between pb-4 border-b border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">vpn_key</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Check-in</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                    <div class="flex items-center justify-between pb-4 border-b border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">chat_bubble</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Comunicación</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                    <div class="flex items-center justify-between pb-4 border-b border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">location_on</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Ubicación</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400">sell</span>
+                            <span class="text-base text-jom-gray-900 dark:text-white">Precio</span>
+                        </div>
+                        <span class="font-semibold text-jom-gray-900 dark:text-white">3.0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-[60%] flex flex-col overflow-hidden">
+                <div class="p-6 pb-4 flex flex-col sm:flex-row gap-4">
+                    <div class="relative flex-1">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-jom-gray-500 dark:text-zinc-400">
+                            <span class="material-symbols-outlined text-[20px]">search</span>
+                        </div>
+                        <input
+                            class="block w-full h-[44px] pl-11 pr-4 bg-white dark:bg-zinc-800 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input text-jom-gray-900 dark:text-white placeholder:text-jom-gray-500 dark:placeholder:text-zinc-400 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all duration-200"
+                            placeholder="Busca todas las reseñas" type="text" />
+                    </div>
+                    <div class="relative w-full sm:w-[140px]">
+                        <select
+                            class="appearance-none block w-full h-[44px] px-4 pr-10 bg-white dark:bg-zinc-800 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input text-jom-gray-900 dark:text-white font-medium focus:ring-1 focus:ring-primary focus:border-primary outline-none cursor-pointer transition-all duration-200">
+                            <option>Mejores</option>
+                            <option>Más recientes</option>
+                        </select>
+                        <div
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-jom-gray-500 dark:text-zinc-400">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto custom-scrollbar px-6 space-y-8 pb-8">
+                    <div class="pt-6 border-t border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img alt="User profile" class="w-12 h-12 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWa408CYcPY7eVPJlH9DYDPQSJSZFceuu6alEN1ZbdRBiSJx5keG-sgFxChIimSBd2P4HyydbXNQPw-6f8Lfpqmc2shXyF_SZDhVYgLJav3lTFTjihXZ67--V5Yzc8T4KR66keJEz-CPYKSBJXT18E1SeT5-4xzTqSvxnT8R1YhD6lgj267-nxU2xf0OwWwNEOKxU3bV1GX7hNWBZeUiCv1bfxHehzsJKrqWtdCQKsQm_Nb4UIX83uazvxjeVZWQ9LNGYz0uCrR3T" />
+                            <div>
+                                <h4 class="text-base font-semibold text-jom-gray-900 dark:text-white">Gary Test Vera Terrazas</h4>
+                                <p class="text-xs text-jom-gray-500 dark:text-zinc-400">5 años en Airbnb</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex text-primary">
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                            </div>
+                            <span class="text-xs text-jom-gray-500 dark:text-zinc-400">· mayo de 2025 · Estadía de más de una semana</span>
+                        </div>
+                        <p class="text-sm text-jom-gray-900 dark:text-zinc-300 leading-relaxed">
+                            Buen lugar, pero podría mejorar
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img alt="User profile" class="w-12 h-12 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuATNox_4mexJb_n--ExasAF8h6WdMLI46wyXrDDgxAR2rQTMN0T0AqxQH0UkkqjYvgf9RmOU-NVjAniTNtvYfeL3Zk0Bhj28uDro0YIQlCtEa4_V6mBE9BU1TSNOwAwyuQq6FFphkM0StDDKHZlGvSi035pwUM8VwtKIoPaLmP3XeSdOKI8QKg4FD63DGwIA_L9eaGIBGSBNg4fRTcf9Abz9aJwZWOa5az_ntZairaV2ugL_Nw5U0BHuru8ALgbX3-Rsi42DDHAaXF7" />
+                            <div>
+                                <h4 class="text-base font-semibold text-jom-gray-900 dark:text-white">Gary Test Vera Terrazas</h4>
+                                <p class="text-xs text-jom-gray-500 dark:text-zinc-400">5 años en Airbnb</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex text-primary">
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                            </div>
+                            <span class="text-xs text-jom-gray-500 dark:text-zinc-400">· mayo de 2025 · Estadía de más de una semana</span>
+                        </div>
+                        <p class="text-sm text-jom-gray-900 dark:text-zinc-300 leading-relaxed">
+                            Excelente experiencia, lo recomiendo!
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-jom-gray-200 dark:border-zinc-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img alt="User profile" class="w-12 h-12 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgXqYB-ANmHuL7sFkp9UkteA0bEmPneS9s4HrJc83iwKYsw7jDf24AU_Eu1MHFRbc1LfVnQx_1D0Zh7z5MmTITkgnQnzWQxRI8IzV2mC-h-s5q4ybYexkT2L-8lFdjy04-2YlVRiUR9lrRkwrifRQ_2anaRlgbV_t16c-b1M5tLy_QXfRt7C6nTboakty6TmY2ZVrN6CoyHArx5Hoe6z6lqNG9rIasxXQ_nXNPLPBMI24G6ZVQwSR8YsAxO1Q7Yat2vElCNwYfBJaJ" />
+                            <div>
+                                <h4 class="text-base font-semibold text-jom-gray-900 dark:text-white">Gary Test Vera Terrazas</h4>
+                                <p class="text-xs text-jom-gray-500 dark:text-zinc-400">5 años en Airbnb</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex text-primary">
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px] filled">star</span>
+                                <span class="material-symbols-outlined text-[18px]">star</span>
+                                <span class="material-symbols-outlined text-[18px]">star</span>
+                            </div>
+                            <span class="text-xs text-jom-gray-500 dark:text-zinc-400">· abril de 2025 · Estadía de más de una
+                                semana</span>
+                        </div>
+                        <p class="text-sm text-jom-gray-900 dark:text-zinc-300 leading-relaxed">
+                            Buen lugar, pero podría mejorar
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

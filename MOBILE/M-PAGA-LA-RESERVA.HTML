@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Detalle de la reserva - JOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-border": "#E5E7EB",
+                        "soft-highlight": "#F3F4F6",
+                        "ui-primary-hover": "#4a45b0",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+            .max-content-width {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sticky-summary {
+            position: sticky;
+            top: 2rem;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <nav class="sticky top-0 z-50 bg-[#FFFFFF] border-b border-neutral-border h-14 md:h-20 flex items-center">
+        <div class="max-content-width w-full flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button onclick="window.history.back()" class="lg:hidden text-neutral-text active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                </button>
+                <div class="size-6 md:size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-xl md:text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-3 md:gap-8">
+                <button class="hidden md:flex items-center gap-2 text-neutral-text font-medium text-[13px] md:text-[14px] active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-neutral-text flex items-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[22px] md:text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="relative flex items-center gap-2 pl-2 cursor-pointer group active:scale-95 transition-transform">
+                    <div
+                        class="size-9 rounded-full bg-neutral-bg border border-neutral-border flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-neutral-secondary group-hover:text-neutral-text transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-content-width py-4 md:py-8 lg:py-16 pb-32">
+        <div class="max-w-xl mx-auto">
+            <h2 class="text-[20px] md:text-[24px] font-semibold text-neutral-text mb-6">Detalle de la reserva</h2>
+            
+            <div class="bg-white border border-neutral-border rounded-card p-4 md:p-6 shadow-sm space-y-6">
+                <div class="flex gap-4">
+                    <img alt="Departamento Lujoso" class="w-24 h-24 md:w-28 md:h-28 rounded-jom object-cover shrink-0"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlpxFnT5qBMdFjmKR8JF2nSjGX-LJMXGTXFxS3euPoGuC9wjWYMBe3iWw4Db2AiXs65M4KUIytW4dmcQ_8ddiZGUrdbUx6PtwznglFGG-2d2ZworZwOEBP1rquyg8dqYvsb-NQhjMRvlJjwitjxMKUQVedk7IAaVxHhBXVOoiNMe4zaf9pNEwpXzWsy2bnShOS2WuyMHfG6-CpcIE0unkAFYifOVtmFLl_hEUS-HstorhpM6zu0nxNN3xstyR0ccguj-_dBvdJtUVX" />
+                    <div>
+                        <h3 class="font-semibold text-[15px] md:text-[16px] leading-tight text-neutral-text">Departamento Lujoso Zona Norte 4</h3>
+                        <div class="flex items-center mt-2 gap-1">
+                            <span class="material-symbols-outlined text-primary text-[16px]">star</span>
+                            <span class="text-[14px] font-medium text-neutral-text">4.4</span>
+                            <span class="text-[12px] md:text-[13px] text-neutral-secondary">(256 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-neutral-border"></div>
+                
+                <div>
+                    <h4 class="font-semibold text-[14px] md:text-[15px] mb-2 text-neutral-text">Cancelación</h4>
+                    <p class="text-[13px] md:text-[14px] text-neutral-secondary leading-relaxed">
+                        Si cancelas la reservación antes de las 3:00 p.m. del 12 jun, recibiras un reembolso total.
+                    </p>
+                    <a class="text-[13px] md:text-[14px] font-semibold underline mt-2 inline-block text-primary" href="#">Política completa</a>
+                </div>
+                
+                <div class="border-t border-neutral-border"></div>
+                
+                <div>
+                    <h4 class="font-semibold text-[14px] md:text-[15px] mb-4 text-neutral-text">Detalles del viaje</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
+                            <div>
+                                <p class="text-[12px] md:text-[13px] font-semibold text-neutral-text">Check in</p>
+                                <p class="text-[12px] text-neutral-secondary">Agregar fecha</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
+                            <div>
+                                <p class="text-[12px] md:text-[13px] font-semibold text-neutral-text">Check out</p>
+                                <p class="text-[12px] text-neutral-secondary">Agregar fecha</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 col-span-2">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">group</span>
+                            <div>
+                                <p class="text-[12px] md:text-[13px] font-semibold text-neutral-text">Travelers</p>
+                                <p class="text-[12px] text-neutral-secondary">2 adultos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-neutral-border"></div>
+                
+                <div>
+                    <h4 class="font-semibold text-[14px] md:text-[15px] mb-4 text-neutral-text">Información del precio</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-[13px] md:text-[14px]">
+                            <span class="text-neutral-secondary">200 BOB x 4 noches</span>
+                            <span class="text-neutral-text">800 BOB</span>
+                        </div>
+                        <div class="flex justify-between text-[13px] md:text-[14px]">
+                            <span class="text-neutral-secondary">10% Descuento</span>
+                            <span class="text-success font-medium">80 BOB</span>
+                        </div>
+                        <div class="flex justify-between text-[13px] md:text-[14px]">
+                            <span class="text-neutral-secondary">Limpieza</span>
+                            <span class="text-neutral-text">100 BOB</span>
+                        </div>
+                        <div class="flex justify-between text-[13px] md:text-[14px]">
+                            <span class="text-neutral-secondary">Tarifa Assert</span>
+                            <span class="text-neutral-text">20 BOB</span>
+                        </div>
+                        <div class="flex justify-between pt-4 border-t border-neutral-border">
+                            <span class="font-bold text-neutral-text text-[15px] md:text-[16px]">Total</span>
+                            <span class="font-bold text-[18px] md:text-[20px] text-neutral-text">840 BOB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fixed Bottom Buttons -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-border shadow-lg z-40 p-4">
+            <div class="max-content-width flex gap-3">
+                <button onclick="window.history.back()" class="flex-1 border-2 border-neutral-border text-neutral-text font-semibold py-3 px-6 rounded-jom h-[48px] transition-all active:scale-95 hover:bg-neutral-bg">
+                    Cancelar
+                </button>
+                <button onclick="window.location.href='M-METODOS-PAGO.HTML'" class="flex-1 bg-primary hover:bg-ui-primary-hover text-white font-semibold py-3 px-6 rounded-jom h-[48px] transition-all active:scale-95">
+                    Pagar
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer
+        class="hidden lg:block bg-neutral-bg border-t border-neutral-border py-12 px-8 mt-16">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <div class="text-primary text-2xl font-black tracking-tighter mb-4">jom</div>
+                <p class="text-[13px] md:text-[14px] text-neutral-secondary">Reserva tu próximo hogar con la confianza y
+                    seguridad de JOM.</p>
+            </div>
+            <div>
+                <h5 class="font-bold text-[13px] md:text-[14px] mb-4 uppercase tracking-wider text-neutral-text">Explorar</h5>
+                <ul class="space-y-2 text-[13px] md:text-[14px] text-neutral-secondary">
+                    <li><a class="hover:text-primary transition-colors" href="#">Destinos</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Experiencias</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Lujo</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold text-[13px] md:text-[14px] mb-4 uppercase tracking-wider text-neutral-text">Soporte</h5>
+                <ul class="space-y-2 text-[13px] md:text-[14px] text-neutral-secondary">
+                    <li><a class="hover:text-primary transition-colors" href="#">Centro de ayuda</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Seguridad</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Cancelaciones</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold text-[13px] md:text-[14px] mb-4 uppercase tracking-wider text-neutral-text">Legal</h5>
+                <ul class="space-y-2 text-[13px] md:text-[14px] text-neutral-secondary">
+                    <li><a class="hover:text-primary transition-colors" href="#">Privacidad</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Términos</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Mapa del sitio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="max-w-[1200px] mx-auto pt-12 mt-12 border-t border-neutral-border flex flex-col md:flex-row justify-between items-center text-[12px] md:text-[13px] text-neutral-secondary">
+            <p>© 2026 JOM. Todos los derechos reservados.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a class="hover:text-primary transition-colors" href="#">Instagram</a>
+                <a class="hover:text-primary transition-colors" href="#">Facebook</a>
+                <a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

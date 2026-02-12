@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Hoy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="hoy.css" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-[#F8F9FC] font-display min-h-screen flex flex-col">
+    <header class="sticky top-0 left-0 right-0 h-20 bg-white border-b border-slate-200 z-50">
+        <div class="max-w-[1200px] w-full mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-8">
+                <button
+                    class="hidden md:flex items-center gap-2 text-[#6B7280] hover:text-[#4A45B0] font-medium text-sm transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-[#6B7280] hover:text-[#4A45B0] flex items-center transition-colors">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="flex items-center gap-2 pl-2 cursor-pointer group">
+                    <div
+                        class="size-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-[20px] text-[#6B7280] group-hover:text-[#5B55C8] transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex h-[calc(100vh-80px)]">
+        <!-- Menú lateral izquierdo -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col py-6 px-4">
+            <nav class="flex flex-col gap-2">
+                <a href="HOY.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-900 bg-secondary-active rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">today</span>
+                    Hoy
+                </a>
+                <a href="ANUNCIOS.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">home</span>
+                    Anuncios
+                </a>
+                <a href="CALENDARIO.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    Calendario
+                </a>
+                <a href="MENSAJERIA3.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">chat</span>
+                    Mensajería
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 max-w-[1360px] mx-auto py-8">
+        <div class="max-content-width">
+            <div class="flex justify-center mb-12">
+                <div class="bg-neutral-bg-secondary p-1.5 rounded-[14px] flex gap-1 border border-neutral-border">
+                    <button class="tab-pill-active">Hoy</button>
+                    <button class="tab-pill-inactive">Reservaciones programadas</button>
+                </div>
+            </div>
+            <section class="mb-12 flex flex-col items-center">
+                <h2 class="section-title-solicitudes mb-24 text-center">Tus solicitudes</h2>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="request-card group">
+                        <div
+                            class="inline-flex items-center gap-2 bg-[#FFFBEB] text-warning px-4 py-1.5 rounded-full text-[11px] font-bold mb-6">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            Quedan: 23:59:41
+                        </div>
+                        <div class="mb-6 flex justify-center">
+                            <div
+                                class="w-14 h-14 bg-primary group-hover:bg-ui-primary-hover rounded-full flex items-center justify-center text-white font-bold text-base transition-colors duration-200">
+                                jom
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <h3
+                                class="text-[16px] font-semibold group-hover:text-ui-primary-hover transition-colors duration-200">
+                                Solicitud de reserva</h3>
+                            <p class="text-[14px] font-normal text-neutral-text">4 - 7 de feb.</p>
+                            <p class="text-neutral-text-secondary text-[14px] font-normal">Mono ambiente con vista al mar</p>
+                        </div>
+                    </div>
+                    <div
+                        class="w-[260px] bg-neutral-bg-secondary border border-dashed border-neutral-border rounded-card py-24 px-4 flex items-center justify-center text-neutral-text-secondary text-sm italic text-center">
+                        Esperando nuevas solicitudes...
+                    </div>
+                </div>
+            </section>
+            <section class="mb-12">
+                <h2 class="section-title-reservaciones mb-24">Reservaciones</h2>
+                <div class="overflow-x-auto bg-neutral-bg border border-neutral-border rounded-card shadow-jom-subtle">
+                    <table class="w-full text-left border-collapse min-w-[1120px]">
+                        <thead>
+                            <tr>
+                                <th class="table-header-cell py-4 px-6 w-[120px]">Estado</th>
+                                <th class="table-header-cell py-4 px-6">Huésped</th>
+                                <th class="table-header-cell py-4 px-6">Llegada/salida</th>
+                                <th class="table-header-cell py-4 px-6">Reservado</th>
+                                <th class="table-header-cell py-4 px-6">Inmueble</th>
+                                <th class="table-header-cell py-4 px-6">Código</th>
+                                <th class="table-header-cell py-4 px-6">Total</th>
+                                <th class="table-header-cell py-4 px-6 w-[140px]"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-border">
+                            <tr>
+                                <td class="py-4 px-6">
+                                    <span
+                                        class="bg-neutral-bg-secondary text-neutral-text-secondary px-3 py-1 rounded-full text-[12px] font-semibold">Próximo</span>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="font-semibold">Javier Vargas</div>
+                                    <div class="text-[12px] text-neutral-text-secondary">1 Adulto</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="font-medium">20 may 2026</div>
+                                    <div class="text-neutral-text-secondary">21 may 2026</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div>20 ene 2026</div>
+                                    <div class="text-neutral-text-secondary">00:23 a.m.</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="truncate max-w-[180px] font-medium text-neutral-text-secondary">Pruebas de
+                                        publicación...</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <span class="font-mono text-neutral-text-secondary">0000010299</span>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6 font-semibold">
+                                    $264.50
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <button class="px-4 py-2 bg-neutral-bg border border-neutral-border rounded-jom text-body font-semibold text-neutral-text hover:bg-neutral-bg-secondary hover:border-ui-primary-hover hover:text-ui-primary-hover transition-all duration-200">Detalles</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6">
+                                    <span
+                                        class="bg-neutral-bg-secondary text-neutral-text-secondary px-3 py-1 rounded-full text-[12px] font-semibold">Próximo</span>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="font-semibold">Javier Vargas</div>
+                                    <div class="text-[12px] text-neutral-text-secondary">1 Adulto</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="font-medium">6 may 2026</div>
+                                    <div class="text-neutral-text-secondary">7 may 2026</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div>20 ene 2026</div>
+                                    <div class="text-neutral-text-secondary">00:12 a.m.</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <div class="truncate max-w-[180px] font-medium text-neutral-text-secondary">Pruebas de
+                                        publicación...</div>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6">
+                                    <span class="font-mono text-neutral-text-secondary">0000010298</span>
+                                </td>
+                                <td class="table-row-cell-data py-4 px-6 font-semibold">
+                                    $264.50
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <button class="px-4 py-2 bg-neutral-bg border border-neutral-border rounded-jom text-body font-semibold text-neutral-text hover:bg-neutral-bg-secondary hover:border-ui-primary-hover hover:text-ui-primary-hover transition-all duration-200">Detalles</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-12 flex justify-center">
+                    <button class="link-button">
+                        Ver todas las reservaciones
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </button>
+                </div>
+            </section>
+            <section
+                class="bg-neutral-bg-secondary rounded-card py-8 px-8 border border-neutral-border flex flex-col md:flex-row justify-between items-center gap-6 group cursor-pointer hover:border-ui-primary-hover hover:shadow-jom-subtle transition-all duration-200">
+                <div class="flex flex-col gap-2">
+                    <h3
+                        class="flex items-center gap-2 text-h2 font-semibold group-hover:text-ui-primary-hover transition-colors duration-200">
+                        Mostrar todas las reservas
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-200">arrow_forward</span>
+                    </h3>
+                    <p class="text-neutral-text-secondary text-sm">Revisa el historial completo y los próximos ingresos de tus
+                        inmuebles.</p>
+                </div>
+                <div
+                    class="relative w-16 h-16 flex items-center justify-center bg-neutral-bg rounded-full shadow-jom-subtle group-hover:scale-105 transition-transform duration-200">
+                    <span class="text-3xl">🧳</span>
+                </div>
+            </section>
+        </div>
+    </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Solicitud Enviada - JOM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1f2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#4B5563",
+                        "jom-gray-500": "#6b7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#e5e7eb",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#f8f9fc",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "jom-input": "12px",
+                        "jom-card": "16px",
+                        "jom-modal": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-jom-gray-900 dark:text-white min-h-screen flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/10 dark:bg-black/40 backdrop-blur-xl"></div>
+    
+    <div class="relative w-full max-w-[640px] bg-white dark:bg-zinc-900 rounded-jom-modal shadow-2xl z-10 overflow-hidden">
+        <div class="absolute right-2 top-2">
+            <button
+                class="w-11 h-11 flex items-center justify-center text-jom-gray-500 dark:text-zinc-400 hover:bg-jom-gray-50 dark:hover:bg-zinc-800 rounded-full transition-all duration-200">
+                <span class="material-symbols-outlined text-[24px]">close</span>
+            </button>
+        </div>
+        
+        <div class="p-8 pt-12 flex flex-col items-center">
+            <div class="w-20 h-20 bg-success rounded-full flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-white text-5xl">check</span>
+            </div>
+            <h1 class="text-[28px] font-semibold text-jom-gray-900 dark:text-white text-center mb-3 leading-tight">
+                ¡Solicitud enviada con éxito!
+            </h1>
+            <p class="text-sm text-jom-gray-500 dark:text-zinc-400 text-center max-w-md mb-12">
+                El anfitrión tiene 24 h para responderte. <br /> No se realizará ningún cobro si no acepta.
+            </p>
+            <div
+                class="w-full bg-white dark:bg-zinc-900 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-card overflow-hidden flex flex-row items-stretch mb-8 shadow-sm">
+                <div class="w-1/3 min-h-[140px] p-6">
+                    <img alt="Vista de Monoambiente Nomad" class="w-full h-full object-cover rounded-jom-card"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDahClWIUD8TJ3fwlaj8Z17VX5Hj4Pn0-w_NRc5bXXuNC4vXC1qwLrsn9dhlr1C4guCkNC2_xZIMjBxtE9MyBQBh-ohTTh-IfcnYr-7ZvtRIujKdYafCXWg4wwX4MQIhqnbc18YPXRWicbjY8G25lLoxaZsilQ4i8_k6YD4A8m4LbKf3kiTPIiIffzUBFmXkurj8KKNqM00lm6yhvJfv4aF7ZBPWen5m84n0uJGkRJfKKdMVzzrJli4TFQpcC6bJiNEZAaryxkYd35v" />
+                </div>
+                <div class="w-2/3 p-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-semibold text-jom-gray-900 dark:text-white">Monoambiente - Nomad</h3>
+                        <div class="flex items-center text-xs text-jom-gray-500 dark:text-zinc-400 mt-1">
+                            <span class="material-symbols-outlined text-base mr-1">location_on</span>
+                            Santa Cruz, Bolivia
+                        </div>
+                        <div class="text-sm text-jom-gray-500 dark:text-zinc-300 mt-3 space-y-2">
+                            <p>Lun, 13 ene - Mié, 15 ene.</p>
+                            <p>3 adultos</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-[20px] font-bold text-jom-gray-900 dark:text-white">BOB 500</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <button
+                    class="bg-primary hover:bg-primary-hover text-white text-base font-semibold h-12 rounded-jom-input transition-all duration-200 focus:ring-1 focus:ring-primary">
+                    Ver Viaje
+                </button>
+                <button
+                    class="bg-white dark:bg-transparent border border-jom-gray-200 dark:border-zinc-700 text-jom-gray-900 dark:text-white text-base font-semibold h-12 rounded-jom-input hover:bg-jom-gray-50 dark:hover:bg-zinc-800 transition-all duration-200">
+                    Enviar mensaje
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

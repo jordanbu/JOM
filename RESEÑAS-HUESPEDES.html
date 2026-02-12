@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Official JOM Guest Reviews Modal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "16px",
+                        "xl": "1.5rem",
+                        "jom-modal": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="font-display min-h-screen flex items-center justify-center p-4 bg-background-light dark:bg-background-dark">
+    <div class="fixed inset-0 bg-black/10 dark:bg-black/40 backdrop-blur-xl z-0"></div>
+    <div
+        class="relative w-full max-w-[640px] h-[85vh] bg-white dark:bg-zinc-900 rounded-jom-modal shadow-2xl flex flex-col overflow-hidden z-10">
+        <div class="relative px-6 py-6 border-b border-jom-gray-200 dark:border-zinc-700 flex items-center justify-center">
+            <h1 class="text-jom-gray-900 dark:text-white text-[20px] font-semibold">Reseñas de huéspedes (19)</h1>
+            <button
+                class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-jom-gray-500 hover:bg-jom-gray-50 dark:hover:bg-zinc-800 rounded-full transition-colors duration-200">
+                <span class="material-symbols-outlined text-[24px]">close</span>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto custom-scrollbar px-8">
+            <div class="divide-y divide-jom-gray-200 dark:divide-zinc-700">
+                <div class="py-6">
+                    <div class="flex items-center gap-4 mb-3">
+                        <img alt="Audrey" class="w-[44px] h-[44px] rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3-AtbC1X6a4LFGeDQfQ156TzLGQALdNCq_5bdeHe97wxrYbkELuTV6VfqeNheC9RzSVUmGERtOM__VmbQhm6Cx4INS0PhPWVDL852HEaj_twHsZ2QKTPGK40h248EPEo1z1rQyvhCUnrGaKuztUykP_T9fFhy_s4teOB1z8sOk779Y0p3TitEEY3eZQ28A7v8rsGC607iuOPfOL5iMJI1bkDDFyEEZA9iF8PnfHONOf_13YXQw_LhBrfN3SW8a958P8HOIJVlZnMW" />
+                        <div>
+                            <h3 class="text-jom-gray-900 dark:text-white text-[16px] font-semibold">Audrey</h3>
+                            <p class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Cochabamba, Bolivia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex text-jom-gold">
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined text-lg">star</span>
+                            <span class="material-symbols-outlined text-lg">star</span>
+                        </div>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Abril de 2025</span>
+                        <span class="text-jom-gray-200 dark:text-zinc-700 text-[12px]">•</span>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Estadía de una noche</span>
+                    </div>
+                    <p class="text-jom-gray-900 dark:text-white text-[14px] font-normal leading-relaxed">
+                        Un excelente lugar donde poder quedarse con muchas facilidades dentro y fuera del mismo
+                        departamento, totalmente limpio y ordenado. El dueño una persona muy amable y responsable.
+                    </p>
+                </div>
+                <div class="py-6">
+                    <div class="flex items-center gap-4 mb-3">
+                        <img alt="Juan" class="w-[44px] h-[44px] rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh3V9J8_rDIaeDdvhB4XkGfO0yw65BJ0wzldGyeNWbpDLYYPMhAIhVE23MxF31mwZZoH8IszTn4-IKbuzDzUwQVBpf5Ba54vhCehKtg932NxqELnaTb3f_xMX8yy-0Wo8yqDmGxbYNWsCRdvyT4W0Ss4_DzOWXmqRooIbI8_n1oRyvANyRvAad_8VvTjqUN4sajdZcGFAssL_gwZTAY26h8VxqPkz1LFOCpU8rTEBTopakGmhTGRqNtS7wsurBYhM4VtkCL4QoOq6_" />
+                        <div>
+                            <h3 class="text-jom-gray-900 dark:text-white text-[16px] font-semibold">Juan Carlos</h3>
+                            <p class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Santa Cruz, Bolivia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex text-jom-gold">
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                        </div>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Marzo de 2025</span>
+                        <span class="text-jom-gray-200 dark:text-zinc-700 text-[12px]">•</span>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Estadía de tres noches</span>
+                    </div>
+                    <p class="text-jom-gray-900 dark:text-white text-[14px] font-normal leading-relaxed">
+                        La ubicación es inmejorable y la atención al detalle en el departamento hizo que nuestra estadía
+                        fuera perfecta. La vista desde el balcón es impresionante, especialmente al atardecer.
+                    </p>
+                </div>
+                <div class="py-6">
+                    <div class="flex items-center gap-4 mb-3">
+                        <img alt="Elena" class="w-[44px] h-[44px] rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAUXmlHxzp23sIUvuryB_nLkoOHH5jly715UOfNwMPycv3IpBebzl9ujtcrV14tCV21INNT0L5-D8LGDKP86sb3e12xACPFEUKEaPRrEqF7ERGy2Inzs0PZvc4FIx3e8A_CAypu48VUn3MKd3qjM1fSjNRmk7m1hFfgyujPdV0nuJpBXDUtMg2nWQeAsmYmfUEkISXrrfH_ft1hqqVz6-VcbCs0pGx3K04Ss5eiEofngtuT8NUhkvAcleW9MjpsXT9TnX3CHDq_oLH" />
+                        <div>
+                            <h3 class="text-jom-gray-900 dark:text-white text-[16px] font-semibold">Elena</h3>
+                            <p class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">La Paz, Bolivia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex text-jom-gold">
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined text-lg">star</span>
+                        </div>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Febrero de 2025</span>
+                        <span class="text-jom-gray-200 dark:text-zinc-700 text-[12px]">•</span>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Estadía de fin de semana</span>
+                    </div>
+                    <p class="text-jom-gray-900 dark:text-white text-[14px] font-normal leading-relaxed">
+                        Muy acogedor y limpio. El proceso de entrada fue muy sencillo y la comunicación con el anfitrión
+                        fue fluida en todo momento. Definitivamente volvería a hospedarme aquí.
+                    </p>
+                </div>
+                <div class="py-6">
+                    <div class="flex items-center gap-4 mb-3">
+                        <img alt="Audrey" class="w-[44px] h-[44px] rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIM97JFax9MlCxPSJxj1X4boaU8nOccaaYsgd06ABlfeiE5P-A0NThq6WqTJdgAoTMueTRP_Wc4szzyVJAjwsEXiSp5X9dnW_Qm9dvAQtnbP4m6lpcGImg4JG_EJpjN5OHH2mLOMc1VK3ARAujABC1zojKXjY6n2JQcl-vTVas7bFF-I1Oy0EC06PCFNbCDW3vkOjD8ldm-ksUihWoGI-lvuYHOAJtKYKeKhWePknGSBKMKBtJauaBuQwtPkhMJjEH_cgU0oLpgKY6" />
+                        <div>
+                            <h3 class="text-jom-gray-900 dark:text-white text-[16px] font-semibold">Audrey</h3>
+                            <p class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Cochabamba, Bolivia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex text-jom-gold">
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined filled text-lg">star</span>
+                            <span class="material-symbols-outlined text-lg">star</span>
+                            <span class="material-symbols-outlined text-lg">star</span>
+                        </div>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Enero de 2025</span>
+                        <span class="text-jom-gray-200 dark:text-zinc-700 text-[12px]">•</span>
+                        <span class="text-jom-gray-500 dark:text-zinc-400 text-[12px]">Estadía de una noche</span>
+                    </div>
+                    <p class="text-jom-gray-900 dark:text-white text-[14px] font-normal leading-relaxed">
+                        Una experiencia repetida y siempre satisfactoria. La calidad se mantiene y la hospitalidad es de
+                        primera.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contacta al anfitrión - JOM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "16px",
+                        "xl": "1.5rem",
+                        "jom-card": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-white dark:bg-background-dark">
+    <header class="w-full border-b border-jom-gray-200 dark:border-zinc-700 h-20 bg-white dark:bg-zinc-900 sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-content-width py-16">
+        <div class="flex flex-col lg:flex-row gap-16">
+            <div class="flex-1 max-w-[640px]">
+                <div class="flex flex-col gap-2 mb-8">
+                    <a class="flex items-center gap-2 text-jom-gray-500 dark:text-zinc-400 hover:text-jom-gray-900 dark:hover:text-white w-fit mb-2 transition-colors" href="#">
+                        <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                    </a>
+                    <h1 class="text-[20px] font-semibold text-jom-gray-900 dark:text-white">Contacta al anfitrión</h1>
+                    <p class="text-[12px] text-jom-gray-500 dark:text-zinc-400">Suele responder en el plazo de una hora</p>
+                </div>
+                <div class="h-[1px] bg-jom-gray-200 dark:bg-zinc-700 my-8"></div>
+                <section class="mb-16">
+                    <h3 class="text-[18px] font-semibold text-jom-gray-900 dark:text-white mb-6">La mayoría de los viajeros preguntan sobre
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-[16px] font-semibold text-jom-gray-900 dark:text-white">Precios y disponibilidad</h4>
+                            <ul class="flex flex-col gap-3">
+                                <li class="flex gap-2 text-[14px] text-jom-gray-900 dark:text-white leading-relaxed">
+                                    <span class="mt-2 block size-1.5 shrink-0 rounded-full bg-jom-gray-900 dark:bg-white"></span>
+                                    El alojamiento de Assert está disponible para el periodo seleccionado. Resérvalo
+                                    pronto.
+                                </li>
+                                <li class="flex gap-2 text-[14px] text-jom-gray-900 dark:text-white leading-relaxed">
+                                    <span class="mt-2 block size-1.5 shrink-0 rounded-full bg-jom-gray-900 dark:bg-white"></span>
+                                    Si cancelas con 2 días antes de la fecha de check-in, obtendrás un reembolso total.
+                                    Pasado ese plazo, si cancelas antes de la fecha de check-in, obtendrás un reembolso
+                                    del 50 %, menos la primera noche y la tarifa por servicio.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section class="mb-8">
+                    <h3 class="text-[18px] font-semibold text-jom-gray-900 dark:text-white mb-6">¿Tienes más preguntas? Mensajea al
+                        anfitrión</h3>
+                    <div class="flex flex-col gap-6">
+                        <textarea id="mensaje"
+                            class="w-full min-h-[160px] p-4 bg-white dark:bg-zinc-800 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input text-jom-gray-900 dark:text-white placeholder:text-jom-gray-500 dark:placeholder:text-zinc-500 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all duration-200 resize-none text-[14px]"
+                            placeholder="Escribe tu mensaje" oninput="toggleEnviarButton()"></textarea>
+                        <button id="enviarMensaje" disabled
+                            class="w-full md:w-fit px-8 h-12 bg-primary hover:bg-primary-hover text-white text-[16px] font-semibold rounded-jom-input transition-colors duration-200 shadow-sm active:scale-[0.98] disabled:bg-jom-gray-200 dark:disabled:bg-zinc-700 disabled:text-jom-gray-500 dark:disabled:text-zinc-500 disabled:cursor-not-allowed disabled:shadow-none">
+                            Enviar mensaje
+                        </button>
+                    </div>
+                </section>
+            </div>
+            <aside class="w-full lg:w-[360px] lg:ml-auto">
+                <div class="sticky top-28 bg-white dark:bg-zinc-900 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-card p-6" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-[20px] font-bold text-jom-gray-900 dark:text-white">700 BOB</span>
+                                <span class="text-[16px] font-semibold text-jom-gray-900 dark:text-white">/noche</span>
+                            </div>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500"
+                                    style="font-variation-settings: 'FILL' 1">star</span>
+                                <span class="text-[14px] font-medium text-jom-gray-900 dark:text-white">4</span>
+                            </div>
+                        </div>
+                        <div class="w-[48px] h-[48px] rounded-full overflow-hidden border border-jom-gray-200 dark:border-zinc-700">
+                            <img alt="Host avatar" class="size-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                        </div>
+                    </div>
+                    <div class="border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input overflow-hidden mb-6">
+                        <div class="flex border-b border-jom-gray-200 dark:border-zinc-700">
+                            <div
+                                class="flex-1 p-3 border-r border-jom-gray-200 dark:border-zinc-700 cursor-pointer hover:bg-jom-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span
+                                        class="material-symbols-outlined text-[16px] text-jom-gray-500">calendar_month</span>
+                                    <span
+                                        class="text-[12px] text-jom-gray-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Llegada</span>
+                                </div>
+                                <div class="text-[14px] text-jom-gray-900 dark:text-white">02 feb 2026</div>
+                            </div>
+                            <div class="flex-1 p-3 cursor-pointer hover:bg-jom-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span
+                                        class="material-symbols-outlined text-[16px] text-jom-gray-500">calendar_month</span>
+                                    <span
+                                        class="text-[12px] text-jom-gray-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Salida</span>
+                                </div>
+                                <div class="text-[14px] text-jom-gray-900 dark:text-white">08 feb 2026</div>
+                            </div>
+                        </div>
+                        <div class="p-3 cursor-pointer hover:bg-jom-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="material-symbols-outlined text-[16px] text-jom-gray-500">person</span>
+                                <span
+                                    class="text-[12px] text-jom-gray-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Huéspedes</span>
+                            </div>
+                            <div class="text-[14px] text-jom-gray-900 dark:text-white">1 viajeros</div>
+                        </div>
+                    </div>
+                    <button id="verDisponibilidad" onclick="mostrarDetalles()" 
+                        class="w-full h-12 bg-primary hover:bg-primary-hover text-white text-[16px] font-semibold rounded-jom-input transition-colors duration-200 shadow-sm active:scale-[0.98]">
+                        Ver disponibilidad
+                    </button>
+                    
+                    <div id="detallesPrecios" class="hidden mt-4 p-4 bg-white dark:bg-zinc-900 rounded-jom-input border border-jom-gray-200 dark:border-zinc-700">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[14px] text-jom-gray-500 dark:text-zinc-400">Precio por noche (STANDARD)</span>
+                                <span class="text-[14px] font-medium text-jom-gray-900 dark:text-white">5.00 BOB</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-[14px] text-jom-gray-500 dark:text-zinc-400">Precio por noche (WEEKEND)</span>
+                                <span class="text-[14px] font-medium text-jom-gray-900 dark:text-white">1.00 BOB</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-[14px] text-jom-gray-500 dark:text-zinc-400">Comisión de uso de plataforma</span>
+                                <span class="text-[14px] font-medium text-jom-gray-900 dark:text-white">0.90 BOB</span>
+                            </div>
+                            <div class="h-[1px] bg-jom-gray-200 dark:bg-zinc-700 my-3"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-[16px] font-semibold text-jom-gray-900 dark:text-white">Total</span>
+                                <span class="text-[20px] font-bold text-jom-gray-900 dark:text-white">6.90 BOB</span>
+                            </div>
+                            <div class="mt-4 p-3 bg-white dark:bg-zinc-800 rounded-jom-input border border-jom-gray-200 dark:border-zinc-700">
+                                <div class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-[16px] text-jom-gray-500 mt-0.5">info</span>
+                                    <div>
+                                        <p class="text-[14px] font-medium text-jom-gray-900 dark:text-white">Cancelación Gratuita</p>
+                                        <p class="text-[12px] text-jom-gray-500 dark:text-zinc-400">Puedes cancelar la reservacion si no fue previamente aceptada. <span class="underline cursor-pointer text-jom-gray-900 dark:text-white hover:text-primary transition-colors">Política completa</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <footer class="bg-jom-gray-50 dark:bg-zinc-900 border-t border-jom-gray-200 dark:border-zinc-700 pt-16 pb-12 mt-16">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="size-6 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+                    </div>
+                    <p class="text-neutral-secondary text-sm leading-relaxed">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo
+                            trabajamos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y
+                            cookies</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y
+                            condiciones</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de
+                            cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de
+                            Ayuda</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de
+                            cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y
+                            seguridad</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un
+                            problema</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-neutral-secondary text-xs">© 2024 JOM SRL. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-6">
+                    <div class="flex gap-4">
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-xl">language</span>
+                        </a>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español
+                            (BO)</button>
+                        <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés
+                            (US)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function mostrarDetalles() {
+            const botonDisponibilidad = document.getElementById('verDisponibilidad');
+            const detallesPrecios = document.getElementById('detallesPrecios');
+            
+            // Ocultar botón de disponibilidad
+            botonDisponibilidad.style.display = 'none';
+            
+            // Mostrar detalles de precios
+            detallesPrecios.classList.remove('hidden');
+            
+            // Activar botón de enviar mensaje si hay texto
+            actualizarBotonEnviar();
+        }
+        
+        function toggleEnviarButton() {
+            actualizarBotonEnviar();
+        }
+        
+        function actualizarBotonEnviar() {
+            const mensaje = document.getElementById('mensaje');
+            const botonEnviar = document.getElementById('enviarMensaje');
+            const detallesPrecios = document.getElementById('detallesPrecios');
+            const detallesVisible = !detallesPrecios.classList.contains('hidden');
+            
+            // Activar automáticamente cuando se muestren los detalles
+            if (detallesVisible) {
+                botonEnviar.disabled = false;
+            } else {
+                // Solo requerir texto si no se han mostrado los detalles
+                if (mensaje.value.trim().length > 0) {
+                    botonEnviar.disabled = false;
+                } else {
+                    botonEnviar.disabled = true;
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

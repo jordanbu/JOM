@@ -1,0 +1,483 @@
+<html lang="es">
+
+<head></head>
+
+<body class="text-slate-900">```html
+
+
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Host Dashboard - Final Reservation Detail Structure</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: "#5A4B9E",
+                        action: "#5B55C8",
+                        surface: "#F8F9FC",
+                        divider: "#E5E7EB",
+                        title: "#1F2937",
+                        success: "#16A34A",
+                        danger: "#DC2626",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        'radius-16': "16px",
+                    },
+                    spacing: {
+                        '8pt': '8px',
+                        '16pt': '16px',
+                        '24pt': '24px',
+                        '32pt': '32px',
+                    }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --brand-logo: #5A4B9E;
+            --action-color: #5B55C8;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FC;
+            -webkit-font-smoothing: antialiased;
+        }
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #1F2937;
+        }
+        .body-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .meta-text {
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .secondary-button {
+            height: 48px;
+            border-radius: 12px;
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1F2937;
+            width: 100%;
+            transition: all 0.2s;
+        }
+        .secondary-button:hover {
+            background-color: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+        .sticky-sidebar {
+            position: sticky;
+            top: 104px;
+        }
+        .bottom-sheet {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bottom-sheet:not(.expanded) {
+            transform: translateY(calc(100% - 64px));
+        }
+        .bottom-sheet:not(.expanded) .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+        }
+        .bottom-sheet.expanded {
+            transform: translateY(0);
+        }
+        .bottom-sheet.expanded .content-wrapper {
+            max-height: calc(100vh - 140px);
+        }
+        @media (min-width: 1024px) {
+            .bottom-sheet {
+                transform: translateY(0) !important;
+            }
+            .bottom-sheet .content-wrapper {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
+        .timeline-line {
+            position: absolute;
+            left: 13px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+        }
+    </style>
+
+
+    <header
+        class="h-20 w-full flex items-center justify-between px-8 bg-white border-b border-divider fixed top-0 left-0 right-0 z-[60]">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-[var(--brand-logo)]">
+                <span class="text-white font-bold text-xs uppercase">jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight text-[var(--brand-logo)]">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 meta-text font-medium text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español (BO)</span>
+            </div>
+            <button class="text-slate-600 hover:text-action transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+            </button>
+            <div
+                class="flex items-center gap-2 p-1 pl-3 border border-divider rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600">menu</span>
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex pt-20">
+        <aside class="w-64 bg-white border-r border-divider fixed left-0 top-20 bottom-0 overflow-y-auto z-50">
+            <nav class="px-4 py-6 space-y-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-action font-semibold bg-slate-50" href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    <span class="body-text">Hoy</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">campaign</span>
+                    <span class="body-text">Anuncios</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <span class="body-text">Calendario</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                    <span class="body-text">Mensajería</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                    <span class="body-text">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+        <main class="ml-64 flex-1 bg-surface min-h-[calc(100vh-80px)]">
+            <div class="max-w-[1360px] mx-auto px-8 py-8">
+                <div class="flex gap-32pt items-start">
+                    <div class="flex-1 bg-white border border-divider rounded-radius-16 p-8 space-y-32pt">
+                        <div class="space-y-6">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[12px] font-bold uppercase tracking-wider text-slate-500">Reserva ·
+                                    Próxima</span>
+                                <h1 class="text-[32px] font-bold text-title tracking-tight">Pago confirmado por el
+                                    huésped</h1>
+                            </div>
+                            <div class="flex items-start gap-4 p-6 bg-white border border-divider rounded-radius-16">
+                                <img alt="Maria Laura" class="w-16 h-16 rounded-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-title">Maria Laura</h3>
+                                    <p class="body-text text-slate-600">Lujoso depto Stratto Equipetrol</p>
+                                    <p class="body-text text-slate-500">30 de ago. – 10 de sep (11 noches)</p>
+                                    <p class="body-text font-medium text-slate-900 mt-1">1 huésped · 700,00 BOB</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-surface rounded-radius-16 p-6 flex gap-4 border border-divider">
+                            <span class="material-symbols-outlined text-action text-[24px]">info</span>
+                            <div>
+                                <p class="body-text text-slate-700 font-medium">Próximo paso: <span
+                                        class="font-normal text-slate-600">El huésped realizará el check-in el mié, 3 de
+                                        ene de 2024. Podés comunicarte con él para coordinar detalles previos si lo
+                                        necesitás.</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-24pt border-t border-divider">
+                            <h2 class="section-header mb-6">Acerca del huésped</h2>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">star</span>
+                                        <span class="body-text font-medium">4.9 de valoración</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">verified_user</span>
+                                        <span class="body-text font-medium">Identidad verificada</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">location_on</span>
+                                        <span class="body-text font-medium">Vive en La Paz, Bolivia</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">language</span>
+                                        <span class="body-text font-medium">Habla Español, Inglés</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="inline-block mt-6 body-text font-semibold text-action hover:underline"
+                                href="#">Mostrar el perfil</a>
+                        </div>
+                        <div class="pt-24pt border-t border-divider">
+                            <h2 class="section-header mb-6">Detalles</h2>
+                            <div class="grid grid-cols-2 gap-y-8 gap-x-12">
+                                <div>
+                                    <p class="meta-text text-slate-500 mb-1">Huéspedes</p>
+                                    <p class="body-text font-medium">1 huésped</p>
+                                </div>
+                                <div>
+                                    <p class="meta-text text-slate-500 mb-1">Código de confirmación</p>
+                                    <p class="body-text font-medium uppercase">HMCF2W4N9Z</p>
+                                    <p class="text-[11px] text-slate-400 mt-0.5">Usá este código para referencias con
+                                        soporte</p>
+                                </div>
+                                <div>
+                                    <p class="meta-text text-slate-500 mb-1">Check-in</p>
+                                    <p class="body-text font-medium">mié, 3 de ene de 2024</p>
+                                </div>
+                                <div>
+                                    <p class="meta-text text-slate-500 mb-1">Check-out</p>
+                                    <p class="body-text font-medium">mié, 31 de ene de 2024</p>
+                                </div>
+                                <div class="col-span-2">
+                                    <p class="meta-text text-slate-500 mb-1">Política de cancelación</p>
+                                    <p class="body-text font-medium">Moderada</p>
+                                </div>
+                            </div>
+                            <a class="inline-block mt-6 body-text font-semibold text-action hover:underline"
+                                href="#">Mostrar el calendario</a>
+                        </div>
+                        <div class="pt-24pt border-t border-divider">
+                            <h2 class="section-header mb-6">Información de pago</h2>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="border border-divider rounded-xl overflow-hidden">
+                                    <div class="bg-surface px-4 py-2 border-b border-divider">
+                                        <span class="text-[12px] font-bold text-slate-600 uppercase">Pagado por el
+                                            huésped</span>
+                                    </div>
+                                    <div class="p-4 space-y-2">
+                                        <div class="flex justify-between body-text text-slate-600">
+                                            <span>BOB 63,64 x 11 noches</span>
+                                            <span>700,00 BOB</span>
+                                        </div>
+                                        <div class="flex justify-between body-text text-slate-600">
+                                            <span>Impuestos</span>
+                                            <span>0,00 BOB</span>
+                                        </div>
+                                        <div
+                                            class="pt-2 mt-2 border-t border-dashed border-divider flex justify-between font-bold text-title">
+                                            <span>Total pagado</span>
+                                            <span class="text-[20px] font-bold">700,00 BOB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border border-divider rounded-xl overflow-hidden">
+                                    <div class="bg-surface px-4 py-2 border-b border-divider">
+                                        <span class="text-[12px] font-bold text-slate-600 uppercase">Cobro recibido por
+                                            el anfitrión</span>
+                                    </div>
+                                    <div class="p-4 space-y-2">
+                                        <div class="flex justify-between body-text text-slate-600">
+                                            <span>Ingresos brutos</span>
+                                            <span>125,00 BOB</span>
+                                        </div>
+                                        <div class="flex justify-between body-text text-slate-600">
+                                            <span>Comisión de servicio</span>
+                                            <span>-15,00 BOB</span>
+                                        </div>
+                                        <div
+                                            class="pt-2 mt-2 border-t border-dashed border-divider flex justify-between font-bold text-title">
+                                            <span>Tus ingresos</span>
+                                            <span class="text-[20px] font-bold text-slate-900">BOB 110,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-[12px] text-slate-500 italic">El pago se libera automáticamente 24 h
+                                después del check-in.</p>
+                        </div>
+                        <div class="pt-24pt border-t border-divider">
+                            <h2 class="section-header mb-6">Ayuda y recursos</h2>
+                            <div class="space-y-4">
+                                <a class="flex items-center justify-between group py-2" href="#">
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-slate-400 group-hover:text-action">help</span>
+                                        <span
+                                            class="body-text text-slate-600 group-hover:text-action font-medium">Centro
+                                            de ayuda</span>
+                                    </div>
+                                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                </a>
+                                <a class="flex items-center justify-between group py-2" href="#">
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-slate-400 group-hover:text-red-600">flag</span>
+                                        <span
+                                            class="body-text text-slate-600 group-hover:text-red-600 font-medium">Denunciar
+                                            este huésped</span>
+                                    </div>
+                                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                </a>
+                                <div class="border-t border-divider pt-6">
+                                    <button class="flex items-center justify-between w-full text-left group">
+                                        <span class="body-text font-semibold text-title">Preguntas frecuentes</span>
+                                        <span class="material-symbols-outlined text-slate-400">expand_more</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="w-full lg:w-[400px] shrink-0 fixed lg:relative bottom-0 left-0 right-0 lg:bottom-auto lg:left-auto lg:right-auto z-40 bottom-sheet">
+                        <div class="sticky-sidebar bg-white border border-divider rounded-t-3xl lg:rounded-radius-16 shadow-lg lg:shadow-none">
+                            <div onclick="toggleBottomSheet(event)" class="lg:hidden flex items-center justify-between px-6 py-4 border-b border-divider cursor-pointer active:bg-slate-50 transition-colors">
+                                <h3 class="text-[16px] font-semibold text-title flex items-center gap-2">
+                                    <div class="w-4 h-4 rounded-full border-2 border-action bg-white flex items-center justify-center flex-shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-action"></div>
+                                    </div>
+                                    Estado de la reserva
+                                </h3>
+                                <span class="material-symbols-outlined text-slate-600 chevron-icon transition-transform">keyboard_arrow_up</span>
+                            </div>
+                            <div class="content-wrapper p-6 overflow-y-auto transition-all duration-300">
+                            <h2 class="text-lg font-bold text-title mb-8 hidden lg:block">Estado de la reserva</h2>
+                            <div class="relative flex flex-col gap-6 ml-2">
+                                <div class="timeline-line"></div>
+                                <div class="relative pl-10">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-success rounded-full text-success z-10 shadow-sm">
+                                        <span class="material-symbols-outlined text-[18px]">check</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-900">1. Solicitud de reserva</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-success rounded-full text-success z-10 shadow-sm">
+                                        <span class="material-symbols-outlined text-[18px]">check</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-900">2. Aprobaste la solicitud</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-success rounded-full text-success z-10 shadow-sm">
+                                        <span class="material-symbols-outlined text-[18px]">check</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-900">3. Pago procesado</p>
+                                        <p class="meta-text text-slate-500">vie, 29 ago</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border-2 border-slate-900 rounded-full text-slate-900 z-10">
+                                        <span class="text-[12px] font-bold">3</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-bold text-title">4. Check-in</p>
+                                        <p class="meta-text text-action font-semibold">sab, 31 ago.</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10 opacity-60">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-divider rounded-full text-slate-400 z-10">
+                                        <span class="text-[12px] font-bold">4</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-600">5. Check-out</p>
+                                        <p class="meta-text text-slate-500">dom, 1 sept</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10 opacity-60">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-divider rounded-full text-slate-400 z-10">
+                                        <span class="text-[12px] font-bold">5</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-600">6. Reseña</p>
+                                        <p class="meta-text text-slate-500">lun, 2 sept - sab, 7 sept</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-10 opacity-60">
+                                    <div
+                                        class="absolute left-0 top-0 flex items-center justify-center w-[28px] h-[28px] bg-white border border-divider rounded-full text-slate-400 z-10">
+                                        <span class="text-[12px] font-bold">6</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="body-text font-medium text-slate-600">7. Pago programado</p>
+                                        <p class="meta-text text-slate-500">Lun, 02 ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-divider space-y-4">
+                                <button class="secondary-button">
+                                    Enviar un mensaje
+                                </button>
+                                <div class="flex flex-col items-center gap-4">
+                                    <a class="body-text font-semibold text-slate-900 hover:underline" href="#">Política
+                                        de cancelación</a>
+                                    <a class="body-text font-semibold text-danger hover:underline" href="#">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleBottomSheet(event) {
+            if (window.innerWidth >= 1024) return;
+            
+            const bottomSheet = document.querySelector('.bottom-sheet');
+            const chevron = document.querySelector('.chevron-icon');
+            
+            bottomSheet.classList.toggle('expanded');
+            
+            if (bottomSheet.classList.contains('expanded')) {
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        // Inicializar el chevron en estado colapsado
+        window.addEventListener('DOMContentLoaded', function() {
+            const chevron = document.querySelector('.chevron-icon');
+            if (window.innerWidth < 1024) {
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        });
+    </script>
+    ```
+</body>
+
+</html>

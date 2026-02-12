@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Reserva tu Hospedaje</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "ui-primary": "#5B55C8",
+                        "ui-primary-hover": "#4A45B0",
+                        "soft-highlight": "#EFEEFF",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-border": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+        .hero-pattern {
+            background-color: #F8F9FC;
+            background-image: radial-gradient(#EFEEFF 2px, transparent 2px);
+            background-size: 32px 32px;
+        }.search-field-group:focus-within {
+            background-color: #F9FAFB;
+        }
+        .search-field-group:focus-within .material-symbols-outlined {
+            color: #5B55C8 !important;
+        }
+        .search-field-group:focus-within .field-label {
+            color: #5B55C8 !important;
+        }.search-field-group {
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        .search-field-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 24px;
+            right: 24px;
+            height: 2px;
+            background-color: transparent;
+            transition: background-color 0.2s;
+        }
+        .search-field-group:focus-within::after {
+            background-color: #5B55C8;
+        }.favorite-active .material-symbols-outlined {
+            color: #5B55C8 !important;
+            font-variation-settings: 'FILL' 1 !important;
+        }
+        .favorite-active:hover .material-symbols-outlined {
+            color: #4A45B0 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <header class="relative bg-gradient-to-b from-[#F8F9FC] to-[#EFEEFF] pt-24 pb-32 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-40"></div>
+        <div class="relative z-10 max-content-width flex flex-col items-center text-center">
+            <h1 class="text-[28px] font-semibold text-neutral-text mb-3 leading-tight tracking-tight">
+                Reserva tu <span class="text-primary">Hospedaje</span>
+            </h1>
+            <p class="text-neutral-secondary text-base mb-12 max-w-lg">Descubre lugares increíbles para tu próxima aventura</p>
+            <div class="w-full max-w-[900px]">
+                <div
+                    class="w-full bg-white rounded-full border border-neutral-border p-2 flex flex-col md:flex-row items-center" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                    <div
+                        class="search-field-group flex-1 flex items-center px-6 gap-3 border-r border-neutral-border h-12 w-full md:w-auto rounded-l-full">
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary text-xl transition-colors">location_on</span>
+                        <div class="flex flex-col items-start overflow-hidden">
+                            <span
+                                class="field-label text-[10px] font-bold text-neutral-secondary uppercase leading-none mb-0.5 transition-colors">Ubicación</span>
+                            <input
+                                class="border-none p-0 text-sm focus:ring-0 w-full placeholder:text-neutral-text font-medium truncate bg-transparent"
+                                placeholder="¿A dónde vas?" type="text" />
+                        </div>
+                    </div>
+                    <div
+                        class="search-field-group flex-1 flex items-center px-6 gap-3 border-r border-neutral-border h-12 w-full md:w-auto">
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary text-xl transition-colors">calendar_today</span>
+                        <div class="flex flex-col items-start overflow-hidden">
+                            <span
+                                class="field-label text-[10px] font-bold text-neutral-secondary uppercase leading-none mb-0.5 transition-colors">Llegada</span>
+                            <input
+                                class="border-none p-0 text-sm focus:ring-0 w-full placeholder:text-neutral-text font-medium truncate bg-transparent"
+                                placeholder="Añadir fecha" type="text" />
+                        </div>
+                    </div>
+                    <div
+                        class="search-field-group flex-1 flex items-center px-6 gap-3 border-r border-neutral-border h-12 w-full md:w-auto">
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary text-xl transition-colors">calendar_today</span>
+                        <div class="flex flex-col items-start overflow-hidden">
+                            <span
+                                class="field-label text-[10px] font-bold text-neutral-secondary uppercase leading-none mb-0.5 transition-colors">Salida</span>
+                            <input
+                                class="border-none p-0 text-sm focus:ring-0 w-full placeholder:text-neutral-text font-medium truncate bg-transparent"
+                                placeholder="Añadir fecha" type="text" />
+                        </div>
+                    </div>
+                    <div class="search-field-group flex-1 flex items-center px-6 gap-3 h-12 w-full md:w-auto mr-2">
+                        <span
+                            class="material-symbols-outlined text-neutral-secondary text-xl transition-colors">group</span>
+                        <div class="flex flex-col items-start overflow-hidden">
+                            <span
+                                class="field-label text-[10px] font-bold text-neutral-secondary uppercase leading-none mb-0.5 transition-colors">Huéspedes</span>
+                            <input
+                                class="border-none p-0 text-sm focus:ring-0 w-full placeholder:text-neutral-text font-medium truncate bg-transparent"
+                                placeholder="¿Cuántos?" type="text" />
+                        </div>
+                    </div>
+                    <button
+                        class="size-12 bg-primary text-white rounded-full flex items-center justify-center hover:bg-ui-primary-hover transition-colors shrink-0">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-content-width py-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Cochabamba"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50 favorite-active" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Cochabamba, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Apartamento Enorme y simpatico</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.1
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">560 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Tarija"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Tarija, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Tarija Hermosa Casa</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">600 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Santa Cruz"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50 favorite-active" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Santa Cruz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Casa con buena ubicación</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">700 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Santa Cruz"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNhAftdmNzN8iMp9QO6GRTHK8LbPxXRX2b_75fbzJchQCytC8j4H5rcEXa1f0TJwf6nq7yxOVuunzRPw1Kjb7uv98b6RqquSP3nMWKrLIhSO3-zYihA1DYV6sG-1KhQXLUUG3nzRMLdxCA4_xqrhp7krZ_GWT34iTKvIGQuHI56I7mCPS1M1459O8NcDJlTz-P20CxNfQ14Qgz-n2ekJ42JxLCGQoPPIf9hoUIf3IcmIuqLES_dyoshzWfSH9hndENnkGVCAbjp3x" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center transition-colors hover:bg-gray-50" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <span class="material-symbols-outlined text-[20px] text-neutral-secondary">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Santa Cruz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Hermosa Casa de 3 dormitorios</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">550 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="La Paz"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50">
+                        <span class="material-symbols-outlined text-[20px] text-[#6B7280]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">La Paz, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Vista panorámica de la ciudad</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.8
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">480 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Sucre"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50 favorite-active">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Sucre, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Hostal Tradicional Colonial</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.5
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">350 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Beni"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50">
+                        <span class="material-symbols-outlined text-[20px] text-[#6B7280]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Beni, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Eco-lodge en la selva</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        4.9
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">850 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+            <div class="flex flex-col gap-3 group cursor-pointer">
+                <div class="relative aspect-[4/3] rounded-[16px] overflow-hidden bg-neutral-100">
+                    <img alt="Potosí"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                    <button
+                        class="absolute top-4 right-4 size-8 bg-white rounded-full flex items-center justify-center favorite-btn transition-colors hover:bg-gray-50 favorite-active">
+                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col overflow-hidden">
+                        <h3 class="text-[16px] font-semibold text-neutral-text truncate">Potosí, Bolivia</h3>
+                        <p class="text-[14px] text-neutral-secondary truncate">Suite en Salar de Uyuni</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold shrink-0">
+                        <span class="material-symbols-outlined text-[12px]"
+                            style="font-variation-settings: 'FILL' 1">star</span>
+                        5.0
+                    </div>
+                </div>
+                <p class="text-[18px] font-bold text-neutral-text">1200 BOB <span
+                        class="text-sm font-normal text-neutral-secondary">/noche</span></p>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="size-6 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+                    </div>
+                    <p class="text-neutral-secondary text-sm leading-relaxed">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo
+                            trabajamos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y
+                            cookies</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y
+                            condiciones</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de
+                            cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de
+                            Ayuda</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de
+                            cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y
+                            seguridad</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un
+                            problema</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-neutral-secondary text-xs">© 2024 JOM SRL. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-6">
+                    <div class="flex gap-4">
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-xl">language</span>
+                        </a>
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-xl">camera</span>
+                        </a>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español
+                            (BO)</button>
+                        <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés
+                            (US)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Configuración de la cuenta - JOM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-border": "#E5E7EB",
+                        "soft-highlight": "#F3F4F6",
+                        "ui-primary-hover": "#4a45b0",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+            .max-content-width {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .dropdown-menu {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+            border: 2px solid #E5E7EB;
+        }
+        .dropdown-item {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: #1F2937;
+            gap: 12px;
+            border-left: 3px solid transparent;
+        }
+        .dropdown-item:hover {
+            background-color: #EFEEFF;
+            border-left-color: #5B55C8;
+            color: #5B55C8;
+        }
+        .dropdown-item:hover .material-symbols-outlined {
+            color: #5B55C8;
+        }
+        .card-section {
+            background: white;
+            border-radius: 16px;
+        }
+        .info-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 0;
+            background: white;
+        }
+        @media (min-width: 768px) {
+            .info-item {
+                padding: 24px 0;
+            }
+        }
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding-top: 0;
+        }
+        .accordion-content.active {
+            max-height: 500px;
+            padding-top: 16px;
+            border-top: 1px solid #E5E7EB;
+            margin-top: 16px;
+        }
+        .accordion-button {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .accordion-button:hover {
+            color: #4A45B0;
+        }
+        .accordion-button .material-symbols-outlined {
+            transition: transform 0.3s ease;
+        }
+        .accordion-button.active .material-symbols-outlined {
+            transform: rotate(180deg);
+        }
+    </style>
+    <script>
+        function toggleAccordion(button) {
+            const content = button.closest('.info-item').querySelector('.accordion-content');
+            const isActive = button.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.accordion-content').forEach(cnt => {
+                cnt.classList.remove('active');
+            });
+            
+            // Toggle current accordion
+            if (!isActive) {
+                button.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-white">
+    <nav class="sticky top-0 z-50 bg-[#FFFFFF] border-b border-neutral-border h-14 md:h-20 flex items-center">
+        <div class="max-content-width w-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-6 md:size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-xl md:text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-3 md:gap-8">
+                <button class="hidden md:flex items-center gap-2 text-neutral-text font-medium text-sm">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-neutral-text flex items-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[22px] md:text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="relative flex items-center gap-2 pl-2 cursor-pointer group active:scale-95 transition-transform">
+                    <div
+                        class="size-9 rounded-full bg-neutral-bg border border-neutral-border flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-neutral-secondary group-hover:text-neutral-text transition-colors">menu</span>
+                    <div class="dropdown-menu absolute right-0 top-full mt-4 w-72 bg-white rounded-card py-3 z-[60] opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 origin-top-right scale-95 group-hover:scale-100">
+                        <div class="flex flex-col">
+                            <a class="dropdown-item" href="#">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">person</span>
+                                Mi perfil
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">settings</span>
+                                Configuración
+                            </a>
+                            <div class="py-2">
+                                <div class="h-[1px] bg-neutral-border"></div>
+                            </div>
+                            <a class="dropdown-item" href="#">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">help</span>
+                                Centro de ayuda
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">logout</span>
+                                Cerrar sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-content-width py-6 md:pt-16 md:pb-24">
+        <h1 class="text-[20px] md:text-[28px] font-semibold text-neutral-text mb-6 md:mb-8">Configuración de la cuenta</h1>
+        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start">
+            <aside class="w-full md:w-80 md:sticky md:top-20">
+                <div class="bg-white border border-neutral-border rounded-card p-4 md:p-6 shadow-sm">
+                    <nav class="flex flex-col space-y-1 md:space-y-2">
+                    <a class="flex items-center gap-3 px-3 md:px-4 py-2.5 md:py-3 bg-soft-highlight text-primary rounded-jom font-medium transition-colors active:scale-95"
+                        href="../CONFIGURACION3.html">
+                        <span class="material-symbols-outlined text-[20px]">person</span>
+                        <span class="text-[14px] md:text-[15px]">Información personal</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 md:px-4 py-2.5 md:py-3 text-neutral-text hover:bg-neutral-bg rounded-jom transition-colors active:scale-95"
+                        href="#">
+                        <span class="material-symbols-outlined text-[20px]">shield</span>
+                        <span class="text-[14px] md:text-[15px]">Inicio de sesión y seguridad</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 md:px-4 py-2.5 md:py-3 text-neutral-text hover:bg-neutral-bg rounded-jom transition-colors active:scale-95"
+                        href="#">
+                        <span class="material-symbols-outlined text-[20px]">payments</span>
+                        <span class="text-[14px] md:text-[15px]">Pagos</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 md:px-4 py-2.5 md:py-3 text-neutral-text hover:bg-neutral-bg rounded-jom transition-colors active:scale-95"
+                        href="#">
+                        <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+                        <span class="text-[14px] md:text-[15px]">Historial de notificaciones</span>
+                    </a>
+                </nav>
+                </div>
+            </aside>
+        </div>
+    </main>
+    
+
+</body>
+
+</html>

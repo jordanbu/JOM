@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Viajes - JOM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-border": "#E5E7EB",
+                        "soft-highlight": "#F3F4F6",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px",
+                    },
+                    boxShadow: {
+                        "destacada": "0 1px 3px rgba(0, 0, 0, 0.06)",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+            .max-content-width {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-background-dark">
+    <header class="w-full border-b border-jom-gray-200 dark:border-zinc-700 h-14 md:h-20 bg-white dark:bg-zinc-900 sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-xl md:text-2xl tracking-tight">jom</div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200 active:scale-90">
+                    <span class="material-symbols-outlined text-[22px]">account_circle</span>
+                </button>
+                <button class="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200 active:scale-90 md:hidden">
+                    <span class="material-symbols-outlined text-[22px]">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-content-width py-6 md:pt-16 md:pb-16">
+        <div class="mb-6 md:mb-8">
+            <h1 class="text-[22px] md:text-[28px] font-semibold leading-tight text-neutral-text">Viajes</h1>
+        </div>
+        <div class="flex gap-6 md:gap-8 border-b border-neutral-border mb-4 md:mb-6">
+            <button
+                class="pb-3 md:pb-4 text-[14px] md:text-[16px] font-semibold text-primary border-b-2 border-primary hover:text-ui-primary-hover transition-colors active:scale-95">Mis
+                reservas</button>
+            <button
+                class="pb-3 md:pb-4 text-[14px] md:text-[16px] font-medium text-neutral-secondary hover:text-neutral-text transition-colors active:scale-95">Reseñas
+                pendientes</button>
+        </div>
+        <div class="flex flex-col gap-4 md:gap-6 mb-12 md:mb-16">
+            <div
+                class="bg-white rounded-[16px] border border-[#E5E7EB] p-3 md:p-4 flex flex-col md:flex-row md:items-center md:justify-between shadow-destacada">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                    <div class="w-full md:w-[180px] aspect-[16/10] md:aspect-auto md:h-[120px] rounded-[12px] overflow-hidden flex-shrink-0">
+                        <img alt="Penthouse con vista al mar" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 md:gap-3 flex-wrap">
+                            <h3 class="text-[15px] md:text-[16px] font-semibold text-neutral-text">Penthouse con vista al mar</h3>
+                            <span class="px-2.5 md:px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold bg-green-100 text-success">En
+                                curso</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-secondary">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                            <p class="text-[13px] md:text-[14px]">12 - 18 Octubre, 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="flex items-center justify-center md:justify-start gap-1 text-[14px] font-semibold text-[#5B55C8] hover:opacity-80 transition-opacity mt-3 md:mt-0 md:pr-4 active:scale-95"
+                    href="#">
+                    Ver detalle
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                </a>
+            </div>
+            <div
+                class="bg-white rounded-[16px] border border-[#E5E7EB] p-3 md:p-4 flex flex-col md:flex-row md:items-center md:justify-between shadow-destacada">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                    <div class="w-full md:w-[180px] aspect-[16/10] md:aspect-auto md:h-[120px] rounded-jom overflow-hidden flex-shrink-0">
+                        <img alt="Apartamento de Lujo" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNhAftdmNzN8iMp9QO6GRTHK8LbPxXRX2b_75fbzJchQCytC8j4H5rcEXa1f0TJwf6nq7yxOVuunzRPw1Kjb7uv98b6RqquSP3nMWKrLIhSO3-zYihA1DYV6sG-1KhQXLUUG3nzRMLdxCA4_xqrhp7krZ_GWT34iTKvIGQuHI56I7mCPS1M1459O8NcDJlTz-P20CxNfQ14Qgz-n2ekJ42JxLCGQoPPIf9hoUIf3IcmIuqLES_dyoshzWfSH9hndENnkGVCAbjp3x" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 md:gap-3 flex-wrap">
+                            <h3 class="text-[15px] md:text-[16px] font-semibold text-neutral-text">Apartamento de Lujo</h3>
+                            <span
+                                class="px-2.5 md:px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold bg-soft-highlight text-primary">Confirmado</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-secondary">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                            <p class="text-[13px] md:text-[14px]">10 - 15 Noviembre, 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="flex items-center justify-center md:justify-start gap-1 text-[14px] font-semibold text-[#5B55C8] hover:opacity-80 transition-opacity mt-3 md:mt-0 md:pr-4 active:scale-95"
+                    href="#">
+                    Ver detalle
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                </a>
+            </div>
+            <div
+                class="bg-white rounded-[16px] border border-[#E5E7EB] p-3 md:p-4 flex flex-col md:flex-row md:items-center md:justify-between shadow-destacada">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                    <div class="w-full md:w-[180px] aspect-[16/10] md:aspect-auto md:h-[120px] rounded-jom overflow-hidden flex-shrink-0">
+                        <img alt="Cabaña en el Bosque" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUrjVfXZlKvvC8MTPKczV_64Vq0SlKq29CCB1k3Lnu1Pr2GCfJX5pk2wO15rAnDuG3LNha87xdpvuUE-EKmtg99MJcPtMwjV5fEt5TDqjjLkZAkCusKRerVwpBc_qO0CLl8Dkvlzoqm9i96Y-Lip2_vICZoE8Hn5wsup8TK3WQZZYQKLsgMTJWPJvvETaLi-e3hh51l9tuy-yMvWEZ1b2liZYrj6G_zsnQZuP0MHnD2eXYbkVS7SmCaa48UaPjSMQf6kdw7cS5lm0x" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 md:gap-3 flex-wrap">
+                            <h3 class="text-[15px] md:text-[16px] font-semibold text-neutral-text">Cabaña en el Bosque</h3>
+                            <span
+                                class="px-2.5 md:px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold bg-slate-100 text-slate-600">Finalizado</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-secondary">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                            <p class="text-[13px] md:text-[14px]">01 - 05 Septiembre, 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="flex items-center justify-center md:justify-start gap-1 text-[14px] font-semibold text-[#5B55C8] hover:opacity-80 transition-opacity mt-3 md:mt-0 md:pr-4 active:scale-95"
+                    href="#">
+                    Ver detalle
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                </a>
+            </div>
+            <div
+                class="bg-white rounded-[16px] border border-[#E5E7EB] p-3 md:p-4 flex flex-col md:flex-row md:items-center md:justify-between shadow-destacada">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                    <div class="w-full md:w-[180px] aspect-[16/10] md:aspect-auto md:h-[120px] rounded-jom overflow-hidden flex-shrink-0">
+                        <img alt="Estudio Moderno" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_OHsOgDyAIxGjBOyAmEH1PiXlQj3NFvb4r5oR3PHYkp5_ZsbiKtrvAdcJNDohf2ti8S1hVul8yOP51ibg2O2PRpM4-2PRGJFjouW8AYk3m4ZvgYXejoEC9rLmRoum14qEEBwFJz4QJX6Puhyko2ma99ejNWCB4JgzWjSaCUvwb4xogUl4glyha4Jvb3FopcE8s3I7lBjshNDPzUoNcxQzKAG7AIp-qwpiq16P-cq0ITT-Yz-6_TuaTGA_Utf-JjM_WCvzJ80mEcjR" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 md:gap-3 flex-wrap">
+                            <h3 class="text-[15px] md:text-[16px] font-semibold text-neutral-text">Estudio Moderno</h3>
+                            <span
+                                class="px-2.5 md:px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold bg-red-100 text-red-600">Cancelado</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-secondary">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                            <p class="text-[13px] md:text-[14px]">20 - 22 Diciembre, 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="flex items-center justify-center md:justify-start gap-1 text-[14px] font-medium text-primary hover:underline transition-colors mt-3 md:mt-0 md:pr-4 active:scale-95"
+                    href="#">
+                    Ver detalle
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                </a>
+            </div>
+            <div
+                class="bg-neutral-bg rounded-card px-4 md:px-8 flex items-center justify-between min-h-[100px] md:h-[120px] py-4 md:py-0 border border-neutral-border mt-4">
+                <a class="flex items-center gap-2 group cursor-pointer active:scale-95 transition-transform" href="#">
+                    <span class="text-[14px] md:text-[16px] font-semibold text-neutral-text">Encuentra viajes pasados en tu perfil</span>
+                    <span
+                        class="material-symbols-outlined text-[20px] text-neutral-text group-hover:translate-x-1 transition-transform">chevron_right</span>
+                </a>
+                <div class="flex-shrink-0 h-full flex items-center overflow-hidden">
+                    <div class="h-16 w-16 md:h-24 md:w-24 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[48px] md:text-[64px] text-neutral-border"
+                            style="font-variation-settings: 'FILL' 1;">luggage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-neutral-bg border-t border-neutral-border pt-8 md:pt-16 pb-8 md:pb-12">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-16">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="size-6 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+                    </div>
+                    <p class="text-neutral-secondary text-[14px] leading-relaxed">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                    <div class="flex gap-4 mt-2">
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-[20px]">public</span>
+                        </a>
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-[20px]">share</span>
+                        </a>
+                        <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined text-[20px]">alternate_email</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-[14px]">Compañía</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo
+                            trabajamos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Inversionistas</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-[14px]">Legal</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y
+                            cookies</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y
+                            condiciones</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Mapa del
+                            sitio</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-[14px]">Soporte</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de
+                            Ayuda</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de
+                            cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un
+                            problema</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Atención al
+                            cliente</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-neutral-secondary text-xs">© 2024 JOM SRL. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-8">
+                    <button
+                        class="flex items-center gap-2 text-xs font-semibold text-neutral-secondary hover:text-neutral-text transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">language</span>
+                        Español (BO)    
+                    </button>
+                    <button
+                        class="flex items-center gap-2 text-xs font-semibold text-neutral-secondary hover:text-neutral-text transition-colors">
+                        BS (Bolivianos)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

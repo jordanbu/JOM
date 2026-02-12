@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Anuncios</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="anuncios.css" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-[#F8F9FC] font-display min-h-screen flex flex-col">
+    <header class="sticky top-0 left-0 right-0 h-20 bg-white border-b border-slate-200 z-50">
+        <div class="max-w-[1200px] w-full mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-8">
+                <button
+                    class="hidden md:flex items-center gap-2 text-[#6B7280] hover:text-[#4A45B0] font-medium text-sm transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-[#6B7280] hover:text-[#4A45B0] flex items-center transition-colors">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="flex items-center gap-2 pl-2 cursor-pointer group">
+                    <div
+                        class="size-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-[20px] text-[#6B7280] group-hover:text-[#5B55C8] transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex h-[calc(100vh-80px)]">
+        <!-- Menú lateral izquierdo -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col py-6 px-4">
+            <nav class="flex flex-col gap-2">
+                <a href="HOY.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">today</span>
+                    Hoy
+                </a>
+                <a href="ANUNCIOS.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-900 bg-secondary-active rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">home</span>
+                    Anuncios
+                </a>
+                <a href="CALENDARIO.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    Calendario
+                </a>
+                <a href="MENSAJERIA3.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">chat</span>
+                    Mensajería
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Contenido principal -->
+        <main class="flex-1 max-w-[1360px] mx-auto py-8">
+            <div class="bg-white rounded-card shadow-sm border border-jom-gray-200">
+                <!-- Header con tabs -->
+                <div class="border-b border-jom-gray-200 px-8 pt-6">
+                    <h1 class="text-2xl font-bold text-jom-gray-900 mb-6">Mis Anuncios</h1>
+                    <div class="flex gap-8">
+                        <button class="pb-4 px-1 text-sm font-semibold text-primary border-b-2 border-primary transition-colors">
+                            Publicados
+                        </button>
+                        <button class="pb-4 px-1 text-sm font-medium text-jom-gray-600 border-b-2 border-transparent hover:text-jom-gray-900 transition-colors">
+                            Pendientes
+                        </button>
+                        <button class="pb-4 px-1 text-sm font-medium text-jom-gray-600 border-b-2 border-transparent hover:text-jom-gray-900 transition-colors">
+                            No publicados
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid de tarjetas -->
+                <div class="p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        
+                        <!-- Card 1: Casa Tarija Hermosa -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" 
+                                     alt="Casa Tarija" class="w-full aspect-square object-cover rounded-card group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Tarija, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">4.8</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Casa Tarija Hermosa</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">127.5 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Departamento Centro -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" 
+                                     alt="Departamento" class="w-full aspect-square object-cover rounded-card group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Santa Cruz de la Sierra, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">4.5</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Departamento lujoso</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">280.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Cabaña Cochabamba -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" 
+                                     alt="Cabaña" class="w-full aspect-square object-cover rounded-card group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Cochabamba, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">4.9</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Cabaña romántica</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">550.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Loft Zona Sur -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <div class="w-full aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-card flex items-center justify-center group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                    <span class="material-symbols-outlined text-blue-600 text-6xl">apartment</span>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">La Paz, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">4.2</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Loft Zona Sur</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">380.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Mono ambiente con vista al mar -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <div class="w-full aspect-square bg-gradient-to-br from-purple-100 to-purple-200 rounded-card flex items-center justify-center group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                    <span class="material-symbols-outlined text-purple-600 text-6xl">home</span>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Cochabamba, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">2.6</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Mono ambiente con vista al mar</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">200.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Villa El Trompillo -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <div class="w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-card flex items-center justify-center group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                    <span class="material-symbols-outlined text-green-600 text-6xl">cottage</span>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Santa Cruz de la Sierra, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">0.0</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Villa El Trompillo</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">450.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 7: Error/Sin imagen -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <div class="w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-card flex flex-col items-center justify-center group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                    <span class="material-symbols-outlined text-gray-400 text-6xl mb-2">image_not_supported</span>
+                                    <p class="text-meta text-neutral-text-secondary">Oops! Imagen no encontrada</p>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Potosí, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">3.8</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Casa Colonial Centro</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">320.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 8: Departamento Moderno -->
+                        <div class="group cursor-pointer">
+                            <div class="relative mb-4">
+                                <div class="w-full aspect-square bg-gradient-to-br from-orange-100 to-orange-200 rounded-card flex items-center justify-center group-hover:shadow-jom-subtle transition-shadow duration-200">
+                                    <span class="material-symbols-outlined text-orange-600 text-6xl">domain</span>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-neutral-bg px-3 py-1.5 rounded-full shadow-jom-subtle flex items-center gap-1.5">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <span class="text-meta text-neutral-text">Publicado</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-meta text-neutral-text-secondary">Sucre, Bolivia</p>
+                                    <div class="flex items-center gap-1 bg-ui-primary-soft text-primary px-2 py-0.5 rounded-lg">
+                                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">star</span>
+                                        <span class="text-[13px] font-bold">4.7</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-h3 text-neutral-text line-clamp-1">Departamento Moderno Centro</h3>
+                                <p class="text-body text-neutral-text">
+                                    <span class="text-price">290.0 BOB</span>
+                                    <span class="text-meta text-neutral-text-secondary">/ noche</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

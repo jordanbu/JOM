@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>JOM - Mensajería</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-border": "#E5E7EB",
+                        "soft-highlight": "#F3F4F6",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px"
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+            .max-content-width {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .chat-view { display: none; }
+        @media (max-width: 1023px) {
+            .chat-view.active { 
+                display: flex;
+                animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .list-view.hidden { display: none; }
+        }
+        @media (min-width: 1024px) {
+            .chat-view { display: flex; }
+        }
+        .details-panel {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (max-width: 1023px) {
+            .details-panel:not(.active) {
+                transform: translateX(100%);
+            }
+            .details-panel.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8F9FC] dark:bg-background-dark min-h-screen flex flex-col">
+    <header class="w-full border-b border-jom-gray-200 dark:border-zinc-700 h-14 md:h-20 bg-white dark:bg-zinc-900 sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-xl md:text-2xl tracking-tight">jom</div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200 active:scale-90">
+                    <span class="material-symbols-outlined text-[22px]">account_circle</span>
+                </button>
+                <button class="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200 active:scale-90 md:hidden">
+                    <span class="material-symbols-outlined text-[22px]">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Contenedor centrado de mensajería -->
+    <main class="flex-1 w-full lg:max-w-[1360px] lg:mx-auto lg:py-8 lg:px-6">
+        <div class="flex h-[calc(100vh-56px)] md:h-[calc(100vh-144px)] lg:rounded-card overflow-hidden lg:border lg:border-neutral-border">
+            <aside class="list-view w-full lg:w-[400px] bg-white shadow-sm flex flex-col overflow-hidden flex-shrink-0 lg:border-l lg:border-r border-neutral-border">
+                <div class="h-14 md:h-20 px-4 md:px-8 border-b border-neutral-border flex items-center justify-between gap-3">
+                    <h2 class="text-[16px] md:text-[18px] font-semibold text-neutral-text">Mensajes</h2>
+                    <div class="flex items-center gap-1">
+                        <button class="p-2 hover:bg-neutral-bg rounded-full transition-colors active:scale-90">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">search</span>
+                        </button>
+                        <button class="p-2 hover:bg-neutral-bg rounded-full transition-colors active:scale-90">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">settings</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="px-4 md:px-6 py-3 md:py-4 border-b border-neutral-border">
+                    <div class="flex gap-2 md:gap-3">
+                        <button
+                            class="px-4 py-2 bg-primary text-white font-medium rounded-full text-[13px] md:text-[14px] hover:bg-ui-primary-hover transition-colors active:scale-95">
+                            Todos
+                        </button>
+                        <button
+                            class="px-4 py-2 text-neutral-text font-medium rounded-full text-[13px] md:text-[14px] hover:bg-neutral-bg transition-colors active:scale-95">
+                            No leído
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto">
+                    <div onclick="openChat()"
+                        class="px-4 md:px-6 py-4 bg-soft-highlight flex gap-3 md:gap-4 cursor-pointer border-l-2 border-primary hover:bg-neutral-bg transition-colors active:bg-neutral-bg">
+                        <div class="size-12 md:size-14 rounded-full bg-cover bg-center shrink-0 ring-2 ring-white"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfB9izL3aWber0b67ICFhEtHn7uEkjxMi-rt8GpOybmzl6QVgH2753n-YFIFZWmTS2WeKvAW1XvmvTie_35w4Z44cwo-pld3qPo2C4PXHcUi_bdaCJBcQD0-O_NAgfO8eFgD7dMhErZxkyvTN4c_G_cgnwr_7gw8YLEIydSFRb0LSImgVhM6E_rPDvSZ-cJ-CY7HxEzOfTHAHAeG-eUbSblgJUG8jR93j-IGzmH4XR9IGyRDaGbuL15H8XlVc9wdEtliv_pQGYUc2m')">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[14px] font-semibold text-neutral-text truncate">Jordi</span>
+                                <span class="text-[12px] text-neutral-secondary">Jueves</span>
+                            </div>
+                            <p class="text-[14px] text-neutral-text font-medium truncate mb-0.5">Hola Quiero Hospedarme</p>
+                            <p class="text-[12px] text-neutral-secondary truncate">Reserva de 2 noches del 24-26 ene</p>
+                        </div>
+                    </div>
+                    <div onclick="openChat()" class="px-4 md:px-6 py-4 hover:bg-neutral-bg flex gap-3 md:gap-4 cursor-pointer transition-colors active:bg-neutral-bg">
+                        <div class="size-12 md:size-14 rounded-full bg-cover bg-center shrink-0"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUcCKQy57TBHMRFXbAI4u97zq9NJxmXT55SAkzFtoosQovwHecW82STnjbXH6sTIKI-6GL-DGRgiYcx4JUjpLaaaRyiythof3GBlY49MfPUTz3-Gw6FKgJW-bxhrnr4fKf-L6giBGxP72zKm-TqAFW2W7hsvZl1ZpkqqEcmGS7z2cge5ACTSF4ohsiwx3zQoJ0YzpJKgJrR0WJsIFaD08UoWzckzcRPiijBcEnC9kd0zIxPaiH9_GarG16gs_mhNM4qwJbMrn-BXbE')">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[14px] font-medium text-neutral-text truncate">Analia Eliana</span>
+                                <span class="text-[12px] text-neutral-secondary">Miér</span>
+                            </div>
+                            <p class="text-[14px] text-neutral-secondary truncate">Hola quiero una reserva</p>
+                        </div>
+                    </div>
+                    <div onclick="openChat()" class="px-4 md:px-6 py-4 hover:bg-neutral-bg flex gap-3 md:gap-4 cursor-pointer transition-colors active:bg-neutral-bg">
+                        <div
+                            class="size-12 md:size-14 rounded-full bg-gradient-to-br from-neutral-border to-neutral-secondary shrink-0 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[24px]">person</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[14px] font-medium text-neutral-text truncate">ASSERT</span>
+                                <span class="text-[12px] text-neutral-secondary">Lun</span>
+                            </div>
+                            <p class="text-[14px] text-neutral-secondary truncate">Hola, necesito ayuda con...</p>
+                        </div>
+                    </div>
+                    <div onclick="openChat()" class="px-4 md:px-6 py-4 hover:bg-neutral-bg flex gap-3 md:gap-4 cursor-pointer transition-colors active:bg-neutral-bg">
+                        <div class="size-12 md:size-14 rounded-full bg-cover bg-center shrink-0"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpq4grK-HBx5gjY64XEAkPJlFdJvc0cKRLBLdKB_znqZzLNV79Rq4vPZFGsdCHWxCKP-cUVHuTqm3DPaaRiZvQTuz6OrkN5V981poH7riz3pGPQgO1qISTW7B_S_qwxoKT1OBmYWWcJffhC-9MycNUZoFHxFOwsOY4Xk9q6ZxcWlq9Ef08s8pZZ71XVwMMhqbtMPLUXmVHn2B6rsKXc1zwLpkr8s6fI-IDyIlTJGtQE4q04qq_uFDLG2YMutLOUWxqctv72nVQOY9y')">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[14px] font-medium text-neutral-text truncate">Franz</span>
+                                <span class="text-[12px] text-neutral-secondary">Miér</span>
+                            </div>
+                            <p class="text-[14px] text-neutral-secondary truncate">Prueba de reserva</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <section class="chat-view flex-1 bg-white flex-col overflow-hidden">
+                <header class="h-20 md:h-28 px-4 md:px-8 border-b border-neutral-border flex items-center justify-between flex-shrink-0">
+                    <div class="flex items-center gap-3 md:gap-4">
+                        <button onclick="closeChat()" class="w-9 h-9 flex items-center justify-center lg:hidden active:scale-90 transition-transform">
+                            <span class="material-symbols-outlined text-jom-gray-900">arrow_back</span>
+                        </button>
+                        <div class="size-14 md:size-16 rounded-full bg-neutral-bg flex items-center justify-center overflow-hidden">
+                            <img alt="Jordi" class="size-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvUuUCZKyDIuOROphnvzRT5KXGT3o29aTgr7TOmWJhn1oLyD58q4EaK0xfYsTiPBUKoh2WPqQ5pX_-GRXsBlMauybgutyRhjv3Ea-LjH4d0yJlFaXzn1sr8PQZYahT0A1G2j4bhwr6qNtFciWMfLxJCPvxWupMqdUnuLi5374-i6ZZPNu1xtBDvKYNxU9pdqdIMENJX2AaBrODom1y9Xtm2hPZGEz9AJriF9zhkmjb6mAGFPCoL-EGFQp2btsh-in3zM5j8lMFKCRk" />
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[17px] md:text-[18px] font-semibold text-neutral-text">Jordi</span>
+                            <span class="text-[14px] md:text-[15px] text-neutral-secondary">departamento frutal</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleDetails()" 
+                        class="text-[12px] md:text-[13px] font-medium text-neutral-text bg-neutral-bg px-4 md:px-5 py-2 rounded-full hover:bg-neutral-border transition-colors active:scale-95">Detalle</button>
+                </header>
+                <div class="flex-1 overflow-y-auto px-4 md:px-8 py-4 md:py-8 flex flex-col gap-4 md:gap-6">
+                    <div class="flex items-end gap-3">
+                        <div
+                            class="size-10 rounded-full bg-neutral-bg flex items-center justify-center overflow-hidden flex-shrink-0">
+                            <img alt="Jordi" class="size-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvUuUCZKyDIuOROphnvzRT5KXGT3o29aTgr7TOmWJhn1oLyD58q4EaK0xfYsTiPBUKoh2WPqQ5pX_-GRXsBlMauybgutyRhjv3Ea-LjH4d0yJlFaXzn1sr8PQZYahT0A1G2j4bhwr6qNtFciWMfLxJCPvxWupMqdUnuLi5374-i6ZZPNu1xtBDvKYNxU9pdqdIMENJX2AaBrODom1y9Xtm2hPZGEz9AJriF9zhkmjb6mAGFPCoL-EGFQp2btsh-in3zM5j8lMFKCRk" />
+                        </div>
+                        <div class="flex flex-col gap-1 max-w-[65%]">
+                            <span class="text-[12px] font-medium text-neutral-secondary px-2">Jordi</span>
+                            <div
+                                class="bg-neutral-bg text-neutral-text px-4 py-3 rounded-[20px] rounded-bl-[4px] text-[14px] leading-relaxed">
+                                ¡Hola! Gracias por tu interés. El departamento está disponible para esas fechas.
+                            </div>
+                            <span class="text-[12px] text-neutral-secondary px-2">9:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="self-end flex flex-col gap-1 max-w-[65%] items-end">
+                        <span class="text-[12px] font-medium text-neutral-secondary px-2">Tú</span>
+                        <div
+                            class="bg-primary text-white px-4 py-3 rounded-[20px] rounded-br-[4px] text-[14px] leading-relaxed">
+                            Hola Quiero Hospedarme
+                        </div>
+                        <span class="text-[12px] text-neutral-secondary px-2">10:30 AM</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 my-6">
+                        <div
+                            class="text-neutral-secondary text-[14px] px-6 py-3.5 text-center max-w-lg leading-relaxed">
+                            La solicitud expiró por falta de aprobación del anfitrión a tiempo. Intenta nuevamente o
+                            explora otras opciones.
+                        </div>
+                    </div>
+                </div>
+                <footer class="px-4 md:px-8 py-4 md:py-6 bg-white flex-shrink-0 border-t border-neutral-border">
+                    <div class="relative flex items-center gap-3">
+                        <input
+                            class="w-full h-11 md:h-12 px-4 md:px-5 pr-14 bg-white border border-neutral-border rounded-full focus:outline-none focus:border-primary text-[14px] text-neutral-text placeholder:text-neutral-secondary"
+                            placeholder="Escribe un mensaje..." type="text" />
+                        <button class="absolute right-3 md:right-4 p-2 hover:bg-neutral-bg rounded-full transition-colors active:scale-90">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[22px]">send</span>
+                        </button>
+                    </div>
+                </footer>
+            </section>
+            <aside class="details-panel fixed lg:relative top-0 right-0 bottom-0 lg:top-auto lg:right-auto lg:bottom-auto w-full lg:w-[400px] bg-white shadow-lg lg:shadow-sm flex-col overflow-hidden flex-shrink-0 border-l border-neutral-border z-50 lg:z-auto flex">
+                <div class="h-20 px-4 lg:px-8 border-b border-neutral-border flex items-center justify-between">
+                    <button onclick="closeDetails()" class="lg:hidden w-9 h-9 flex items-center justify-center active:scale-90 transition-transform">
+                        <span class="material-symbols-outlined text-jom-gray-900">close</span>
+                    </button>
+                    <h3 class="text-[18px] font-semibold text-neutral-text">Detalles de la reserva</h3>
+                    <div class="w-9 lg:hidden"></div>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1">
+                    <div class="relative group mb-6">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvUuUCZKyDIuOROphnvzRT5KXGT3o29aTgr7TOmWJhn1oLyD58q4EaK0xfYsTiPBUKoh2WPqQ5pX_-GRXsBlMauybgutyRhjv3Ea-LjH4d0yJlFaXzn1sr8PQZYahT0A1G2j4bhwr6qNtFciWMfLxJCPvxWupMmdUnuLi5374-i6ZZPNu1xtBDvKYNxU9pdqdIMENJX2AaBrODom1y9Xtm2hPZGEz9AJriF9zhkmjb6mAGFPCoL-EGFQp2btsh-in3zM5j8lMFKCRk"
+                            alt="Propiedad" class="w-full aspect-[4/3] object-cover rounded-xl" />
+                    </div>
+                    <div class="space-y-4 mb-6 pb-6 border-b border-neutral-border">
+                        <h4 class="text-[16px] font-semibold leading-snug text-neutral-text">departamento frutal</h4>
+                        <p class="text-[14px] text-neutral-secondary leading-relaxed">
+                            La mayoría de los anfitriones responden en 24 horas.
+                        </p>
+                    </div>
+                    <div class="space-y-4 mb-6 pb-6 border-b border-neutral-border">
+                        <h5 class="text-[16px] font-semibold text-neutral-text">Detalles del viaje</h5>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-[12px] font-semibold text-neutral-secondary mb-1">Llegada</p>
+                                <p class="text-[16px] font-medium text-neutral-text">24 ene 2026</p>
+                            </div>
+                            <div>
+                                <p class="text-[12px] font-semibold text-neutral-secondary mb-1">Salida</p>
+                                <p class="text-[16px] font-medium text-neutral-text">26 ene 2026</p>
+                            </div>
+                            <div>
+                                <p class="text-[12px] font-semibold text-neutral-secondary mb-1">Huéspedes</p>
+                                <p class="text-[16px] font-medium text-neutral-text">1 adulto</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6 pb-6 border-b border-neutral-border">
+                        <h5 class="text-[16px] font-semibold text-neutral-text mb-3">Información de pago</h5>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[14px] text-neutral-secondary">2 noches x Bs 150</span>
+                            <span class="text-[16px] font-semibold text-neutral-text">Bs 300</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-neutral-border">
+                            <span class="text-[16px] font-semibold text-neutral-text">Total (BOB)</span>
+                            <span class="text-lg font-semibold text-neutral-text">Bs 300</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        function openChat() {
+            if (window.innerWidth < 1024) {
+                document.querySelector('.list-view').classList.add('hidden');
+                document.querySelector('.chat-view').classList.add('active');
+            }
+        }
+
+        function closeChat() {
+            if (window.innerWidth < 1024) {
+                document.querySelector('.chat-view').classList.remove('active');
+                document.querySelector('.list-view').classList.remove('hidden');
+            }
+        }
+
+        function toggleDetails() {
+            if (window.innerWidth < 1024) {
+                document.querySelector('.details-panel').classList.add('active');
+            }
+        }
+
+        function closeDetails() {
+            document.querySelector('.details-panel').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

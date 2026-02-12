@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Official My Profile Page</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "jom-gray-900": "#1f2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#4B5563",
+                        "jom-gray-500": "#6b7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#e5e7eb",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#f8f9fc",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "jom-input": "12px",
+                        "jom-card": "16px",
+                        "jom-modal": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-background-dark font-display text-jom-gray-900 dark:text-white">
+    <header class="w-full border-b border-jom-gray-200 dark:border-zinc-700 h-20 bg-white dark:bg-zinc-900">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-jom-gray-50 dark:hover:bg-zinc-800 text-jom-gray-900 dark:text-zinc-400 transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[1200px] mx-auto px-8 pt-16 pb-24">
+        <div class="flex flex-col md:flex-row gap-16">
+            <aside class="w-full md:w-[30%] flex flex-col">
+                <div
+                    class="relative w-[160px] h-[160px] rounded-full overflow-hidden mb-6 bg-jom-gray-50 dark:bg-zinc-800 border border-jom-gray-200 dark:border-zinc-700">
+                    <img alt="Profile" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-w92N1jSS4SLjvdf4lhLZzfG03jE7lNVfl0J7XRMezGYhLO5mFwPWNsjE91F_QSMwPo43yJbijjEzk3S1ogedrBFfT0sKIm6rg-iJ1MM8DxgAya9bFKKk2ABq-JqYexXeRR09_-_MvQmgZyZcJygwK2HiH9UObLMFCxPDk5cVlFVunG9TcVYY6z6wEuNQBjh-R1oX3fYjokqS8TVhfI5qqc86I4KFcWTp4X7Kb8wrsa_JRpgCXlKClXVFqFyS0ASV5sepopcpJYnK" />
+                </div>
+                <button
+                    class="flex items-center justify-center gap-2 w-[160px] h-12 border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input text-jom-gray-900 dark:text-white font-semibold hover:bg-jom-gray-50 dark:hover:bg-zinc-800 transition-all duration-200">
+                    <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    <span>Editar</span>
+                </button>
+            </aside>
+            <div class="w-full md:w-[70%]">
+                <div class="mb-12">
+                    <h1 class="text-[28px] font-semibold text-jom-gray-900 dark:text-white leading-tight mb-3">Mi perfil</h1>
+                    <p class="text-sm text-jom-gray-500 dark:text-zinc-400 max-w-[720px]">Los anfitriones y huéspedes pueden ver tu perfil y es posible que
+                        aparezca en Assert para ayudarnos a fomentar la confianza en nuestra comunidad.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">person</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">A qué me dedico:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">front end</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 mt-6 md:mt-0">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">map</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">A dónde siempre quise
+                                ir:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">Al caribe</p>
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 h-px bg-jom-gray-200 dark:bg-zinc-700 my-6"></div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">pets</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">Mascotas:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">3 mascotas</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 mt-6 md:mt-0">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">cake</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">Cumpleaños:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">29-01-1986</p>
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 h-px bg-jom-gray-200 dark:bg-zinc-700 my-6"></div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">language</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">Idiomas que hablo:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">Espanol, Ingles</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 mt-6 md:mt-0">
+                        <span class="material-symbols-outlined text-jom-gray-500 dark:text-zinc-400 text-[24px]">location_on</span>
+                        <div>
+                            <p class="text-base font-semibold text-jom-gray-900 dark:text-white leading-normal">Vivo en:</p>
+                            <p class="text-sm text-jom-gray-500 dark:text-zinc-400">Santa Cruz - Bolivia</p>
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 h-px bg-jom-gray-200 dark:bg-zinc-700 my-6"></div>
+                </div>
+                <div class="mt-8">
+                    <h2 class="text-lg font-semibold text-jom-gray-900 dark:text-white mb-4">Información sobre mí</h2>
+                    <p class="text-sm text-jom-gray-900 dark:text-zinc-300">
+                        Escribe algo sobre ti.
+                        <a class="text-primary text-sm font-semibold hover:underline ml-1" href="#">Presentate</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-jom-gray-50 dark:bg-zinc-900 py-12 border-t border-jom-gray-200 dark:border-zinc-700 mt-auto">
+        <div class="max-w-[1200px] mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-jom-gray-500 dark:text-zinc-400 text-xs">
+                    © 2024 JOM Platform. Todos los derechos reservados.
+                </div>
+                <div class="flex gap-8 text-xs font-medium text-jom-gray-900 dark:text-white">
+                    <a class="hover:underline" href="#">Privacidad</a>
+                    <a class="hover:underline" href="#">Términos</a>
+                    <a class="hover:underline" href="#">Mapa del sitio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

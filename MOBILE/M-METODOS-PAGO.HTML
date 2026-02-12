@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Método de pago - JOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-border": "#E5E7EB",
+                        "soft-highlight": "#F3F4F6",
+                        "ui-primary-hover": "#4a45b0",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                        "jom-input": "12px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+                color: #1F2937;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+            .max-content-width {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <nav class="sticky top-0 z-50 bg-[#FFFFFF] border-b border-neutral-border h-14 md:h-20 flex items-center">
+        <div class="max-content-width w-full flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button onclick="window.history.back()" class="text-neutral-text active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                </button>
+                <div class="size-6 md:size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-xl md:text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-3 md:gap-8">
+                <button class="hidden md:flex items-center gap-2 text-neutral-text font-medium text-[13px] md:text-[14px] active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-neutral-text flex items-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[22px] md:text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="relative flex items-center gap-2 pl-2 cursor-pointer group active:scale-95 transition-transform">
+                    <div
+                        class="size-9 rounded-full bg-neutral-bg border border-neutral-border flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-neutral-secondary group-hover:text-neutral-text transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="max-content-width py-4 md:py-8 pb-32">
+        <div class="max-w-xl mx-auto">
+            <h2 class="text-[20px] md:text-[24px] font-semibold text-neutral-text mb-6">Método de pago</h2>
+            
+            <div class="space-y-6">
+                <!-- Tarjeta guardada -->
+                <div class="border border-neutral-border rounded-card overflow-hidden bg-white shadow-sm">
+                    <div class="p-4 md:p-6 border-b border-neutral-border flex justify-between items-center bg-neutral-bg">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px] md:text-[24px]">credit_card</span>
+                            <span class="font-medium text-[14px] md:text-[15px]">Visa ***45454</span>
+                        </div>
+                        <span class="text-blue-600 font-bold italic text-[18px] md:text-xl">VISA</span>
+                    </div>
+                    <div class="p-4 md:p-6 grid grid-cols-3 gap-3 md:gap-4">
+                        <div>
+                            <p class="text-neutral-secondary text-[12px] md:text-[13px] mb-1">Nombre en la tarjeta</p>
+                            <p class="font-medium text-[13px] md:text-[14px] text-neutral-text">Jose alberto</p>
+                        </div>
+                        <div>
+                            <p class="text-neutral-secondary text-[12px] md:text-[13px] mb-1">Numero de tarjeta</p>
+                            <p class="font-medium text-[13px] md:text-[14px] text-neutral-text">**4455</p>
+                        </div>
+                        <div>
+                            <p class="text-neutral-secondary text-[12px] md:text-[13px] mb-1">Fecha de vencimiento</p>
+                            <p class="font-medium text-[13px] md:text-[14px] text-neutral-text">11/23</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Otras opciones de pago -->
+                <div class="space-y-3">
+                    <button
+                        class="w-full flex items-center justify-between px-4 md:px-6 h-[48px] border border-neutral-border rounded-jom hover:border-primary transition-all group active:scale-95">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="material-symbols-outlined text-neutral-secondary group-hover:text-primary text-[20px]">add_card</span>
+                            <span class="text-[13px] md:text-[14px] font-medium text-neutral-text">Agregar tarjeta de débito / crédito</span>
+                        </div>
+                        <span class="text-blue-600 font-bold italic text-[18px] md:text-xl">VISA</span>
+                    </button>
+                    <button
+                        class="w-full flex items-center justify-between px-4 md:px-6 h-[48px] border border-neutral-border rounded-jom hover:border-primary transition-all group active:scale-95">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="material-symbols-outlined text-neutral-secondary group-hover:text-primary text-[20px]">qr_code_2</span>
+                            <span class="text-[13px] md:text-[14px] font-medium text-neutral-text">Codigo QR</span>
+                        </div>
+                        <span class="material-symbols-outlined text-neutral-secondary text-[24px]">qr_code</span>
+                    </button>
+                </div>
+
+                <!-- Términos -->
+                <div class="pt-4">
+                    <p class="text-[12px] md:text-[13px] text-neutral-secondary">
+                        Al confirmar el pago aceptas los <a class="underline font-medium text-primary" href="#">términos de la reservación</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fixed Bottom Button -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-border shadow-lg z-40 p-4">
+            <div class="max-content-width">
+                <button onclick="window.location.href='M-RESERVA-CONFIRMADA.HTML'" class="w-full bg-primary hover:bg-ui-primary-hover text-white font-semibold py-3 px-6 rounded-jom h-[48px] transition-all active:scale-95">
+                    Confirmar pago
+                </button>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

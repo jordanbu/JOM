@@ -1,0 +1,250 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    EXPLICACIÓN DE BOTONES - MODAL LOGIN
+═══════════════════════════════════════════════════════════════════════════════
+
+Este documento explica todos los estilos, tamaños, colores y espaciados de los
+botones en el modal de login de JOM.
+
+═══════════════════════════════════════════════════════════════════════════════
+1. BOTÓN DE CERRAR (X)
+═══════════════════════════════════════════════════════════════════════════════
+
+Clases aplicadas:
+-----------------
+w-11 h-11 flex items-center justify-center text-jom-gray-500 
+hover:bg-jom-gray-50 dark:hover:bg-zinc-800 rounded-full transition-colors
+
+TAMAÑO:
+-------
+• w-11 = ancho de 44px
+• h-11 = alto de 44px
+• Botón cuadrado que se ve circular por el rounded-full
+
+POSICIONAMIENTO:
+----------------
+• right-2 = 8px desde el borde derecho
+• top-2 = 8px desde el borde superior
+• Posición absoluta en la esquina superior derecha del modal
+
+ESPACIADO INTERNO:
+------------------
+• flex items-center justify-center = contenido centrado perfectamente
+• El icono "close" está centrado dentro del área de 44x44px
+
+COLORES:
+--------
+• Icono normal: text-jom-gray-500 = #6B7280 (gris medio)
+• Hover fondo (modo claro): hover:bg-jom-gray-50 = #F8F9FC (gris muy claro)
+• Hover fondo (modo oscuro): dark:hover:bg-zinc-800 (zinc oscuro)
+• Sin fondo por defecto, solo aparece al pasar el mouse
+
+FORMA:
+------
+• rounded-full = border-radius: 9999px (totalmente circular)
+
+EFECTOS:
+--------
+• transition-colors = transición suave cuando cambia de color
+• Al pasar el mouse aparece un fondo gris muy sutil
+
+
+═══════════════════════════════════════════════════════════════════════════════
+2. BOTÓN "INICIAR SESIÓN" (Botón Principal)
+═══════════════════════════════════════════════════════════════════════════════
+
+Clases aplicadas:
+-----------------
+w-full h-12 bg-primary hover:bg-primary-hover text-white font-semibold 
+rounded-jom-input transition-colors duration-200 shadow-sm active:scale-[0.98]
+
+TAMAÑO:
+-------
+• w-full = ancho completo (100% del contenedor)
+• h-12 = alto de 48px
+• Botón rectangular ancho
+
+ESPACIADO:
+----------
+• Margen superior: mt-6 = 24px de separación del enlace "¿Olvidaste tu contraseña?"
+• Padding interno automático del texto centrado
+
+COLORES:
+--------
+• Fondo normal: bg-primary = #5B55C8 (morado corporativo)
+• Fondo hover: hover:bg-primary-hover = #4A45B0 (morado más oscuro)
+• Texto: text-white = blanco (#FFFFFF)
+• Texto peso: font-semibold = 600 (semi-negrita)
+
+FORMA:
+------
+• rounded-jom-input = border-radius: 12px (esquinas redondeadas)
+
+SOMBRA:
+-------
+• shadow-sm = sombra pequeña y sutil para dar profundidad
+
+EFECTOS Y TRANSICIONES:
+-----------------------
+• transition-colors = transición suave de colores
+• duration-200 = duración de 200 milisegundos (0.2 segundos)
+• active:scale-[0.98] = se reduce al 98% cuando se hace clic
+  (efecto de "presionar" el botón)
+
+COMPORTAMIENTO:
+---------------
+1. Estado normal: morado #5B55C8
+2. Al pasar el mouse: morado oscuro #4A45B0 (transición suave de 200ms)
+3. Al hacer clic: se reduce ligeramente (98% del tamaño)
+4. Sombra sutil siempre visible
+
+
+═══════════════════════════════════════════════════════════════════════════════
+3. BOTÓN "CONTINUAR CON GOOGLE"
+═══════════════════════════════════════════════════════════════════════════════
+
+Clases aplicadas:
+-----------------
+w-full h-12 flex items-center justify-center gap-3 bg-white dark:bg-zinc-800 
+border border-jom-gray-200 dark:border-zinc-700 rounded-jom-input 
+hover:bg-jom-gray-50 dark:hover:bg-zinc-700 transition-colors duration-200 
+active:scale-[0.98]
+
+TAMAÑO:
+-------
+• w-full = ancho completo (100% del contenedor)
+• h-12 = alto de 48px (MISMO alto que el botón "Iniciar sesión")
+
+ESPACIADO:
+----------
+• gap-3 = 12px de separación entre el logo de Google y el texto
+• flex items-center justify-center = contenido centrado vertical y horizontalmente
+• Se ubica después del separador "o" (con divisor visual)
+
+COLORES - MODO CLARO:
+---------------------
+• Fondo normal: bg-white = blanco (#FFFFFF)
+• Fondo hover: hover:bg-jom-gray-50 = #F8F9FC (gris muy claro)
+• Borde: border-jom-gray-200 = #E5E7EB (gris claro)
+• Texto: text-jom-gray-900 = #1F2937 (gris muy oscuro, casi negro)
+
+COLORES - MODO OSCURO:
+----------------------
+• Fondo normal: dark:bg-zinc-800 (zinc oscuro)
+• Fondo hover: dark:hover:bg-zinc-700 (zinc medio)
+• Borde: dark:border-zinc-700 (zinc medio)
+• Texto: dark:text-white = blanco
+
+FORMA:
+------
+• rounded-jom-input = border-radius: 12px (igual que botón principal)
+• border = borde de 1px
+
+EFECTOS Y TRANSICIONES:
+-----------------------
+• transition-colors = transición suave de colores
+• duration-200 = duración de 200 milisegundos (igual que botón principal)
+• active:scale-[0.98] = se reduce al 98% al hacer clic (mismo efecto)
+
+CONTENIDO:
+----------
+• Logo de Google (SVG de 18x18px) con colores oficiales de Google
+• Texto "Continuar con Google" con font-medium (peso 500)
+• 12px de separación entre logo y texto (gap-3)
+
+COMPORTAMIENTO:
+---------------
+1. Estado normal: fondo blanco con borde gris
+2. Al pasar el mouse: fondo gris muy claro (transición suave de 200ms)
+3. Al hacer clic: se reduce ligeramente (98% del tamaño)
+4. En modo oscuro: todos los colores se adaptan automáticamente
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SISTEMA DE DISEÑO - CONSISTENCIA
+═══════════════════════════════════════════════════════════════════════════════
+
+ALTURAS CONSISTENTES:
+---------------------
+• Botón cerrar: 44px (w-11 h-11)
+• Botón principal: 48px (h-12)
+• Botón Google: 48px (h-12)
+→ Los botones de acción tienen la MISMA altura para uniformidad visual
+
+BORDER RADIUS:
+--------------
+• Botones rectangulares: 12px (rounded-jom-input)
+• Botón circular: 9999px (rounded-full)
+
+TRANSICIONES:
+-------------
+• Todos: 200ms (duration-200)
+• Tipo: cambios de color suaves (transition-colors)
+• Sin lag, respuesta inmediata al hover
+
+FEEDBACK TÁCTIL:
+----------------
+• Efecto de "presionar": active:scale-[0.98]
+• Aplica a botones de acción (Iniciar sesión y Google)
+• Se reduce al 98% del tamaño = sensación de botón físico
+
+MODO OSCURO:
+------------
+• Todos los botones tienen versiones adaptadas (dark:)
+• Cambio automático según el tema del sistema
+• Colores optimizados para legibilidad en ambos modos
+
+ESTADOS HOVER:
+--------------
+• Cambios sutiles de color para feedback visual
+• Nunca cambios bruscos, siempre transiciones suaves
+• Indicadores claros de interactividad
+
+ESPACIADOS:
+-----------
+• Entre elementos: múltiplos de 4px (sistema de espaciado de Tailwind)
+• Margen botón principal: 24px superior (mt-6)
+• Gap logo-texto: 12px (gap-3)
+• Padding modal: 32px horizontal, 24px vertical (px-8 py-6)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PALETA DE COLORES UTILIZADA
+═══════════════════════════════════════════════════════════════════════════════
+
+MORADOS (Brand):
+----------------
+• primary: #5B55C8 (morado corporativo)
+• primary-hover: #4A45B0 (morado oscuro para hover)
+
+GRISES (Sistema):
+-----------------
+• jom-gray-900: #1F2937 (texto principal)
+• jom-gray-500: #6B7280 (texto secundario, iconos)
+• jom-gray-200: #E5E7EB (bordes, divisores)
+• jom-gray-50: #F8F9FC (fondos sutiles, hover)
+
+MODO OSCURO:
+------------
+• zinc-900: fondo del modal en dark mode
+• zinc-800: fondos de elementos en dark mode
+• zinc-700: hover y bordes en dark mode
+• white: texto principal en dark mode
+
+OTROS:
+------
+• white: #FFFFFF (fondos, texto en botones oscuros)
+• black con opacidad: overlay del modal (black/10, black/40)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+NOTAS ADICIONALES
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Todos los tamaños están expresados en clases de Tailwind CSS
+2. Los espaciados siguen un sistema de 4px (1 = 4px, 2 = 8px, 3 = 12px, etc.)
+3. Las transiciones son consistentes en duración (200ms)
+4. El sistema dark mode usa la clase "dark" en el elemento <html>
+5. Los botones son completamente accesibles (hover, active, focus states)
+6. El efecto scale-[0.98] mejora la experiencia táctil en móviles
+
+═══════════════════════════════════════════════════════════════════════════════

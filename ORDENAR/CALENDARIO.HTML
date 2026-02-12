@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Calendario</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="calendario.css" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "primary-hover": "#4a45b0",
+                        "jom-gold": "#FDB022",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A",
+                        "jom-gray-900": "#1F2937",
+                        "jom-gray-800": "#374151",
+                        "jom-gray-700": "#4B5563",
+                        "jom-gray-600": "#6B7280",
+                        "jom-gray-500": "#6B7280",
+                        "jom-gray-400": "#9CA3AF",
+                        "jom-gray-300": "#D1D5DB",
+                        "jom-gray-200": "#E5E7EB",
+                        "jom-gray-100": "#F3F4F6",
+                        "jom-gray-50": "#F8F9FC",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-[#F8F9FC] font-display min-h-screen flex flex-col">
+    <header class="sticky top-0 left-0 right-0 h-20 bg-white border-b border-slate-200 z-50">
+        <div class="max-w-[1200px] w-full mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-8">
+                <button
+                    class="hidden md:flex items-center gap-2 text-[#6B7280] hover:text-[#4A45B0] font-medium text-sm transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-[#6B7280] hover:text-[#4A45B0] flex items-center transition-colors">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="flex items-center gap-2 pl-2 cursor-pointer group">
+                    <div
+                        class="size-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-[20px] text-[#6B7280] group-hover:text-[#5B55C8] transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex h-[calc(100vh-80px)]">
+        <!-- Menú lateral izquierdo -->
+        <aside class="w-64 bg-white border-r border-jom-gray-200 flex flex-col py-6 px-4">
+            <nav class="flex flex-col gap-2">
+                <a href="HOY.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-jom-gray-600 hover:bg-jom-gray-100 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">today</span>
+                    Hoy
+                </a>
+                <a href="ANUNCIOS.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-jom-gray-600 hover:bg-jom-gray-100 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">home</span>
+                    Anuncios
+                </a>
+                <a href="CALENDARIO.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-jom-gray-900 bg-[#EFEEFF] rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    Calendario
+                </a>
+                <a href="MENSAJERIA3.HTML" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-jom-gray-600 hover:bg-jom-gray-100 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">chat</span>
+                    Mensajería
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-jom-gray-600 hover:bg-jom-gray-100 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Contenido principal -->
+        <main class="flex-1 max-w-[1360px] mx-auto py-8">
+            <!-- Header del calendario -->
+            <header class="bg-white border-b border-jom-gray-200 px-8 py-6 rounded-t-xl shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <div>
+                        <h1 class="text-2xl font-bold text-jom-gray-900">Calendario de Precios / Propiedades</h1>
+                        <p class="text-sm text-jom-gray-600 mt-1">Gestión de disponibilidad y precios por día</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="px-4 py-2 text-sm border border-jom-gray-300 rounded-lg hover:bg-jom-gray-100 transition-colors font-medium">
+                            Exportar
+                        </button>
+                        <button class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors font-medium">
+                            Actualizar precios
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Contenedor del calendario -->
+            <div class="flex-1 flex overflow-hidden rounded-b-xl shadow-sm">
+                <!-- Sidebar izquierdo con propiedades -->
+                <aside class="w-80 bg-white border-r border-jom-gray-200 flex flex-col">
+                    <!-- Búsqueda -->
+                    <div class="p-6 border-b border-jom-gray-200">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+                            </div>
+                            <input type="text" placeholder="Buscar propiedad" 
+                                   class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Lista de propiedades -->
+                    <div class="flex-1 overflow-y-auto">
+                        <div class="p-4 space-y-2">
+                            <!-- Propiedad 1 -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-primary transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-gray-200 overflow-hidden flex-shrink-0">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" 
+                                         alt="Casa Tarija" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-bold text-slate-900 truncate">Casa Tarija Hermosa</h3>
+                                    <p class="text-xs text-slate-500 truncate">Tarija, Bolivia</p>
+                                </div>
+                            </div>
+
+                            <!-- Propiedad 2 -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-primary transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-gray-200 overflow-hidden flex-shrink-0">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" 
+                                         alt="Departamento Centro" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-bold text-slate-900 truncate">Departamento Centro</h3>
+                                    <p class="text-xs text-slate-500 truncate">Santa Cruz de la Sierra, Bolivia</p>
+                                </div>
+                            </div>
+
+                            <!-- Propiedad 3 -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-primary transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-gray-200 overflow-hidden flex-shrink-0">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" 
+                                         alt="Cabaña Cochabamba" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-bold text-slate-900 truncate">Cabaña Cochabamba</h3>
+                                    <p class="text-xs text-slate-500 truncate">Cochabamba, Bolivia</p>
+                                </div>
+                            </div>
+
+                            <!-- Propiedad 4 -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-primary transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-100 to-blue-200 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-blue-600 text-lg">apartment</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-bold text-slate-900 truncate">Loft Zona Sur</h3>
+                                    <p class="text-xs text-slate-500 truncate">La Paz, Bolivia</p>
+                                </div>
+                            </div>
+
+                            <!-- Propiedad 5 -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-primary transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-100 to-green-200 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-green-600 text-lg">cottage</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-bold text-slate-900 truncate">Villa El Trompillo</h3>
+                                    <p class="text-xs text-slate-500 truncate">Santa Cruz de la Sierra, Bolivia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Área del calendario -->
+                <div class="flex-1 overflow-auto bg-white">
+                    <!-- Header de meses -->
+                    <div class="sticky top-0 bg-gray-50 border-b border-gray-200 z-20">
+                        <div class="flex min-w-max">
+                            <div class="flex-1 flex">
+                                <!-- Enero 2026 -->
+                                <div class="flex-1 px-4 py-4 border-r border-gray-200 text-center">
+                                    <span class="text-sm font-bold text-slate-800">Enero de 2026</span>
+                                </div>
+                                <!-- Febrero 2026 -->
+                                <div class="flex-1 px-4 py-4 text-center">
+                                    <span class="text-sm font-bold text-slate-800">Febrero de 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header de días -->
+                    <div class="sticky top-[57px] bg-white border-b border-gray-200 z-10">
+                        <div class="flex min-w-max">
+                            <div class="flex">
+                                <!-- Últimos días de enero -->
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Mié</div>
+                                    <div class="text-sm font-bold text-slate-900">29</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Jue</div>
+                                    <div class="text-sm font-bold text-slate-900">30</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Vie</div>
+                                    <div class="text-sm font-bold text-slate-900">31</div>
+                                </div>
+                                <!-- Febrero - Fines de semana destacados -->
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100 bg-blue-50">
+                                    <div class="text-xs text-blue-600 font-medium">Sáb</div>
+                                    <div class="text-sm font-bold text-slate-900">1</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100 bg-red-50">
+                                    <div class="text-xs text-red-600 font-medium">Dom</div>
+                                    <div class="text-sm font-bold text-slate-900">2</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Lun</div>
+                                    <div class="text-sm font-bold text-slate-900">3</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Mar</div>
+                                    <div class="text-sm font-bold text-slate-900">4</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Mié</div>
+                                    <div class="text-sm font-bold text-slate-900">5</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Jue</div>
+                                    <div class="text-sm font-bold text-slate-900">6</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Vie</div>
+                                    <div class="text-sm font-bold text-slate-900">7</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100 bg-blue-50">
+                                    <div class="text-xs text-blue-600 font-medium">Sáb</div>
+                                    <div class="text-sm font-bold text-slate-900">8</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100 bg-red-50">
+                                    <div class="text-xs text-red-600 font-medium">Dom</div>
+                                    <div class="text-sm font-bold text-slate-900">9</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Lun</div>
+                                    <div class="text-sm font-bold text-slate-900">10</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center border-r border-gray-100">
+                                    <div class="text-xs text-slate-500">Mar</div>
+                                    <div class="text-sm font-bold text-slate-900">11</div>
+                                </div>
+                                <div class="w-24 px-2 py-3 text-center">
+                                    <div class="text-xs text-slate-500">Mié</div>
+                                    <div class="text-sm font-bold text-slate-900">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid de precios por propiedad -->
+                    <div class="min-w-max">
+                        <!-- Fila 1: Casa Tarija -->
+                        <div class="flex border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <div class="flex">
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <!-- Rango seleccionado en morado -->
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-primary text-white cursor-pointer rounded-l-lg">
+                                    <span class="text-sm font-bold">180.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-primary text-white cursor-pointer">
+                                    <span class="text-sm font-bold">180.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-primary text-white cursor-pointer">
+                                    <span class="text-sm font-bold">180.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-primary text-white cursor-pointer rounded-r-lg">
+                                    <span class="text-sm font-bold">180.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-blue-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-blue-700">150.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-red-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-red-700">200.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">127.5 BOB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 2: Departamento Centro -->
+                        <div class="flex border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <div class="flex">
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-blue-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-blue-700">320.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-red-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-red-700">400.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-blue-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-blue-700">320.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-red-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-red-700">400.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">280.0 BOB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 3: Cabaña Cochabamba -->
+                        <div class="flex border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <div class="flex">
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-blue-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-blue-700">650.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-red-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-red-700">750.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-blue-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-blue-700">650.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 bg-red-50 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-red-700">750.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center border-r border-gray-100 hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                                <div class="w-24 px-2 py-4 text-center hover:bg-primary hover:bg-opacity-10 cursor-pointer">
+                                    <span class="text-sm font-medium text-slate-700">550.0 BOB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

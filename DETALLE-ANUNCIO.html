@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Tarija Hermosa Casa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B55C8",
+                        "ui-primary": "#5B55C8",
+                        "ui-primary-hover": "#4A45B0",
+                        "soft-highlight": "#EFEEFF",
+                        "neutral-bg": "#F8F9FC",
+                        "neutral-text": "#1F2937",
+                        "neutral-secondary": "#6B7280",
+                        "neutral-border": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "jom": "12px",
+                        "card": "16px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+        body {
+          font-family: 'Inter', sans-serif;
+          color: #1F2937;
+          -webkit-font-smoothing: antialiased;
+        }
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .max-content-width {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+        /* Carousel styles for mobile */
+        .carousel-track {
+            will-change: transform;
+        }
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background: #D1D5DB;
+        }
+        .carousel-dot.active {
+            background: #5B55C8;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="text-primary font-bold text-2xl tracking-tight">JoM</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+                <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-text transition-all duration-200">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-content-width py-16">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h1 class="text-[28px] font-semibold text-neutral-text">Tarija Hermosa Casa -
+                    Tarija, Bolivia</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center gap-2 border border-neutral-border px-4 py-2 rounded-jom hover:bg-neutral-bg transition-colors duration-200">
+                    <span class="material-symbols-outlined text-[20px]">share</span>
+                    <span class="text-[14px] font-medium">Compartir</span>
+                </button>
+                <button
+                    class="flex items-center gap-2 border border-neutral-border px-4 py-2 rounded-jom hover:bg-neutral-bg transition-colors duration-200">
+                    <span class="material-symbols-outlined text-[20px]">favorite</span>
+                    <span class="text-[14px] font-medium">Guardar</span>
+                </button>
+            </div>
+        </div>
+        <div>
+            <!-- Mobile carousel (visible under md) -->
+            <div class="mobile-carousel md:hidden mb-6">
+                <div class="relative">
+                    <div class="carousel-track flex transition-transform duration-300">
+                        <div class="min-w-full flex-shrink-0">
+                            <img alt="Main Photo" class="w-full h-56 object-cover rounded-card"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                        </div>
+                        <div class="min-w-full flex-shrink-0">
+                            <img alt="Gallery Photo 2" class="w-full h-56 object-cover rounded-card"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                        </div>
+                        <div class="min-w-full flex-shrink-0">
+                            <img alt="Gallery Photo 3" class="w-full h-56 object-cover rounded-card"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                        </div>
+                        <div class="min-w-full flex-shrink-0">
+                            <img alt="Gallery Photo 4" class="w-full h-56 object-cover rounded-card"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNhAftdmNzN8iMp9QO6GRTHK8LbPxXRX2b_75fbzJchQCytC8j4H5rcEXa1f0TJwf6nq7yxOVuunzRPw1Kjb7uv98b6RqquSP3nMWKrLIhSO3-zYihA1DYV6sG-1KhQXLUUG3nzRMLdxCA4_xqrhp7krZ_GWT34iTKvIGQuHI56I7mCPS1M1459O8NcDJlTz-P20CxNfQ14Qgz-n2ekJ42JxLCGQoPPIf9hoUIf3IcmIuqLES_dyoshzWfSH9hndENnkGVCAbjp3x" />
+                        </div>
+                        <div class="min-w-full flex-shrink-0">
+                            <img alt="Gallery Photo 5" class="w-full h-56 object-cover rounded-card"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                        </div>
+                    </div>
+                    <button
+                        class="carousel-prev absolute left-3 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow border"
+                        aria-label="Anterior">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button
+                        class="carousel-next absolute right-3 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow border"
+                        aria-label="Siguiente">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="carousel-dots flex justify-center gap-2 mt-3"></div>
+                </div>
+            </div>
+
+            <!-- Desktop/Tablet grid (hidden on small) -->
+            <div
+                class="hidden md:grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 md:h-[400px] h-auto mb-8 rounded-2xl overflow-hidden">
+                <div class="md:col-span-2 md:row-span-2 col-span-1 row-span-1">
+                    <img alt="Main Photo" class="w-full md:h-full h-56 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                </div>
+                <div class="md:col-span-1 md:row-span-1 col-span-1 row-span-1">
+                    <img alt="Gallery Photo 2" class="w-full md:h-full h-56 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" />
+                </div>
+                <div class="md:col-span-1 md:row-span-1 col-span-1 row-span-1">
+                    <img alt="Gallery Photo 3" class="w-full md:h-full h-56 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" />
+                </div>
+                <div class="md:col-span-1 md:row-span-1 col-span-1 row-span-1">
+                    <img alt="Gallery Photo 4" class="w-full md:h-full h-56 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNhAftdmNzN8iMp9QO6GRTHK8LbPxXRX2b_75fbzJchQCytC8j4H5rcEXa1f0TJwf6nq7yxOVuunzRPw1Kjb7uv98b6RqquSP3nMWKrLIhSO3-zYihA1DYV6sG-1KhQXLUUG3nzRMLdxCA4_xqrhp7krZ_GWT34iTKvIGQuHI56I7mCPS1M1459O8NcDJlTz-P20CxNfQ14Qgz-n2ekJ42JxLCGQoPPIf9hoUIf3IcmIuqLES_dyoshzWfSH9hndENnkGVCAbjp3x" />
+                </div>
+                <div class="md:col-span-1 md:row-span-1 col-span-1 row-span-1">
+                    <img alt="Gallery Photo 5" class="w-full md:h-full h-56 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-16">
+            <div class="flex-1">
+                <div
+                    class="mb-6 flex items-center gap-4 pb-8 border-b border-neutral-border">
+                    <img alt="Anfitrión Juanito Pérez" class="size-16 rounded-full object-cover border-2 border-neutral-border"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    <div>
+                        <h2 class="text-[18px] font-semibold text-neutral-text">Anfitrión Juanito Pérez</h2>
+                        <p class="text-[14px] text-neutral-secondary">3 años anfitrionando</p>
+                    </div>
+                </div>
+                <div class="mb-12">
+                    <h3 class="text-[18px] font-semibold text-neutral-text mb-4">Descripción</h3>
+                    <p class="text-[14px] text-neutral-text leading-relaxed">
+                        Casa espectacular en tarija dos personas que les guste la pesca. Ubicada en una zona tranquila y
+                        exclusiva, ideal para el descanso. La propiedad cuenta con amplios espacios, iluminación natural
+                        y todas las comodidades modernas para una estancia inolvidable.
+                    </p>
+                </div>
+                <div class="mb-12">
+                    <h3 class="text-[18px] font-semibold text-neutral-text mb-6">Servicios</h3>
+                    <div class="grid grid-cols-2 gap-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-neutral-secondary">wifi</span>
+                            <span class="text-neutral-text">Wifi</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-neutral-secondary">directions_car</span>
+                            <span class="text-neutral-text">Tracción 4x4</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-neutral-secondary">beach_access</span>
+                            <span class="text-neutral-text">Equipo de Playa</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-neutral-secondary">kitchen</span>
+                            <span class="text-neutral-text">Cocina equipada</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-12">
+                    <h3 class="text-[18px] font-semibold text-neutral-text mb-2">Selecciona la fecha de llegada</h3>
+                    <p class="text-[14px] text-neutral-secondary mb-6">Agrega las fechas de viaje para obtener
+                        precios exactos</p>
+                    <div class="bg-white p-6 border border-neutral-border rounded-card overflow-x-auto" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <div class="flex justify-between items-center mb-8">
+                            <span class="font-medium">Enero 2026</span>
+                            <div class="flex gap-4">
+                                <span class="material-symbols-outlined cursor-pointer">chevron_left</span>
+                                <span class="material-symbols-outlined cursor-pointer">chevron_right</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 text-center gap-2">
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">lun</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">mar</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">mié</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">jue</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">vie</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">sáb</div>
+                            <div class="text-[12px] text-neutral-secondary font-medium py-2">dom</div>
+                            <div class="p-2 text-sm text-neutral-secondary opacity-40">29</div>
+                            <div class="p-2 text-sm text-neutral-secondary opacity-40">30</div>
+                            <div class="p-2 text-sm text-neutral-secondary opacity-40">31</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">1</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">2</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">3</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">4</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">5</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">6</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">7</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">8</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">9</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">10</div>
+                            <div class="p-2 text-sm hover:bg-neutral-bg cursor-pointer">11</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full lg:w-[360px] shrink-0">
+                <div
+                    class="lg:sticky lg:top-28 bg-white border border-neutral-border rounded-card p-6" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex flex-col gap-2">
+                            <div>
+                                <span class="text-[20px] font-bold text-neutral-text">600 BOB</span>
+                                <span class="text-[14px] text-neutral-secondary">/noche</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold w-fit">
+                                <span class="material-symbols-outlined text-[12px]"
+                                    style="font-variation-settings: 'FILL' 1">star</span>
+                                4.0 (2)
+                            </div>
+                        </div>
+                        <img alt="Host Avatar" class="size-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <div class="border border-neutral-border rounded-jom overflow-hidden mb-6">
+                        <div class="grid grid-cols-2 border-b border-neutral-border">
+                            <div
+                                class="flex items-center gap-3 p-4 border-r border-neutral-border min-h-[56px]">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
+                                <div class="flex flex-col justify-center">
+                                    <label
+                                        class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Llegada</label>
+                                    <div class="text-[14px] text-neutral-text">22 ene 2026</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-4 min-h-[56px]">
+                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
+                                <div class="flex flex-col justify-center">
+                                    <label
+                                        class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Salida</label>
+                                    <div class="text-[14px] text-neutral-text">28 ene 2026</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 min-h-[56px]">
+                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">group</span>
+                            <div class="flex flex-col justify-center">
+                                <label
+                                    class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Huéspedes</label>
+                                <div class="text-[14px] text-neutral-text">1 viajeros</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full h-12 bg-primary text-white text-[16px] font-semibold rounded-jom hover:bg-ui-primary-hover transition-colors duration-200 mb-4">
+                        Comprobar disponibilidad
+                    </button>
+                    <p class="text-center text-[14px] text-neutral-secondary">No se te cobrará nada todavía</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-neutral-border pt-12">
+            <div class="mb-12" id="reviews">
+                <h3 class="text-[18px] font-semibold text-neutral-text mb-8 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary"
+                        style="font-variation-settings: 'FILL' 1">star</span>
+                    4.0 · 2 reseñas
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-4">
+                            <img alt="User" class="size-10 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                            <div>
+                                <h4 class="text-[14px] font-semibold text-neutral-text">Gary Test Vera Terrazas</h4>
+                                <p class="text-[12px] text-neutral-secondary">Cochabamba, Bolivia</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-0.5 text-primary">
+                            <span class="material-symbols-outlined text-[16px]"
+                                style="font-variation-settings: 'FILL' 1">star</span>
+                            <span class="material-symbols-outlined text-[16px]"
+                                style="font-variation-settings: 'FILL' 1">star</span>
+                            <span class="material-symbols-outlined text-[16px]"
+                                style="font-variation-settings: 'FILL' 1">star</span>
+                            <span class="material-symbols-outlined text-[16px]"
+                                style="font-variation-settings: 'FILL' 1">star</span>
+                            <span class="material-symbols-outlined text-[16px]">star</span>
+                        </div>
+                        <p class="text-[14px] text-neutral-text leading-relaxed">Todo perfecto. Camas cómodas, cocina
+                            equipada y una vista al atardecer impresionante.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-12">
+                <h3 class="text-[18px] font-semibold text-neutral-text mb-6">Ubicación: Tarija, Bolivia</h3>
+                <div class="w-full h-[400px] bg-neutral-bg rounded-2xl overflow-hidden relative">
+                    <div class="absolute inset-0 flex items-center justify-center bg-neutral-100">
+                        <span class="material-symbols-outlined text-4xl text-[#D1D5DB]">map</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-12">
+                <h3 class="text-[18px] font-semibold text-neutral-text mb-8">Conoce al anfitrión</h3>
+                <div
+                    class="bg-white rounded-card flex flex-col md:flex-row md:justify-start gap-8">
+                    <div
+                        class="w-full md:w-96 bg-white border border-neutral-border rounded-2xl p-8" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        <div class="flex flex-row items-center gap-8">
+                            <div class="flex flex-col items-center min-w-[160px]">
+                                <div class="relative mb-2">
+                                    <img alt="Franz Iriarte" class="size-40 rounded-full object-cover border-4 border-[#EFEEFF] shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                                    <div class="absolute bottom-1 right-1 w-12 h-12 flex items-center justify-center">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+                                            <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" fill="white"/>
+                                            <path d="M12 2.5L5 6V11C5 15.52 8.02 19.69 12 20.93C15.98 19.69 19 15.52 19 11V6L12 2.5Z" fill="#5B55C8"/>
+                                            <path d="M10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.59L10 14.17Z" fill="white"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center gap-1">
+                                    <h4 class="text-lg font-bold text-neutral-text text-center">Franz Iriarte</h4>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <span class="inline-block px-4 py-0.5 rounded-full bg-soft-highlight text-primary text-xs font-semibold">Anfitrión</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col justify-start gap-4 flex-1">
+                                <div class="flex flex-col items-start">
+                                    <span class="text-2xl font-bold text-neutral-text">2</span>
+                                    <span class="text-[11px] font-semibold text-neutral-secondary mt-1">Reseñas</span>
+                                    <div class="w-[120px] border-b border-neutral-border my-2"></div>
+                                </div>
+                                <div class="flex flex-col items-start">
+                                    <span class="flex items-center gap-2">
+                                        <span class="text-2xl font-bold text-neutral-text">3.0</span>
+                                        <span class="material-symbols-outlined text-[24px] align-middle" style="font-variation-settings: 'FILL' 1">star</span>
+                                    </span>
+                                    <span class="text-[11px] font-semibold text-neutral-secondary mt-1">Puntaje</span>
+                                    <div class="w-[120px] border-b border-neutral-border my-2"></div>
+                                </div>
+                                <div class="flex flex-col items-start">
+                                    <span class="text-2xl font-bold text-neutral-text">8</span>
+                                    <span class="text-[11px] font-semibold text-neutral-secondary mt-1">Meses en JOM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 w-full">
+                        <h4 class="text-xl mb-4">Franz Iriarte - Anfitrion</h4>
+                        <div class="mb-6">
+                            <p class="text-sm font-medium mb-1">Índice de respuesta: 100%</p>
+                        </div>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px] text-neutral-secondary">location_on</span>
+                                <span class="text-[14px] text-neutral-text">Vivo en Santa Cruz de la Sierra, Bolivia</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px] text-neutral-secondary">language</span>
+                                <span class="text-[14px] text-neutral-text">Hablo inglés y español</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px] text-neutral-secondary">schedule</span>
+                                <span class="text-[14px] text-neutral-text">Responde en menos de una hora</span>
+                            </div>
+                        </div>
+                        <button
+                            class="bg-white border border-neutral-border text-neutral-text text-[16px] px-6 py-3 rounded-jom font-semibold hover:bg-neutral-bg transition-colors duration-200">
+                            Contactar con el anfitrión
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-12 border-t border-neutral-border pt-12">
+                <h2 class="text-[18px] font-semibold text-neutral-text mb-8">Cosas que debes saber</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-[16px] font-semibold text-neutral-text mb-4">Reglas de la casa</h3>
+                        <ul class="flex flex-col gap-4 text-neutral-text">
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">schedule</span>
+                                <span class="text-[14px]">Llegada: 14:00 - 20:00</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">schedule</span>
+                                <span class="text-[14px]">Salida antes de las 11:00</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">group</span>
+                                <span class="text-[14px]">2 huéspedes como máximo</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-[16px] font-semibold text-neutral-text mb-4">Seguridad y propiedad
+                        </h3>
+                        <ul class="flex flex-col gap-4 text-neutral-text">
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">detector_smoke</span>
+                                <span class="text-[14px]">Detector de humo no indicado</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">emergency</span>
+                                <span class="text-[14px]">Detector de monóxido de carbono no indicado</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[20px]">info</span>
+                                <span class="text-[14px]">Cámaras de seguridad en la propiedad</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-[16px] font-semibold text-neutral-text mb-4">Política de
+                            cancelación</h3>
+                        <p class="text-[14px] text-neutral-text leading-relaxed mb-4">
+                            Añade las fechas de tu viaje para obtener los detalles de cancelación de este alojamiento.
+                        </p>
+                        <a class="text-[14px] font-semibold text-primary hover:underline transition-colors"
+                            href="#">Mostrar más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer
+        class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="size-6 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+                    </div>
+                    <p class="text-neutral-secondary text-sm leading-relaxed">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Sobre Jom</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Cómo trabajamos</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Contáctanos</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Privacidad y cookies</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Términos y condiciones</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Política de cancelación</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+                    <div class="flex flex-col gap-3">
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Centro de Ayuda</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Opciones de cancelación</a>
+                        <a class="text-neutral-secondary hover:text-primary text-sm transition-colors"
+                            href="#">Confianza y seguridad</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-neutral-secondary text-xs">© 2024 JOM SRL. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-6">
+                    <div class="flex gap-4">
+                        <button
+                            class="text-xs font-medium text-neutral-secondary hover:text-primary">Español
+                            (BO)</button>
+                        <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés
+                            (US)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    (function () {
+        const carousels = document.querySelectorAll('.mobile-carousel');
+        carousels.forEach((root) => {
+            const track = root.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            const prev = root.querySelector('.carousel-prev');
+            const next = root.querySelector('.carousel-next');
+            const dotsWrap = root.querySelector('.carousel-dots');
+            let index = 0;
+            let startX = 0;
+            let dx = 0;
+
+            function update() {
+                track.style.transform = `translateX(-${index * 100}%)`;
+                Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+
+            // build dots
+            slides.forEach((s, i) => {
+                const d = document.createElement('button');
+                d.type = 'button';
+                d.className = 'carousel-dot';
+                d.setAttribute('aria-label', 'Ir a ' + (i + 1));
+                d.addEventListener('click', () => { index = i; update(); });
+                dotsWrap.appendChild(d);
+            });
+
+            prev.addEventListener('click', () => { index = Math.max(0, index - 1); update(); });
+            next.addEventListener('click', () => { index = Math.min(slides.length - 1, index + 1); update(); });
+
+            // touch support
+            track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dx = 0; });
+            track.addEventListener('touchmove', (e) => { dx = e.touches[0].clientX - startX; });
+            track.addEventListener('touchend', () => {
+                if (Math.abs(dx) > 40) {
+                    if (dx < 0) index = Math.min(slides.length - 1, index + 1);
+                    else index = Math.max(0, index - 1);
+                }
+                update();
+            });
+
+            // init
+            if (dotsWrap.children.length) dotsWrap.children[0].classList.add('active');
+            update();
+        });
+    })();
+</script>
