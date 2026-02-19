@@ -1,0 +1,248 @@
+detalle
+
+Layout móvil: STACKED (apilado verticalmente)
+Layout desktop: flex flex-row (lado a lado)
+Breakpoint: lg (1024px)
+
+MÓVIL:
+- Bloque perfil: 100% ancho (w-full)
+- Bloque reseñas: 100% ancho (w-full) - DEBAJO del perfil
+
+DESKTOP:
+- Bloque perfil: 40% ancho (lg:w-[40%])
+- Bloque reseñas: 60% ancho (lg:w-[60%]) - AL LADO del perfil
+- Gap entre bloques: 48px (gap-12)
+
+
+HEADER STICKY
+-
+Altura: 80px (h-20)
+Logo: 32px (text-2xl) "JoM" púrpura #5B55C8
+Botones: 44×44px (w-11 h-11) - Cuenta y Menú
+Padding: 32px (px-8) en desktop
+Fondo: blanco #FFFFFF | Borde: #E5E7EB
+Z-index: 50 | Sticky top-0
+
+MÓVIL ESPECÍFICO:
+- Padding: reducido en viewport pequeños
+- Botones se mantienen en tamaño touch-friendly 44×44px
+
+
+SECCIÓN PERFIL - RESPONSIVE MÓVIL
+-
+CONTENEDOR PRINCIPAL:
+- Móvil: Flex column, full-width
+- Desktop: 40% ancho
+- Padding general: 48px (p-8)
+- Border-radius: 16px (rounded-card)
+- Fondo: blanco
+- Sombra: 0 4px 12px rgba(0,0,0,0.12)
+- Border: 1px #E5E7EB
+
+HEADER DEL CARD:
+- Móvil: flex column (apilado)
+- Desktop: flex row (horizontal)
+- Título: 28px (text-[28px]), semibold
+- Botón Editar: 48px altura, 24px padding horizontal
+
+LAYOUT INTERNO - IMAGEN + STATS:
+MÓVIL (IMPORTANTE):
+- flex flex-col md:flex-row (OJO: esto NO está en el código actual)
+- En móvil: imagen CENTERED arriba, stats DEBAJO
+- Imagen: 160px circular (size-40 = 160px)
+- Image border: 4px púrpura claro #EFEEFF
+- Image: objeto-cover, border-radius full circular
+
+STATS LAYOUT MÓVIL:
+- Apiladas verticalmente
+- Cada stat con número grande (text-2xl)
+- Subtítulo pequeño (text-[11px])
+- Separador: línea gris 1px #E5E7EB
+
+BADGE TIPO USUARIO (MÓVIL):
+- Texto: "Huésped"
+- Tamaño: text-xs
+- Padding: px-4 py-0.5
+- Border-radius: full (rounded-full)
+- Fondo: púrpura claro #F3F4F6 (soft-highlight)
+- Texto: púrpura #5B55C8
+
+
+STATS NÚMEROS - MOBILE DETAIL:
+Card tiene 3 valores en columna:
+1. Reseñas: Número "8" + texto "Reseña"
+   - Número: 28px (text-2xl), bold, gris oscuro #1F2937
+   - Label: 11px, semibold, gris medio #6B7280
+
+2. Puntaje: Número "2.5" + estrella en círculo
+   - Número: 28px, bold
+   - Estrella: 36px (w-9 h-9), fondo púrpura claro #EFEEFF
+   - Estrella: púrpura #5B55C8, FILLED
+   - Label: 11px, semibold
+
+3. Años: Número "2" + texto "Año en Assert"
+   - Número: 28px, bold
+   - Label: 11px, semibold
+
+Gap entre stats: 16px (gap-4)
+Width mínimo imagen + stats: 160px
+
+COLORES PERFIL - MOBILE:
+- Nombre usuario: 18px, bold, gris oscuro #1F2937
+- Ciudad: 14px, gris medio #6B7280
+- Border separadores: #E5E7EB
+- Fondo stats: transparent
+
+
+SECCIÓN RESEÑAS - RESPONSIVE MOBILE
+-
+CONTENEDOR PRINCIPAL:
+- Móvil: 100% ancho (w-full) DEBAJO del perfil
+- Desktop: 60% ancho (lg:w-[60%]) AL LADO
+- Gap con perfil: 48px (gap-12)
+- Flex column
+
+TÍTULO RESEÑAS:
+- Tamaño: 28px (text-[28px]), semibold
+- Color: gris oscuro #1F2937
+- Con contador: "(2)"
+
+LISTA RESEÑAS - MOBILE DETAIL:
+- Flex column gap 48px (gap-12)
+- Divididas por línea gris (divide-y divide-neutral-border)
+- Padding entre elementos: 48px top (pt-12)
+
+RESEÑA INDIVIDUAL - MOBILE:
+- Nombre reviewer: 16px, semibold, gris oscuro #1F2937
+- Ubicación: 14px, gris medio #6B7280
+
+ESTRELLAS RESEÑA:
+- Container: inline-flex gap-0.5
+- Padding: 4px horizontal (px-2), 2px vertical (py-1)
+- Border-radius: full (pastilla)
+- Fondo: púrpura claro #EFEEFF
+- Estrellas: 18px, púrpura #5B55C8, FILLED (font-variation fill 1)
+- Cantidad: 5 estrellas
+
+METADATA RESEÑA (derecha de estrellas):
+- Fecha: 12px, bold, gris oscuro #1F2937 ("Abril de 2025")
+- Duración: 12px, gris medio #6B7280 ("Estadía de una noche")
+- Layout: flex gap-4
+
+TEXTO RESEÑA:
+- Font-size: 14px (text-sm)
+- Color: gris oscuro #1F2937
+- Line-height: relaxed
+- Margin top: 16px (gap-4)
+
+BOTÓN "MOSTRAR TODAS LAS RESEÑAS":
+- Tipo: btn-secondary
+- Altura: 48px
+- Padding: 0 24px
+- Border-radius: 12px
+- Border: 1px #E5E7EB
+- Fondo: transparent → hover #F8F9FC
+- Color texto: gris oscuro #1F2937
+- Peso: semibold (600)
+- Transición: 0.2s all
+
+
+COLORES RESEÑAS - MOBILE:
+- Nombre: #1F2937
+- Ubicación: #6B7280
+- Fecha: #1F2937 (bold)
+- Texto: #1F2937
+- Estrellas: #5B55C8 (púrpura)
+- Fondo estrellas: #EFEEFF
+
+
+FOOTER (DEBAJO DE TODO)
+-
+Padding móvil: 48px vertical (py-12)
+Padding horizontal: 32px (max-content-width)
+Fondo: gris muy claro #F8F9FC
+Border-top: 1px #E5E7EB
+
+LAYOUT MÓVIL:
+- grid grid-cols-1 md:grid-cols-4 (1 columna móvil, 4 desktop)
+- Gap: 48px (gap-12)
+
+COLUMNA LOGO:
+- Logo: 24px (text-2xl) púrpura #5B55C8
+- SVG: 24px
+- Gap: 8px
+- Descripción: 14px, gris medio #6B7280
+
+COLUMNAS LINKS:
+- Título: 14px, semibold, gris oscuro #1F2937
+- Links: 14px, gris medio → hover púrpura #5B55C8
+- Gap entre links: 16px (gap-4)
+- Transición: colors 200ms
+
+
+RESPONSIVE BREAKPOINTS KEY
+-
+MÓVIL (xs - 640px):
+✓ Layout apilado vertical (flex-col)
+✓ Imagen perfil arriba CENTERED
+✓ Stats apiladas debajo
+✓ Reseñas full-width DEBAJO del perfil
+✓ Padding reducido en algunos elementos
+✓ Fuentes base sin modificación
+
+TABLET (md - 768px):
+✓ Cambios menores en padding
+✓ Grid footer a 2-4 columnas
+✓ Botones mantienen tamaño
+
+DESKTOP (lg - 1024px):
+✓ flex-row para layout principal (40% - 60%)
+✓ Perfil e información al lado
+✓ Imagen puede reposicionarse horizontal
+✓ Padding máximo (32px)
+
+
+ESPECIFICACIONES TÉCNICAS
+-
+Dimensiones (Tailwind):
+- lg: 1024px (breakpoint principal)
+- max-content-width: 1200px centerizado
+
+Tipografía:
+- Títulos: 28px (text-[28px])
+- Nombres: 18px (text-lg)
+- Normal: 14px, 16px
+- Pequeño: 12px, 11px
+- Font: Inter, antialiased
+
+Espaciado (px = 4px):
+- Padding card: 32px (p-8)
+- Gap bloques: 48px (gap-12)
+- Margin stats: 16px/32px (gap-4/gap-8)
+- Separator: py-12 (48px)
+
+Sombras:
+- Card: 0 4px 12px rgba(0,0,0,0.12)
+- Dropdown: 0 4px 12px rgba(0,0,0,0.08)
+
+Transiciones:
+- Duration: 200ms
+- Propiedades: all, colors, background-color
+
+
+CARACTERÍSTICAS RESPONSIVE CLAVE
+-
+✔ Stacked móvil → Row desktop
+✔ Full-width bloques en mobile
+✔ Imagen centered en mobile
+✔ Stats verticales en mobile → horizontal desktop
+✔ Touch targets mínimo 44×44px ✔
+✔ Padding flexible según viewport
+✔ Layout footer responsive 1-4 cols
+✔ Alto contraste accesible
+✔ Transiciones suaves 200ms
+✔ Sin scroll horizontal (evergreen)
+
+-
+M-PANTALLA-PERFIL.HTML | 18 Febrero 2026 | Sistema JOM Móvil
+-

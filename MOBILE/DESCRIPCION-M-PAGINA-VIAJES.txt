@@ -1,0 +1,149 @@
+DESCRIPCIÓN
+-
+
+HEADER STICKY
+-
+Altura: 56px | Logo: 24px (púrpura #5B55C8) | Botones: 36×36px
+Fondo: blanco #FFFFFF | Borde: gris #E5E7EB | Padding: 16px
+Botones hover: fondo gris #F8F9FC | Z-index: 50
+Maquetación: [Logo] ←────→ [Cuenta] [Menú] | Flex: justify-between
+
+
+SECCIÓN 2: TÍTULO "VIAJES"
+-
+
+TAMAÑO MÓVIL:
+- Título:         text-[22px]             ← 22px
+- Font weight:    font-semibold           ← 600 (bold)
+- Margin abajo:   mb-6                    ← 24px
+
+COLOR MÓVIL:
+- Texto:          text-neutral-text       ← #1F2937 (gris oscuro)
+
+MAQUETACIÓN MÓVIL:
+- Full-width con container: .max-content-width (16px padding izq-der)
+- Line height: leading-tight (comprimido visualmente)
+
+
+TABS NAVIGATION
+-
+Gap: 24px | Padding bottom: 12px | Texto: 14px | Border-bottom: 2px
+
+TAB ACTIVO "Mis reservas":
+- Texto: púrpura #5B55C8 | Peso: semibold | Border: púrpura #5B55C8
+
+TAB INACTIVO "Reseñas pendientes":
+- Texto: gris medio #6B7280 | Peso: medium | Sin border
+- Hover: gris oscuro #1F2937 | Transición: 200m
+- Margin abajo:      gap-4 (entre cards) ← 16px
+
+TAMAÑO MÓVIL - Imagen:
+- Ancho:             w-full              ← 100% del card
+- Aspect ratio:      aspect-[16/10]      ← Proporción 16:10
+- Border radius:     rounded-[12px]      ← 12px
+
+CARDS DE RESERVAS
+-
+Padding: 12px | Gap: 16px | Border-radius: 16px | Border: #E5E7EB
+Imagen: 100% ancho, aspect 16/10, border-radius 12px
+Fondo: blanco #FFFFFF | Sombra: 0 1px 3px rgba(0,0,0,0.06)
+
+TEXTOS:
+- Título: 15px, semibold, gris oscuro #1F2937
+- Fecha: 13px, gris medio #6B7280
+- Link "Ver": 14px, púrpura #5B55C8, hover opacity-80, active scale-95
+
+BADGES DE ESTADO:
+- "En curso": fondo verde #DCFCE7, texto verde #16A34A
+- "Confirmado": fondo púrpura claro #EFEEFF, texto púrpura #5B55C8
+- "Finalizado": fondo gris #F1F5F9, texto gris #475569
+- "Cancelado": fondo rojo #FEE2E2, texto rojo #DC2626
+
+Tamaño badge: 11px, bold, rounded-full, padding px-2.5 py-1
+
+COLORES MÓVIL
+-
+
+PRIMARIOS:
+├─ Púrpura (Primary):       #5B55C8
+├─ Púrpura Hover:           #4A45B0
+└─ Púrpura Claro (Tint):    #EFEEFF
+
+NEUTRALES:
+├─ Gris Oscuro (Texto):     #1F2937
+├─ Gris Medio (Secundario): #6B7280
+├─ Gris Claro (Bordes):     #E5E7EB
+└─ Gris Muy Claro (Fondos): #F8F9FC
+
+SEMÁNTICOS:
+├─ Verde (Success):         #16A34A
+├─ Rojo (Error):            #DC2626
+└─ Fondo blanco:            #FFFFFF
+
+
+TAMAÑOS MÓVIL
+-
+
+TIPOGRAFÍA:
+├─ Títulos:         22px (font-semibold)
+├─ Subtítulos:      15px (font-semibold)
+├─ Texto normal:    14px (font-medium)
+├─ Texto pequeño:   13px
+├─ Badge:           11px (font-bold)
+└─ Ícono:           18-22px (Material Symbols)
+
+ESPACIADO:
+├─ Padding general: 16px
+├─ Padding card:    12px
+├─ Gap entre items: 16px
+├─ Gap tabs:        24px
+└─ Margin bottom:   24px
+
+TAMAÑOS:
+├─ Header:          56px (h-14)
+├─ Botones:         36×36px (w-9 h-9)
+├─ Card:            Ancho full - aspect 16/10
+└─ Ícono maleta:    48px
+
+
+INTERACTIVIDAD
+-
+
+HOVER (Desktop):
+├─ Botones: hover:bg-jom-gray-50 (fondo gris)
+├─ Links: hover:opacity-80 (fade)
+└─ Tabs: hover:text-neutral-text (color change)
+
+ACTIVE (Press):
+├─ Botones: active:scale-95 (encogen 5%)
+└─ Links: active:scale-95 (encogen)
+
+TRANSICIONES:
+├─ Duración: 200ms (transition-all duration-200)
+└─ Tipo: transition-colors, transition-opacity
+
+
+
+
+CARACTERÍSTICAS CLAVE
+-
+
+✔ Cards full-width con padding (16px horizontal)
+✔ Imágenes apiladas verticalmente (aspect ratio 16/10)
+COLORES MÓVIL
+TAMAÑOS MÓVIL
+================================================================================
+TIPOGRAFÍA:
+- Títulos: 22px (semibold) | Subtítulos: 15px (semibold) | Normal: 14px
+- Pequeño: 13px | Badge: 11px (bold) | Ícono: 18-22px
+
+ESPACIADO:
+- Padding: 16px general, 12px cards | Gaps: 16px items, 24px tabs
+- Margin abajo: 24px
+
+COMPONENTES:
+- Header: 56px | Botones: 36×36px | Card imagen: 16:10 aspect | Ícono:INTERACTIVIDAD
+================================================================================
+HOVER: Botones fondo gris #F8F9FC | Links opacity-80 | Tabs color #1F2937
+ACTIVE: Botones y links scale-95 (encogen 5%)
+TRANSICIONES: 200ms, transition-colors y transition-opacity

@@ -1,0 +1,92 @@
+-
+🎨 COLORES DE ETIQUETAS DE ESTADO (BADGES) - JOM DS v1.1
+-
+
+PENDIENTE
+-
+Categoría: Warning
+Fondo (Surface): #FEF3C7 (amarillo muy claro)
+Texto: #92400E (marrón oscuro)
+Brand: #F59E0B (amarillo)
+Uso: Estados en espera, pendientes de acción
+
+
+APROBADA
+-
+Categoría: Success Primary
+Fondo (Surface): #DCFCE7 (verde muy claro)
+Texto: #166534 (verde oscuro)
+Brand: #16A34A (verde)
+Uso: Reservas confirmadas, aprobadas
+
+
+EN CURSO
+-
+Categoría: Success Outline
+Fondo (Surface): #E0F2FE (azul muy claro)
+Texto: #0369A1 (azul oscuro)
+Brand: #0EA5E9 (azul)
+Uso: Viajes en progreso, reservas activas
+
+
+PRÓXIMO
+-
+Categoría: Neutral
+Fondo (Surface): #F8F9FC (gris muy claro)
+Texto: #1F2937 (gris oscuro)
+Border: #E5E7EB (gris claro)
+Uso: Próximas reservas, eventos futuros
+
+
+FINALIZADO
+-
+Categoría: Neutral Secondary
+Fondo (Surface): #EFEEFF (púrpura muy claro)
+Texto: #5B55C8 (púrpura)
+Brand: #5B55C8 (púrpura primario)
+Uso: Viajes finalizados, reservas completadas
+
+
+CANCELADO
+-
+Categoría: Error
+Fondo (Surface): #FEE2E2 (rojo muy claro)
+Texto: #991B1B (rojo oscuro)
+Brand: #DC2626 (rojo)
+Uso: Reservas canceladas, denegadas
+
+
+ESPECIFICACIONES TÉCNICAS
+-
+Dimensiones:
+- Altura: 24px - 28px
+- Padding horizontal: 8px - 12px
+- Border-radius: 999px (pastilla/pill)
+
+Tipografía:
+- Font: Inter
+- Tamaño: 12px - 14px
+- Peso: 500 (Medium) - 600 (Semibold)
+
+Elementos:
+- Ícono tamaño: 16px (en box 24×24px)
+- Ícono estilo: Outline, stroke 1.5px
+- Sin sombras permitidas
+- Gap icon-texto: 4px
+
+
+TABLA RESUMEN
+-
+Estado      | Fondo     | Texto
+------------|-----------|----------
+Pendiente   | #FEF3C7   | #92400E
+Aprobada    | #DCFCE7   | #166534
+En curso    | #E0F2FE   | #0369A1
+Próximo     | #F8F9FC   | #1F2937
+Finalizado  | #EFEEFF   | #5B55C8
+Cancelado   | #FEE2E2   | #991B1B
+
+
+-
+Colores JOM Design System v1.1 | 18 Febrero 2026
+-

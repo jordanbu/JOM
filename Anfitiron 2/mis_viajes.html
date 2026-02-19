@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Mis Viajes JOM Detalle y Pago Pendiente</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b55c8",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+  animation: page-enter 200ms ease;
+}
+
+.page-exit {
+  animation: page-exit 200ms ease forwards;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        :root {
+            --pending-color: #F59E0B;
+            --approved-color: #16A34A;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#111018] dark:text-white min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md">
+        <div class="flex items-center px-4 pt-6 pb-2">
+            <h1 class="text-[#111018] dark:text-white text-[28px] font-semibold leading-tight tracking-tight flex-1">
+                Viajes</h1>
+        </div>
+        <div class="px-4">
+            <div class="flex border-b border-[#d5d4e2] dark:border-white/10 gap-8">
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-4"
+                    href="#">
+                    <p class="text-sm font-semibold leading-normal">Próximos</p>
+                </a>
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#5e5c8a] dark:text-gray-400 pb-3 pt-4"
+                    href="#">
+                    <p class="text-sm font-semibold leading-normal">Anteriores</p>
+                </a>
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#5e5c8a] dark:text-gray-400 pb-3 pt-4"
+                    href="#">
+                    <p class="text-sm font-semibold leading-normal">Cancelados</p>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+        <div
+            class="bg-white dark:bg-[#1c1c2b] border border-[#E5E7EB] dark:border-white/5 rounded-2xl p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            <div class="flex items-center gap-3">
+                <div class="w-16 h-16 shrink-0 bg-center bg-no-repeat bg-cover rounded-xl overflow-hidden"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCa6cvzUMWLjMvhj8sbtTcD7qhRP53c-RQo8Z_0u5aiDy4W_K755LkXe4UJHin92Yrd_R3yVg_urmPYIevV855eQF6IeSRTJp-n-E7TBxw9WvqLi_ZC4lQPpHCBo_tAK4_ZhwdDpWRfkAih9X5c8DngMmgYBr3E0tjsOIbGHuHogl_Ti02j_9x7pGSPPMmCYye2w6kxOKEKkn73a1tjs0DUECwvSM5I0Bv5VXg16wTC0JJtnEL2ToofLNzDXZq-R69IBt3L8jzvTsA");'>
+                </div>
+                <div class="flex flex-col flex-1 min-w-0">
+                    <h3 class="text-[#111018] dark:text-white text-base font-semibold truncate">Dpto. a estrenar en
+                        Asunción</h3>
+                    <div class="flex items-center gap-1.5 text-[#5e5c8a] dark:text-gray-400 text-[13px]">
+                        <span>6 - 8 feb</span>
+                        <span>•</span>
+                        <span class="text-[var(--pending-color)] font-medium">• Pendiente</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-[#111018] dark:text-white text-sm font-bold">800 BOB</p>
+                        <button
+                            class="h-8 px-4 bg-gray-100 dark:bg-white/5 text-[#111018] dark:text-white text-xs font-semibold rounded-lg border border-transparent">
+                            Ver detalle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="bg-white dark:bg-[#1c1c2b] border border-[#E5E7EB] dark:border-white/5 rounded-2xl p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            <div class="flex items-center gap-3">
+                <div class="w-16 h-16 shrink-0 bg-center bg-no-repeat bg-cover rounded-xl overflow-hidden"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBpQvaOPWTIrZR2nB8erFVQt3e7NkZiU7PJH8Di7ag637_UPI0fl0SIt85G5wljJg-a9jRn_zCNg770c4zzD78jr9vnPaVpU-Px0xqZ3P6uKT-pNxWC6SmXRvSVyTMU7sAmj9WVT0qDMaIEQzZl0lcXTnzm-eQWmJmS4URTygvzt7_ukF7mX0kjt2-dnnRnK9011ZyStJe-z3nl063DYrup66tiQ5PysGM9b2ZtFmlyXE6MKGkek5PHvJRS0v1cwqPoEHnEDqC3O7Y");'>
+                </div>
+                <div class="flex flex-col flex-1 min-w-0">
+                    <h3 class="text-[#111018] dark:text-white text-base font-semibold truncate">Apartamento simpático -
+                        Cochabamba, Bolivia
+                    </h3>
+                    <div class="flex flex-col">
+                        <div class="flex items-center gap-1.5 text-[#5e5c8a] dark:text-gray-400 text-[13px]">
+                            <span>12 - 15 mar</span>
+                            <span>•</span>
+                            <span class="text-[var(--approved-color)] font-medium">• Aprobada</span>
+                        </div>
+                        <span class="text-primary text-[12px] font-medium leading-tight">Pendiente de pago</span>
+                    </div>
+                    <a href="detalle_reserva.html" onclick="event.preventDefault(); goTo('detalle_reserva.html')"
+                        class="block">
+                        <div class="flex justify-between items-center mt-1">
+                            <p class="text-[#111018] dark:text-white text-sm font-bold">800 BOB</p>
+                            <button
+                                class="h-8 px-4 bg-white dark:bg-transparent border border-[#E5E7EB] dark:border-white/10 text-[#111018] dark:text-white text-xs font-semibold rounded-lg shadow-sm">
+                                Ver detalle
+                            </button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <nav
+        class="sticky bottom-0 z-50 border-t border-[#eaeaf1] dark:border-white/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md pb-8 pt-2">
+        <div class="flex justify-around items-center px-4">
+            <a class="flex flex-col items-center gap-1 text-[#5e5c8a] dark:text-gray-400" href="#">
+                <span class="material-symbols-outlined text-[24px]">search</span>
+                <p class="text-[10px] font-medium">Explorar</p>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-[#5e5c8a] dark:text-gray-400" href="#">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+                <p class="text-[10px] font-medium">Favoritos</p>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-primary" href="#">
+                <span class="material-symbols-outlined active-icon text-[24px]">work</span>
+                <p class="text-[10px] font-bold">Viajes</p>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-[#5e5c8a] dark:text-gray-400" href="#">
+                <span class="material-symbols-outlined text-[24px]">chat_bubble</span>
+                <p class="text-[10px] font-medium">Mensajes</p>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-[#5e5c8a] dark:text-gray-400" href="#">
+                <span class="material-symbols-outlined text-[24px]">account_circle</span>
+                <p class="text-[10px] font-medium">Perfil</p>
+            </a>
+        </div>
+    </nav>
+    <script>
+        function goTo(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 200);
+        }
+    </script>
+
+
+</body>
+
+</html>

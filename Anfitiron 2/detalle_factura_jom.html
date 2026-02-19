@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Detalle de Factura (Pendiente)</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        warning: "#F59E0B",
+                        disabled: "#9CA3AF",
+                        "background-light": "#F9FAFB",
+                        "surface-light": "#FFFFFF",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "8px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+  animation: page-enter 200ms ease;
+}
+
+.page-exit {
+  animation: page-exit 200ms ease forwards;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<script>
+    function goTo(url) {
+        document.body.classList.add('page-exit');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 200);
+    }
+</script>
+
+
+<body class="bg-background-light text-slate-900 min-h-screen">
+    <header
+        class="w-full h-16 bg-white border-b border-[#E5E7EB] flex items-center justify-between px-6 sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">j
+            </div>
+            <span class="text-xl font-bold tracking-tight text-primary">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <button
+                class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">language</span>
+                Español (BO)
+            </button>
+            <div class="flex items-center gap-3 pl-2 border-l border-slate-200">
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_P-e1WG5S5aKLYed8NIOA8hRlmN4GArczC7sN-UOAAujkjZE8jeu5Mbr1Q11adAEb9C43DWl9KYdm6unyUNhjGE79B7f1zNRHTMvNrj3I3RPn2CL49rWxKiaZ0DPShwrQ0-9Cwor0K8lZVqZI3hWZk92xoiaLvB1oBG0tcXG9heLFNGhxMYoQXYMIZ-Lzka6yNIq23z5IQitk_LwKVt3WZI3NENse2wrBDzh-km9jqT5JBGzXLSkWEil3dlI-Fhe_f48fxi2OJBXb" />
+                </div>
+                <span class="material-symbols-outlined text-slate-400 cursor-pointer">menu</span>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-4xl mx-auto py-10 px-6">
+        <a class="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary mb-8 transition-colors"
+            href="Flujos_impuestos.html">
+            <span class="material-symbols-outlined !text-base">arrow_back</span>
+            Volver a impuestos
+        </a>
+        <div class="mb-8">
+            <h1 class="text-[18px] font-semibold text-slate-900">Factura</h1>
+            <p class="text-sm text-slate-500 mt-1">Factura emitida por JOM por el uso de la plataforma</p>
+        </div>
+        <div class="space-y-6">
+            <div class="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nº de Factura</p>
+                        <p class="text-sm font-semibold text-slate-400">Pendiente de generación</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Fecha de emisión
+                        </p>
+                        <p class="text-sm font-medium text-slate-400">---</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Estado</p>
+                        <div class="flex items-center gap-1.5 text-[#F59E0B]">
+                            <span class="material-symbols-outlined !text-base">schedule</span>
+                            <span class="text-sm font-bold uppercase tracking-wide">Pendiente</span>
+                            <div class="relative flex items-center tooltip-container">
+                                <span
+                                    class="material-symbols-outlined !text-[16px] cursor-help text-slate-400">info</span>
+                                <div
+                                    class="tooltip-text invisible opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-800 text-white text-[11px] font-normal rounded shadow-lg transition-all z-10 text-center leading-tight">
+                                    Esta factura se emitirá automáticamente al finalizar el hospedaje
+                                    <div
+                                        class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+                <div class="px-6 py-4 border-b border-[#E5E7EB] bg-slate-50/50">
+                    <h2 class="text-sm font-bold text-slate-900">Datos del cliente</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tipo de
+                                facturación</p>
+                            <p class="text-sm font-medium text-slate-700">Factura como huésped</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nombre / Razón
+                                Social</p>
+                            <p class="text-sm font-medium text-slate-700">Alejandro Martínez Silva</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">CI / NIT</p>
+                            <p class="text-sm font-medium text-slate-700">8394021018</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">País / Región
+                            </p>
+                            <p class="text-sm font-medium text-slate-700">Bolivia</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Correo
+                                electrónico</p>
+                            <p class="text-sm font-medium text-slate-700">a.martinez@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+                <div class="px-6 py-4 border-b border-[#E5E7EB] bg-slate-50/50">
+                    <h2 class="text-sm font-bold text-slate-900">Referencia de operación</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">ID de Reserva
+                            </p>
+                            <p class="text-sm font-semibold text-primary">#RES-29482</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Estadía</p>
+                            <p class="text-sm font-medium text-slate-700">20 ene 2026 - 24 ene 2026</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Concepto de
+                                servicio</p>
+                            <p class="text-sm font-medium text-slate-700">Uso de plataforma JOM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+                <div class="px-6 py-4 border-b border-[#E5E7EB] bg-slate-50/50">
+                    <h2 class="text-sm font-bold text-slate-900">Detalle de facturación</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-[#E5E7EB]">
+                                <th class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                    Descripción del servicio</th>
+                                <th
+                                    class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 text-right">
+                                    Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-slate-700">TOTAL</td>
+                                <td class="px-6 py-4 text-sm text-slate-700 text-right font-mono">Bs 45,00</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-slate-700">Comisión de pasarela</td>
+                                <td class="px-6 py-4 text-sm text-slate-700 text-right font-mono">Bs 5,00</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-4 text-sm font-bold text-slate-900">Total facturado</td>
+                                <td class="px-6 py-4 text-lg font-bold text-slate-900 text-right font-mono">Bs 50,00
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button
+                    class="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-[#9CA3AF] border border-[#9CA3AF] cursor-not-allowed rounded-lg transition-all shadow-sm"
+                    disabled="">
+                    <span class="material-symbols-outlined !text-xl">download_done</span>
+                    Descargar factura (PDF)
+                </button>
+            </div>
+            <footer class="mt-12 pt-8 border-t border-[#E5E7EB]">
+                <p class="text-[11px] text-slate-400 leading-relaxed text-center italic">
+                    Esta factura corresponde únicamente a los servicios prestados por la plataforma JOM. El costo de la
+                    reserva y otros cargos directos del alojamiento son facturados independientemente por el anfitrión
+                    según la normativa vigente del Servicio de Impuestos Nacionales de Bolivia.
+                </p>
+            </footer>
+        </div>
+    </main>
+
+</body>
+
+</html>

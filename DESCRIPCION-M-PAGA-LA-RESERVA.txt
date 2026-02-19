@@ -1,0 +1,368 @@
+═════════════════════════════════════════════════════════════════════════════════
+M-PAGA-LA-RESERVA.HTML - DESCRIPCION MOBILE RESPONSIVE
+═════════════════════════════════════════════════════════════════════════════════
+
+TIPO DE PAGINA: Confirmación y detalles de reserva (Payment Review Page)
+PROPOSITO: Mostrar resumen completo de la reserva antes del pago (property, fechas, viajeros, precios desglosados)
+AUDIENCIA: Usuarios móviles confirmando detalles antes de proceder al pago
+
+
+─────────────────────────────────────────────────────────────────────────────────
+1. HEADER STICKY (NAV)
+─────────────────────────────────────────────────────────────────────────────────
+
+DIMENSIONES RESPONSIVAS:
+- Móvil (xs): h-14 (56px) - altitud minima para touch targets
+- Desktop (md+): h-20 (80px) - espacio visual mayor, campos más grandes
+
+ESTRUCTURA FLEX (left | center-space | right):
+- Izquierda: Botón back (solo móvil, lg:hidden) + Logo JOM (6×6 md:8×8) + Texto "jom" (xl → 2xl)
+- Centro: Espaciador invisible (flex-1)
+- Derecha: Lenguaje (hidden md:flex, 13-14px), Notificaciones (+badge rojo #5B55C8), Perfil dropdown
+
+COMPORTAMIENTO MOBILE SPECIFICO:
+- Back button (24×24) activo solo en xs-md (onclick="window.history.back()") - permite retroceso rápido
+- Desaparece en lg (oculto, usuario tiene vista completa del sitio)
+- Botón activo con scale-90 (active:scale-90 transition-transform 200ms)
+
+NOTIFICACIONES:
+- Badge count (número 3): size-4 (16px), bg-primary (#5B55C8), texto bold blanco
+- Posición: absolute -top-1 -right-1 (esquina superior derecha)
+- Border blanco 2px para separación visual
+
+PERFIL DROPDOWN:
+- Avatar circular: size-9 (36px), border neutral-border, overflow hidden
+- Icono menu (scale-95 active)
+- Trigger: cursor-pointer group hover para cambios de estado
+
+
+─────────────────────────────────────────────────────────────────────────────────
+2. MAIN CONTENT LAYOUT
+─────────────────────────────────────────────────────────────────────────────────
+
+CONTENEDOR MAXIMO:
+- max-content-width: Ancho maximo 1200px + padding responsivo
+  - Móvil: px-4 (16px) laterales
+  - Desktop (md+): px-8 (32px) laterales
+- max-w-xl: Contenedor especifico de contenido (ancho maximo 42rem) centrado (mx-auto)
+- py-4 md:py-8 lg:py-16: Padding vertical gradual según pantalla (4px → 32px → 64px)
+
+TITULOS PRINCIPALES:
+- "Detalle de la reserva": text-[20px] md:text-[24px], font-semibold, mb-6
+- Color: neutral-text (#1F2937)
+
+
+─────────────────────────────────────────────────────────────────────────────────
+3. CARD PRINCIPAL - DETALLES RESERVA
+─────────────────────────────────────────────────────────────────────────────────
+
+CONTENEDOR CARD:
+- bg-white + border neutral-border (E5E7EB) + rounded-card (16px)
+- shadow-sm (caja sutil, profundidad 1px)
+- Padding responsivo: p-4 md:p-6 (16px → 24px)
+- space-y-6: Espacio 24px entre secciones (separa visualmente bloques)
+
+SECCION 1: IMAGENES + INFO PROPERTY
+─────────────────────────────────────
+- Flex row (gap-4): Imagen izquierda, info derecha
+- Imagen: 
+  - Móvil: w-24 h-24 (96×96px)
+  - Desktop (md+): w-28 h-28 (112×112px)
+  - rounded-jom (12px), object-cover, shrink-0 (no se reduce)
+- Info derecha:
+  - Título: "Departamento Lujoso Zona Norte 4"
+  - Font: semibold, text-[15px] md:text-[16px], leading-tight (compact)
+  - Rating: star icon (16px) + "4.4" (font-medium) + "(256 reviews)" (gris, 12-13px)
+  - mt-2 gap-1: Espaciado flex items en rating
+
+SECCION 2: CANCELACION (separator + texto + link)
+─────────────────────────────────────
+- border-t: Divisor visual superior (neutral-border)
+- Titulo: semibold, text-[14-15px], mb-2
+- Descripción: text-[13-14px], neutral-secondary, leading-relaxed (líneas respiradas)
+- Link política: text-[13-14px], font-semibold, underline, text-primary, hover efecto
+- inline-block mt-2 para alineación correcta
+
+SECCION 3: DETALLES DEL VIAJE
+─────────────────────────────────────
+- Grid layout: grid-cols-2 gap-4 (2 columnas, 16px espacio)
+- Cada item: flex gap-3 (icon + contenido)
+- icon: material-symbols-outlined, text-[20px], color neutral-secondary
+- Contenido:
+  - Titulo: text-[12-13px] font-semibold, neutral-text
+  - Subtítulo: text-[12px], neutral-secondary
+- Elemento travelers: col-span-2 (ocupa ambas columnas, full-width)
+- Items:
+  ✓ Check in (calendar icon)
+  ✓ Check out (calendar icon)
+  ✓ Travelers (group icon)
+
+SECCION 4: INFORMACION DEL PRECIO (Desglose)
+─────────────────────────────────────
+- Estructura: space-y-3 (items con 12px separación)
+- Cada línea: flex justify-between, text-[13-14px]
+- Izquierda: concepto (neutral-secondary)
+- Derecha: valor (neutral-text), destacado bold si es importante
+
+LINEAS DESGLOSE:
+- 200 BOB x 4 noches | 800 BOB (básico)
+- 10% Descuento | 80 BOB (verde/success font-medium)
+- Limpieza | 100 BOB (tarifa adicional)
+- Tarifa Assert | 20 BOB (tarifa sistema)
+- TOTAL (pt-4 border-t separator, font-bold, text-[15-16px] izquierda, text-[18-20px] derecha)
+
+
+─────────────────────────────────────────────────────────────────────────────────
+4. BOTTOM BUTTONS - FIXED MOBILE
+─────────────────────────────────────────────────────────────────────────────────
+
+COMPUESTO DE:
+- Fixed container: fixed bottom-0 left-0 right-0, z-40
+- bg-white + border-t (neutral-border) + shadow-lg (profundidad visual)
+- p-4: Padding 16px externo
+- max-content-width: Centra y controla ancho maximo
+
+BUTTON LAYOUT:
+- flex gap-3: Dos botones separados 12px
+- flex-1: Cada botón toma 50% - 6px del espacio
+
+BOTON 1 - CANCELAR (Secundario outline):
+- border-2 border-neutral-border (bordes destacados)
+- text-neutral-text (color de texto gris)
+- font-semibold py-3 px-6
+- h-[48px] (altura minima touch friendly 48px)
+- rounded-jom (12px)
+- hover:bg-neutral-bg (fondo gris claro al pasar mouse)
+- active:scale-95 (presión visual)
+- onclick="window.history.back()" (retroceso)
+
+BOTON 2 - PAGAR (Primario CTA):
+- bg-primary (#5B55C8)
+- hover:bg-ui-primary-hover (#4a45b0) (sombra hover)
+- text-white font-semibold
+- py-3 px-6 h-[48px] rounded-jom
+- active:scale-95
+- onclick="window.location.href='M-METODOS-PAGO.HTML'" (navega a métodos pago)
+
+IMPORTANCIA MOBILE:
+- Sticky en bottom-0: Siempre visible, no requiere scroll
+- Altura 48px: Minimo recomendado para touch targets
+- Padding p-4: Espacio respiradero alrededor
+- z-40: Por encima del contenido principal
+
+
+─────────────────────────────────────────────────────────────────────────────────
+5. PADDING BOTTOM DEL MAIN (pb-32)
+─────────────────────────────────────────────────────────────────────────────────
+
+PROPOSITO:
+- pb-32 (128px): Espacio adicional abajo del contenido
+- Crea separación entre content y fixed buttons
+- Previene que últimas líneas del precio se oculten bajo botones
+- En desktop: Espacio "muerto" pero necesario para UX mobile-first
+
+
+─────────────────────────────────────────────────────────────────────────────────
+6. FOOTER
+─────────────────────────────────────────────────────────────────────────────────
+
+VISIBILIDAD:
+- hidden lg:block (solo visible en desktop, hidden en móvil y tablet)
+- Elimina clutter visual en pantallas pequeñas
+- Sin scroll adicional requerido en móvil
+
+ESTRUCTURA:
+- bg-neutral-bg (#F8F9FC) fondo gris claro
+- border-t border-neutral-border (separador superior)
+- py-12 px-8 (padding vertical 48px, horizontal 32px)
+- mt-16 (margen superior 64px, distancia visual)
+
+CONTENIDO GRID:
+- grid-cols-1 md:grid-cols-4 gap-8 (1 columna → 4 columnas, 32px separación)
+- Columnas: Logo + descripción, Explorar, Soporte, Legal
+- Cada columna con links (h5 uppercase, ul con spacing)
+- Typography: text-[13-14px], neutral-secondary para textos
+
+BOTTOM FOOTER:
+- pt-12 mt-12 border-t (doble separador)
+- flex justify-between (copyright izquierda, redes derecha)
+- Responsive flex-col md:flex-row (stackea vertical móvil)
+
+
+─────────────────────────────────────────────────────────────────────────────────
+7. RESPONSIVE BREAKPOINTS Y COMPORTAMIENTOS
+─────────────────────────────────────────────────────────────────────────────────
+
+MÓVIL (xs, 0-640px):
+═══════════════════════════════════════════════════════════════════════════════
+✓ Header h-14 (56px) compacto
+✓ Back button visible (lg:hidden)
+✓ Lenguaje oculto (hidden md:flex)
+✓ Card padding p-4 (16px)
+✓ Imagen property 96×96px
+✓ Textos 13-15px (compactos)
+✓ Precio grid 2 columnas (lado a lado)
+✓ Botones fixed bottom, 48px height, full-width comportamiento
+✓ pb-32 espacio extra para botones
+✓ Footer oculto
+✓ Overall padding máximo px-4
+
+TABLET (md, 768px+):
+═══════════════════════════════════════════════════════════════════════════════
+✓ Header h-20 (80px) más espacioso
+✓ Lenguaje visible ("Español (BO)")
+✓ Card padding p-6 (24px)
+✓ Imagen property 112×112px
+✓ Textos aumentan 1-2px (14-16px)
+✓ Logo y brand elementos más grandes
+✓ Botones siguen en bottom fixed (todavia útil)
+✓ Footer aún oculto (hidden lg:block)
+
+DESKTOP (lg, 1024px+):
+═══════════════════════════════════════════════════════════════════════════════
+✓ Back button desaparece (lg:hidden)
+✓ max-content-width controla ancho maximo 1200px
+✓ Card centrada con mx-auto
+✓ Footer visible con 4 columnas layout
+✓ padding-bottom del main py-16 (64px vertical)
+✓ Border-spacing aumentado (gap-8)
+✓ Botones fixed bottom todavía visibles (comportamiento consistente)
+
+
+─────────────────────────────────────────────────────────────────────────────────
+8. ESPACIADO Y SIZING GUIDE
+─────────────────────────────────────────────────────────────────────────────────
+
+PADDING HORIZONTAL:
+  - Móvil: px-4 (16px)
+  - Desktop: px-8 (32px)
+  
+PADDING VERTICAL (main):
+  - Móvil: py-4 (16px)
+  - Tablet: py-8 (32px)
+  - Desktop: py-16 (64px)
+  
+GAPS INTERNOS:
+  - Flex items alto: gap-3 (12px)
+  - Flex items normal: gap-2 (8px)
+  - Grid separaciones: gap-4 (16px)
+  - Secciones: space-y-6 (24px)
+
+FONT SIZES RESPONSIVOS:
+  - Títulos principales: text-[20px] → text-[24px]
+  - Subtítulos: text-[14-15px] → text-[16px]
+  - Body: text-[13px] → text-[14px]
+  - Labels: text-[12px] (constante)
+
+ALTURAS TOUCH TARGETS:
+  - Botones: h-[48px] (minimo recomendado)
+  - Header: h-14 (xs) → h-20 (md)
+
+
+─────────────────────────────────────────────────────────────────────────────────
+9. COLORES Y ESTADOS
+─────────────────────────────────────────────────────────────────────────────────
+
+HEADER:
+  - Fondo: #FFFFFF (blanco puro)
+  - Logo/marca: primary #5B55C8 (púrpura)
+  - Text: neutral-text #1F2937 (gris oscuro)
+  - Border: neutral-border #E5E7EB (gris claro)
+  - Notificaciones badge: primary #5B55C8
+  
+CARD CONTENT:
+  - Fondo: #FFFFFF
+  - Borders: neutral-border #E5E7EB
+  - Títulos: neutral-text #1F2937 (semibold)
+  - Descripciones: neutral-secondary #6B7280 (gris medio)
+  - Links: primary #5B55C8 (púrpura, underline)
+  
+PRECIOS:
+  - Regular: neutral-text #1F2937
+  - Descuento: success #16A34A (verde)
+  - Total: bold, más grande
+  
+BOTONES:
+  - Cancelar: outline, neutral-text con border-neutral-border (E5E7EB)
+    - Hover: bg-neutral-bg (#F3F4F6)
+  - Pagar: bg-primary #5B55C8
+    - Hover: bg-ui-primary-hover #4a45b0 (más oscuro)
+  
+FOOTER:
+  - Fondo: neutral-bg #F8F9FC (gris muy claro)
+  - Títulos: neutral-text #1F2937
+  - Links: neutral-secondary #6B7280
+    - Hover: primary #5B55C8
+
+
+─────────────────────────────────────────────────────────────────────────────────
+10. INTERACCIONES Y ANIMACIONES
+─────────────────────────────────────────────────────────────────────────────────
+
+BUTTON INTERACTIONS:
+  - active:scale-95: Presión visual (escala 95% al clickear)
+  - transition-transform: Transición suave (200ms por defecto Tailwind)
+  - hover:bg-neutral-bg: Cambio fondo en hover (Cancelar)
+  - hover:bg-ui-primary-hover: Cambio a púrpura oscuro (Pagar)
+
+LINK INTERACTIONS:
+  - text-primary: Color púrpura
+  - underline: Textura visual
+  - hover:text-primary: Mantiene color en hover (footer links)
+
+TRANSITIONS:
+  - transition-colors: Para cambios de color suave
+  - transition-transform: Para cambios scale suave
+  - transition-all: Para cambios múltiples propiedades
+
+ICON STATES:
+  - material-symbols-outlined: Icons dinámicos
+  - FILL variation: Puede cambiar con estatus (FILL 0 = outline, FILL 1 = filled)
+  - Colores: primary, neutral-secondary, según contexto
+
+
+─────────────────────────────────────────────────────────────────────────────────
+11. PUNTOS CLAVE MOBILE
+─────────────────────────────────────────────────────────────────────────────────
+
+✓ STICKY HEADER: Siempre visible, no interfiere con scroll
+✓ FIXED BUTTONS: Botones pago/cancelar siempre accesibles abajo pantalla
+✓ EXTRA PADDING: pb-32 previene que contenido se oculte bajo buttons
+✓ TOUCH TARGETS: Mínimo 48px altura en botones (fácil de tocar)
+✓ READABLE TEXT: 13-16px font sizes, suficiente contraste
+✓ RESPONSIVE IMAGES: 96px → 112px según pantalla
+✓ SINGLE COLUMN: Contenido apilado verticalmente móvil
+✓ BACK BUTTON: Retorno rápido a pantalla anterior (lg:hidden)
+✓ ≠FOOTER: Oculto en móvil, visible desktop (reduce clutter)
+✓ SEMANTIC SPACING: space-y-6 entre secciones para jerarquía visual
+
+
+═════════════════════════════════════════════════════════════════════════════════
+RESUMEN ESTRUCTURA VISUAL
+═════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────┐
+│  HEADER STICKY (h-14 → h-20)            │ ← Logo, back button, notifications
+├─────────────────────────────────────────┤
+│                                         │
+│  MAIN CONTENT (max-w-xl centrado)      │
+│  ┌───────────────────────────────────┐ │
+│  │ TITULO: Detalle de la reserva     │ │
+│  ├───────────────────────────────────┤ │
+│  │ CARD (bg-white, border, shadow)   │ │
+│  │ • Imagen + Info property          │ │
+│  │ • Política cancelación            │ │
+│  │ • Detalles viaje (grid 2col)     │ │
+│  │ • Desglose precio                 │ │
+│  └───────────────────────────────────┘ │
+│                                         │
+│  [pb-32 extra padding]                 │
+│                                         │
+└─────────────────────────────────────────┘
+┌─ FIXED BOTTOM (z-40) ─────────────────┐
+│  [Cancelar]        [Pagar]           │ ← h-48px fixed bottom
+└────────────────────────────────────────┘
+
+FOOTER (desktop only, hidden lg:block)
+
+═════════════════════════════════════════════════════════════════════════════════

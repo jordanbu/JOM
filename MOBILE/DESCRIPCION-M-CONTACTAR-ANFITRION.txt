@@ -1,0 +1,325 @@
+
+LAYOUT GENERAL RESPONSIVE
+-
+MÓVIL (xs - 1023px):
+- Flex column (apilado)
+- Main content: full-width
+- Aside: BOTTOM SHEET fijo en fondo (fixed bottom-0)
+- Altura sheet: ajustable (80px header → 90vh expanded)
+
+DESKTOP (lg - 1024px+):
+- Flex row (lado a lado)
+- Main: flex-1 max-640px
+- Aside: 360px ancho (lg:w-[360px])
+- Sticky top-20 (bajo header)
+- No fixed positioning
+
+Viewport:
+- user-scalable: no (sin zoom manual)
+- initial-scale: 1.0
+
+
+HEADER STICKY
+-
+Altura: 56px móvil (h-14), 80px desktop (md:h-20)
+Logo: 20px móvil, 24px desktop
+Botón atrás: visible SOLO móvil (md:hidden) 36×36px
+Padding: 16px móvil (px-4), 32px desktop (md:px-8)
+Fondo: blanco #FFFFFF | Borde: #E5E7EB
+Z-index: 50 | Sticky top-0
+
+BOTONES HEADER MÓVIL:
+- Cuenta: 36×36px, visible en móvil
+- Menú: 36×36px, visible móvil (md:hidden)
+- Hover: bg-#F8F9FC | Transición: 200ms
+
+
+MAIN CONTENT - RESPONSIVE MOBILE
+-
+PADDING MÓVIL:
+- Top/Bottom: 24px (py-6 = 24px)
+- Bottom desktop: 64px (md:py-16)
+- Bottom overall: 96px (pb-24 = 96px) para no tapar bottom-sheet
+
+MÁXIMO ANCHO:
+- Container: 640px max (max-w-[640px])
+- Full-width en móvil
+- Centrado en desktop
+
+TÍTULO SECTION:
+- Móvil: 20px, semibold
+- Desktop: 24px, semibold
+- Color: gris oscuro #1F2937
+- Margin abajo: 24px (mb-6 móvil), 32px (md:mb-8 desktop)
+
+SUBTÍTULO:
+- Tamaño: 12px móvil, 14px desktop (text-[12px] md:text-[14px])
+- Color: gris medio #6B7280
+- Font: regular
+
+
+SECCIÓN "MAYORÍA DE VIAJEROS PREGUNTAN"
+-
+TÍTULO:
+- Tamaño: 16px móvil, 18px desktop
+- Peso: semibold
+- Color: gris oscuro #1F2937
+- Margin abajo: 16px móvil, 24px desktop
+
+ITEMS LISTA:
+- Layout: flex flex-col gap-4 (16px)
+- Por item: flex gap-2
+
+BULLET POINT:
+- Tamaño: 6px (size-1.5 = 6px)
+- Color: gris oscuro #1F2937
+- Rounded: full (circle)
+- Margin top: 8px (mt-2) - alineación visual
+
+TEXTO:
+- Tamaño: 14px
+- Color: gris oscuro #1F2937
+- Line-height: relaxed
+- Responsive: mismo tamaño móvil y desktop
+
+
+SECCIÓN TEXTAREA "¿TIENES MÁS PREGUNTAS?"
+-
+CONTENEDOR:
+- Gap: 16px móvil (gap-4), 24px desktop (md:gap-6)
+- Flex direction: column
+
+TEXTAREA INPUT:
+- Min-height: 120px móvil (min-h-[120px]), 160px desktop (md:min-h-[160px])
+- Padding: 12px móvil (p-3), 16px desktop (md:p-4)
+- Border: 1px #E5E7EB
+- Border-radius: 12px (rounded-jom-input)
+- Font-size: 14px móvil, 15px desktop
+- Color: gris oscuro #1F2937
+- Placeholder: gris medio #6B7280
+- Focus: ring-2 purple #5B55C8
+
+BOTÓN "ENVIAR MENSAJE":
+- Width: 100% (full)
+- Altura: 48px (h-12)
+- Padding: 24px móvil-desktop (md:px-8)
+- Background: púrpura #5B55C8
+- Hover: púrpura hover #4A45B0
+- Texto: blanco 15px móvil, 16px desktop
+- Font: semibold
+- Border-radius: 12px (rounded-jom-input)
+- Active: scale 98% (active:scale-[0.98])
+- Disabled: fondo gris #E5E7EB, texto gris #6B7280
+- Transición: colors 200ms
+
+
+BOTTOM SHEET ASIDE - MÓVIL ESPECÍFICO
+-
+POSICIONAMIENTO MÓVIL:
+- fixed bottom-0 left-0 right-0 (FIJO en fondo)
+- Z-index: 40
+- Class: bottom-sheet
+
+ANIMACIÓN MÓVIL:
+- Cerrado: translateY(calc(100% - 80px)) = 80px visible
+- Expandido: translateY(0) = full screen
+- Transición: 300ms cubic-bezier(0.4, 0, 0.2, 1)
+- Sin transform en desktop (lg)
+
+ALTURA Y OVERFLOW:
+- max-height: 90vh
+- overflow-y: auto
+- Scroll interno
+
+HEADER BOTTOM SHEET:
+- Solo visible móvil (lg:hidden)
+- Altura: 80px (py-4 = 16px × 2 + contenido)
+- Padding: 16px (px-4 py-4)
+- Border-bottom: 1px #E5E7EB
+- Flex: items-center justify-between
+- Cursor: clickable
+
+AVATAR SECTION:
+- Avatar: 40×40px (w-[40px] h-[40px])
+- Border: 1px #E5E7EB
+- Border-radius: full
+- Object: cover
+
+PRECIO EN HEADER:
+- N° precio: 18px, bold, gris oscuro #1F2937
+- Etiqueta: 14px, semibold, gris medio #6B7280
+- Layout: flex items-baseline gap-1
+
+RATING:
+- Star icon: 12px en box 20×20px
+- Fondo: púrpura claro #EFEEFF
+- Color: púrpura #5B55C8
+- Número: 12px medium
+
+CHEVRON ICON (expand):
+- Material symbol: keyboard_arrow_up
+- Transición: transform 300ms
+- Mobile: rotate cuando expandido
+
+
+CONTENIDO PANEL
+-
+PADDING:
+- Móvil: 16px (p-4)
+- Desktop: 24px (md:p-6)
+
+SECCIÓN FECHAS Y HUÉSPEDES:
+- Border: 1px #E5E7EB
+- Border-radius: 12px
+- Overflow: hidden
+- Margin-bottom: 24px (mb-6)
+
+ITEMS CALENDARIOS:
+- Layout: flex 50/50 (flex-1 para cada uno)
+- Border-right: 1px #E5E7EB (excepto último)
+- Padding: 12px (p-3)
+- Cursor: clickable
+- Hover: bg-#F8F9FC
+
+FECHA CAMPO:
+- Ícono: 16px calendar_month
+- Label: 12px, uppercase, gris medio #6B7280, tracking-wider
+- Valor: 14px, gris oscuro #1F2937
+- Gap icon-label: 8px
+
+HUÉSPEDES:
+- Border-top: 1px #E5E7EB
+- Ícono: 16px person
+- Label: "HUÉSPEDES" 12px uppercase
+- Valor: "1 viajeros" 14px
+
+BOTÓN "VER DISPONIBILIDAD":
+- Width: 100%
+- Altura: 48px (h-12)
+- Background: púrpura #5B55C8
+- Hover: púrpura hover #4A45B0
+- Color: blanco
+- Texto: 16px font-semibold
+- Border-radius: 12px
+- Active: scale 98%
+- Transición: colors 200ms
+- Sombra: shadow-sm
+
+
+DETALLES PRECIOS (EXPANDIBLE)
+-
+VISIBILIDAD: hidden por defecto (id:detallesPrecios)
+
+CONTENEDOR:
+- Margin-top: 16px (mt-4)
+- Padding: 16px (p-4)
+- Fondo: blanco #FFFFFF (dentro panel dark)
+- Border: 1px #E5E7EB
+- Border-radius: 12px
+- Space-y: 12px (gap-3)
+
+ITEMS PRECIO:
+- Layout: flex justify-between
+- Texto: 14px gris medio #6B7280 (label)
+- Valor: 14px medium gris oscuro #1F2937
+
+TOTAL:
+- Texto: 16px semibold gris oscuro #1F2937
+- Valor: 20px bold gris oscuro #1F2937
+
+SEPARADOR:
+- h-[1px] bg-#E5E7EB
+- my-3 (12px vertical)
+
+AVISO CANCELACIÓN:
+- Padding: 12px (p-3)
+- Fondo: blanco #FFFFFF
+- Border: 1px #E5E7EB
+- Border-radius: 12px
+- Layout: flex items-start gap-2
+
+ÍCONO INFO:
+- Tamaño: 16px
+- Margin-top: 2px (mt-0.5)
+
+TEXTO INFO:
+- Título: 14px medium gris oscuro
+- Descripción: 12px gris medio #6B7280
+- Link: underline, hover púrpura
+
+
+COLORES MÓVIL RESUMEN
+-
+PRIMARIOS:
+- Púrpura: #5B55C8
+- Púrpura Hover: #4A45B0
+
+NEUTRALES:
+- Gris Oscuro (texto): #1F2937
+- Gris Medio: #6B7280
+- Gris Claro (bordes): #E5E7EB
+- Gris Muy Claro (fondos): #F8F9FC
+- Blanco: #FFFFFF
+- Púrpura Claro (badges): #EFEEFF
+
+
+TAMAÑOS MÓVIL CLAVE
+-
+TIPOGRAFÍA:
+- Título sección: 20px → 24px
+- Subtitle: 12px → 14px
+- Precio: 18px (header), 20px (panel)
+- Normal: 14px → 16px
+- Pequeño: 12px
+
+ESPACIADO:
+- Padding general: 12-16px
+- Main padding: 24px top/bottom
+- Gap items: 12-16px (16px móvil, 24px desktop)
+- Separador: 1px
+
+COMPONENTES:
+- Header altura: 56px → 80px
+- Avatar: 40px → 48px
+- Botones: 48px altura
+- Bottom-sheet altura base: 80px visible
+- Textarea altura: 120px → 160px
+
+
+INTERACTIVIDAD MÓVIL
+-
+BOTTOM SHEET TOGGLE:
+- Click header → expand/collapse
+- Smooth animation 300ms
+- Transform origin: translateY axis
+- Chevron rotation
+
+TEXTAREA:
+- oninput="toggleEnviarButton()"
+- Botón habilitado solo con texto
+- Disabled state visual
+
+HOVER STATES:
+- Calendarios: bg-#F8F9FC hover
+- Links: color → púrpura
+- Botones: scale 98% active
+
+TRANSICIONES:
+- Duration: 200-300ms
+- Types: transform, colors, background-color
+- Cubic-bezier para bottom-sheet
+
+
+CARACTERÍSTICAS RESPONSIVE CRÍTICAS
+-
+✔ Bottom sheet fixed en móvil (mejor UX)
+✔ Sticky sidebar en desktop
+✔ Flex column móvil → flex row desktop
+✔ max-height 640px en desktop (legibilidad)
+✔ pb-24 móvil para no tapar sheet
+✔ Avatar responsive del header (40px → 48px)
+✔ Textarea expandible en height
+✔ Touch targets 44×44px+ ✔
+✔ Sin scroll horizontal (evergreen)
+✔ Input focus visible y accesible
+

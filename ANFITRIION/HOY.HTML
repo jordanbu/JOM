@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Host Dashboard - Request Approval (V1)</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-light": "#F8F9FC",
+                        secondary: "#6B7280",
+                        warning: "#F59E0B",
+                        divider: "#E5E7EB",
+                        title: "#1F2937"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'large': "16px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: theme('colors.background-light');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: theme('colors.divider');
+            border-radius: 10px;
+        }
+        .active-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.primary');
+        }
+        .content-block {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid theme('colors.divider');
+        }
+        h1 {
+            @apply text-[28px] font-bold leading-tight;
+        }
+        .body-text {
+            @apply text-[14px] leading-relaxed;
+        }
+        .price-text {
+            @apply text-[20px] font-bold;
+            color: #000;
+        }
+        .num-bg {
+            background-color: #E5E7EB;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        .btn-primary {
+            @apply bg-primary text-white font-bold text-[16px] hover:bg-[#4A44B0] transition-colors shadow-sm;
+        }
+        .btn-secondary {
+            @apply bg-white border border-divider text-slate-900 font-bold text-[16px] hover:bg-slate-50 transition-colors;
+        }
+        .max-content-width {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+    </style>
+</head>
+
+<body class="text-slate-900 min-h-screen">
+    <header
+        class="h-16 w-full flex items-center justify-between px-8 bg-white border-b border-divider fixed top-0 left-0 z-[60]">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs">jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 text-sm font-medium text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español (BO)</span>
+            </div>
+            <button class="text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+            </button>
+            <div
+                class="flex items-center gap-2 p-1 pl-3 border border-divider rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600">menu</span>
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <aside class="hidden md:block w-[240px] bg-white border-r border-divider overflow-auto mt-16">
+        <nav class="px-4 py-6 space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors" href="#">
+                <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                <span class="text-[14px]">Hoy</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors" href="#">
+                <span class="material-symbols-outlined text-[20px]">campaign</span>
+                <span class="text-[14px]">Anuncios</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors" href="#">
+                <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                <span class="text-[14px]">Calendario</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-50 text-primary font-semibold" href="#">
+                <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                <span class="text-[14px]">Mensajería</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 transition-colors" href="#">
+                <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                <span class="text-[14px]">Dashboard</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="ml-0 md:ml-[240px] pt-16 min-h-screen pb-32">
+        <div class="max-w-[1120px] mx-auto px-8 py-10">
+            <div class="flex justify-center -mt-[39px] mb-16">
+                <div class="bg-white dark:bg-slate-800 p-1.5 rounded-full border border-slate-200 dark:border-slate-700 inline-flex shadow-sm">
+                    <button class="px-8 py-2 bg-primary text-white rounded-full font-medium shadow-lg shadow-primary/20 transition-all">Hoy</button>
+                    <button class="px-8 py-2 text-slate-500 dark:text-slate-400 font-medium hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Reservaciones programadas</button>
+                </div>
+            </div>
+            <section class="mb-16">
+                <h2 class="text-2xl font-semibold mb-6 text-center text-slate-800 dark:text-slate-100">Tus solicitudes</h2>
+                <div class="flex gap-6 justify-center overflow-x-auto pb-4">
+                    <div class="flex-shrink-0 w-[300px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative hover:shadow-md transition-shadow">
+                        <div class="mb-6">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-semibold rounded-full border border-amber-100 dark:border-amber-800">
+                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                Quedan: 23:59:41
+                            </span>
+                        </div>
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white mb-4">
+                            <span class="font-bold text-xl">jom</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Solicitud de reserva</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium mb-1">4 - 7 de feb.</p>
+                        <p class="text-slate-400 dark:text-slate-500 text-sm">Mono ambiente con vista al mar</p>
+                    </div>
+                    <div class="flex-shrink-0 w-[300px] bg-slate-50/50 dark:bg-slate-800/30 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-6 flex items-center justify-center text-center">
+                        <p class="text-slate-400 dark:text-slate-500 italic text-sm">Esperando nuevas solicitudes...</p>
+                    </div>
+                </div>
+            </section>
+            <section class="mb-16">
+                <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-100">Reservaciones</h2>
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-sm p-4">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-fixed text-left border-collapse">
+                            <thead>
+                                <tr class="bg-jom-gray dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700">
+                                    <th class="w-[10%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estado</th>
+                                    <th class="w-[22%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Huésped</th>
+                                    <th class="w-[16%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Llegada / Salida</th>
+                                    <th class="w-[14%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reservado</th>
+                                    <th class="w-[20%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Inmueble</th>
+                                    <th class="w-[10%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Código</th>
+                                    <th class="w-[8%] px-4 py-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right">Total</th>
+                                    <th class="px-4 py-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                    <td class="px-4 py-4 align-middle">
+                                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold rounded-full">Próximo</span>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="font-semibold text-slate-900 dark:text-white">Javier Vargas</div>
+                                        <div class="text-xs text-slate-500">1 Adulto</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm font-medium text-slate-700 dark:text-slate-300">20 may 2026</div>
+                                        <div class="text-xs text-slate-500">21 may 2026</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-700 dark:text-slate-300">20 ene 2026</div>
+                                        <div class="text-xs text-slate-500">00:23 a.m.</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-700 dark:text-slate-300 truncate max-w-[240px]">Pruebas de publicación...</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-500">0000010299</div>
+                                    </td>
+                                    <td class="px-4 py-4 text-right align-middle">
+                                        <div class="price-text text-right">$264.50</div>
+                                    </td>
+                                    <td class="px-4 py-4 text-right align-middle">
+                                        <button class="px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Detalles</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                    <td class="px-4 py-4 align-middle">
+                                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold rounded-full">Próximo</span>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="font-semibold text-slate-900 dark:text-white">Javier Vargas</div>
+                                        <div class="text-xs text-slate-500">1 Adulto</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm font-medium text-slate-700 dark:text-slate-300">6 may 2026</div>
+                                        <div class="text-xs text-slate-500">7 may 2026</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-700 dark:text-slate-300">20 ene 2026</div>
+                                        <div class="text-xs text-slate-500">00:12 a.m.</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-700 dark:text-white truncate max-w-[240px]">Pruebas de publicación...</div>
+                                    </td>
+                                    <td class="px-4 py-4 align-middle">
+                                        <div class="text-sm text-slate-500">0000010298</div>
+                                    </td>
+                                    <td class="px-4 py-4 text-right align-middle">
+                                        <div class="price-text text-right">$264.50</div>
+                                    </td>
+                                    <td class="px-4 py-4 text-right align-middle">
+                                        <button class="px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Detalles</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <a class="text-primary font-semibold text-sm flex items-center justify-center gap-2 hover:underline" href="#">
+                        Ver todas las reservaciones
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
+                </div>
+            </section>
+            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <div>
+                    <h3 class="text-[17px] font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-1">
+                        Mostrar todas las reservas
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Revisa el historial completo y los próximos ingresos de tus inmuebles.</p>
+                </div>
+                <div class="text-4xl filter saturate-50 contrast-125">🧳</div>
+            </div>
+        </div>
+    </main>
+
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <button class="w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+    </div>
+
+    <!-- (old panel removed - replaced with panel inside card to overlap list) -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openButtons = document.querySelectorAll('.js-open-approve-panel');
+            const panel = document.getElementById('approve-panel');
+            const closeBtn = document.getElementById('approve-panel-close');
+            const cancelBtn = document.getElementById('approve-panel-cancel');
+            const confirmBtn = document.getElementById('approve-panel-confirm');
+
+            function openPanel() {
+                panel.classList.remove('translate-x-full');
+                panel.classList.add('translate-x-0');
+            }
+
+            function closePanel() {
+                panel.classList.remove('translate-x-0');
+                panel.classList.add('translate-x-full');
+            }
+
+            openButtons.forEach(btn => btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPanel();
+            }));
+
+            closeBtn.addEventListener('click', closePanel);
+            cancelBtn.addEventListener('click', closePanel);
+
+            // Confirm action placeholder - you can wire this to actual logic
+            confirmBtn.addEventListener('click', () => {
+                // For now, close the panel and you can add further behavior (API call, state change)
+                closePanel();
+                alert('Solicitud aprobada (simulado)');
+            });
+
+            // Fixed reply button handler (opens chat / composes message)
+            const fixedOpen = document.getElementById('fixed-reply-open');
+            if (fixedOpen) {
+                fixedOpen.addEventListener('click', () => {
+                    // Simulate opening a message composer or navigating to chat
+                    alert('Abrir chat con María (simulado)');
+                });
+            }
+        });
+    </script>
+
+    <footer class="w-full bg-[#F8F9FC] border-t border-divider pt-12 pb-8">
+        <div class="max-content-width">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor
+                        confianza.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-slate-700 dark:text-slate-300 font-semibold text-sm">Compañía</h4>
+                    <div class="flex flex-col gap-2">
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-slate-700 dark:text-slate-300 font-semibold text-sm">Legal</h4>
+                    <div class="flex flex-col gap-2">
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-slate-700 dark:text-slate-300 font-semibold text-sm">Soporte</h4>
+                    <div class="flex flex-col gap-2">
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+                        <a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-divider pt-6 pb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-6">
+                    <div class="flex gap-4">
+                        <a class="text-slate-500 hover:text-primary transition-colors" href="#" aria-label="Sitio web">
+                            <span class="material-symbols-outlined text-xl" aria-hidden="true">language</span>
+                        </a>
+                        <a class="text-slate-500 hover:text-primary transition-colors" href="#" aria-label="Instagram">
+                            <span class="material-symbols-outlined text-xl" aria-hidden="true">camera</span>
+                        </a>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="text-xs font-medium text-slate-500 hover:text-primary px-2 py-1 rounded" aria-label="Español (BO)">Español (BO)</button>
+                        <button class="text-xs font-medium text-slate-500 hover:text-primary px-2 py-1 rounded" aria-label="Inglés (US)">Inglés (US)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

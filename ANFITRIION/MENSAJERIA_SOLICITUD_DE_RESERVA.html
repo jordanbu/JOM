@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Messaging - Pending Reservation Request (Host View)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: "#5A4B9E",
+                        primary: "#5B55C8",
+                        hover: "#4A45B0",
+                        surface: "#F8F9FC",
+                        divider: "#E5E7EB",
+                        text: "#1F2937",
+                        text2: "#6B7280",
+                        text3: "#9CA3AF"
+                    },
+                    fontFamily: { sans: ["Inter", "sans-serif"], display: ["Inter", "sans-serif"] },
+                    borderRadius: { "16": "16px", "12": "12px", "full": "9999px" }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+    </style>
+</head>
+
+<body class="bg-surface font-display min-h-screen flex flex-col">
+    <!-- HEADER -->
+    <header class="sticky top-0 left-0 right-0 h-20 bg-white border-b border-divider z-50">
+        <div class="max-w-[1200px] w-full mx-auto px-8 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-8 flex items-center justify-center text-brand">
+                    <svg fill="none" viewBox="0 0 48 48" class="w-8 h-8">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-brand">jom</span>
+            </div>
+            <div class="flex items-center gap-8">
+                <button
+                    class="hidden md:flex items-center gap-2 text-text2 hover:text-hover font-medium text-sm transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-text2 hover:text-hover flex items-center transition-colors">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span
+                        class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="flex items-center gap-2 pl-2 cursor-pointer group">
+                    <div
+                        class="size-9 rounded-full bg-surface border border-divider flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-[20px] text-text2 group-hover:text-primary transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex h-[calc(100vh-80px)]">
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-white border-r border-divider flex flex-col py-6 px-4 shrink-0">
+            <nav class="flex flex-col gap-2">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-text2 hover:bg-surface rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">today</span>
+                    Hoy
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-text2 hover:bg-surface rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">home</span>
+                    Anuncios
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-text2 hover:bg-surface rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    Calendario
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-text bg-secondary-active rounded-lg">
+                    <span class="material-symbols-outlined text-[20px]">chat</span>
+                    Mensajería
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-text2 hover:bg-surface rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+            </nav>
+        </aside>
+        <!-- CONTENIDO MAIN SPLIT -->
+        <main class="flex-1 max-w-[1360px] mx-auto py-8">
+            <div class="flex h-[calc(100vh-144px)] rounded-xl overflow-hidden border border-divider">
+                <!-- Lista MENSAJES (SE MANTIENE) -->
+                <aside
+                    class="w-[400px] bg-white shadow-sm flex flex-col overflow-hidden flex-shrink-0 border-l border-r border-divider">
+                    <div class="h-20 px-8 border-b border-divider flex items-center justify-between gap-3">
+                        <h2 class="text-[22px] font-semibold text-text">Mensajes</h2>
+                        <div class="flex items-center gap-2">
+                            <button class="p-2 hover:bg-surface rounded-full transition-colors">
+                                <span class="material-symbols-outlined text-text2 text-[22px]">search</span>
+                            </button>
+                            <button class="p-2 hover:bg-surface rounded-full transition-colors">
+                                <span class="material-symbols-outlined text-text2 text-[22px]">settings</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-b border-divider">
+                        <div class="flex gap-3">
+                            <button
+                                class="px-4 py-2 bg-text text-white font-semibold rounded-full text-[14px] hover:bg-hover transition-colors">
+                                Todos
+                            </button>
+                            <button
+                                class="px-4 py-2 text-text2 font-semibold rounded-full text-[14px] hover:bg-surface transition-colors">
+                                No leído
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto custom-scrollbar">
+                        <div
+                            class="px-6 py-4 bg-surface flex gap-4 cursor-pointer border-l-2 border-primary hover:bg-surface transition-colors">
+                            <div class="size-14 rounded-full bg-cover bg-center shrink-0 ring-2 ring-white"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfB9izL3aWber0b67ICFhEtHn7uEkjxMi-rt8GpOybmzl6QVgH2753n-YFIFZWmTS2WeKvAW1XvmvTie_35w4Z44cwo-pld3qPo2C4PXHcUi_bdaCJBcQD0-O_NAgfO8eFgD7dMhErZxkyvTN4c_G_cgnwr_7gw8YLEIydSFRb0LSImgVhM6E_rPDvSZ-cJ-CY7HxEzOfTHAHAeG-eUbSblgJUG8jR93j-IGzmH4XR9IGyRDaGbuL15H8xVlVc9wdEtliv_pQGYUc2m')">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-[15px] font-semibold text-text truncate">Maria</span>
+                                    <span class="text-[12px] text-text2">Ahora</span>
+                                </div>
+                                <p class="text-[14px] text-text font-medium truncate mb-0.5">Hola Quiero Hospedarme...
+                                </p>
+                                <p class="text-[12px] text-text2 truncate">Solicitud pendiente</p>
+                            </div>
+                        </div>
+                        <!-- Puedes añadir más items aquí -->
+                    </div>
+                </aside>
+                <!-- Conversación central: estado pendiente vacío -->
+                <section class="flex-1 bg-white flex flex-col overflow-hidden">
+                    <header class="h-20 px-8 border-b border-divider flex items-center justify-between flex-shrink-0">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="size-12 rounded-full bg-surface flex items-center justify-center overflow-hidden">
+                                <img alt="Maria" class="size-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMk0gPtSI7qIGao-DqHtROH3G3oaqDH_roB0UVN3vAygC8Gqc0_viExDVskn8gJ6zDNL_ntOFrN8XFoTDHLwJqiRChCVjvzuAZJf6IpKzs5FoebQsgQAFdc1zehFVTZ5iAwlO1JP1Ojj0cH7x6WWcbky8dlv2TLQUHquF0ql_GvKDFB_xNyfpcsVhgivTQMGduy_KOSnvyrC4OlevXLQpFqZ1s95o22uUr_xP6ikZi7hC2BDdLIeMVzPzzpd8D9nnGnq5he0r0IzI" />
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[16px] font-semibold text-text">Maria</span>
+                                <span class="text-[14px] text-text2">departamento frutal</span>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[12px] font-semibold bg-surface px-4 py-1.5 rounded-full text-text2">Huésped</span>
+                    </header>
+                    <div class="flex-1 overflow-y-auto px-8 py-8 flex flex-col items-center justify-start">
+                        <div class="max-w-lg w-full text-center space-y-3">
+                            <p class="text-[14px] text-text2">
+                                Responde la solicitud
+                            </p>
+                            <p class="text-[14px] text-text2">
+                                María hizo una solicitud: Tenés 12 horas para responder la solicitud.
+                            </p>
+                        </div>
+                    </div>
+                    <footer class="px-8 py-6 bg-white flex-shrink-0">
+                        <div class="relative flex items-center gap-3">
+                            <input
+                                class="w-full h-[48px] px-5 pr-14 bg-white border border-divider rounded-12 focus:outline-none focus:border-primary text-[16px] text-text placeholder:text-text2"
+                                placeholder="Escribe un mensaje..." type="text" />
+                            <button class="absolute right-4 p-2 hover:bg-surface rounded-full transition-colors">
+                                <span class="material-symbols-outlined text-text2 text-[22px]">send</span>
+                            </button>
+                        </div>
+                    </footer>
+                </section>
+                <!-- Panel derecho: Detalle de reservación AJUSTADO+ ALERTA -->
+                <aside
+                    class="w-[400px] bg-white shadow-sm flex flex-col overflow-y-auto flex-shrink-0 border-l border-r border-divider">
+                    <div class="h-20 px-8 border-b border-divider flex items-center">
+                        <h3 class="text-[22px] font-semibold text-text">Detalle</h3>
+                    </div>
+                    <div class="p-8 flex-1 overflow-y-auto">
+                        <!-- Estado solicitud pendiente -->
+                        <div class="mb-6">
+                            <span
+                                class="inline-flex items-center gap-1 px-5 py-1 rounded-full border border-[#E4D796] bg-[#FEF3C7] text-[#92400E] text-[14px] font-semibold">
+                                <span class="material-symbols-outlined align-middle text-[18px]">schedule</span>
+                                Solicitud · Pendiente
+                            </span>
+                        </div>
+                        <h1 class="text-[22px] font-bold text-text mb-1">Responde la solicitud</h1>
+                        <div class="flex items-start gap-4 p-6 bg-white border border-divider rounded-16 mb-8">
+                            <img alt="Maria Laura" class="w-16 h-16 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                            <div class="flex-1">
+                                <h3 class="text-[16px] font-semibold text-text">Maria Laura</h3>
+                                <p class="text-[14px] text-text2">Lujoso depto Stratto Equipetrol</p>
+                                <p class="text-[14px] text-text2">30 de ago. – 10 de sep (11 noches)</p>
+                                <p class="text-[14px] font-medium text-text mt-1">1 huésped · 700,00 BOB</p>
+                            </div>
+                        </div>
+                        <!-- ALERTA SEGÚN IMAGEN 3 -->
+                        <div
+                            class="rounded-16 border border-divider bg-[#F8F9FC] flex items-center gap-3 px-6 py-5 mb-8">
+
+                            <p class="text-[16px] leading-normal text-[#1F2937]">
+                                <span class="font-semibold">María hizo una solicitud:</span>
+                                Tenés 12 horas para responder la solicitud.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-divider mb-6"></div>
+                        <p class="text-[14px] text-text2 mb-8 ">Acciones posibles sobre esta solicitud pendiente.</p>
+                        <div class="flex flex-col gap-3 max-w-[320px]">
+                            <button
+                                class="w-full h-12 bg-primary hover:bg-hover text-white rounded-12 font-semibold text-[16px] transition-colors shadow-sm">
+                                Aceptar solicitud
+                            </button>
+                            <button
+                                class="w-full h-12 bg-white border border-divider text-text rounded-12 font-semibold text-[16px] hover:bg-surface transition-colors">
+                                Rechazar
+                            </button>
+                        </div>
+                        <div class="border-t border-divider my-8"></div>
+                        <div class="pb-8 border-b border-divider">
+                            <h3 class="text-[16px] font-semibold text-text mb-4">Acerca de María de los Ángeles</h3>
+                            <div class="flex flex-col gap-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-[#F3F4F6] flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-text3 text-[20px]">star</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[14px] font-semibold text-text">4.9 de valoración</p>
+                                        <p class="text-[14px] text-text2">Basado en 12 reseñas</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-[#F3F4F6] flex items-center justify-center">
+                                        <span
+                                            class="material-symbols-outlined text-text3 text-[20px]">verified_user</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[14px] font-semibold text-text">Identidad verificada</p>
+                                        <p class="text-[14px] text-text2">Documento validado</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-[#F3F4F6] flex items-center justify-center">
+                                        <span
+                                            class="material-symbols-outlined text-text3 text-[20px]">location_on</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[14px] font-semibold text-text">Vive en La Paz, Bolivia</p>
+                                        <p class="text-[14px] text-text2">Se unió en 2021</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button
+                                        class="ml-0 text-[14px] font-medium text-primary hover:text-hover hover:underline">
+                                        Mostrar el perfil completo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-8 content-block border-b border-divider" style="
+    padding-bottom: 32px;
+">
+                            <h3 class="text-[16px] font-semibold text-text mb-4">Detalles de la reserva</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-[14px] font-semibold text-text">Huéspedes</p>
+                                    <p class="text-[14px] text-text2">1 adulto</p>
+                                </div>
+                                <div>
+                                    <p class="text-[14px] font-semibold text-text">Check-in</p>
+                                    <p class="text-[14px] text-text2">Vie, 30 de ago. de 2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-[14px] font-semibold text-text">Check-out</p>
+                                    <p class="text-[14px] text-text2">Mar, 10 de sep. de 2025</p>
+                                </div>
+                            </div>
+                            <button class="mt-6 text-[14px] font-medium text-primary hover:text-hover hover:underline">
+                                Mostrar el calendario
+                            </button>
+                        </div>
+                        <div class="pt-8 content-block">
+                            <h3 class="text-[16px] font-semibold text-text mb-4">Ganancias potenciales</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-[14px] text-text2">
+                                    <span>1 noche x 120,00 BOB</span>
+                                    <span class="text-text">120,00 BOB</span>
+                                </div>
+                                <div class="flex justify-between text-[14px] text-text2">
+                                    <span>Comisión por servicio de JOM</span>
+                                    <span class="text-red-500">-10,00 BOB</span>
+                                </div>
+                                <div class="flex justify-between pt-3 font-bold">
+                                    <span class="text-[14px] text-text">Total (BOB)</span>
+                                    <span class="text-[20px] font-bold text-text">110,00 BOB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

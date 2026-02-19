@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Componente: Etiquetas de Estado (Badges) - JOM DS v1.1</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #FFFFFF;
+      color: #1F2937;
+    }
+  </style>
+<style data-purpose="component-styles">
+    /* Base Badge Styles adhering to JOM DS v1.1 specs */
+    .jom-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 26px; /* 24-28px range */
+      padding: 0 10px; /* 8-12px range */
+      border-radius: 999px;
+      font-size: 13px; /* 12-14px range */
+      font-weight: 500; /* 500-600 weight */
+      gap: 4px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    
+    .jom-badge-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Color Palettes */
+    .badge-pendiente { background-color: #FEF3C7; color: #92400E; }
+    .badge-aprobada { background-color: #DCFCE7; color: #166534; }
+    .badge-encurso { background-color: #E0F2FE; color: #0369A1; }
+    .badge-proximo { background-color: #F8F9FC; border-color: #E5E7EB; color: #1F2937; }
+    .badge-finalizado { background-color: #EFEEFF; color: #5B55C8; }
+    .badge-cancelado { background-color: #FEE2E2; color: #991B1B; }
+  </style>
+</head>
+<body class="bg-white">
+<!-- BEGIN: MainHeader -->
+<header class="border-b border-gray-100 py-8 px-6 lg:px-12 max-w-7xl mx-auto">
+<div class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Documentación Técnica</span>
+<h1 class="text-3xl font-bold text-gray-900">Componente: Etiquetas de Estado (Badges)</h1>
+<p class="text-gray-500 text-lg">JOM Design System v1.1 • Sistema de reservas y estados</p>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto px-6 lg:px-12 py-12 space-y-20">
+<!-- BEGIN: ColorPaletteSection -->
+<section data-purpose="color-documentation" id="paleta-colores">
+<h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+<span class="w-1 h-6 bg-blue-600 rounded-full"></span>
+        1. Paleta de Colores de Estado
+      </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Pendiente -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">Pendiente</span>
+<span class="text-xs text-gray-400">Warning</span>
+</div>
+<div class="grid grid-cols-3 gap-2 h-12">
+<div class="bg-[#F59E0B] rounded-sm" title="Brand"></div>
+<div class="bg-[#FEF3C7] rounded-sm" title="Surface"></div>
+<div class="bg-[#92400E] rounded-sm" title="Text"></div>
+</div>
+</div>
+<!-- Aprobada -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">Aprobada</span>
+<span class="text-xs text-gray-400">Success Primary</span>
+</div>
+<div class="grid grid-cols-3 gap-2 h-12">
+<div class="bg-[#16A34A] rounded-sm" title="Brand"></div>
+<div class="bg-[#DCFCE7] rounded-sm" title="Surface"></div>
+<div class="bg-[#166534] rounded-sm" title="Text"></div>
+</div>
+</div>
+<!-- En curso -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">En curso</span>
+<span class="text-xs text-gray-400">Success Outline</span>
+</div>
+<div class="grid grid-cols-3 gap-2 h-12">
+<div class="bg-[#0EA5E9] rounded-sm" title="Brand"></div>
+<div class="bg-[#E0F2FE] rounded-sm" title="Surface"></div>
+<div class="bg-[#0369A1] rounded-sm" title="Text"></div>
+</div>
+</div>
+<!-- Próximo -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">Próximo</span>
+<span class="text-xs text-gray-400">Neutral</span>
+</div>
+<div class="grid grid-cols-2 gap-2 h-12">
+<div class="bg-[#F8F9FC] border border-gray-200 rounded-sm" title="Surface"></div>
+<div class="bg-[#1F2937] rounded-sm" title="Text"></div>
+</div>
+</div>
+<!-- Finalizado -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">Finalizado</span>
+<span class="text-xs text-gray-400">Neutral Secondary</span>
+</div>
+<div class="grid grid-cols-3 gap-2 h-12">
+<div class="bg-[#5B55C8] rounded-sm" title="Brand"></div>
+<div class="bg-[#EFEEFF] rounded-sm" title="Surface"></div>
+<div class="bg-[#5B55C8] rounded-sm" title="Text"></div>
+</div>
+</div>
+<!-- Cancelado -->
+<div class="border border-gray-100 p-4 rounded-lg space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm">Cancelado</span>
+<span class="text-xs text-gray-400">Error</span>
+</div>
+<div class="grid grid-cols-3 gap-2 h-12">
+<div class="bg-[#DC2626] rounded-sm" title="Brand"></div>
+<div class="bg-[#FEE2E2] rounded-sm" title="Surface"></div>
+<div class="bg-[#991B1B] rounded-sm" title="Text"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ColorPaletteSection -->
+<!-- BEGIN: SpecificationsSection -->
+<section data-purpose="spec-documentation" id="especificaciones">
+<h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+<span class="w-1 h-6 bg-blue-600 rounded-full"></span>
+        2. Especificaciones del Componente
+      </h2>
+<div class="bg-gray-50 rounded-xl p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-12">
+<div class="space-y-2">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Dimensiones</h4>
+<ul class="text-sm space-y-1 text-gray-700">
+<li><span class="font-medium">Altura:</span> 24px - 28px</li>
+<li><span class="font-medium">Padding horizontal:</span> 8px - 12px</li>
+<li><span class="font-medium">Radio de borde:</span> 999px (Pill)</li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Tipografía</h4>
+<ul class="text-sm space-y-1 text-gray-700">
+<li><span class="font-medium">Fuente:</span> Inter</li>
+<li><span class="font-medium">Tamaño:</span> 12px - 14px</li>
+<li><span class="font-medium">Peso:</span> 500 (Medium) - 600 (Semibold)</li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Elementos Visuales</h4>
+<ul class="text-sm space-y-1 text-gray-700">
+<li><span class="font-medium">Icon size:</span> 16px (24px bounding box)</li>
+<li><span class="font-medium">Icon style:</span> Outline / Stroke 1.5px</li>
+<li><span class="font-medium">Sombreados:</span> No permitidos</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- END: SpecificationsSection -->
+<!-- BEGIN: VariantsSection -->
+<section data-purpose="variant-matrix" id="variantes">
+<h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+<span class="w-1 h-6 bg-blue-600 rounded-full"></span>
+        3. Variantes del Badge
+      </h2>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-gray-400 uppercase border-b border-gray-100">
+<th class="pb-4 font-bold">Estado</th>
+<th class="pb-4 font-bold">Default</th>
+<th class="pb-4 font-bold">Con Icono</th>
+<th class="pb-4 font-bold">Sólo Texto</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<!-- Pendiente -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">Pendiente</td>
+<td class="py-6"><span class="jom-badge badge-pendiente">Pendiente</span></td>
+<td class="py-6">
+<span class="jom-badge badge-pendiente">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Pendiente
+                </span>
+</td>
+<td class="py-6"><span class="text-[#92400E] font-medium text-sm px-2">Pendiente</span></td>
+</tr>
+<!-- Aprobada -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">Aprobada</td>
+<td class="py-6"><span class="jom-badge badge-aprobada">Aprobada</span></td>
+<td class="py-6">
+<span class="jom-badge badge-aprobada">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Aprobada
+                </span>
+</td>
+<td class="py-6"><span class="text-[#166534] font-medium text-sm px-2">Aprobada</span></td>
+</tr>
+<!-- En curso -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">En curso</td>
+<td class="py-6"><span class="jom-badge badge-encurso">En curso</span></td>
+<td class="py-6">
+<span class="jom-badge badge-encurso">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  En curso
+                </span>
+</td>
+<td class="py-6"><span class="text-[#0369A1] font-medium text-sm px-2">En curso</span></td>
+</tr>
+<!-- Próximo -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">Próximo</td>
+<td class="py-6"><span class="jom-badge badge-proximo">Próximo</span></td>
+<td class="py-6">
+<span class="jom-badge badge-proximo">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Próximo
+                </span>
+</td>
+<td class="py-6"><span class="text-[#1F2937] font-medium text-sm px-2">Próximo</span></td>
+</tr>
+<!-- Finalizado -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">Finalizado</td>
+<td class="py-6"><span class="jom-badge badge-finalizado">Finalizado</span></td>
+<td class="py-6">
+<span class="jom-badge badge-finalizado">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Finalizado
+                </span>
+</td>
+<td class="py-6"><span class="text-[#5B55C8] font-medium text-sm px-2">Finalizado</span></td>
+</tr>
+<!-- Cancelado -->
+<tr>
+<td class="py-6 font-medium text-sm text-gray-500 italic">Cancelado</td>
+<td class="py-6"><span class="jom-badge badge-cancelado">Cancelado</span></td>
+<td class="py-6">
+<span class="jom-badge badge-cancelado">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Cancelado
+                </span>
+</td>
+<td class="py-6"><span class="text-[#991B1B] font-medium text-sm px-2">Cancelado</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: VariantsSection -->
+<!-- BEGIN: ContextsSection -->
+<section data-purpose="usage-contexts" id="contextos">
+<h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+<span class="w-1 h-6 bg-blue-600 rounded-full"></span>
+        4. Contextos de Uso
+      </h2>
+<div class="grid grid-cols-1 gap-12">
+<!-- En Tabla -->
+<div class="space-y-4">
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">En Tabla</h3>
+<div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-sm">
+<thead class="bg-gray-50 border-b border-gray-100">
+<tr>
+<th class="px-6 py-4 text-left font-semibold text-gray-600">Referencia</th>
+<th class="px-6 py-4 text-left font-semibold text-gray-600">Cliente</th>
+<th class="px-6 py-4 text-left font-semibold text-gray-600">Fecha</th>
+<th class="px-6 py-4 text-left font-semibold text-gray-600">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr>
+<td class="px-6 py-4 font-mono text-xs text-blue-600">#RSV-2045</td>
+<td class="px-6 py-4 font-medium">Carlos Martínez</td>
+<td class="px-6 py-4 text-gray-500">24 May 2024</td>
+<td class="px-6 py-4"><span class="jom-badge badge-aprobada">Aprobada</span></td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-mono text-xs text-blue-600">#RSV-2046</td>
+<td class="px-6 py-4 font-medium">Elena Rivas</td>
+<td class="px-6 py-4 text-gray-500">25 May 2024</td>
+<td class="px-6 py-4"><span class="jom-badge badge-pendiente">Pendiente</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- En Card -->
+<div class="space-y-4">
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">En Card</h3>
+<div class="w-full max-w-sm border border-gray-100 rounded-2xl overflow-hidden relative group">
+<div class="h-48 bg-gray-200 overflow-hidden relative">
+<img alt="Propiedad" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqSwHPxdBWw0Ox91I1nYyMTN_PTyKhFYpGjQklQoqAR6YJYOnBPrEFmI1tnGk8skL-ODCMNZDgZsp9EyoNXuBxqRNVNcfHJB003LESLqiyw3drRZEDwgmc-K7ONq5mhdz7aEWUxBAOghF0K4idmi75jevCGrFDMQm3eR3R-BZHWsjxeMkVqr0MM6v4sZlSv5h12UcU2ZVtWH8tmaD8m0X4k3bxdCL9XeNtHtwr6ScjfNyOtrfKAV1bZT88tH4Dowjg0j5rzJzKXik1"/>
+<!-- Floating Badge -->
+<div class="absolute top-4 left-4">
+<span class="jom-badge badge-encurso shadow-sm bg-white/90 backdrop-blur-sm">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    En curso
+                  </span>
+</div>
+</div>
+<div class="p-5 space-y-2">
+<h4 class="font-bold text-lg">Reserva Suite Familiar</h4>
+<p class="text-gray-500 text-sm">Check-out: Hoy, 12:00 PM</p>
+</div>
+</div>
+</div>
+<!-- En Detalle -->
+<div class="space-y-4">
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">En Detalle</h3>
+<div class="p-8 border border-gray-100 rounded-2xl space-y-6">
+<div class="flex items-center gap-4">
+<h2 class="text-2xl font-bold text-gray-900">Detalle Reserva #440</h2>
+<span class="jom-badge badge-proximo text-sm px-3">Próximo</span>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-50">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Inicio</p>
+<p class="font-medium">15 Jun, 2024</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Huéspedes</p>
+<p class="font-medium">2 Adultos</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Vista Mobile -->
+<div class="space-y-4">
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Vista Mobile</h3>
+<div class="w-[375px] mx-auto md:mx-0 border-x border-t border-gray-200 rounded-t-[32px] overflow-hidden bg-gray-50 h-[300px]">
+<div class="bg-white p-6 mt-12 rounded-t-[24px] shadow-sm h-full">
+<div class="flex justify-between items-start mb-6">
+<div class="space-y-1">
+<p class="text-xs text-gray-400 font-medium">Tu estancia</p>
+<h4 class="font-bold text-lg leading-tight">Hotel Boutique Palma</h4>
+</div>
+<span class="jom-badge badge-aprobada">
+<svg class="jom-badge-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Confirmada
+                </span>
+</div>
+<button class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl text-sm">Ver Itinerario</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ContextsSection -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="max-w-7xl mx-auto px-6 lg:px-12 py-12 border-t border-gray-100 mt-20 flex justify-between items-center text-sm text-gray-400">
+<p>© 2024 JOM Hospitality Group - Design System v1.1</p>
+<div class="flex gap-4">
+<a class="hover:text-blue-600" href="#">Guía de Estilo</a>
+<a class="hover:text-blue-600" href="#">Componentes</a>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

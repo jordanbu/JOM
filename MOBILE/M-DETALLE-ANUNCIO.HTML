@@ -69,7 +69,7 @@
 </head>
 
 <body class="bg-white">
-    <header class="w-full border-b border-neutral-border h-14 md:h-20 bg-white sticky top-0 z-50">
+    <header class="hidden md:block w-full border-b border-neutral-border h-14 md:h-20 bg-white sticky top-0 z-50">
         <div class="max-w-[1200px] mx-auto px-4 md:px-8 h-full flex items-center justify-between">
             <div class="flex items-center">
                 <button onclick="history.back()" class="w-9 h-9 flex items-center justify-center mr-2 active:scale-90 transition-transform">
@@ -88,21 +88,27 @@
             </div>
         </div>
     </header>
-    <main class="pb-24 lg:pb-16">
+    <main class="pb-28 lg:pb-16">
         <div>
             <!-- Mobile: 1 foto pantalla completa -->
-            <div class="md:hidden relative w-full h-[60vh]">
+            <div class="md:hidden relative w-full h-[30vh]">
                 <img alt="Main Photo" class="w-full h-full object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
-                <!-- Botones sobre la foto -->
-                <div class="absolute top-4 right-4 flex items-center gap-2">
-                    <button class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg active:scale-90 transition-transform">
-                        <span class="material-symbols-outlined text-neutral-text text-[20px]">share</span>
-                    </button>
-                    <button class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg active:scale-90 transition-transform">
-                        <span class="material-symbols-outlined text-neutral-text text-[20px]">favorite_border</span>
-                    </button>
-                </div>
+                    <!-- Flecha de volver dentro de la imagen (móvil) -->
+                    <div class="absolute top-4 left-4">
+                        <button onclick="history.back()" class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                            <span class="material-symbols-outlined text-neutral-text text-[20px]">arrow_back</span>
+                        </button>
+                    </div>
+                    <!-- Botones sobre la foto -->
+                    <div class="absolute top-4 right-4 flex items-center gap-2">
+                        <button class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                            <span class="material-symbols-outlined text-neutral-text text-[20px]">share</span>
+                        </button>
+                        <button class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                            <span class="material-symbols-outlined text-neutral-text text-[20px]">favorite_border</span>
+                        </button>
+                    </div>
             </div>
 
             <!-- Título mobile (debajo de la foto) -->
@@ -116,6 +122,7 @@
                     <h1 class="text-[22px] md:text-[28px] font-semibold text-neutral-text leading-tight">Tarija Hermosa Casa - Tarija, Bolivia</h1>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 md:h-[400px] h-auto mb-8 rounded-2xl overflow-hidden">
+        <!-- Fixed bottom bar: price + CTA (mobile) - removed from here and placed at document end for correct stacking -->
                 <div class="md:col-span-2 md:row-span-2 col-span-1 row-span-1">
                     <img alt="Main Photo" class="w-full md:h-full h-56 object-cover"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" />
@@ -217,81 +224,10 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full lg:w-[360px] shrink-0 fixed lg:relative bottom-0 left-0 right-0 lg:bottom-auto lg:left-auto lg:right-auto z-40 bottom-sheet">
-                <div class="lg:sticky lg:top-28 bg-white border-t lg:border border-neutral-border lg:rounded-card shadow-2xl lg:shadow-sm" style="max-height: 85vh;">
-                    <!-- Header del bottom sheet (solo visible en mobile) -->
-                    <div onclick="toggleReserva()" class="lg:hidden flex items-center justify-between px-4 py-4 cursor-pointer active:bg-neutral-bg transition-colors">
-                        <div class="flex items-center gap-3">
-                            <div>
-                                <div class="flex items-baseline gap-1">
-                                    <span class="text-[18px] font-bold text-neutral-text">600 BOB</span>
-                                    <span class="text-[12px] text-neutral-secondary">/noche</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="h-10 px-6 bg-primary text-white text-[14px] font-semibold rounded-jom hover:bg-ui-primary-hover transition-colors">
-                            Reservar
-                        </button>
-                    </div>
-                    
-                    <!-- Contenido del panel -->
-                    <div class="content-wrapper p-6">
-                    <div class="flex justify-between items-start mb-6 hidden lg:flex">
-                        <div class="flex flex-col gap-2">
-                            <div>
-                                <span class="text-[20px] font-bold text-neutral-text">600 BOB</span>
-                                <span class="text-[14px] text-neutral-secondary">/noche</span>
-                            </div>
-                            <div
-                                class="inline-flex items-center gap-1 bg-soft-highlight text-primary px-2 py-0.5 rounded-lg text-[13px] font-bold w-fit">
-                                <span class="material-symbols-outlined text-[12px]"
-                                    style="font-variation-settings: 'FILL' 1">star</span>
-                                4.0 (2)
-                            </div>
-                        </div>
-                        <img alt="Host Avatar" class="size-10 rounded-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
-                    </div>
-                    <div class="border border-neutral-border rounded-jom overflow-hidden mb-6">
-                        <div class="grid grid-cols-2 border-b border-neutral-border">
-                            <div
-                                class="flex items-center gap-3 p-4 border-r border-neutral-border min-h-[56px]">
-                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
-                                <div class="flex flex-col justify-center">
-                                    <label
-                                        class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Llegada</label>
-                                    <div class="text-[14px] text-neutral-text">22 ene 2026</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 p-4 min-h-[56px]">
-                                <span class="material-symbols-outlined text-neutral-secondary text-[20px]">calendar_today</span>
-                                <div class="flex flex-col justify-center">
-                                    <label
-                                        class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Salida</label>
-                                    <div class="text-[14px] text-neutral-text">28 ene 2026</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 p-4 min-h-[56px]">
-                            <span class="material-symbols-outlined text-neutral-secondary text-[20px]">group</span>
-                            <div class="flex flex-col justify-center">
-                                <label
-                                    class="block text-[10px] font-bold uppercase text-neutral-secondary mb-1">Huéspedes</label>
-                                <div class="text-[14px] text-neutral-text">1 viajeros</div>
-                            </div>
-                        </div>
-                    </div>
-                    <button
-                        class="w-full h-12 bg-primary text-white text-[16px] font-semibold rounded-jom hover:bg-ui-primary-hover transition-colors duration-200 mb-4">
-                        Comprobar disponibilidad
-                    </button>
-                    <p class="text-center text-[14px] text-neutral-secondary">No se te cobrará nada todavía</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Mobile booking bottom-sheet replaced by fixed bottom bar for consistent layout -->
         </div>
         <div class="border-t border-neutral-border pt-12">
-            <div class="mb-12" id="reviews">
+            <div class="mb-12 px-4 md:px-0" id="reviews">
                 <h3 class="text-[18px] font-semibold text-neutral-text mb-8 flex items-center gap-2">
                     <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-soft-highlight material-symbols-outlined text-[18px] text-primary"
                         style="font-variation-settings: 'FILL' 1">star</span>
@@ -323,7 +259,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-12">
+            <div class="mb-12 px-4 md:px-0">
                 <h3 class="text-[18px] font-semibold text-neutral-text mb-6">Ubicación: Tarija, Bolivia</h3>
                 <div class="w-full h-[400px] bg-neutral-bg rounded-2xl overflow-hidden relative">
                     <div class="absolute inset-0 flex items-center justify-center bg-neutral-100">
@@ -331,16 +267,16 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-12">
+            <div class="mb-12 px-4 md:px-0">
                 <h3 class="text-[18px] font-semibold text-neutral-text mb-8">Conoce al anfitrión</h3>
                 <div
                     class="bg-white rounded-card flex flex-col md:flex-row md:justify-start gap-8">
                     <div
-                        class="w-full md:w-96 bg-white border border-neutral-border rounded-2xl p-8" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
+                        class="w-full md:w-96 bg-white border border-neutral-border rounded-2xl p-6 md:p-8" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">
                         <div class="flex flex-row items-center gap-8">
-                            <div class="flex flex-col items-center min-w-[160px]">
+                            <div class="flex flex-col items-center min-w-0 w-24 md:w-40 flex-shrink-0">
                                 <div class="relative mb-2">
-                                    <img alt="Franz Iriarte" class="size-40 rounded-full object-cover border-4 border-[#EFEEFF] shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
+                                    <img alt="Franz Iriarte" class="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#EFEEFF] shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" />
                                     <div class="absolute bottom-1 right-1 w-12 h-12 flex items-center justify-center">
                                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
                                             <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" fill="white"/>
@@ -403,7 +339,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-12 border-t border-neutral-border pt-12">
+            <div class="mb-12 border-t border-neutral-border pt-12 px-4 md:px-0">
                 <h2 class="text-[18px] font-semibold text-neutral-text mb-8">Cosas que debes saber</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>
@@ -454,6 +390,24 @@
             </div>
         </div>
     </main>
+    <!-- Fixed bottom bar: mobile only -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-border safe-area-bottom z-50 bottom-bar-shadow block md:hidden">
+        <div class="max-w-[760px] mx-auto w-full px-4 py-3 flex items-center justify-between">
+            <div class="flex flex-col min-w-0">
+                <div class="flex items-baseline gap-1">
+                    <span class="text-[20px] font-bold text-neutral-text whitespace-nowrap">600 BOB</span>
+                    <span class="text-sm text-neutral-secondary">/noche</span>
+                </div>
+                <p class="text-[14px] text-neutral-secondary font-medium truncate">22 ene - 28 ene</p>
+            </div>
+            <a href="solicitud_reserva_1.html" class="block">
+                <button class="h-[48px] px-5 bg-primary text-white rounded-jom font-bold text-[16px] active:scale-95 transition-transform shrink-0 ml-4 flex items-center justify-center">
+                    Solicitud de reserva
+                </button>
+            </a>
+        </div>
+    </div>
+
     <footer
         class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
         <div class="max-content-width">

@@ -1,0 +1,165 @@
+-
+📱 M-CONFIGURACION.HTML - DESCRIPCIÓN MOBILE RESUMIDA
+-
+
+HEADER/NAV STICKY
+-
+Altura: 56px móvil (h-14), 80px desktop (md:h-20)
+Logo: SVG 24px + texto "jom" 20-24px púrpura #5B55C8
+Fondo: blanco #FFFFFF | Borde: #E5E7EB | Padding: 16px
+Z-index: 50 | Maquetación: flex justify-between
+
+BOTONES HEADER:
+- Idioma: oculto en móvil (hidden md:flex) | Texto 12px
+- Notificaciones: 22px móvil, 24px desktop con badge púrpura
+- Perfil: Avatar 36px circular + dropdown menu
+
+BADGE NOTIFICACIONES:
+- Tamaño: 16px × 16px circular
+- Fondo: púrpura #5B55C8
+- Texto: blanco, 10px, bold
+- Posición: -top-1 -right-1 (esquina superior derecha)
+- Border: 2px blanco
+
+
+DROPDOWN MENU (Profile)
+-
+Ancho: 288px (w-72) | Border-radius: 16px | Z-index: 60
+Fondo: blanco | Sombra: dropout (0 20px 25px -5px)
+Padding: 12px (py-3)
+Comportamiento: opacity-0 invisible por defecto → visible en hover
+Transición: 200ms, scale 95% → 100%
+Origen: top-right
+
+DROPDOWN ITEMS:
+- Altura: 48px
+- Padding: 0 20px
+- Gap icon-texto: 12px
+- Texto: 14px, weight 500, gris oscuro #1F2937
+- Ícono: 20px, gris secundario #6B7280
+- Border-left: 3px transparent (hover: púrpura #5B55C8)
+- Hover: fondo púrpura claro #EFEEFF, texto púrpura, ícono púrpura
+- Transición: 0.2s ease
+
+
+TÍTULO PÁGINA
+-
+Texto: "Configuración de la cuenta"
+Tamaño: 20px móvil, 28px desktop
+Peso: semibold (600)
+Color: gris oscuro #1F2937
+Margin abajo: 24px móvil, 32px desktop
+
+
+LAYOUT PRINCIPAL
+-
+Estructura: flex flex-col md:flex-row (stacked móvil, lado a lado desktop)
+Gap: 24px móvil (gap-6), 48px desktop (md:gap-12)
+Padding: 24px arriba móvil, 64px desktop
+Items align: items-start
+
+
+SIDEBAR NAVEGACIÓN
+-
+Ancho: 100% móvil, 320px desktop (md:w-80)
+Posición desktop: sticky top-20
+Card border: 1px #E5E7EB
+Border-radius: 16px
+Padding: 16px móvil, 24px desktop
+Sombra: shadow-sm
+
+NAV ITEMS (LINKS):
+- Estructura: flex gap-3 items-center
+- Padding: 10px-12px móvil (py-2.5), 12px-16px desktop (py-3)
+- Padding horizontal: 12px-16px (px-3 md:px-4)
+- Texto: 14px móvil, 15px desktop
+- Ícono: 20px
+- Border-radius: 12px (rounded-jom)
+- Transición: colors 200ms, scale 95% active
+
+ITEM ACTIVO:
+- Fondo: púrpura claro #F3F4F6 (soft-highlight)
+- Texto: púrpura #5B55C8 (primary)
+- Peso: medium (500)
+
+ITEM INACTIVO:
+- Texto: gris oscuro #1F2937
+- Hover: fondo gris muy claro #F8F9FC (neutral-bg)
+- Transición: colors
+
+ITEMS EN SIDEBAR:
+1. Información personal (activo por defecto)
+2. Inicio de sesión y seguridad
+3. Pagos
+4. Historial de notificaciones (con ícono bell)
+
+
+COLORES MÓVIL
+-
+PRIMARIOS:
+- Púrpura: #5B55C8
+- Púrpura Hover: #4A45B0
+- Púrpura Claro (soft): #F3F4F6
+
+NEUTRALES:
+- Gris Oscuro (texto): #1F2937
+- Gris Medio: #6B7280
+- Gris Claro: #E5E7EB
+- Gris Muy Claro: #F8F9FC
+- Blanco: #FFFFFF
+
+SEMÁNTICOS:
+- Dorado: #FDB022
+- Gold para acentos premium
+
+
+TAMAÑOS MÓVIL
+-
+TIPOGRAFÍA:
+- Título página: 20px → 28px desktop (semibold)
+- Botón header: 14px | Nav items: 14px → 15px
+- Texto pequeño: 12px
+
+COMPONENTES:
+- Header altura: 56px → 80px
+- Avatar: 36px circular
+- Ícono: 20px → 24px
+- Badge: 16px circular
+- Sidebar ancho: 320px (desktop)
+
+ESPACIADO:
+- Header padding: 16px
+- Sidebar padding: 16px → 24px
+- Item padding: 10px vert, 12px horiz → 12px vert, 16px horiz
+- Gap items: 12px
+- Main padding: 24px → 64px desktop
+
+
+INTERACTIVIDAD
+-
+HOVER:
+- Nav items: fondo gris #F8F9FC
+- Dropdown: opacity 0 → 1, scale 95% → 100%
+- Texts: color change a púrpura #5B55C8
+
+ACTIVE:
+- Botones y nav: scale-95 (encogen 5%)
+- Transición: 200ms
+
+TRANSICIONES:
+- Duration: 200ms-300ms
+- Tipos: transition-colors, transition-transform, transition-all
+
+
+CARACTERÍSTICAS CLAVE
+-
+✔ Sidebar sticky en desktop (top-20)
+✔ Dropdown menu con hover smooth
+✔ Badge notificaciones con contador
+✔ Nav items con active highlight púrpura
+✔ Responsive: stacked móvil, layout lado-a-lado desktop
+✔ Items 48px touch-friendly
+✔ Transiciones suaves 200ms
+✔ Alto contraste accesible
+✔ Ícono avatar circular
+✔ Separadores entre dropdown items

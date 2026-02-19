@@ -121,6 +121,36 @@
         .register-sheet.active {
             transform: translateY(0);
         }
+
+        .dropdown-menu {
+            position: fixed;
+            top: 0;
+            right: -50%;
+            width: 50%;
+            height: 100vh;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            z-index: 999;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-menu.active {
+            right: 0;
+        }
+        .dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+        }
+        .dropdown-overlay.active {
+            display: block;
+        }
     </style>
 </head>
 
@@ -133,9 +163,57 @@
                 <button onclick="openLoginModal()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
                     <span class="material-symbols-outlined text-neutral-text">account_circle</span>
                 </button>
-                <button onclick="toggleMenu()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
-                    <span class="material-symbols-outlined text-neutral-text">menu</span>
-                </button>
+                <div class="relative">
+                    <button onclick="toggleMenu()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
+                        <span class="material-symbols-outlined text-neutral-text">menu</span>
+                    </button>
+                    <div id="dropdown-overlay" class="dropdown-overlay" onclick="closeMenu()"></div>
+                    <div id="dropdown-menu" class="dropdown-menu">
+                        <!-- SECCIÓN PERFIL -->
+                        <div class="p-4 border-b border-neutral-border">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-neutral-bg overflow-hidden flex-shrink-0">
+                                    <img alt="User avatar" class="w-full h-full object-cover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                                </div>
+                                <div class="text-left">
+                                    <p class="text-sm font-semibold text-neutral-text">Jordan</p>
+                                    <p class="text-xs text-neutral-secondary">jordan@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- OPCIONES DEL MENÚ -->
+                        <div class="py-2">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-neutral-text hover:bg-neutral-bg transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">payment</span>
+                                <span>Pagos</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-neutral-text hover:bg-neutral-bg transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">settings</span>
+                                <span>Configuración de la cuenta</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-neutral-text hover:bg-neutral-bg transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">person</span>
+                                <span>Ser un huésped</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-neutral-text hover:bg-neutral-bg transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">apartment</span>
+                                <span>Publicar espacio en JOM</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-neutral-text hover:bg-neutral-bg transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">help</span>
+                                <span>Centro de ayuda</span>
+                            </a>
+                        </div>
+                        <!-- CERRAR SESIÓN -->
+                        <div class="border-t border-neutral-border py-2">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-red-600 hover:bg-red-50 transition-colors text-sm">
+                                <span class="material-symbols-outlined text-[20px]">logout</span>
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -372,89 +450,6 @@
         </div>
     </main>
 
-    <!-- Menu Sidebar (slides from right, covers 3/4 of screen) -->
-    <div id="menuOverlay" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-black/40" onclick="toggleMenu()"></div>
-        <div class="menu-sidebar absolute top-0 right-0 bottom-0 w-3/4 max-w-sm bg-white shadow-2xl overflow-y-auto">
-            <div class="sticky top-0 bg-white border-b border-neutral-border z-10">
-                <div class="flex items-center justify-between p-4">
-                    <div class="text-primary font-bold text-xl">jom</div>
-                    <button onclick="toggleMenu()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="p-6 space-y-6">
-                <!-- User Section -->
-                <button onclick="openLoginModal(); toggleMenu();" class="w-full flex items-center gap-4 pb-4 text-left">
-                    <div class="w-14 h-14 bg-neutral-bg rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined text-3xl text-neutral-secondary">account_circle</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-neutral-text">Iniciar sesión</p>
-                        <p class="text-sm text-neutral-secondary">Gestiona tu cuenta</p>
-                    </div>
-                </button>
-                
-                <!-- Register Button -->
-                <button onclick="openRegisterModal(); toggleMenu();" class="w-full flex items-center gap-4 pb-6 border-b border-neutral-border text-left">
-                    <div class="w-14 h-14 bg-neutral-bg rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined text-3xl text-neutral-secondary">person_add</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-neutral-text">Registrarse</p>
-                        <p class="text-sm text-neutral-secondary">Crea tu cuenta gratis</p>
-                    </div>
-                </button>
-
-                <!-- Main Menu -->
-                <nav class="space-y-1">
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">home</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Inicio</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">search</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Explorar</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">favorite_border</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Favoritos</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">event</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Mis viajes</span>
-                    </a>
-                </nav>
-
-                <div class="border-t border-neutral-border pt-4 space-y-1">
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">settings</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Configuración</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">help</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Ayuda</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
-                        <span class="material-symbols-outlined text-neutral-text">language</span>
-                        <span class="text-[15px] font-medium text-neutral-text">Idioma: Español (BO)</span>
-                    </a>
-                </div>
-
-                <!-- Host Section -->
-                <div class="bg-soft-highlight rounded-card p-4 space-y-2">
-                    <h3 class="font-semibold text-neutral-text">¿Quieres ser anfitrión?</h3>
-                    <p class="text-sm text-neutral-secondary">Comparte tu espacio y comienza a ganar dinero</p>
-                    <button class="w-full bg-primary text-white py-2.5 rounded-jom font-medium hover:bg-ui-primary-hover transition-colors">
-                        Comenzar ahora
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Register Modal -->
     <div id="registerModal" class="fixed inset-0 z-[100] hidden">
         <div class="fixed inset-0 backdrop-blur-xl bg-black/40" onclick="closeRegisterModal()"></div>
@@ -648,21 +643,32 @@
 
         // Menu Sidebar
         function toggleMenu() {
-            const overlay = document.getElementById('menuOverlay');
-            const sidebar = overlay.querySelector('.menu-sidebar');
-            
-            if (overlay.classList.contains('hidden')) {
-                overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    sidebar.classList.add('active');
-                }, 10);
-            } else {
-                sidebar.classList.remove('active');
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 300);
-            }
+            const menu = document.getElementById('dropdown-menu');
+            const overlay = document.getElementById('dropdown-overlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
         }
+
+        function closeMenu() {
+            const menu = document.getElementById('dropdown-menu');
+            const overlay = document.getElementById('dropdown-overlay');
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Cerrar el menú cuando se hace clic en un enlace dentro del menú
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('#dropdown-menu a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Cerrar el menú cuando se presiona Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMenu();
+                }
+            });
+        });
 
         function openSearchModal() {
             alert('Abrir modal de búsqueda');

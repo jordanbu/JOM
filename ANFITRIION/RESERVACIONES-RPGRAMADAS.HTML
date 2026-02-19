@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Host Dashboard - Hoy</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-light": "#F8F9FC",
+                        "background-dark": "#0F172A",
+                        secondary: "#6B7280",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'large': "16px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-item-active {
+            color: #5B55C8;
+            font-weight: 600;
+        }
+        .sidebar-item-active .material-symbols-outlined {
+            color: #5B55C8;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <header
+        class="h-16 w-full flex items-center justify-between px-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs">jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español (BO)</span>
+            </div>
+            <button class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+            </button>
+            <div
+                class="flex items-center gap-2 p-1 pl-3 border border-slate-200 dark:border-slate-700 rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">menu</span>
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex pt-16">
+        <aside
+            class="fixed left-0 top-16 h-[calc(100vh-64px)] w-[240px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-40">
+            <nav class="px-4 py-6 space-y-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active bg-slate-50 dark:bg-slate-800/50"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    <span class="text-[14px]">Hoy</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">campaign</span>
+                    <span class="text-[14px]">Anuncios</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <span class="text-[14px]">Calendario</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                    <span class="text-[14px]">Mensajería</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                    <span class="text-[14px]">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+        <main class="ml-[240px] w-full min-h-[calc(100vh-64px)]">
+            <div class="max-w-[1360px] mx-auto p-12">
+                <div class="flex justify-center mb-12">
+                    <div
+                        class="bg-white dark:bg-slate-800 p-1.5 rounded-full border border-slate-200 dark:border-slate-700 inline-flex items-center">
+                        <button
+                            class="px-8 py-2.5 text-secondary dark:text-slate-400 font-medium text-sm hover:text-slate-900 dark:hover:text-white transition-all">
+                            Hoy
+                        </button>
+                        <button
+                            class="px-8 py-2.5 bg-primary text-white rounded-full font-medium text-sm transition-all">
+                            Reservaciones programadas
+                        </button>
+                    </div>
+                </div>
+                <!-- Sección de solicitudes eliminada para la vista de reservaciones programadas -->
+                <section class="mb-12">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-[18px] font-semibold">Reservaciones</h2>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-large overflow-hidden">
+                        <table class="w-full text-left">
+                            <thead
+                                class="bg-[#F8F9FC] dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <tr>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Estado</th>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Huésped</th>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Llegada/salida</th>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Reservado</th>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Inmueble</th>
+                                    <th class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider">
+                                        Código</th>
+                                    <th
+                                        class="px-6 py-4 text-[14px] font-medium text-secondary tracking-wider text-right">
+                                        Total</th>
+                                    <th class="px-6 py-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-slate-100 dark:bg-slate-800 text-secondary dark:text-slate-400 px-3 py-1 rounded-full text-[12px] font-normal">Próximo</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-[14px] font-[600] text-secondary">Javier Vargas</div>
+                                        <div class="text-[14px] text-secondary">1 Adulto</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary">
+                                        <div class="font-normal">20 may 2026</div>
+                                        <div class="text-secondary">21 may 2026</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary">
+                                        <div class="font-normal">20 ene 2026</div>
+                                        <div class="text-secondary text-[14px]">00:23 a.m.</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary max-w-[200px] truncate">
+                                        Pruebas de publicación...
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] font-mono text-secondary">
+                                        0000010299
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] font-[600] text-right">
+                                        $264.50
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-[14px] font-normal hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                            Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-slate-100 dark:bg-slate-800 text-secondary dark:text-slate-400 px-3 py-1 rounded-full text-[12px] font-normal">Próximo</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-[14px] font-[600] text-secondary">Javier Vargas</div>
+                                        <div class="text-[14px] text-secondary">1 Adulto</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary">
+                                        <div class="font-normal">6 may 2026</div>
+                                        <div class="text-secondary">7 may 2026</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary">
+                                        <div class="font-normal">20 ene 2026</div>
+                                        <div class="text-secondary text-[14px]">00:12 a.m.</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] text-secondary max-w-[200px] truncate">
+                                        Pruebas de publicación...
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] font-mono text-secondary">
+                                        0000010298
+                                    </td>
+                                    <td class="px-6 py-4 text-[14px] font-[600] text-right">
+                                        $264.50
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-[14px] font-normal hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                            Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 'Ver todas las reservaciones' eliminado en la vista de reservaciones programadas -->
+                </section>
+
+            </div>
+        </main>
+    </div>
+    <button
+        class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform active:scale-95 z-[100]"
+        onclick="document.documentElement.classList.toggle('dark')">
+        <span class="material-symbols-outlined">dark_mode</span>
+    </button>
+
+</body>
+
+</html>

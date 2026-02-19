@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b55c8",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14141e",
+                        "success": "#16A34A"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            animation: page-enter 200ms ease;
+        }
+
+        .page-exit {
+            animation: page-exit 200ms ease forwards;
+        }
+
+        @keyframes page-enter {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes page-exit {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-[#111018] dark:text-white">
+    <div
+        class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-background-dark shadow-xl overflow-hidden">
+        <div class="flex items-center p-4 justify-between sticky top-0 bg-white dark:bg-background-dark z-10">
+            <div class="text-[#111018] dark:text-white flex size-12 shrink-0 items-center justify-start">
+                <span class="material-symbols-outlined text-2xl cursor-pointer">close</span>
+            </div>
+            <div class="flex-grow"></div>
+        </div>
+        <main class="flex-1 flex flex-col items-center px-6 pt-10 pb-24 overflow-y-auto">
+            <div class="mb-6 flex items-center justify-center bg-success/10 rounded-full p-6">
+                <span class="material-symbols-outlined text-success text-[64px] leading-none"
+                    style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;">
+                    check_circle
+                </span>
+            </div>
+            <div class="text-center mb-3">
+                <h1 class="text-[#111018] dark:text-white text-[28px] font-semibold leading-tight px-4">
+                    ¡Reserva confirmada!
+                </h1>
+            </div>
+            <div class="text-center mb-8">
+                <p class="text-[#111018] dark:text-gray-300 text-base font-normal leading-relaxed px-2">
+                    Se realizó el pago de manera correcta. Tu reservación para <span class="font-semibold">"Dpto. a
+                        estrenar en Asunción"</span> ha sido confirmada con éxito y ya puedes prepararte para tu viaje.
+                </p>
+            </div>
+            <div class="w-full p-4 border border-[#E5E7EB] dark:border-gray-700 rounded-2xl bg-white dark:bg-[#1f1f2e]">
+                <div class="flex items-center justify-between gap-4">
+                    <div class="flex flex-col gap-2 flex-1">
+                        <p class="text-[#5e5c8a] dark:text-gray-400 text-xs font-bold uppercase tracking-wider">RESUMEN
+                            DE LA RESERVA</p>
+                        <div class="flex flex-col gap-0.5">
+                            <p class="text-[#111018] dark:text-white text-lg font-semibold leading-tight">6 - 8 de feb
+                                de 2026</p>
+                            <p class="text-[#5e5c8a] dark:text-gray-400 text-base font-medium">Total pagado: 800 BOB</p>
+                        </div>
+                    </div>
+                    <div class="w-24 h-24 bg-center bg-no-repeat bg-cover rounded-xl" data-alt="Apartment photo"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjOIUs7262U2JYMMErqWIGYUt-zT5zwbBWgR7bN-l3Wyeyz0r9G2B3ugoCdbfUb8VPmGST0HldVSwuXtcixPM1s39CTote9krREPEIHbNcrNSJiU4ssyCFMrU3lT1TpD_0SfVlekPHz_UpgjCxSUNLr8qTzsFi4xZhAnUYrVu-_xgRvVOT22Hrc_1zfghblUXSIuM0PxwapzDL1cr4_IvVtgFc_UcTf52oBDo438lk4KgnlVwe00weIMgbp7MB18xF9xrM8mbydK4");'>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 flex flex-col items-center gap-2">
+                <div class="flex items-center gap-2 text-success">
+                    <span class="material-symbols-outlined text-[18px]">event_available</span>
+                    <span class="text-sm font-medium">Reserva confirmada y lista</span>
+                </div>
+            </div>
+        </main>
+        <footer
+            class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-md p-6 pb-8 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex flex-col gap-4">
+                <button
+                    class="w-full h-12 bg-primary hover:bg-[#4a45a3] text-white font-semibold rounded-xl transition-colors">
+                    Ir a mis viajes
+                </button>
+                <div class="text-center">
+                    <a class="text-primary text-[14px] font-medium hover:underline" href="#">
+                        Volver al inicio
+                    </a>
+                </div>
+            </div>
+            <div class="h-2"></div>
+        </footer>
+    </div>
+    <script>
+        function goTo(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 200);
+        }
+    </script>
+
+
+</body>
+
+</html>

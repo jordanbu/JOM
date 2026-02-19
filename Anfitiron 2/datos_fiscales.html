@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Impuestos Datos Fiscales</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#0F172A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "8px",
+                        'xl': '16px',
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+  animation: page-enter 200ms ease;
+}
+
+.page-exit {
+  animation: page-exit 200ms ease forwards;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .form-input-height {
+            height: 44px;
+        }
+        .btn-primary-height {
+            height: 48px;
+        }
+    </style>
+</head>
+<script>
+    function goTo(url) {
+        document.body.classList.add('page-exit');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 200);
+    }
+</script>
+
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
+    <header
+        class="fixed top-0 w-full h-16 bg-white dark:bg-surface-dark border-b border-slate-200 dark:border-slate-800 z-50 flex items-center justify-between px-6">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">j
+            </div>
+            <span class="text-xl font-bold tracking-tight text-primary">jom</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <button
+                class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">language</span>
+                Español (BO)
+            </button>
+            <div class="relative">
+                <span
+                    class="material-symbols-outlined text-slate-600 dark:text-slate-400 cursor-pointer hover:text-primary transition-colors">notifications</span>
+                <span
+                    class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white dark:border-surface-dark font-bold">3</span>
+            </div>
+            <div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-700">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjG4mIFq05dIGjy1mbOKxmNN7nExoBzEJfg2mn0OFi-LFVcFCmWjlgAOxLgqhMHkEjJqvm7n64P7gl5myIKCjiZ2nA5owmv06-64B7X3EYeQvnekGcYny3BhIt4EAnjCVemQvVg3doox7PveG0nuy-BGuJYv6VyD9I_uCUlAThg3KsjoqUHR1bbMCyAMPXfzy1VWAHGTth43kXeVah7OquLr2gXQE4KgF5jEQ4fdrVpbGgpxvH-L-aQmqgR-krHv1krlruPUrg9rty" />
+                </div>
+                <span class="material-symbols-outlined text-slate-400 cursor-pointer">menu</span>
+            </div>
+        </div>
+    </header>
+    <div class="flex pt-16">
+        <aside
+            class="fixed left-0 w-72 h-[calc(100vh-64px)] bg-white dark:bg-surface-dark border-r border-slate-200 dark:border-slate-800 p-4 space-y-2 overflow-y-auto">
+            <nav class="space-y-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">person</span>
+                    <span class="text-sm font-medium">Información personal</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">security</span>
+                    <span class="text-sm font-medium">Inicio de sesión y seguridad</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="text-sm font-medium">Pagos</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">notifications_active</span>
+                    <span class="text-sm font-medium">Historial de notificaciones</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-primary/10 text-primary transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span class="text-sm font-bold">Impuestos</span>
+                </a>
+            </nav>
+        </aside>
+        <main class="ml-72 flex-1 p-8">
+            <div class="max-w-3xl mx-auto">
+                <header class="mb-6">
+                    <div class="mb-6">
+                        <h1 class="text-[18px] font-semibold text-slate-900 dark:text-white">Impuestos</h1>
+                        <p class="text-sm text-slate-500 mt-1">Gestiona tu información fiscal para la emisión de
+                            facturas legales en Bolivia.</p>
+                    </div>
+                    <div class="flex gap-8 border-b border-slate-200 dark:border-slate-800">
+                        <button onclick="goTo('Flujos_impuestos.html')"
+                            class="pb-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+                            Facturación
+                        </button>
+                        <button class="pb-3 text-sm font-semibold text-primary border-b-2 border-primary">
+                            Datos fiscales
+                        </button>
+                    </div>
+                </header>
+                <div
+                    class="bg-white dark:bg-surface-dark border border-[#E5E7EB] dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div
+                        class="flex items-center gap-2 mb-8 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900/30 p-3 rounded-lg">
+                        <span class="material-symbols-outlined text-[#16A34A] !fill-1">check_circle</span>
+                        <span class="text-sm font-medium text-emerald-800 dark:text-emerald-400">Datos fiscales
+                            completos</span>
+                    </div>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Tipo de
+                                persona</label>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input checked="" class="w-4 h-4 text-primary border-slate-300 focus:ring-primary"
+                                        name="person_type" type="radio" value="natural" />
+                                    <span
+                                        class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Persona
+                                        Natural</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input class="w-4 h-4 text-primary border-slate-300 focus:ring-primary"
+                                        name="person_type" type="radio" value="juridica" />
+                                    <span
+                                        class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Persona
+                                        Jurídica / Empresa</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Nombre o
+                                Razón social</label>
+                            <input
+                                class="w-full form-input-height px-4 border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:ring-primary focus:border-primary text-sm transition-all"
+                                type="text" value="Marco Antonio Rodríguez" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Documento
+                                fiscal (NIT / CI)</label>
+                            <input
+                                class="w-full form-input-height px-4 border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:ring-primary focus:border-primary text-sm transition-all"
+                                type="text" value="4829102011" />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">País</label>
+                            <div class="relative">
+                                <select
+                                    class="w-full form-input-height px-4 border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:ring-primary focus:border-primary text-sm appearance-none cursor-pointer">
+                                    <option selected="" value="BO">Bolivia</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="PE">Perú</option>
+                                </select>
+                                <span
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 pointer-events-none">expand_more</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Correo
+                                electrónico de facturación</label>
+                            <input
+                                class="w-full form-input-height px-4 border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:ring-primary focus:border-primary text-sm transition-all"
+                                type="email" value="m.rodriguez@email.com" />
+                        </div>
+                        <div class="pt-2">
+                            <p class="text-[12px] text-[#6B7280] dark:text-slate-500 leading-relaxed">
+                                Los cambios realizados se aplicarán únicamente a facturas futuras. Las facturas ya
+                                emitidas no pueden ser modificadas.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="inline-flex items-center justify-center btn-primary-height px-8 bg-primary hover:bg-[#4A44B0] text-white font-semibold rounded-xl transition-colors shadow-md shadow-primary/20"
+                                type="submit">
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div
+                    class="mt-8 flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/30">
+                    <span class="material-symbols-outlined text-primary">help</span>
+                    <div>
+                        <p class="text-sm font-medium text-slate-900 dark:text-white">¿Necesitas ayuda con tus datos?
+                        </p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Consulta nuestro centro de ayuda sobre
+                            impuestos y facturación en Bolivia.</p>
+                    </div>
+                    <button class="ml-auto text-xs font-bold text-primary hover:underline">Ver guías</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

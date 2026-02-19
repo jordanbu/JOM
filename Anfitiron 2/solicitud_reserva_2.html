@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Mensaje al anfitrión JOM Corregido</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "neutral-text": "#1F2937",
+                        "gray-subtext": "#6B7280",
+                        "border-light": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+  animation: page-enter 200ms ease;
+}
+
+.page-exit {
+  animation: page-exit 200ms ease forwards;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .safe-area-bottom {
+            padding-bottom: calc(16px + env(safe-area-inset-bottom));
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-neutral-text antialiased flex flex-col min-h-screen">
+    <header
+        class="flex items-center justify-between px-4 h-[56px] border-b border-border-light bg-white sticky top-0 z-50">
+        <button class="w-10 h-10 flex items-center justify-start text-gray-900">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h2 class="text-[16px] font-semibold text-gray-900">Mensaje al anfitrión</h2>
+        <div class="w-10"></div>
+    </header>
+    <main class="flex-1 px-4 py-8">
+        <div class="max-w-md mx-auto">
+            <h1 class="text-[28px] font-semibold leading-[1.2] mb-3 text-gray-900">
+                Mensajea al anfitrión
+            </h1>
+            <p class="text-[16px] text-gray-subtext mb-8 leading-normal">
+                Cuéntanos por qué viajas, quién te acompaña y qué es lo que más te gusta del espacio.
+            </p>
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-14 h-14 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                    <img alt="Jenny Montaño" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5lkvMJ7DgTe1Qot21tPaypTcZC7Fg9GM5jZMkUMpdRkLhOUZOcoIyt-IOR_2TMicTYwyKrwBSUR-xjPPO0HQxBpE70BkSMYEA6KUNXlO9QS9wEqbzrzdCjrAKpymmyEy_nhsfxX6x4Tzm2zemsLBMzmauQD8RiFZTQfePMD2KF2Zl39gTcGETV9eGWnXx74GB_m2SGMMNyA5apEG12jI5zuc-xobQXHCudVy-T_FbKAQh2yPhnC3ViShHIftlpLH6YvbgE5ULVPc" />
+                </div>
+                <div>
+                    <h3 class="text-[16px] font-semibold text-gray-900">Juanito Pérez</h3>
+                    <p class="text-[14px] text-gray-subtext">Anfitrión desde 2020</p>
+                </div>
+            </div>
+            <div class="mb-6">
+                <textarea
+                    class="w-full min-h-[140px] p-4 border border-border-light rounded-[12px] text-[16px] text-gray-900 placeholder:text-[#9CA3AF] focus:ring-1 focus:ring-primary focus:border-primary outline-none resize-none transition-all"
+                    placeholder="Hola, Jenny: Estaré de visita..."></textarea>
+            </div>
+            <p class="text-[14px] text-gray-900 leading-snug">
+                Al seleccionar el botón, acepto los <a
+                    class="text-[#5B55C8] font-medium underline decoration-[#5B55C8]/30" href="#">términos de la
+                    reservación</a>
+            </p>
+        </div>
+    </main>
+    <footer class="w-full border-t border-border-light bg-white sticky bottom-0 z-50">
+        <a href="solicitud_reserva_enviada.html"
+            onclick="event.preventDefault(); goTo('solicitud_reserva_enviada.html')" class="block">
+            <div class="max-w-md mx-auto px-4 pt-4 safe-area-bottom">
+                <button
+                    class="w-full h-[48px] bg-primary rounded-[12px] font-semibold text-white active:opacity-90 transition-opacity flex items-center justify-center">
+                    Enviar solicitud
+                </button>
+            </div>
+        </a>
+    </footer>
+    <script>
+        function goTo(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 200);
+        }
+    </script>
+
+</body>
+
+</html>

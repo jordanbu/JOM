@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Home Exploración Final Corregida</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366F1",
+                        "primary-lila": "#5B55C8",
+                        "badge-bg": "#EFEEFF",
+                        "background-light": "#F8F9FC",
+                        "background-dark": "#0F172A",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'xl': "16px",
+                        '2xl': "24px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+  animation: page-enter 200ms ease;
+}
+
+.page-exit {
+  animation: page-exit 200ms ease forwards;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .heart-active {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            color: #5B55C8;
+        }
+        .heart-inactive {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            color: #FFFFFF;
+            filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3));
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 antialiased">
+    <div class="h-12 bg-white dark:bg-slate-900 sticky top-0 z-50">
+        <div class="flex justify-between items-center px-6 h-full">
+            <span class="text-sm font-semibold">9:41</span>
+            <div class="flex items-center space-x-1.5">
+                <span class="material-symbols-rounded text-[18px]">signal_cellular_alt</span>
+                <span class="material-symbols-rounded text-[18px]">wifi</span>
+                <span class="material-symbols-rounded text-[18px]">battery_full</span>
+            </div>
+        </div>
+    </div>
+    <header class="bg-white dark:bg-slate-900 px-4 pb-6 pt-2 shadow-sm sticky top-12 z-40">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="relative p-1">
+                    <span class="material-symbols-rounded text-slate-600 dark:text-slate-400">notifications</span>
+                    <span
+                        class="absolute top-0 right-0 block h-4 w-4 rounded-full bg-primary text-[10px] text-white flex items-center justify-center font-bold border border-white">57</span>
+                </button>
+                <div class="w-8 h-8 rounded-full overflow-hidden border border-slate-100">
+                    <img alt="Avatar" class="w-full h-full object-cover"
+                        src="https://images.pexels.com/photos/7320500/pexels-photo-7320500.jpeg" />
+                </div>
+            </div>
+        </div>
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold leading-tight">Reserva tu <span class="text-primary-lila">Hospedaje</span>
+            </h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Descubre lugares increíbles para tu próxima
+                aventura</p>
+        </div>
+        <div
+            class="bg-white dark:bg-slate-800 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 dark:border-slate-700 p-3 flex items-center space-x-3">
+            <div class="bg-primary-lila rounded-full w-9 h-9 flex items-center justify-center text-white shrink-0">
+                <span class="material-symbols-rounded text-[20px]">search</span>
+            </div>
+            <div class="flex-1 overflow-hidden">
+                <div class="text-[15px] font-medium text-slate-500 dark:text-slate-300">¿A dónde vas?</div>
+            </div>
+        </div>
+    </header>
+    <main class="px-4 py-6">
+        <div class="space-y-8">
+            <a href="detalle_anuncio.html" onclick="event.preventDefault(); goTo('detalle_anuncio.html')" class="block">
+                <div class="group">
+                    <div class="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3">
+                        <img alt="Cochabamba" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpQvaOPWTIrZR2nB8erFVQt3e7NkZiU7PJH8Di7ag637_UPI0fl0SIt85G5wljJg-a9jRn_zCNg770c4zzD78jr9vnPaVpU-Px0xqZ3P6uKT-pNxWC6SmXRvSVyTMU7sAmj9WVT0qDMaIEQzZl0lcXTnzm-eQWmJmS4URTygvzt7_ukF7mX0kjt2-dnnRnK9011ZyStJe-z3nl063DYrup66tiQ5PysGM9b2ZtFmlyXE6MKGkek5PHvJRS0v1cwqPoEHnEDqC3O7Y" />
+                        <button class="absolute top-4 right-4 z-10">
+                            <span class="material-symbols-outlined heart-inactive text-[28px]">favorite</span>
+                        </button>
+                        <div class="absolute bottom-3 left-0 right-0 flex justify-center space-x-1.5">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1 min-w-0 pr-2">
+                            <h3 class="font-bold text-base text-slate-900 dark:text-white truncate">Cochabamba, Bolivia
+                            </h3>
+                            <p class="text-slate-500 text-sm mt-0.5">Apartamento Enorme y simpático</p>
+                            <p class="mt-2 text-base font-bold">560 BOB <span
+                                    class="font-normal text-slate-500 text-sm">/noche</span></p>
+                        </div>
+                        <div class="flex items-center space-x-1 bg-badge-bg px-2 py-1 rounded-lg shrink-0">
+                            <span class="material-symbols-rounded text-primary-lila text-[16px]">star</span>
+                            <span class="text-sm font-bold text-primary-lila">4.1</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="group">
+                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3">
+                    <img alt="Tarija" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA4CeCzq1ip8aApidNxAz3R-lsRF9kxUp8VpH0Cm-Vuq_1JK3QKtxz-Z3lgWmhTDR1cPXeGTJjY3XFpXD5j3yT69Xf7iBlC7UdkkLo-KcefDA5x3iJYzO3HZ373sRqFIPDe0skzhqLH6nnD5RzAkihPCHk3p02Kh-KvyPhCmjeYQdAhU3J_4bzb69vGFzoFkX01dWYh6OwWb7NmJToxRAlI6nZzN2-lq7rAj1J9gYQXjIM90EkuJMQOFaEIZNnT_OR0V87JIiUIx4" />
+                    <button class="absolute top-4 right-4 z-10">
+                        <span class="material-symbols-outlined heart-inactive text-[28px]">favorite</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div class="flex-1 min-w-0 pr-2">
+                        <h3 class="font-bold text-base text-slate-900 dark:text-white truncate">Tarija, Bolivia</h3>
+                        <p class="text-slate-500 text-sm mt-0.5">Tarija Hermosa Casa</p>
+                        <p class="mt-2 text-base font-bold">600 BOB <span
+                                class="font-normal text-slate-500 text-sm">/noche</span></p>
+                    </div>
+                    <div class="flex items-center space-x-1 bg-badge-bg px-2 py-1 rounded-lg shrink-0">
+                        <span class="material-symbols-rounded text-primary-lila text-[16px]">star</span>
+                        <span class="text-sm font-bold text-primary-lila">4.0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <a href="detalle_anuncio.html" onclick="event.preventDefault(); goTo('detalle_anuncio.html')"
+                    class="block">
+                    <div class="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3">
+                        <img alt="Santa Cruz" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgAmG-2yTWiEXAEkCOofV3JJSU1-7l381RxVAnek9HdEeLfp4mD1imUcvZheVstfs5fBBp6NAJHsKmu9-bABVvj0Wqj-abUmgYlPyruRbQOM31q1aGl0FLBJbVEQy2-VdLbjf2zM5LPtY43gKCxSK-gb6ea2-C864ddmPzkiwcq3PKQbxAHJ_XzUadJw4YZrobmMg2yPytxVvJLH6-UQwcZHysdJ1OMyVAE5F1Tsyf4_LbxVj6vJnlH_jv_wtsoy_O9zo_x6hPrw" />
+                        <button class="absolute top-4 right-4 z-10">
+                            <span class="material-symbols-rounded heart-active text-[28px]">favorite</span>
+                        </button>
+                    </div>
+                </a>
+                <div class="flex justify-between items-start">
+                    <div class="flex-1 min-w-0 pr-2">
+                        <h3 class="font-bold text-base text-slate-900 dark:text-white truncate">Santa Cruz de la Sierra,
+                            Bolivia</h3>
+                        <p class="text-slate-500 text-sm mt-0.5">Santa Cruz, Depto 2 dormitorios</p>
+                        <p class="mt-2 text-base font-bold">700 BOB <span
+                                class="font-normal text-slate-500 text-sm">/noche</span></p>
+                    </div>
+                    <div class="flex items-center space-x-1 bg-badge-bg px-2 py-1 rounded-lg shrink-0">
+                        <span class="material-symbols-rounded text-primary-lila text-[16px]">star</span>
+                        <span class="text-sm font-bold text-primary-lila">4.0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <a href="detalle_anuncio.html" onclick="event.preventDefault(); goTo('detalle_anuncio.html')"
+                    class="block">
+                    <div class="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3">
+                        <img alt="Santa Cruz Casa" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3wtEGa3m0NMRbyxXaOgjvtpHgZjJCzqK3OY17mLoJFdWSuRsXYMY1YWo-Te2NUdnr2N_eMg__vEjlfbkvj3uWISmDavcBHTPP7YJ3QBWksjedzz8y4SP5HTQZ7pJPdtg3ipV7WiLN06K7n8bT2Thi9Vk5boVNa7kb6RnMj6dZD6kKsfKf6bhfGGGs_e_QTVNZlGSkXkDeHzCUrViuAVOO5SGGyYjTVd8j8La4R96A61Q54n8IJkq2-_maq1VFM1BH6gkGW3_0TVg" />
+                        <button class="absolute top-4 right-4 z-10">
+                            <span class="material-symbols-rounded heart-active text-[28px]">favorite</span>
+                        </button>
+                    </div>
+                </a>
+                <div class="flex justify-between items-start">
+                    <div class="flex-1 min-w-0 pr-2">
+                        <h3 class="font-bold text-base text-slate-900 dark:text-white truncate">Santa Cruz de la Sierra,
+                            Bolivia</h3>
+                        <p class="text-slate-500 text-sm mt-0.5">Hermosa Casa de 3 dormitorios</p>
+                        <p class="mt-2 text-base font-bold">550 BOB <span
+                                class="font-normal text-slate-500 text-sm">/noche</span></p>
+                    </div>
+                    <div class="flex items-center space-x-1 bg-badge-bg px-2 py-1 rounded-lg shrink-0">
+                        <span class="material-symbols-rounded text-primary-lila text-[16px]">star</span>
+                        <span class="text-sm font-bold text-primary-lila">4.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-center space-x-2 mt-12 mb-24">
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200">
+                <span class="material-symbols-rounded text-slate-400">chevron_left</span>
+            </button>
+            <button
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-lila text-white font-bold">1</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full text-slate-500 font-bold">2</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full text-slate-500 font-bold">3</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200">
+                <span class="material-symbols-rounded text-slate-600">chevron_right</span>
+            </button>
+        </div>
+    </main>
+    <button
+        class="fixed bottom-24 right-6 bg-slate-900 text-white px-5 py-3 rounded-full shadow-2xl flex items-center space-x-2 z-40">
+        <span class="material-symbols-rounded text-[20px]">map</span>
+        <span class="text-sm font-bold">Ver mapa</span>
+    </button>
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+        <button class="flex flex-col items-center space-y-1 text-primary-lila">
+            <span class="material-symbols-rounded text-[24px]">explore</span>
+            <span class="text-[10px] font-semibold">Explorar</span>
+        </button>
+        <button class="flex flex-col items-center space-y-1 text-slate-400">
+            <span class="material-symbols-outlined text-[24px]">favorite</span>
+            <span class="text-[10px] font-medium">Favoritos</span>
+        </button>
+        <button class="flex flex-col items-center space-y-1 text-slate-400">
+            <span class="material-symbols-outlined text-[24px]">travel_explore</span>
+            <span class="text-[10px] font-medium">Viajes</span>
+        </button>
+        <button class="flex flex-col items-center space-y-1 text-slate-400">
+            <span class="material-symbols-outlined text-[24px]">chat</span>
+            <span class="text-[10px] font-medium">Mensajes</span>
+        </button>
+        <button class="flex flex-col items-center space-y-1 text-slate-400">
+            <span class="material-symbols-outlined text-[24px]">account_circle</span>
+            <span class="text-[10px] font-medium">Perfil</span>
+        </button>
+    </nav>
+
+</body>
+<script>
+    function goTo(url) {
+        document.body.classList.add('page-exit');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 200);
+    }
+</script>
+
+
+</html>
