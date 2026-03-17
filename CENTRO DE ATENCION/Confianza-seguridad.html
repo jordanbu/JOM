@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <style>
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6B7280;
+        text-decoration: none;
+        transition: background 0.15s, color 0.15s;
+        border-left: 2px solid transparent;
+      }
+      .nav-item:hover {
+        background: #F8F9FC;
+        color: #1F2937;
+      }
+      .nav-item.active {
+        background: #EFEEFF;
+        color: #5B55C8;
+        border-left-color: #5B55C8;
+        font-weight: 600;
+      }
+      .nav-item .nav-num {
+        font-size: 11px;
+        font-weight: 700;
+        color: #5B55C8;
+        opacity: 0.6;
+        min-width: 18px;
+        letter-spacing: 0.04em;
+      }
+      .nav-item.active .nav-num { opacity: 1; }
+      .sidebar-sticky { position: sticky; top: 100px; }
+      .tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .tag-pill:hover {
+        border-color: #5B55C8;
+        background: #EFEEFF;
+      }
+      .tag-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #5B55C8;
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .right-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+      }
+      .right-card .icon-wrap {
+        width: 32px; height: 32px;
+        background: #EFEEFF;
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .right-card .icon-wrap .material-symbols-outlined {
+        font-size: 16px;
+        color: #5B55C8;
+      }
+    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Confianza y Seguridad</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  </style>
+  <style>
+    /* ── Animations ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; animation: slideUp 0.45s ease forwards; }
+    .anim-1 { animation-delay: .04s }
+    .anim-2 { animation-delay: .09s }
+    .anim-3 { animation-delay: .14s }
+    .anim-4 { animation-delay: .19s }
+    .anim-5 { animation-delay: .24s }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    @keyframes shield-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(91,85,200,0.0); }
+      50%       { box-shadow: 0 0 0 8px rgba(91,85,200,0.08); }
+    }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 48px 0 44px;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 500; color: #6B7280;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active { background: #EFEEFF; color: #5B55C8; border-left-color: #5B55C8; font-weight: 600; }
+    .nav-icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; background: #F8F9FC; flex-shrink: 0; }
+    .nav-item.active .nav-icon { background: #EFEEFF; }
+    .nav-icon .material-symbols-outlined { font-size: 14px; color: #9CA3AF; }
+    .nav-item.active .nav-icon .material-symbols-outlined { color: #5B55C8; }
+
+    @media (min-width: 768px) { .sidebar-sticky { position: sticky; top: 100px; } }
+
+    /* ── Section card ── */
+    .section-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .section-card-header {
+      padding: 20px 24px 18px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-card-body { padding: 24px; }
+    .header-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; margin-bottom: 2px; }
+    .sec-title { font-size: 18px; font-weight: 600; color: #1F2937; line-height: 1.25; }
+
+    /* ── Verification items ── */
+    .verify-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px;
+      background: #F8F9FC;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 14px; font-weight: 500; color: #1F2937;
+      transition: border-color 0.15s;
+    }
+    .verify-item:hover { border-color: #C7C4E8; }
+    .verify-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #16A34A; flex-shrink: 0;
+    }
+    .verify-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: #EFEEFF;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .verify-icon .material-symbols-outlined { font-size: 16px; color: #5B55C8; }
+
+    /* ── Payment flow ── */
+    .payment-flow {
+      display: flex; align-items: center; gap: 0;
+      background: #F8F9FC; border: 1px solid #E5E7EB;
+      border-radius: 12px; overflow: hidden;
+    }
+    .pf-node {
+      flex: 1; padding: 16px 20px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .pf-node-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pf-node-icon .material-symbols-outlined { font-size: 20px; }
+    .pf-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6B7280; }
+    .pf-value { font-size: 13px; font-weight: 600; color: #1F2937; }
+    .pf-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: #5B55C8; padding: 0 4px;
+    }
+    .pf-divider { width: 1px; background: #E5E7EB; align-self: stretch; }
+
+    /* ── Payment audience rows ── */
+    .payment-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .payment-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .payment-row:first-child { padding-top: 0; }
+    .pr-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 30px;
+      font-size: 11px; font-weight: 700; white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── Standards grid ── */
+    .standard-item {
+      background: #F8F9FC; border: 1px solid #E5E7EB;
+      border-radius: 12px; padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .standard-item:hover {
+      border-color: #C7C4E8;
+      box-shadow: 0 3px 12px rgba(91,85,200,0.07);
+    }
+    .std-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: #EFEEFF;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .std-icon .material-symbols-outlined { font-size: 19px; color: #5B55C8; }
+    .std-title { font-size: 14px; font-weight: 600; color: #1F2937; }
+    .std-desc { font-size: 13px; color: #6B7280; line-height: 1.55; }
+
+    /* ── Trust badge (hero) ── */
+    .trust-shield {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: #EFEEFF; border: 2px solid rgba(91,85,200,0.15);
+      display: flex; align-items: center; justify-content: center;
+      animation: shield-glow 3s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .trust-shield .material-symbols-outlined { font-size: 36px; color: #5B55C8; }
+
+    /* ── Notice banner ── */
+    .notice-banner {
+      background: #EFEEFF; border: 1px solid rgba(91,85,200,0.2);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 13px; color: #1F2937; line-height: 1.55;
+    }
+    .notice-banner .material-symbols-outlined { color: #5B55C8; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Live badge ── */
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #F0FDF4; border: 1px solid #BBF7D0;
+      border-radius: 30px; padding: 4px 10px;
+      font-size: 12px; font-weight: 600; color: #16A34A;
+    }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #16A34A; animation: pulse 2s infinite; }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+      </div>
+    
+      <div class="flex items-center gap-3">
+        <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="page-hero">
+    <div class="max-content-width">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-6">
+      </div>
+
+      <div class="flex items-start gap-6">
+        <!-- Shield icon -->
+        </div>
+
+        <div class="flex-1">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            </div>
+            
+          </div>
+          <h1 class="text-[28px] font-semibold text-neutral-text leading-tight mb-3">Confianza y Seguridad</h1>
+          <p class="text-sm text-neutral-secondary max-w-xl leading-relaxed">
+            Tu seguridad es nuestra prioridad. Hemos diseñado herramientas y procesos para que puedas reservar y hospedar con total tranquilidad.
+          </p>
+
+          <!-- Quick chips -->
+          <div class="flex flex-wrap gap-2 mt-5">
+           
+          </div>
+        </div>
+
+        <!-- Date badge -->
+        <div class="hidden md:flex w-full justify-end">
+          <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-3 py-1 shrink-0 max-w-fit">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">calendar_today</span>
+            <span class="text-xs text-neutral-secondary font-medium">Actualización:</span>
+            <span class="text-xs font-semibold text-neutral-text">26 feb 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="max-content-width py-12">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden md:block w-56 shrink-0 sidebar-sticky">
+        <p class="text-[11px] font-bold text-neutral-secondary uppercase tracking-widest mb-3 px-2">Pilares</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#perfiles" class="nav-item active" data-section="perfiles">
+           01 Perfiles Verificados
+          </a>
+          <a href="#pagos" class="nav-item" data-section="pagos">
+           02 Pagos 100% Seguros
+          </a>
+          <a href="#evaluaciones" class="nav-item" data-section="evaluaciones">
+           03 Evaluaciones Reales
+          </a>
+          <a href="#estandares" class="nav-item" data-section="estandares">
+           04  Estándares
+          </a>
+        </nav>
+
+        <!-- Trust indicators -->
+        <div class="mt-6 bg-white border border-neutral-border rounded-card p-4 flex flex-col gap-3">
+          <p class="text-[11px] font-bold text-neutral-secondary uppercase tracking-widest">Indicadores</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-neutral-secondary">Identidades verificadas</span>
+            <span class="text-xs font-bold text-primary">100%</span>
+          </div>
+          <div class="w-full h-1.5 bg-neutral-border rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full" style="width:100%"></div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-neutral-secondary">Reseñas verificadas</span>
+            <span class="text-xs font-bold text-primary">100%</span>
+          </div>
+          <div class="w-full h-1.5 bg-neutral-border rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full" style="width:100%"></div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-neutral-secondary">Pagos protegidos</span>
+            <span class="text-xs font-bold text-[#16A34A]">Siempre</span>
+          </div>
+          <div class="w-full h-1.5 bg-neutral-border rounded-full overflow-hidden">
+            <div class="h-full rounded-full" style="width:100%;background:#16A34A"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-4 bg-soft-highlight border border-[#5B55C8]/20 rounded-card p-4 flex flex-col gap-3">
+          <p class="text-xs font-semibold text-neutral-text">¿Algo te preocupa?</p>
+          <p class="text-xs text-neutral-secondary leading-relaxed">Nuestro equipo de seguridad está disponible en todo momento.</p>
+          <a href="#" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">support_agent</span>
+            Contactar soporte
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="flex-1 flex flex-col gap-5 min-w-0">
+
+        <!-- ── 01 Perfiles Verificados ── -->
+        <div id="perfiles" class="section-card anim anim-1">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:20px">badge</span>
+            </div>
+            <div class="flex-1">
+              <h2 class="sec-title">Perfiles Verificados</h2>
+            </div>
+           
+          </div>
+          <div class="section-card-body">
+            <p class="text-sm text-neutral-secondary mb-5 leading-relaxed">Antes de reservar o publicar, pedimos a todos los usuarios que verifiquen su identidad. Esto garantiza que cada persona en la plataforma es quien dice ser.</p>
+            <div class="flex flex-col gap-2">
+              <div class="verify-item">
+                <div class="verify-icon"><span class="material-symbols-outlined">id_card</span></div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm text-neutral-text">Identificación oficial</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">DNI o Pasaporte válido y vigente</p>
+                </div>
+              </div>
+              <div class="verify-item">
+                <div class="verify-icon"><span class="material-symbols-outlined">phone_iphone</span></div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm text-neutral-text">Teléfono y correo confirmados</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">Verificación por código de un solo uso</p>
+                </div>
+              </div>
+              <div class="verify-item">
+                <div class="verify-icon"><span class="material-symbols-outlined">face</span></div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm text-neutral-text">Foto de perfil actual</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">Imagen clara y reciente del usuario</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 02 Pagos ── -->
+        <div id="pagos" class="section-card anim anim-2">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:20px">lock</span>
+            </div>
+            <div class="flex-1">
+              <h2 class="sec-title">Pagos 100% Seguros</h2>
+            </div>
+            
+          </div>
+          <div class="section-card-body">
+            <p class="text-sm text-neutral-secondary mb-5 leading-relaxed">Nunca tendrás que manejar efectivo ni transferencias externas. Nuestro sistema de pago encriptado protege tu dinero hasta que el servicio se cumpla.</p>
+
+            <!-- Payment flow diagram -->
+            <div class="payment-flow mb-5">
+              <div class="pf-node">
+                <div class="pf-node-icon" style="background:#EFEEFF;">
+                  <span class="material-symbols-outlined text-primary" style="font-size:18px">person</span>
+                </div>
+                <span class="pf-label">Huésped</span>
+                <span class="pf-value" style="font-size:12px;color:#6B7280">Paga a JOM</span>
+              </div>
+              <div class="pf-divider"></div>
+              <div class="pf-node" style="background:#EFEEFF;">
+                <div class="pf-node-icon" style="background:#5B55C8;border-radius:10px;">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#fff">shield</span>
+                </div>
+                <span class="pf-label" style="color:#5B55C8;">JOM</span>
+                <span class="pf-value" style="font-size:12px;color:#5B55C8;">Retiene el pago</span>
+              </div>
+              <div class="pf-divider"></div>
+              <div class="pf-node">
+                <div class="pf-node-icon" style="background:#DCFCE7;">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#16A34A">home</span>
+                </div>
+                <span class="pf-label">Anfitrión</span>
+                <span class="pf-value" style="font-size:12px;color:#6B7280">Recibe a +24h</span>
+              </div>
+            </div>
+
+            <!-- Audience details -->
+            <div class="flex flex-col">
+              <div class="payment-row">
+                <span class="pr-badge" style="background:#EFEEFF;border:1px solid rgba(91,85,200,0.2);color:#5B55C8;">
+                  <span class="material-symbols-outlined" style="font-size:13px">luggage</span>
+                  Huéspedes
+                </span>
+                <p class="text-sm text-neutral-secondary leading-relaxed">Pagas a JOM, no directamente al anfitrión. Tu dinero queda protegido hasta confirmar que el alojamiento es como fue descrito.</p>
+              </div>
+              <div class="payment-row">
+                <span class="pr-badge" style="background:#DCFCE7;border:1px solid #BBF7D0;color:#15803D;">
+                  <span class="material-symbols-outlined" style="font-size:13px">home</span>
+                  Anfitriones
+                </span>
+                <p class="text-sm text-neutral-secondary leading-relaxed">Recibes el pago <strong style="color:#1F2937;font-weight:600">24 horas después del check-in</strong> del huésped, una vez confirmada la estancia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 03 Evaluaciones ── -->
+        <div id="evaluaciones" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#FFFBEB;">
+            <div class="header-icon" style="background:#FEF3C7;">
+              <span class="material-symbols-outlined" style="color:#D97706;font-size:20px">star</span>
+            </div>
+            <div class="flex-1">
+              <h2 class="sec-title">Evaluaciones Reales</h2>
+            </div>
+           
+          </div>
+          <div class="section-card-body">
+            <p class="text-sm text-neutral-secondary mb-5 leading-relaxed">La reputación lo es todo. Solo los usuarios que han completado una estancia pueden dejar una reseña. Esto garantiza que las opiniones que lees sean auténticas y basadas en experiencias reales.</p>
+
+            <!-- Process chips -->
+            <div class="flex flex-col sm:flex-row gap-3">
+              <div class="flex-1 flex items-center gap-3 bg-neutral-bg border border-neutral-border rounded-jom px-4 py-3">
+                <div style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#D97706">check_circle</span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-neutral-text">Solo post-estancia</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">Se habilita tras completar</p>
+                </div>
+              </div>
+              <div class="flex-1 flex items-center gap-3 bg-neutral-bg border border-neutral-border rounded-jom px-4 py-3">
+                <div style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#D97706">block</span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-neutral-text">Sin reseñas falsas</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">Sistema de validación activo</p>
+                </div>
+              </div>
+              <div class="flex-1 flex items-center gap-3 bg-neutral-bg border border-neutral-border rounded-jom px-4 py-3">
+                <div style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#D97706">swap_horiz</span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-neutral-text">Bidireccional</p>
+                  <p class="text-xs text-neutral-secondary mt-0.5">Huéspedes y anfitriones</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 04 Estándares ── -->
+        <div id="estandares" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:20px">groups</span>
+            </div>
+            <div class="flex-1">
+              <h2 class="sec-title">Estándares de la Comunidad</h2>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <!-- Notice -->
+            <div class="notice-banner mb-5">
+              <span class="material-symbols-outlined">info</span>
+              <span>No toleramos discriminación, acoso ni comportamientos peligrosos. Si algo no está bien, nuestro equipo de soporte está disponible <strong style="color:#1F2937;font-weight:600">24/7</strong> para intervenir y ayudarte.</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="standard-item">
+                <div class="std-icon"><span class="material-symbols-outlined">do_not_disturb_on</span></div>
+                <p class="std-title">Cero discriminación</p>
+                <p class="std-desc">Toda persona merece ser tratada con respeto, sin importar su origen, género, religión u orientación.</p>
+              </div>
+              <div class="standard-item">
+                <div class="std-icon"><span class="material-symbols-outlined">sentiment_dissatisfied</span></div>
+                <p class="std-title">Cero acoso</p>
+                <p class="std-desc">Cualquier forma de acoso o comportamiento inapropiado puede ser reportado y será atendido de inmediato.</p>
+              </div>
+              <div class="standard-item">
+                <div class="std-icon"><span class="material-symbols-outlined">health_and_safety</span></div>
+                <p class="std-title">Espacios seguros</p>
+                <p class="std-desc">Los anfitriones deben garantizar que sus propiedades cumplan con los estándares de seguridad básicos.</p>
+              </div>
+              <div class="standard-item">
+                <div class="std-icon"><span class="material-symbols-outlined">support_agent</span></div>
+                <p class="std-title">Soporte 24/7</p>
+                <p class="std-desc">Nuestro equipo está listo para intervenir en cualquier etapa del viaje, todos los días del año.</p>
+              </div>
+            </div>
+
+            <!-- Report CTA -->
+            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+              <a href="#" class="flex-1 flex items-center justify-center gap-2 bg-primary text-white text-sm font-semibold px-4 py-3 rounded-jom hover:bg-ui-primary-hover transition-colors">
+                <span class="material-symbols-outlined" style="font-size:17px">report</span>
+                Reportar un problema
+              </a>
+              <a href="#" class="flex-1 flex items-center justify-center gap-2 bg-white border border-neutral-border text-neutral-text text-sm font-semibold px-4 py-3 rounded-jom hover:bg-neutral-bg transition-colors">
+                <span class="material-symbols-outlined" style="font-size:17px">chat</span>
+                Hablar con soporte
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-2">
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">
+            Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor confianza.
+          </p>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors font-semibold" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <div class="flex gap-4">
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">camera</span></a>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés (US)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('#perfiles, #pagos, #evaluaciones, #estandares');
+    const navLinks = document.querySelectorAll('.nav-item[data-section]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

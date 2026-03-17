@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Monthly Income - September Detail | JOM</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-base": "#F8F9FC",
+                        "border-light": "#E5E7EB",
+                        "penalty-red": "#DC2626",
+                        "secondary-text": "#6B7280",
+                        "jom-dark": "#1F2937"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        'card': '16px',
+                    },
+                    maxWidth: {
+                        'jom-container': '1360px',
+                    }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-base font-sans text-jom-dark;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sidebar-active {
+            @apply text-primary font-semibold relative;
+        }
+        .sidebar-active::before {
+            content: '';
+            @apply absolute left-[-16px] top-0 bottom-0 w-1 bg-primary rounded-r-full;
+        }
+        .table-header {
+            @apply px-4 md:px-6 py-3 text-[12px] font-semibold uppercase tracking-wider text-secondary-text bg-[#F8F9FC] border-b border-border-light sticky top-0 z-10;
+        }
+        .table-cell {
+            @apply px-4 md:px-6 py-4 text-[14px] border-b border-border-light align-middle bg-white;
+        }
+        .kpi-card {
+            @apply bg-white p-4 md:p-6 rounded-card border border-border-light shadow-sm w-full;
+        }
+        .btn-primary {
+            @apply h-12 px-6 bg-primary text-white font-semibold rounded-[12px] text-[16px] hover:bg-[#4A45B0] transition-all duration-200 focus:ring-2 focus:ring-primary;
+        }
+        .btn-secondary {
+            @apply h-12 px-6 bg-white border border-border-light text-jom-dark font-semibold rounded-[12px] text-[16px] hover:bg-[#F8F9FC] transition-all duration-200;
+        }
+        .empty-state {
+            @apply flex flex-col items-center justify-center py-16 text-secondary-text;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+    <header
+        class="h-16 w-full flex items-center justify-between px-8 bg-white border-b border-border-light fixed top-0 left-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs uppercase">Jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight uppercase">JOM</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 text-sm font-medium text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español</span>
+                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+            </div>
+            <button class="text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+            </button>
+            <div
+                class="flex items-center gap-2 p-1 pl-3 border border-border-light rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600 text-[20px]">menu</span>
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuConxsjX2o4zwYvps_yaD3hpbimEZRLc1Vpb1diTquFkGFp8iM5p16O-JPX7uECjLq2GkrxfCmwXFY3LZxVIfy_yOWHb8VGUxuTCN1OUBVsZTlKEzWvnSPpHCDIfE84s0ypyC5mquO7CRmcPwew9l0otp89RCwRTMe0otnstAhESKkSWcjiRxTjkYjkFF1nMB2vi7ggiXrQAFarEkU6Fi9YdeCMDIdRzboDFrtQ_HQtrMdvlyYCUmaE1HJ73VyyepJ_qnVH2DIORFg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex pt-16">
+        <!-- Menú lateral en desktop, barra inferior en mobile -->
+        <aside class="hidden md:block w-[240px] bg-white border-r border-border-light flex-shrink-0 fixed h-[calc(100vh-64px)] z-40">
+            <nav class="px-4 py-8 space-y-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    <span class="text-[14px]">Hoy</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">campaign</span>
+                    <span class="text-[14px]">Anuncios</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <span class="text-[14px]">Calendario</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                    <span class="text-[14px]">Mensajería</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-active" href="#">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                    <span class="text-[14px]">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Barra inferior mobile -->
+        <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border-light flex justify-around items-center h-16 md:hidden">
+            <a class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
+                <span class="material-symbols-outlined text-[24px]">calendar_today</span>
+                <span class="text-[11px] leading-none">Hoy</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
+                <span class="material-symbols-outlined text-[24px]">campaign</span>
+                <span class="text-[11px] leading-none">Anuncios</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
+                <span class="material-symbols-outlined text-[24px]">calendar_month</span>
+                <span class="text-[11px] leading-none">Calendario</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
+                <span class="material-symbols-outlined text-[24px]">chat_bubble</span>
+                <span class="text-[11px] leading-none">Mensajería</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-primary sidebar-active" href="#">
+                <span class="material-symbols-outlined text-[24px]">grid_view</span>
+                <span class="text-[11px] leading-none">Dashboard</span>
+            </a>
+        </nav>
+        <main class="flex-1 md:ml-[240px] min-h-[calc(100vh-64px)] overflow-x-hidden w-full">
+            <div class="w-full px-4 md:px-6 py-6 space-y-6">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="space-y-2">
+                        <button class="flex items-center gap-2 text-primary text-sm font-semibold hover:underline mb-4">
+                            <span class="material-symbols-outlined text-sm">arrow_back</span>
+                            Volver al informe
+                        </button>
+                        <h1 class="text-[28px] font-semibold text-jom-dark leading-tight">1 de septiembre 2024 – 30 de
+                            septiembre 2024</h1>
+                        <p class="text-[18px] text-secondary-text">Ganaste <span class="text-jom-dark font-semibold">BOB
+                                12.450,00</span></p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 border border-border-light rounded-lg text-sm font-semibold text-jom-dark bg-white hover:bg-slate-50 transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-[20px]">download</span>
+                        Descargar reporte
+                    </button>
+                </div>
+                <section
+                    class="bg-white rounded-card border border-border-light shadow-sm flex divide-x divide-border-light mb-8">
+                    <div class="flex-1 p-3 md:p-6">
+                        <p class="text-sm text-secondary-text mb-2">Ingresos brutos</p>
+                        <p class="text-[20px] font-bold text-jom-dark">BOB 14.500,00</p>
+                    </div>
+                    <div class="flex-1 p-3 md:p-6">
+                        <p class="text-sm text-secondary-text mb-2">Ajustes</p>
+                        <p class="text-[20px] font-bold text-penalty-red">-BOB 300,00</p>
+                    </div>
+                    <div class="flex-1 p-3 md:p-6">
+                        <p class="text-sm text-secondary-text mb-2">Tarifa servicio</p>
+                        <p class="text-[20px] font-bold text-secondary-text">-BOB 1.750,00</p>
+                    </div>
+                    <div class="flex-1 p-3 md:p-6">
+                        <p class="text-sm text-secondary-text mb-2">Total neto</p>
+                        <p class="text-[20px] font-bold text-jom-dark">BOB 12.450,00</p>
+                    </div>
+                </section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                    <div class="kpi-card w-full">
+                        <p class="text-sm text-secondary-text mb-1">Reservas confirmadas (12)</p>
+                        <p class="text-[24px] font-bold text-jom-dark">12</p>
+                    </div>
+                    <div class="kpi-card w-full">
+                        <p class="text-sm text-secondary-text mb-1">Noches rentadas (42)</p>
+                        <p class="text-[24px] font-bold text-jom-dark">42</p>
+                    </div>
+                    <div class="kpi-card w-full">
+                        <p class="text-sm text-secondary-text mb-1">Promedio noches (3.5)</p>
+                        <p class="text-[24px] font-bold text-jom-dark">3.5</p>
+                    </div>
+                </div>
+                <section class="bg-white rounded-card border border-border-light shadow-sm overflow-hidden mb-8">
+                    <div class="p-6">
+                        <h2 class="text-[18px] font-semibold text-jom-dark mb-1">Sanciones activas (2)</h2>
+                        <p class="text-[14px] text-secondary-text">Los descuentos se aplican automáticamente a tus
+                            próximas reservas.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr>
+                                    <th class="table-header">Inmueble</th>
+                                    <th class="table-header">Monto original</th>
+                                    <th class="table-header">Saldo pendiente</th>
+                                    <th class="table-header">Estado</th>
+                                    <th class="table-header text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border-light">
+                                <tr>
+                                    <td class="px-6 py-4 text-[14px] font-medium text-jom-dark">Casa Playa</td>
+                                    <td class="px-6 py-4 text-[14px] text-jom-dark">BOB 1.200,00</td>
+                                    <td class="px-6 py-4 text-[14px] text-penalty-red">BOB 500,00</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 bg-background-base border border-border-light rounded-[12px] text-[12px] text-jom-dark">
+                                            Activa
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-primary text-[14px] font-medium hover:underline">Ver
+                                            detalle</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 text-[14px] font-medium text-jom-dark">Stratto Loft</td>
+                                    <td class="px-6 py-4 text-[14px] text-jom-dark">BOB 800,00</td>
+                                    <td class="px-6 py-4 text-[14px] text-penalty-red">BOB 300,00</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 bg-background-base border border-border-light rounded-[12px] text-[12px] text-jom-dark">
+                                            Parcialmente cubierta
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-primary text-[14px] font-medium hover:underline">Ver
+                                            detalle</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <div class="space-y-8">
+                    <section>
+                        <h2 class="text-[16px] font-bold text-jom-dark uppercase mb-4 tracking-wide px-1">Ingresos por
+                            inmueble</h2>
+                        <div class="bg-white rounded-card border border-border-light shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-header">Inmueble</th>
+                                            <th class="table-header text-right">Bruto</th>
+                                            <th class="table-header text-right">Ajustes</th>
+                                            <th class="table-header text-right">Tarifa Servicio</th>
+                                            <th class="table-header text-right font-bold">Total Neto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-border-light">
+                                        <tr>
+                                            <td class="table-cell font-medium">Casa Playa</td>
+                                            <td class="table-cell text-right">BOB 7.500,00</td>
+                                            <td class="table-cell text-right text-penalty-red">-BOB 300,00</td>
+                                            <td class="table-cell text-right text-secondary-text">-BOB 900,00</td>
+                                            <td class="table-cell text-right font-bold text-jom-dark">BOB 6.300,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-cell font-medium">Stratto Loft</td>
+                                            <td class="table-cell text-right">BOB 4.000,00</td>
+                                            <td class="table-cell text-right">BOB 0,00</td>
+                                            <td class="table-cell text-right text-secondary-text">-BOB 480,00</td>
+                                            <td class="table-cell text-right font-bold text-jom-dark">BOB 3.520,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-cell font-medium">Penthouse Moderno</td>
+                                            <td class="table-cell text-right">BOB 3.000,00</td>
+                                            <td class="table-cell text-right">BOB 0,00</td>
+                                            <td class="table-cell text-right text-secondary-text">-BOB 370,00</td>
+                                            <td class="table-cell text-right font-bold text-jom-dark">BOB 2.630,00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="pb-12">
+                        <h2 class="text-[16px] font-bold text-jom-dark uppercase mb-4 tracking-wide px-1">Rendimiento
+                            por inmueble</h2>
+                        <div class="bg-white rounded-card border border-border-light shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-header">Inmueble</th>
+                                            <th class="table-header text-right">Noches rentadas</th>
+                                            <th class="table-header text-right">Estancia Promedio</th>
+                                            <th class="table-header text-right">Ocupación %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-border-light">
+                                        <tr>
+                                            <td class="table-cell font-medium">Casa Playa</td>
+                                            <td class="table-cell text-right">24 noches</td>
+                                            <td class="table-cell text-right">4.0 noches</td>
+                                            <td class="table-cell text-right">
+                                                <div class="flex items-center justify-end gap-2">
+                                                    <span class="font-medium">80%</span>
+                                                    <div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-primary" style="width: 80%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-cell font-medium">Stratto Loft</td>
+                                            <td class="table-cell text-right">12 noches</td>
+                                            <td class="table-cell text-right">3.0 noches</td>
+                                            <td class="table-cell text-right">
+                                                <div class="flex items-center justify-end gap-2">
+                                                    <span class="font-medium">40%</span>
+                                                    <div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-primary" style="width: 40%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-cell font-medium">Penthouse Moderno</td>
+                                            <td class="table-cell text-right">6 noches</td>
+                                            <td class="table-cell text-right">2.0 noches</td>
+                                            <td class="table-cell text-right">
+                                                <div class="flex items-center justify-end gap-2">
+                                                    <span class="font-medium">20%</span>
+                                                    <div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-primary" style="width: 20%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

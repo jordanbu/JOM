@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Opciones de Cancelación</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  </style>
+  <style>
+    /* ── Animations ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; animation: slideUp 0.4s ease forwards; }
+    .anim-1 { animation-delay: .04s }
+    .anim-2 { animation-delay: .10s }
+    .anim-3 { animation-delay: .16s }
+    .anim-4 { animation-delay: .22s }
+    .anim-5 { animation-delay: .28s }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 48px 0 40px;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 500; color: #6B7280;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active {
+      background: #EFEEFF; color: #5B55C8;
+      border-left-color: #5B55C8; font-weight: 600;
+    }
+    .nav-num {
+      font-size: 11px; font-weight: 700;
+      color: #5B55C8; opacity: 0.6; min-width: 18px;
+    }
+    .nav-item.active .nav-num { opacity: 1; }
+
+    @media (min-width: 768px) {
+      .sidebar-sticky { position: sticky; top: 100px; }
+    }
+
+    /* ── Policy card ── */
+    .policy-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .policy-card:hover {
+      border-color: #C7C4E8;
+      box-shadow: 0 4px 20px rgba(91,85,200,0.07);
+    }
+
+    .policy-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .policy-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .policy-icon .material-symbols-outlined { font-size: 20px; }
+
+    .policy-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #5B55C8; opacity: 0.7; margin-bottom: 3px;
+    }
+    .policy-name {
+      font-size: 18px; font-weight: 600; color: #1F2937; line-height: 1.25;
+    }
+    .policy-desc {
+      font-size: 13px; color: #6B7280; margin-top: 4px; line-height: 1.5;
+    }
+
+    /* Flexibility badge */
+    .flex-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 30px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .flex-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+
+    /* Policy rows */
+    .policy-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 0; }
+
+    .policy-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .policy-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .policy-row:first-child { padding-top: 0; }
+
+    .row-icon-wrap {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .row-icon-wrap .material-symbols-outlined { font-size: 15px; }
+
+    .row-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 2px;
+    }
+    .row-text {
+      font-size: 13px; color: #6B7280; line-height: 1.55;
+    }
+
+    /* Color variants */
+    /* Flexible — green accent */
+    .card-flexible .policy-header { background: #F0FDF4; }
+    .card-flexible .policy-icon { background: #DCFCE7; }
+    .card-flexible .policy-icon .material-symbols-outlined { color: #16A34A; }
+    .card-flexible .flex-badge { background: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; }
+    .card-flexible .flex-badge .dot { background: #16A34A; }
+    .card-flexible .policy-num { color: #16A34A; }
+
+    /* Moderada — blue accent */
+    .card-moderada .policy-header { background: #EFF6FF; }
+    .card-moderada .policy-icon { background: #DBEAFE; }
+    .card-moderada .policy-icon .material-symbols-outlined { color: #2563EB; }
+    .card-moderada .flex-badge { background: #DBEAFE; color: #1D4ED8; border: 1px solid #BFDBFE; }
+    .card-moderada .flex-badge .dot { background: #2563EB; }
+    .card-moderada .policy-num { color: #2563EB; }
+
+    /* Estricta — yellow/amber accent */
+    .card-estricta .policy-header { background: #FFFBEB; }
+    .card-estricta .policy-icon { background: #FEF3C7; }
+    .card-estricta .policy-icon .material-symbols-outlined { color: #D97706; }
+    .card-estricta .flex-badge { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+    .card-estricta .flex-badge .dot { background: #D97706; }
+    .card-estricta .policy-num { color: #D97706; }
+
+    /* No Reembolsable — red accent */
+    .card-noreembolso .policy-header { background: #FFF1F2; }
+    .card-noreembolso .policy-icon { background: #FFE4E6; }
+    .card-noreembolso .policy-icon .material-symbols-outlined { color: #DC2626; }
+    .card-noreembolso .flex-badge { background: #FFE4E6; color: #B91C1C; border: 1px solid #FECACA; }
+    .card-noreembolso .flex-badge .dot { background: #DC2626; }
+    .card-noreembolso .policy-num { color: #DC2626; }
+
+    /* Row type icon colors */
+    .row-green { background: #DCFCE7; }
+    .row-green .material-symbols-outlined { color: #16A34A; }
+    .row-green-label { color: #15803D; }
+
+    .row-yellow { background: #FEF3C7; }
+    .row-yellow .material-symbols-outlined { color: #D97706; }
+    .row-yellow-label { color: #B45309; }
+
+    .row-red { background: #FFE4E6; }
+    .row-red .material-symbols-outlined { color: #DC2626; }
+    .row-red-label { color: #B91C1C; }
+
+    /* ── Notice banner ── */
+    .notice-banner {
+      background: #EFEEFF;
+      border: 1px solid rgba(91,85,200,0.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 13px; color: #1F2937; line-height: 1.55;
+    }
+    .notice-banner .material-symbols-outlined { color: #5B55C8; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#" class="px-4 py-2 rounded-xl text-sm font-medium text-neutral-secondary hover:text-neutral-text hover:bg-neutral-bg transition-all duration-150">Inicio</a>
+        <a href="#" class="px-4 py-2 rounded-xl text-sm font-medium text-neutral-secondary hover:text-neutral-text hover:bg-neutral-bg transition-all duration-150">Hospedajes</a>
+        <a href="#" class="px-4 py-2 rounded-xl text-sm font-medium text-neutral-secondary hover:text-neutral-text hover:bg-neutral-bg transition-all duration-150">Anfitriones</a>
+        <a href="#" class="px-4 py-2 rounded-xl text-sm font-medium text-primary bg-soft-highlight">Legal</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="page-hero">
+    <div class="max-content-width">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-6">
+        <a href="#" class="text-sm text-neutral-secondary hover:text-primary transition-colors">Inicio</a>
+        <span class="material-symbols-outlined text-neutral-border" style="font-size:16px">chevron_right</span>
+        <a href="#" class="text-sm text-neutral-secondary hover:text-primary transition-colors">Legal</a>
+        <span class="material-symbols-outlined text-neutral-border" style="font-size:16px">chevron_right</span>
+        <span class="text-sm font-medium text-neutral-text">Opciones de Cancelación</span>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-soft-highlight border border-[#5B55C8]/20 rounded-full px-3 py-1 mb-4">
+            <span class="material-symbols-outlined text-primary" style="font-size:14px">event_busy</span>
+            <span class="text-xs font-semibold text-primary uppercase tracking-wider">Políticas</span>
+          </div>
+          <h1 class="text-[28px] font-semibold text-neutral-text leading-tight mb-2">Opciones de Cancelación</h1>
+          <p class="text-sm text-neutral-secondary max-w-xl leading-relaxed">
+            Los anfitriones eligen la política que mejor se adapta a su alojamiento. Antes de reservar, revisa qué política aplica en la sección de detalles del anuncio.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5 self-start md:self-auto shrink-0">
+          <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">calendar_today</span>
+          <span class="text-xs text-neutral-secondary font-medium">Actualización:</span>
+          <span class="text-xs font-semibold text-neutral-text">26 feb 2026</span>
+        </div>
+      </div>
+
+      <!-- Quick comparison pills -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        <a href="#flexible" class="inline-flex items-center gap-1.5 bg-[#DCFCE7] border border-[#BBF7D0] text-[#15803D] text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-80 transition-opacity">
+          <span style="width:6px;height:6px;border-radius:50%;background:#16A34A;display:inline-block;flex-shrink:0"></span>
+          Flexible
+        </a>
+        <a href="#moderada" class="inline-flex items-center gap-1.5 bg-[#DBEAFE] border border-[#BFDBFE] text-[#1D4ED8] text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-80 transition-opacity">
+          <span style="width:6px;height:6px;border-radius:50%;background:#2563EB;display:inline-block;flex-shrink:0"></span>
+          Moderada
+        </a>
+        <a href="#estricta" class="inline-flex items-center gap-1.5 bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-80 transition-opacity">
+          <span style="width:6px;height:6px;border-radius:50%;background:#D97706;display:inline-block;flex-shrink:0"></span>
+          Estricta
+        </a>
+        <a href="#noreembolso" class="inline-flex items-center gap-1.5 bg-[#FFE4E6] border border-[#FECACA] text-[#B91C1C] text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-80 transition-opacity">
+          <span style="width:6px;height:6px;border-radius:50%;background:#DC2626;display:inline-block;flex-shrink:0"></span>
+          No Reembolsable
+        </a>
+          </div>
+            <ul style="display: flex; gap: 18px; margin: 0; padding: 0; list-style: none;">
+              <li style="font-size: 15px; color: #5B55C8; font-weight: 500;">Mejora de experiencia</li>
+              <li style="font-size: 15px; color: #5B55C8; font-weight: 500;">Análisis de uso del sitio</li>
+              <li style="font-size: 15px; color: #5B55C8; font-weight: 500;">Personalización de contenido</li>
+            </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="max-content-width py-12">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden md:block w-56 shrink-0 sidebar-sticky">
+        <p class="text-[11px] font-bold text-neutral-secondary uppercase tracking-widest mb-3 px-2">Políticas</p>
+        <nav class="flex flex-col gap-0.5" id="sideNav">
+          <a href="#flexible" class="nav-item active" data-section="flexible">
+            <span class="nav-num">01</span>Flexible
+          </a>
+          <a href="#moderada" class="nav-item" data-section="moderada">
+            <span class="nav-num">02</span>Moderada
+          </a>
+          <a href="#estricta" class="nav-item" data-section="estricta">
+            <span class="nav-num">03</span>Estricta
+          </a>
+          <a href="#noreembolso" class="nav-item" data-section="noreembolso">
+            <span class="nav-num">04</span>No Reembolsable
+          </a>
+        </nav>
+
+        <!-- Legend -->
+        <div class="mt-6 bg-white border border-neutral-border rounded-card p-4 flex flex-col gap-3">
+          <p class="text-[11px] font-bold text-neutral-secondary uppercase tracking-widest">Leyenda</p>
+          <div class="flex items-center gap-2 text-xs text-neutral-secondary">
+            <div class="row-icon-wrap row-green w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined" style="font-size:13px;color:#16A34A">check_circle</span>
+            </div>
+            Reembolso total
+          </div>
+          <div class="flex items-center gap-2 text-xs text-neutral-secondary">
+            <div class="row-icon-wrap row-yellow w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined" style="font-size:13px;color:#D97706">info</span>
+            </div>
+            Reembolso parcial
+          </div>
+          <div class="flex items-center gap-2 text-xs text-neutral-secondary">
+            <div class="row-icon-wrap row-red w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined" style="font-size:13px;color:#DC2626">cancel</span>
+            </div>
+            Sin reembolso
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-4 bg-soft-highlight border border-[#5B55C8]/20 rounded-card p-4 flex flex-col gap-3">
+          <p class="text-xs font-semibold text-neutral-text">¿Dudas sobre tu reserva?</p>
+          <p class="text-xs text-neutral-secondary leading-relaxed">Nuestro equipo puede ayudarte a entender la política aplicada.</p>
+          <a href="#" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">support_agent</span>
+            Hablar con soporte
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="flex-1 flex flex-col gap-5 min-w-0">
+
+        <!-- Notice -->
+        <div class="notice-banner anim anim-1">
+          <span class="material-symbols-outlined">info</span>
+          <span>La política de cancelación de cada anuncio está visible antes de confirmar tu reserva. Revísala siempre en la sección de detalles del alojamiento.</span>
+        </div>
+
+        <!-- ── 01 Flexible ── -->
+        <div class="policy-card card-flexible anim anim-2" id="flexible">
+          <div class="policy-header">
+            <div class="flex items-start gap-3">
+              <div class="policy-icon">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div>
+                <p class="policy-num">01 — Política</p>
+                <p class="policy-name">Flexible</p>
+                <p class="policy-desc">La opción con mayor libertad para los huéspedes.</p>
+              </div>
+            </div>
+            <div class="flex-badge shrink-0">
+              <span class="dot"></span>
+              Mayor libertad
+            </div>
+          </div>
+          <div class="policy-body">
+            <div class="policy-row">
+              <div class="row-icon-wrap row-green">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div>
+                <p class="row-label row-green-label">Reembolso total</p>
+                <p class="row-text">Si cancelas hasta <strong style="color:#1F2937;font-weight:600">24 horas antes</strong> de la hora del check-in (generalmente 15:00 hora local).</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-yellow">
+                <span class="material-symbols-outlined">info</span>
+              </div>
+              <div>
+                <p class="row-label row-yellow-label">Reembolso parcial</p>
+                <p class="row-text">Si cancelas con menos de 24 horas de anticipación, no se reembolsará la primera noche, pero recibirás el dinero de las noches restantes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 02 Moderada ── -->
+        <div class="policy-card card-moderada anim anim-3" id="moderada">
+          <div class="policy-header">
+            <div class="flex items-start gap-3">
+              <div class="policy-icon">
+                <span class="material-symbols-outlined">balance</span>
+              </div>
+              <div>
+                <p class="policy-num">02 — Política</p>
+                <p class="policy-name">Moderada</p>
+                <p class="policy-desc">Un equilibrio entre flexibilidad y compromiso.</p>
+              </div>
+            </div>
+            <div class="flex-badge shrink-0">
+              <span class="dot"></span>
+              Equilibrada
+            </div>
+          </div>
+          <div class="policy-body">
+            <div class="policy-row">
+              <div class="row-icon-wrap row-green">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div>
+                <p class="row-label row-green-label">Reembolso total</p>
+                <p class="row-text">Si cancelas hasta <strong style="color:#1F2937;font-weight:600">5 días antes</strong> de la llegada.</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-yellow">
+                <span class="material-symbols-outlined">info</span>
+              </div>
+              <div>
+                <p class="row-label row-yellow-label">Reembolso parcial (50%)</p>
+                <p class="row-text">Si cancelas después de ese plazo, pero antes de las <strong style="color:#1F2937;font-weight:600">24 horas de la llegada</strong>.</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-red">
+                <span class="material-symbols-outlined">cancel</span>
+              </div>
+              <div>
+                <p class="row-label row-red-label">Sin reembolso</p>
+                <p class="row-text">Si cancelas el mismo día o no te presentas (no-show).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 03 Estricta ── -->
+        <div class="policy-card card-estricta anim anim-4" id="estricta">
+          <div class="policy-header">
+            <div class="flex items-start gap-3">
+              <div class="policy-icon">
+                <span class="material-symbols-outlined">lock</span>
+              </div>
+              <div>
+                <p class="policy-num">03 — Política</p>
+                <p class="policy-name">Estricta</p>
+                <p class="policy-desc">Para anfitriones con agendas muy ajustadas.</p>
+              </div>
+            </div>
+            <div class="flex-badge shrink-0">
+              <span class="dot"></span>
+              Compromiso firme
+            </div>
+          </div>
+          <div class="policy-body">
+            <div class="policy-row">
+              <div class="row-icon-wrap row-green">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div>
+                <p class="row-label row-green-label">Reembolso total</p>
+                <p class="row-text">Solo si cancelas dentro de las <strong style="color:#1F2937;font-weight:600">48 horas posteriores a la reserva</strong> y al menos <strong style="color:#1F2937;font-weight:600">14 días antes</strong> de la llegada.</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-yellow">
+                <span class="material-symbols-outlined">info</span>
+              </div>
+              <div>
+                <p class="row-label row-yellow-label">Reembolso del 50%</p>
+                <p class="row-text">Si cancelas entre <strong style="color:#1F2937;font-weight:600">7 y 14 días antes</strong> de la llegada.</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-red">
+                <span class="material-symbols-outlined">cancel</span>
+              </div>
+              <div>
+                <p class="row-label row-red-label">Sin reembolso</p>
+                <p class="row-text">Si cancelas con <strong style="color:#1F2937;font-weight:600">menos de 7 días</strong> de anticipación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 04 No Reembolsable ── -->
+        <div class="policy-card card-noreembolso anim anim-5" id="noreembolso">
+          <div class="policy-header">
+            <div class="flex items-start gap-3">
+              <div class="policy-icon">
+                <span class="material-symbols-outlined">money_off</span>
+              </div>
+              <div>
+                <p class="policy-num">04 — Política</p>
+                <p class="policy-name">No Reembolsable</p>
+                <p class="policy-desc">Suele ofrecer un precio más bajo a cambio de un compromiso firme.</p>
+              </div>
+            </div>
+            <div class="flex-badge shrink-0">
+              <span class="dot"></span>
+              Precio reducido
+            </div>
+          </div>
+          <div class="policy-body">
+            <div class="policy-row">
+              <div class="row-icon-wrap row-red">
+                <span class="material-symbols-outlined">cancel</span>
+              </div>
+              <div>
+                <p class="row-label row-red-label">Sin reembolso</p>
+                <p class="row-text">No se realizarán reembolsos en caso de cancelación en ningún momento después de confirmar la reserva.</p>
+              </div>
+            </div>
+            <div class="policy-row">
+              <div class="row-icon-wrap row-yellow">
+                <span class="material-symbols-outlined">gavel</span>
+              </div>
+              <div>
+                <p class="row-label row-yellow-label">Excepción: Fuerza Mayor</p>
+                <p class="row-text">Se considerará reembolso únicamente si la cancelación es por causa de <strong style="color:#1F2937;font-weight:600">fuerza mayor debidamente documentada</strong> (desastres naturales, emergencias médicas graves, etc.).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /flex -->
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-2">
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">
+            Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor confianza.
+          </p>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors font-semibold" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <div class="flex gap-4">
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+              <span class="material-symbols-outlined text-xl">language</span>
+            </a>
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+              <span class="material-symbols-outlined text-xl">camera</span>
+            </a>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés (US)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Sidebar active on scroll */
+    const sections = document.querySelectorAll('#flexible, #moderada, #estricta, #noreembolso');
+    const navLinks = document.querySelectorAll('.nav-item[data-section]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte - Centro de Mensajería</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0f1117;
+    --bg-secondary: #181b25;
+    --bg-card: #1e2230;
+    --bg-card-hover: #252a3a;
+    --bg-active: #2a3048;
+    --accent: #4f6df5;
+    --accent-light: #6b85ff;
+    --accent-glow: rgba(79, 109, 245, 0.15);
+    --accent-glow-strong: rgba(79, 109, 245, 0.3);
+    --text-primary: #e8eaf0;
+    --text-secondary: #8b90a5;
+    --text-muted: #5a5f75;
+    --border: #2a2e3e;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --orange: #fb923c;
+    --purple: #a78bfa;
+    --cyan: #22d3ee;
+    --huesped-tag: #3b82f6;
+    --anfitrion-tag: #8b5cf6;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── LAYOUT ── */
+  .app {
+    display: grid;
+    grid-template-columns: 60px 380px 1fr 340px;
+    grid-template-rows: 1fr;
+    height: 100vh;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  .sidebar {
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 8px;
+  }
+
+  .sidebar-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 20px var(--accent-glow-strong);
+  }
+
+  .sidebar-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-muted);
+    position: relative;
+  }
+
+  .sidebar-item:hover { background: var(--bg-card); color: var(--text-secondary); }
+  .sidebar-item.active {
+    background: var(--accent-glow);
+    color: var(--accent-light);
+  }
+  .sidebar-item.active::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    width: 3px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .sidebar-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    background: var(--danger);
+    border-radius: 50%;
+    border: 2px solid var(--bg-secondary);
+  }
+
+  .sidebar-spacer { flex: 1; }
+
+  /* ── TICKET LIST ── */
+  .ticket-panel {
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .ticket-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ticket-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ticket-header h2 .count {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    background: var(--accent-glow);
+    color: var(--accent-light);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    transition: border-color 0.2s;
+  }
+  .search-box:focus-within { border-color: var(--accent); }
+  .search-box svg { color: var(--text-muted); flex-shrink: 0; }
+  .search-box input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 13px;
+    width: 100%;
+  }
+  .search-box input::placeholder { color: var(--text-muted); }
+
+  .ticket-filters {
+    display: flex;
+    gap: 6px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--text-muted); color: var(--text-primary); }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .ticket-list {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .ticket-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .ticket-item:hover { background: var(--bg-card); }
+  .ticket-item.active { background: var(--bg-active); }
+  .ticket-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+
+  .ticket-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .ticket-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .ticket-status {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .status-open { background: rgba(251, 191, 36, 0.15); color: var(--warning); }
+  .status-progress { background: rgba(79, 109, 245, 0.15); color: var(--accent-light); }
+  .status-resolved { background: rgba(52, 211, 153, 0.15); color: var(--success); }
+  .status-closed { background: rgba(90, 95, 117, 0.15); color: var(--text-muted); }
+
+  .ticket-subject {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ticket-participants {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .participant-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .tag-huesped {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  .tag-anfitrion {
+    background: rgba(139, 92, 246, 0.12);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .participant-tag svg { width: 12px; height: 12px; }
+
+  .ticket-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ticket-time {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .ticket-unread {
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── CHAT AREA ── */
+  .chat-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    overflow: hidden;
+  }
+
+  .chat-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+  }
+
+  .chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .chat-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .chat-header-info h3 { font-size: 15px; font-weight: 600; }
+  .chat-header-info p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .online-dot {
+    width: 7px; height: 7px;
+    background: var(--success);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .chat-header-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .msg-date-divider {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    position: relative;
+    margin: 8px 0;
+  }
+  .msg-date-divider span {
+    background: var(--bg-primary);
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .msg-date-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .msg-system {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 8px 16px;
+    border-radius: 20px;
+    align-self: center;
+    max-width: 80%;
+  }
+  .msg-system svg { vertical-align: middle; margin-right: 4px; }
+
+  .msg-row {
+    display: flex;
+    gap: 10px;
+    max-width: 70%;
+    animation: msgIn 0.3s ease;
+  }
+  .msg-row.sent { align-self: flex-end; flex-direction: row-reverse; }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .msg-avatar.huesped { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .msg-avatar.anfitrion { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  .msg-avatar.soporte { background: linear-gradient(135deg, var(--success), #059669); }
+
+  .msg-content {}
+  .msg-sender {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .msg-sender .role-label {
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .role-huesped { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .role-anfitrion { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .role-soporte { background: rgba(52,211,153,0.15); color: var(--success); }
+
+  .msg-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    position: relative;
+  }
+  .msg-row:not(.sent) .msg-bubble {
+    background: var(--bg-card);
+    border-top-left-radius: 4px;
+  }
+  .msg-row.sent .msg-bubble {
+    background: var(--accent);
+    color: #fff;
+    border-top-right-radius: 4px;
+  }
+
+  .msg-time {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .msg-row.sent .msg-time { text-align: right; }
+
+  /* Chat input */
+  .chat-input-area {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+
+  .chat-input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    transition: border-color 0.2s;
+  }
+  .chat-input-wrapper:focus-within { border-color: var(--accent); }
+
+  .chat-input-wrapper textarea {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 13px;
+    resize: none;
+    max-height: 100px;
+    line-height: 1.5;
+  }
+  .chat-input-wrapper textarea::placeholder { color: var(--text-muted); }
+
+  .input-actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  .input-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .input-btn:hover { color: var(--text-secondary); background: var(--bg-active); }
+  .input-btn.send {
+    background: var(--accent);
+    color: #fff;
+  }
+  .input-btn.send:hover { background: var(--accent-light); }
+
+  .quick-responses {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .quick-btn {
+    font-family: inherit;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .quick-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+
+  /* ── INCIDENT PANEL ── */
+  .incident-panel {
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .incident-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg-secondary);
+    z-index: 2;
+  }
+
+  .incident-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .incident-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .incident-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+  }
+  .info-label { font-size: 12px; color: var(--text-secondary); }
+  .info-value { font-size: 12px; font-weight: 600; }
+
+  .participant-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .participant-card .p-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .participant-card .p-info { flex: 1; }
+  .participant-card .p-name { font-size: 13px; font-weight: 600; }
+  .participant-card .p-role {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .incident-type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .type-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .type-option:hover { border-color: var(--text-muted); color: var(--text-primary); }
+  .type-option.selected {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    color: var(--accent-light);
+  }
+
+  .type-radio {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .type-option.selected .type-radio {
+    border-color: var(--accent);
+  }
+  .type-option.selected .type-radio::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .incident-textarea {
+    width: 100%;
+    min-height: 80px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .incident-textarea:focus { border-color: var(--accent); }
+  .incident-textarea::placeholder { color: var(--text-muted); }
+
+  .char-count {
+    text-align: right;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .btn-primary:hover { background: var(--accent-light); box-shadow: 0 0 20px var(--accent-glow-strong); }
+
+  .btn-secondary {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+  .priority-badges { display: flex; gap: 6px; margin-top: 4px; }
+  .priority-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .priority-badge.low { background: rgba(52,211,153,0.12); color: var(--success); }
+  .priority-badge.medium { background: rgba(251,191,36,0.12); color: var(--warning); }
+  .priority-badge.high { background: rgba(248,113,113,0.12); color: var(--danger); }
+  .priority-badge.selected { border-color: currentColor; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <a href="Dashboard.html" class="sidebar-logo" style="text-decoration:none;color:#fff;">S</a>
+    <a href="Dashboard.html" class="sidebar-item" title="Dashboard" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </a>
+    <a href="Mensajeria.html" class="sidebar-item active" title="Mensajería" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div class="sidebar-badge"></div>
+    </a>
+    <a href="Usuarios.html" class="sidebar-item" title="Usuarios" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </a>
+    <a href="Propiedades.html" class="sidebar-item" title="Propiedades" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+    <a href="Transacciones.html" class="sidebar-item" title="Transacciones" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    </a>
+    <a href="Validacion-Identidad.html" class="sidebar-item" title="Validación de Identidad" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="sidebar-badge" style="background:var(--warning);"></div>
+    </a>
+    <div class="sidebar-spacer"></div>
+    <a href="#" class="sidebar-item" title="Configuración" style="text-decoration:none;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </a>
+  </nav>
+
+  <!-- TICKET LIST -->
+  <div class="ticket-panel">
+    <div class="ticket-header">
+      <h2>
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Tickets
+        <span class="count">12</span>
+      </h2>
+      <div class="search-box">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscar por ticket, huésped o anfitrión...">
+      </div>
+    </div>
+
+    <div class="ticket-filters">
+      <button class="filter-btn active">Todos</button>
+      <button class="filter-btn">Abiertos</button>
+      <button class="filter-btn">En curso</button>
+      <button class="filter-btn">Resueltos</button>
+    </div>
+
+    <div class="ticket-list">
+
+      <!-- Ticket 1 - Active -->
+      <div class="ticket-item active">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0847</span>
+          <span class="ticket-status status-open">Abierto</span>
+        </div>
+        <div class="ticket-subject">Solicitud de alojamiento - Stratto Departamento</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Jordan Avir
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Carlos Méndez
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Hoy, 1:52 PM</span>
+          <span class="ticket-unread">3</span>
+        </div>
+      </div>
+
+      <!-- Ticket 2 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0846</span>
+          <span class="ticket-status status-progress">En curso</span>
+        </div>
+        <div class="ticket-subject">Disponibilidad de propiedad</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Franz Weber
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            María López
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Viernes</span>
+        </div>
+      </div>
+
+      <!-- Ticket 3 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0845</span>
+          <span class="ticket-status status-open">Abierto</span>
+        </div>
+        <div class="ticket-subject">Problema con check-in</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Gary Test
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Pedro Ramírez
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Jueves</span>
+          <span class="ticket-unread">1</span>
+        </div>
+      </div>
+
+      <!-- Ticket 4 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0844</span>
+          <span class="ticket-status status-progress">En curso</span>
+        </div>
+        <div class="ticket-subject">Solicitud de ayuda con reservación</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            ASSERT User
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Ana Gutiérrez
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Jueves</span>
+        </div>
+      </div>
+
+      <!-- Ticket 5 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0843</span>
+          <span class="ticket-status status-resolved">Resuelto</span>
+        </div>
+        <div class="ticket-subject">Solicitud de reservación confirmada</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Franz Weber
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Carlos Méndez
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Miércoles</span>
+        </div>
+      </div>
+
+      <!-- Ticket 6 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0842</span>
+          <span class="ticket-status status-resolved">Resuelto</span>
+        </div>
+        <div class="ticket-subject">Aceptar condiciones de propiedad</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Gary Test
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            María López
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Miércoles</span>
+        </div>
+      </div>
+
+      <!-- Ticket 7 -->
+      <div class="ticket-item">
+        <div class="ticket-top-row">
+          <span class="ticket-number">#TK-2024-0841</span>
+          <span class="ticket-status status-closed">Cerrado</span>
+        </div>
+        <div class="ticket-subject">Solicitud de alojamiento previa</div>
+        <div class="ticket-participants">
+          <span class="participant-tag tag-huesped">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Gary Test
+          </span>
+          <span class="participant-tag tag-anfitrion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Pedro Ramírez
+          </span>
+        </div>
+        <div class="ticket-meta">
+          <span class="ticket-time">Viernes pasado</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="chat-panel">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">JA</div>
+        <div class="chat-header-info">
+          <h3>#TK-2024-0847 — Jordan Avir</h3>
+          <p><span class="online-dot"></span> En línea · STRATTO DEPARTAMENTO</p>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button class="icon-btn" title="Llamar">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </button>
+        <button class="icon-btn" title="Ver detalle">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-messages">
+      <div class="msg-date-divider"><span>Hoy, 2 de Marzo 2026</span></div>
+
+      <!-- Huésped message -->
+      <div class="msg-row">
+        <div class="msg-avatar huesped">JA</div>
+        <div class="msg-content">
+          <div class="msg-sender">
+            Jordan Avir
+            <span class="role-label role-huesped">Huésped</span>
+          </div>
+          <div class="msg-bubble">quiero alojarme</div>
+          <div class="msg-time">1:52 PM</div>
+        </div>
+      </div>
+
+      <!-- System message -->
+      <div class="msg-system">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Solicitud de reserva aprobada
+      </div>
+
+      <!-- System message -->
+      <div class="msg-system">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        La reserva del 02 March al 08 March fue pagada
+      </div>
+
+      <!-- Support message (sent) -->
+      <div class="msg-row sent">
+        <div class="msg-avatar soporte">SP</div>
+        <div class="msg-content">
+          <div class="msg-sender" style="justify-content: flex-end;">
+            <span class="role-label role-soporte">Soporte</span>
+            Tú
+          </div>
+          <div class="msg-bubble">Hola Jordan, bienvenido. Tu reserva ha sido confirmada exitosamente. ¿Hay algo más en lo que pueda ayudarte?</div>
+          <div class="msg-time">2:05 PM</div>
+        </div>
+      </div>
+
+      <!-- Anfitrión message -->
+      <div class="msg-row">
+        <div class="msg-avatar anfitrion">CM</div>
+        <div class="msg-content">
+          <div class="msg-sender">
+            Carlos Méndez
+            <span class="role-label role-anfitrion">Anfitrión</span>
+          </div>
+          <div class="msg-bubble">Perfecto, ya preparé el departamento para la llegada del huésped. Las llaves están en la recepción.</div>
+          <div class="msg-time">2:10 PM</div>
+        </div>
+      </div>
+
+      <!-- Huésped message -->
+      <div class="msg-row">
+        <div class="msg-avatar huesped">JA</div>
+        <div class="msg-content">
+          <div class="msg-sender">
+            Jordan Avir
+            <span class="role-label role-huesped">Huésped</span>
+          </div>
+          <div class="msg-bubble">Gracias! ¿A qué hora puedo hacer el check-in?</div>
+          <div class="msg-time">2:15 PM</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea rows="1" placeholder="Escribe un mensaje como soporte..."></textarea>
+        <div class="input-actions">
+          <button class="input-btn" title="Adjuntar">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </button>
+          <button class="input-btn send" title="Enviar">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="quick-responses">
+        <button class="quick-btn">✅ Reserva confirmada</button>
+        <button class="quick-btn">🕐 Check-in: 3PM</button>
+        <button class="quick-btn">📋 Enviar instrucciones</button>
+        <button class="quick-btn">🔑 Datos de acceso</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCIDENT PANEL -->
+  <div class="incident-panel">
+    <div class="incident-header">
+      <h3>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Acciones del Ticket
+      </h3>
+    </div>
+
+    <!-- Participantes -->
+    <div class="incident-section">
+      <div class="incident-section-title">Participantes</div>
+      <div class="participant-card">
+        <div class="p-avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">JA</div>
+        <div class="p-info">
+          <div class="p-name">Jordan Avir</div>
+          <div class="p-role" style="color: #60a5fa;">Huésped</div>
+        </div>
+      </div>
+      <div class="participant-card">
+        <div class="p-avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">CM</div>
+        <div class="p-info">
+          <div class="p-name">Carlos Méndez</div>
+          <div class="p-role" style="color: #a78bfa;">Anfitrión</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalles del ticket -->
+    <div class="incident-section">
+      <div class="incident-section-title">Detalles de Reserva</div>
+      <div class="info-row">
+        <span class="info-label">Check-in</span>
+        <span class="info-value">02 Mar 2026</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Check-out</span>
+        <span class="info-value">08 Mar 2026</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Propiedad</span>
+        <span class="info-value">Stratto Depto.</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Estado pago</span>
+        <span class="info-value" style="color: var(--success);">Pagado ✓</span>
+      </div>
+    </div>
+
+    <!-- Prioridad -->
+    <div class="incident-section">
+      <div class="incident-section-title">Prioridad</div>
+      <div class="priority-badges">
+        <span class="priority-badge low selected">Baja</span>
+        <span class="priority-badge medium">Media</span>
+        <span class="priority-badge high">Alta</span>
+      </div>
+    </div>
+
+    <!-- Tipo de incidente -->
+    <div class="incident-section">
+      <div class="incident-section-title">Tipo de Incidente</div>
+      <div class="incident-type-grid">
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Acoso
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Inhabitabilidad
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Riesgo seguridad
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Fuerza mayor
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Interrupción
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Retiro voluntario
+        </div>
+        <div class="type-option selected">
+          <div class="type-radio"></div>
+          Molestia menor
+        </div>
+        <div class="type-option">
+          <div class="type-radio"></div>
+          Otro
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="incident-section">
+      <div class="incident-section-title">Descripción del incidente</div>
+      <textarea class="incident-textarea" placeholder="Describe el incidente o acción a tomar..."></textarea>
+      <div class="char-count">0/500</div>
+      <button class="btn-primary">Registrar Incidente</button>
+      <button class="btn-secondary">Cerrar Ticket</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Interactive type selection
+  document.querySelectorAll('.type-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+
+  // Priority selection
+  document.querySelectorAll('.priority-badge').forEach(badge => {
+    badge.addEventListener('click', () => {
+      document.querySelectorAll('.priority-badge').forEach(b => b.classList.remove('selected'));
+      badge.classList.add('selected');
+    });
+  });
+
+  // Ticket selection
+  document.querySelectorAll('.ticket-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.ticket-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Char counter
+  const textarea = document.querySelector('.incident-textarea');
+  const counter = document.querySelector('.char-count');
+  textarea.addEventListener('input', () => {
+    counter.textContent = `${textarea.value.length}/500`;
+    if (textarea.value.length > 500) {
+      textarea.value = textarea.value.substring(0, 500);
+      counter.textContent = '500/500';
+    }
+  });
+
+  // Auto-resize chat input
+  const chatInput = document.querySelector('.chat-input-wrapper textarea');
+  chatInput.addEventListener('input', () => {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+  });
+</script>
+
+</body>
+</html>

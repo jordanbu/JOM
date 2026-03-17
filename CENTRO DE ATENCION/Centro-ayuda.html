@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Centro de Ayuda</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  </style>
+  <style>
+    /* ── Animations ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; animation: slideUp 0.4s ease forwards; }
+    .anim-1 { animation-delay: .04s }
+    .anim-2 { animation-delay: .08s }
+    .anim-3 { animation-delay: .12s }
+    .anim-4 { animation-delay: .16s }
+    .anim-5 { animation-delay: .20s }
+
+    /* ── Hero ── */
+    .help-hero {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 48px 0 40px;
+    }
+
+    /* ── Search bar ── */
+    .search-wrap {
+      position: relative;
+      max-width: 540px;
+    }
+    .search-wrap .material-symbols-outlined.icon-left {
+      position: absolute; left: 16px; top: 50%;
+      transform: translateY(-50%);
+      color: #6B7280; font-size: 20px; pointer-events: none;
+    }
+    .search-wrap input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px 0 48px;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: #1F2937;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-wrap input:focus { border-color: #5B55C8; }
+    .search-wrap input::placeholder { color: #9CA3AF; }
+
+    /* ── Category tabs ── */
+    .cat-tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      background: #fff;
+      font-size: 13px; font-weight: 500;
+      color: #6B7280;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .cat-tab:hover { border-color: #5B55C8; color: #5B55C8; background: #EFEEFF; }
+    .cat-tab.active {
+      border-color: #5B55C8; color: #5B55C8;
+      background: #EFEEFF; font-weight: 600;
+    }
+    .cat-tab .material-symbols-outlined { font-size: 17px; }
+
+    /* ── Section header ── */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-num-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #5B55C8; opacity: 0.7; margin-bottom: 2px;
+    }
+    .section-title {
+      font-size: 18px; font-weight: 600; color: #1F2937; line-height: 1.25;
+    }
+
+    /* ── FAQ accordion ── */
+    .faq-group {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .faq-item { border-bottom: 1px solid #E5E7EB; }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-trigger {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      padding: 18px 24px;
+      background: none; border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s;
+    }
+    .faq-trigger:hover { background: #F8F9FC; }
+    .faq-trigger.open { background: #EFEEFF; }
+
+    .faq-q-left { display: flex; align-items: center; gap: 14px; }
+    .faq-num {
+      font-size: 12px; font-weight: 700;
+      color: #5B55C8; opacity: 0.6;
+      min-width: 22px; letter-spacing: 0.04em;
+    }
+    .faq-trigger.open .faq-num { opacity: 1; }
+    .faq-question {
+      font-size: 15px; font-weight: 600; color: #1F2937; line-height: 1.35;
+    }
+    .faq-trigger.open .faq-question { color: #5B55C8; }
+
+    .faq-chevron {
+      color: #9CA3AF; flex-shrink: 0;
+      transition: transform 0.25s ease;
+      font-size: 20px;
+    }
+    .faq-trigger.open .faq-chevron { transform: rotate(180deg); color: #5B55C8; }
+
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-body.open { max-height: 400px; }
+    .faq-body-inner {
+      padding: 0 24px 20px 60px;
+      font-size: 14px; line-height: 1.65; color: #6B7280;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 500; color: #6B7280;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active {
+      background: #EFEEFF; color: #5B55C8;
+      border-left-color: #5B55C8; font-weight: 600;
+    }
+    .nav-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #F8F9FC; flex-shrink: 0; }
+    .nav-item.active .nav-icon { background: #EFEEFF; }
+    .nav-item .nav-icon .material-symbols-outlined { font-size: 15px; color: #9CA3AF; }
+    .nav-item.active .nav-icon .material-symbols-outlined { color: #5B55C8; }
+
+    @media (min-width: 768px) {
+      .sidebar-sticky { position: sticky; top: 100px; }
+    }
+
+    /* ── Still need help card ── */
+    .help-cta {
+      background: #EFEEFF;
+      border: 1px solid rgba(91,85,200,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="help-hero">
+    <div class="max-content-width">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-6">
+      </div>
+
+      <div class="flex flex-col gap-4 mb-8">
+        <!-- Eliminado highlight vacío -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h1 class="text-[28px] font-semibold text-neutral-text leading-tight mb-2">¿En qué podemos ayudarte?</h1>
+            <p class="text-sm text-neutral-secondary max-w-lg leading-relaxed">
+              Bienvenido al soporte de JOM. Aquí encontrarás guías y respuestas para navegar por nuestra plataforma, ya seas viajero o anfitrión.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5 self-start md:self-auto shrink-0">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">calendar_today</span>
+            <span class="text-xs text-neutral-secondary font-medium">Actualización:</span>
+            <span class="text-xs font-semibold text-neutral-text">26 feb 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <span class="material-symbols-outlined icon-left">search</span>
+        <input type="text" placeholder="Buscar en el centro de ayuda…" id="searchInput" oninput="filterFAQs(this.value)" />
+      </div>
+
+      <!-- Category tabs -->
+      <div class="flex flex-wrap gap-2 mt-5">
+        <button class="cat-tab active" onclick="filterCategory('all', this)">
+          <span class="material-symbols-outlined">apps</span>
+          Todos
+        </button>
+        <button class="cat-tab" onclick="filterCategory('reservas', this)">
+          <span class="material-symbols-outlined">search</span>
+          Búsqueda y Reservas
+        </button>
+        <button class="cat-tab" onclick="filterCategory('cuenta', this)">
+          <span class="material-symbols-outlined">manage_accounts</span>
+          Gestión de Cuenta
+        </button>
+        <button class="cat-tab" onclick="filterCategory('problemas', this)">
+          <span class="material-symbols-outlined">build</span>
+          Resolución de Problemas
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="max-content-width py-12">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden md:block w-56 shrink-0 sidebar-sticky">
+        <!-- Eliminado texto Secciones -->
+        <nav class="flex flex-col gap-0.5" id="sideNav">
+          <a href="#reservas" class="nav-item active" data-section="reservas">
+            <div class="nav-icon" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#EFEEFF;border-radius:8px;font-weight:bold;font-size:18px;color:#5B55C8;">1</div>
+            Búsqueda y Reservas
+          </a>
+          <a href="#cuenta" class="nav-item" data-section="cuenta">
+            <div class="nav-icon" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#EFEEFF;border-radius:8px;font-weight:bold;font-size:18px;color:#5B55C8;">2</div>
+            Gestión de Cuenta
+          </a>
+          <a href="#problemas" class="nav-item" data-section="problemas">
+            <div class="nav-icon" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#EFEEFF;border-radius:8px;font-weight:bold;font-size:18px;color:#5B55C8;">3</div>
+            Resolución de Problemas
+          </a>
+        </nav>
+
+        <!-- Stats -->
+        <!-- Eliminado bloque de Preguntas y Secciones -->
+
+        <!-- Help CTA -->
+        <div class="help-cta mt-5">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary" style="font-size:20px">support_agent</span>
+            <p class="text-sm font-semibold text-neutral-text">¿No encontraste tu respuesta?</p>
+          </div>
+          <p class="text-xs text-neutral-secondary leading-relaxed">Nuestro equipo está listo para ayudarte directamente.</p>
+          <a href="#" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">chat</span>
+            Iniciar chat
+          </a>
+          <a href="mailto:soporte@jom.com" class="flex items-center justify-center gap-2 bg-white border border-neutral-border text-neutral-text text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-neutral-bg transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+            soporte@jom.com
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="flex-1 flex flex-col gap-8 min-w-0" id="faqContent">
+
+        <!-- ── Sección: Búsqueda y Reservas ── -->
+        <div class="anim anim-1" id="reservas" data-category="reservas">
+          <div class="section-header">
+            <!-- Eliminado icono vacío 'section-icon' -->
+            <div>
+              <h2 class="section-title">Búsqueda y Reservas</h2>
+            </div>
+          </div>
+
+          <div class="faq-group">
+            <!-- Q1 -->
+            <div class="faq-item" data-q="cómo buscar alojamiento destino fechas huéspedes filtros">
+              <button class="faq-trigger" onclick="toggleFAQ(this)">
+                <div class="faq-q-left">
+                  <span class="faq-num">01</span>
+                  <span class="faq-question">¿Cómo buscar un alojamiento?</span>
+                </div>
+                <span class="material-symbols-outlined faq-chevron">expand_more</span>
+              </button>
+              <div class="faq-body">
+                <div class="faq-body-inner">
+                  Ingresa tu destino, fechas y número de huéspedes en la barra de búsqueda principal. Luego usa los filtros para seleccionar servicios específicos como wifi, piscina, estacionamiento o mascotas, y ajusta el rango de precios según tu presupuesto. Los resultados se actualizan en tiempo real.
+                </div>
+              </div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item" data-q="pagos pago reserva plataforma segura dinero anfitrión check-in">
+              <button class="faq-trigger" onclick="toggleFAQ(this)">
+                <div class="faq-q-left">
+                  <span class="faq-num">02</span>
+                  <span class="faq-question">¿Cómo funcionan los pagos?</span>
+                </div>
+                <span class="material-symbols-outlined faq-chevron">expand_more</span>
+              </button>
+              <div class="faq-body">
+                <div class="faq-body-inner">
+                  Al solicitar una reserva, realizas el pago a través de nuestra plataforma segura. El dinero queda retenido por JOM y solo se transfiere al anfitrión <strong style="color:#1F2937;font-weight:600">24 horas después de tu check-in exitoso</strong>. Esto garantiza que el alojamiento sea exactamente como fue descrito antes de que el anfitrión reciba el pago.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Sección: Gestión de Cuenta ── -->
+        <div class="anim anim-2" id="cuenta" data-category="cuenta">
+          <div class="section-header">
+            <!-- Eliminado icono 'manage_accounts' -->
+            <div>
+              <!-- Eliminado '02 — Cuenta' -->
+              <h2 class="section-title">Gestión de Cuenta</h2>
+            </div>
+          </div>
+
+          <div class="faq-group">
+            <!-- Q3 -->
+            <div class="faq-item" data-q="contraseña olvidé recuperar correo inicio sesión restablecer">
+              <button class="faq-trigger" onclick="toggleFAQ(this)">
+                <div class="faq-q-left">
+                  <span class="faq-num">03</span>
+                  <span class="faq-question">Recuperar contraseña</span>
+                </div>
+                <span class="material-symbols-outlined faq-chevron">expand_more</span>
+              </button>
+              <div class="faq-body">
+                <div class="faq-body-inner">
+                  Si olvidaste tu contraseña, ve a la pantalla de inicio de sesión y haz clic en <em style="font-style:normal;font-weight:600;color:#1F2937">"Olvidé mi contraseña"</em>. Recibirás un correo electrónico con las instrucciones para restablecerla. El enlace es válido por 30 minutos. Si no lo recibes, revisa tu carpeta de spam.
+                </div>
+              </div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item" data-q="verificación identidad seguridad documento foto comunidad">
+              <button class="faq-trigger" onclick="toggleFAQ(this)">
+                <div class="faq-q-left">
+                  <span class="faq-num">04</span>
+                  <span class="faq-question">Verificación de identidad</span>
+                </div>
+                <span class="material-symbols-outlined faq-chevron">expand_more</span>
+              </button>
+              <div class="faq-body">
+                <div class="faq-body-inner">
+                  Para mantener la seguridad en la plataforma, pedimos a todos los usuarios que verifiquen su identidad subiendo una foto de su documento oficial (cédula de identidad o pasaporte). Este proceso se realiza una sola vez y ayuda a construir confianza en la comunidad JOM. Tus datos están protegidos y encriptados.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Sección: Resolución de Problemas ── -->
+        <div class="anim anim-3" id="problemas" data-category="problemas">
+          <div class="section-header">
+            <!-- Eliminado icono 'build' -->
+            <div>
+              <h2 class="section-title">Resolución de Problemas</h2>
+            </div>
+          </div>
+
+          <div class="faq-group">
+            <!-- Q5 -->
+            <div class="faq-item" data-q="anfitrión cancela cancelación reembolso alojamiento similar equipo">
+              <button class="faq-trigger" onclick="toggleFAQ(this)">
+                <div class="faq-q-left">
+                  <span class="faq-num">05</span>
+                  <span class="faq-question">¿Qué hago si el anfitrión cancela?</span>
+                </div>
+                <span class="material-symbols-outlined faq-chevron">expand_more</span>
+              </button>
+              <div class="faq-body">
+                <div class="faq-body-inner">
+                  Si un anfitrión cancela tu reserva, recibirás un <strong style="color:#1F2937;font-weight:600">reembolso total inmediato</strong> sin cargos adicionales. Además, nuestro equipo de soporte se pondrá en contacto contigo para ayudarte a encontrar un alojamiento similar disponible para tus fechas. Tu tranquilidad es nuestra prioridad.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Empty state (búsqueda sin resultados) ── -->
+        <div id="emptyState" class="hidden flex-col items-center text-center py-16 gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-neutral-bg border border-neutral-border flex items-center justify-center mx-auto">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:26px">search_off</span>
+          </div>
+          <div>
+            <p class="font-semibold text-neutral-text mb-1">Sin resultados</p>
+            <p class="text-sm text-neutral-secondary">No encontramos preguntas que coincidan con tu búsqueda.</p>
+          </div>
+          <a href="mailto:soporte@jom.com" class="inline-flex items-center gap-2 bg-primary text-white text-sm font-semibold px-5 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">mail</span>
+            Preguntar al equipo
+          </a>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /flex -->
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-2">
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">
+            Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor confianza.
+          </p>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors font-semibold" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <div class="flex gap-4">
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+              <span class="material-symbols-outlined text-xl">language</span>
+            </a>
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#">
+              <span class="material-symbols-outlined text-xl">camera</span>
+            </a>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés (US)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Accordion ── */
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const body = item.querySelector('.faq-body');
+      const isOpen = btn.classList.contains('open');
+
+      // Close all in same group
+      const group = btn.closest('.faq-group');
+      group.querySelectorAll('.faq-trigger.open').forEach(t => {
+        t.classList.remove('open');
+        t.nextElementSibling.classList.remove('open');
+      });
+
+      if (!isOpen) {
+        btn.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+
+    /* ── Category filter ── */
+    function filterCategory(cat, clickedBtn) {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      clickedBtn.classList.add('active');
+
+      const sections = document.querySelectorAll('[data-category]');
+      if (cat === 'all') {
+        sections.forEach(s => s.style.display = '');
+      } else {
+        sections.forEach(s => {
+          s.style.display = s.dataset.category === cat ? '' : 'none';
+        });
+      }
+      checkEmpty();
+    }
+
+    /* ── Search filter ── */
+    function filterFAQs(query) {
+      const q = query.toLowerCase().trim();
+      const items = document.querySelectorAll('.faq-item');
+
+      // Reset category tabs to 'all'
+      if (q) {
+        document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+        document.querySelector('[onclick="filterCategory(\'all\', this)"]').classList.add('active');
+        document.querySelectorAll('[data-category]').forEach(s => s.style.display = '');
+      }
+
+      let anyVisible = false;
+      items.forEach(item => {
+        const text = (item.querySelector('.faq-question').textContent + ' ' + (item.dataset.q || '')).toLowerCase();
+        const show = !q || text.includes(q);
+        item.style.display = show ? '' : 'none';
+        if (show) anyVisible = true;
+      });
+
+      // Hide sections that have all items hidden
+      document.querySelectorAll('[data-category]').forEach(section => {
+        if (!q) { section.style.display = ''; return; }
+        const visible = [...section.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+        section.style.display = visible ? '' : 'none';
+      });
+
+      checkEmpty();
+    }
+
+    function checkEmpty() {
+      const empty = document.getElementById('emptyState');
+      const sections = document.querySelectorAll('[data-category]');
+      const anyVisible = [...sections].some(s => s.style.display !== 'none');
+      empty.style.display = anyVisible ? 'none' : 'flex';
+    }
+
+    /* ── Sidebar active on scroll ── */
+    const sections = document.querySelectorAll('[data-category]');
+    const navLinks = document.querySelectorAll('.nav-item[data-section]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Editar anuncio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#5B55C8",
+            primaryHover: "#4A45B0",
+            surface: "#F8F9FC",
+            divider: "#E5E7EB",
+            text: "#1F2937",
+            text2: "#6B7280",
+            text3: "#9CA3AF",
+            "primary-light": "#EFEEFF",
+          },
+          fontFamily: { sans: ["Inter", "sans-serif"] },
+        },
+      },
+    };
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; background: #F8F9FC; color: #1F2937; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align: middle; line-height:1; }
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 9999px; }
+
+    /* List item hover/active */
+    .step-btn { transition: background .12s; }
+    .step-btn:hover { background: #F3F4F6; }
+    .step-btn.is-active { border-left: 3px solid #5B55C8; background: #F3F4F6; }
+
+    /* Drag */
+    .dragging { opacity:.9; transform:scale(1.02); box-shadow:0 16px 28px rgba(0,0,0,.12); z-index:50; }
+    .drag-over { outline: 2px dashed rgba(91,85,200,.5); outline-offset:3px; }
+    .ghost-placeholder { background: rgba(91,85,200,.05); border:2px dashed rgba(91,85,200,.3); }
+
+    .badge-cover {
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
+      color:#fff; font-size:10px; font-weight:700;
+      padding:3px 9px; border-radius:9999px;
+      text-transform:uppercase; letter-spacing:.1em;
+    }
+    .photo-overlay { transition: opacity .15s; }
+    .photo-card:hover .photo-overlay { opacity:1; }
+
+    /* ── MOBILE BOTTOM NAV ── */
+    #mobile-bottom-nav { display: none; }
+    @media (max-width: 767px) {
+      #mobile-bottom-nav {
+        display: flex;
+        position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+        background: #fff; border-top: 1px solid #E5E7EB; z-index: 60;
+        align-items: stretch;
+      }
+      .bnav-item {
+        flex: 1; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 2px;
+        text-decoration: none; color: #9CA3AF;
+        font-size: 10px; font-weight: 500;
+        transition: color .12s; -webkit-tap-highlight-color: transparent;
+        border: none; background: none; cursor: pointer; padding: 0;
+      }
+      .bnav-item.active { color: #5B55C8; }
+      .bnav-item .material-symbols-outlined { font-size: 22px; }
+      body { padding-bottom: 60px; }
+    }
+
+    /* ── MOBILE PANEL SLIDE ── */
+    @media (max-width: 767px) {
+      #mobile-panel {
+        position: fixed; inset: 0; top: 56px; bottom: 60px;
+        background: #fff; z-index: 40;
+        transform: translateX(100%);
+        transition: transform .25s cubic-bezier(.4,0,.2,1);
+        display: flex; flex-direction: column;
+        overflow: hidden;
+      }
+      #mobile-panel.open {
+        transform: translateX(0);
+      }
+      #desktop-layout { display: none; }
+      #mobile-list-view { display: flex; flex-direction: column; flex:1; min-height:0; }
+    }
+    @media (min-width: 768px) {
+      #mobile-panel { display: none !important; }
+      #mobile-list-view { display: none !important; }
+      #desktop-layout { display: flex; }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="h-14 md:h-20 w-full flex items-center justify-between px-4 md:px-8 bg-white border-b border-divider fixed top-0 left-0 z-50">
+  <div class="flex items-center gap-2">
+    <div class="w-7 h-7 md:w-8 md:h-8 bg-primary rounded-lg flex items-center justify-center">
+      <span class="text-white font-bold text-xs">jom</span>
+    </div>
+    <span class="font-bold text-lg md:text-xl tracking-tight">jom</span>
+  </div>
+  <div class="flex items-center gap-2 md:gap-6">
+    <button class="text-text2 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-[22px]">notifications</span>
+    </button>
+    <div class="flex items-center gap-2 p-1 pl-3 border border-divider rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+      <span class="material-symbols-outlined text-text2 text-[20px]">menu</span>
+      <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-200 overflow-hidden">
+        <img alt="avatar" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE: PANEL (slides in over list)
+═══════════════════════════════════════ -->
+<div id="mobile-panel">
+  <!-- Panel header with back -->
+  <div class="h-14 flex items-center gap-3 px-4 border-b border-divider shrink-0 bg-white">
+    <button id="mobile-back" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface transition-colors">
+      <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+    </button>
+    <h2 id="mobile-panel-title" class="text-[16px] font-semibold text-text flex-1 truncate"></h2>
+  </div>
+  <!-- Panel content -->
+  <div id="mobile-panel-body" class="flex-1 overflow-y-auto custom-scrollbar min-h-0">
+    <!-- injected per step -->
+  </div>
+  <!-- Panel footer -->
+  <div class="h-16 border-t border-divider flex items-center justify-end px-4 gap-3 shrink-0 bg-white">
+    <button id="mobile-cancel" class="px-5 h-10 border border-divider rounded-xl font-semibold text-sm text-text2 hover:bg-surface transition-colors">Cancelar</button>
+    <button class="px-6 h-10 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-primaryHover transition-colors">Guardar</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MOBILE: LIST VIEW
+═══════════════════════════════════════ -->
+<div id="mobile-list-view" class="pt-14 pb-0 flex flex-col" style="min-height:100vh;">
+  <!-- Top label -->
+  <div class="px-4 pt-5 pb-3 border-b border-divider bg-white">
+    <p class="text-[11px] font-bold uppercase tracking-widest text-text3 mb-1">Tu anuncio</p>
+    <h1 class="text-[20px] font-bold text-text leading-tight" style="letter-spacing:-.02em;">Editar anuncio</h1>
+    <p class="text-[13px] text-text2 mt-1">Selecciona una sección para editar</p>
+  </div>
+
+  <!-- Listing preview strip -->
+  <div class="px-4 py-4 bg-white border-b border-divider flex items-center gap-3">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi-a2zeNESSCcjM5YtjRfe5aJdIZ1mS_qroapge2Psj2vA9hxovH-jNDlNIvGEgfB4kmD_-TzNyerMxQx_VTP-tmUMJ2E0hYQtsF39x-hb7BmL8teMA2Nlgl_2_SVLlPpCP_eIO5zfUyYZf7Yo_Wt1srkzY8YFXEzL2DJtT0sQ3pn1mFJJN22RzwoIyyFla32ld_Z-89fKK39lSubciyGuQxf4b94s2l9vhG32rhIxDdBWcMTeR4DU6tpVNpN5gTJpvFtN2s-wjw"
+      class="w-14 h-14 rounded-xl object-cover shrink-0" alt="preview" />
+    <div class="min-w-0">
+      <p class="text-[14px] font-semibold text-text truncate">Elegante Depto Stratto</p>
+      <p class="text-[12px] text-text2">Santa Cruz, Bolivia</p>
+      <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Publicado
+      </span>
+    </div>
+  </div>
+
+  <!-- Steps list -->
+  <div class="flex-1 bg-white">
+    <div id="mobile-steps-list" class="flex flex-col divide-y divide-divider">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DESKTOP LAYOUT
+═══════════════════════════════════════ -->
+<div id="desktop-layout" class="pt-20 flex" style="height:100vh;">
+  <!-- Desktop sidebar nav -->
+  <aside class="w-56 bg-white border-r border-divider flex-shrink-0 flex flex-col">
+    <nav class="px-3 py-5 flex flex-col gap-0.5">
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text2 hover:bg-surface transition-colors text-[13px] font-medium" href="#">
+        <span class="material-symbols-outlined text-[19px]">calendar_today</span>Hoy
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text2 hover:bg-surface transition-colors text-[13px] font-medium" href="#">
+        <span class="material-symbols-outlined text-[19px]">campaign</span>Anuncios
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text2 hover:bg-surface transition-colors text-[13px] font-medium" href="#">
+        <span class="material-symbols-outlined text-[19px]">calendar_month</span>Calendario
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text2 hover:bg-surface transition-colors text-[13px] font-medium" href="#">
+        <span class="material-symbols-outlined text-[19px]">chat_bubble</span>Mensajería
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-light text-primary font-semibold text-[13px]" href="#">
+        <span class="material-symbols-outlined text-[19px]">grid_view</span>Dashboard
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Desktop main area -->
+  <main class="flex-1 overflow-hidden p-6">
+    <div class="flex h-full rounded-xl overflow-hidden border border-divider bg-white" style="max-width:1100px;margin:0 auto;">
+
+      <!-- Desktop steps list -->
+      <aside class="w-[340px] flex-shrink-0 border-r border-divider flex flex-col min-h-0">
+        <div class="px-5 py-4 border-b border-divider flex items-center justify-between shrink-0">
+          <h2 class="text-[16px] font-semibold text-text">Editar anuncio</h2>
+        </div>
+        <div id="desktop-steps-list" class="flex-1 overflow-y-auto custom-scrollbar flex flex-col divide-y divide-[#F3F4F6]">
+          <!-- injected by JS -->
+        </div>
+      </aside>
+
+      <!-- Desktop right panel -->
+      <section class="flex-1 min-w-0 flex flex-col min-h-0">
+        <div class="px-7 py-4 border-b border-divider shrink-0">
+          <h2 id="desktop-panel-title" class="text-[16px] font-semibold text-text"></h2>
+        </div>
+        <div id="desktop-panel-body" class="flex-1 overflow-y-auto custom-scrollbar min-h-0 px-7 py-6">
+          <!-- injected by JS -->
+        </div>
+        <div class="h-16 border-t border-divider flex items-center justify-end px-7 gap-3 shrink-0">
+          <button class="px-5 h-10 border border-divider rounded-xl font-semibold text-sm text-text2 hover:bg-surface">Cancelar</button>
+          <button class="px-6 h-10 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-primaryHover">Guardar cambios</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+(function () {
+
+  // ── STEPS DATA ──────────────────────────────────────────────
+  const steps = [
+    {
+      id: "photos",
+      label: "Recorrido fotográfico",
+      sub: "8 fotos cargadas",
+      icon: "photo_library",
+      hasPreview: true,
+    },
+    { id: "title",       label: "Título y descripción",     sub: "Elegante Depto Stratto",                    icon: "title" },
+    { id: "type",        label: "Tipo de hospedaje",        sub: "Departamento • Alojamiento entero",          icon: "home" },
+    { id: "prices",      label: "Precios",                  sub: "200 BOB / noche • +50 BOB fin de semana",   icon: "sell" },
+    { id: "services",    label: "Servicios",                sub: "Wifi, Cocina, Aire acond...",                icon: "wifi" },
+    { id: "capacity",    label: "Capacidad",                sub: "2 huéspedes • 1 habitación, 1 cama",        icon: "people" },
+    { id: "location",    label: "Ubicación",                sub: "Santa Cruz • Calle Los Pinos...",            icon: "location_on" },
+    { id: "reservation", label: "Tipo de reservación",      sub: "Solicitud • Requiere aprobación",           icon: "event_available" },
+    { id: "rules",       label: "Reglas de la casa",        sub: "4 activas • No mascotas, No fumar...",      icon: "rule" },
+    { id: "policy",      label: "Política de cancelación",  sub: "Estándar • Reembolso hasta 5 días",         icon: "policy" },
+    { id: "checkin",     label: "Check-in / Check-out",     sub: "Entrada: 14:00 • Salida: 11:00",            icon: "key" },
+    { id: "status",      label: "Estado del anuncio",       sub: "Publicado • Visible para huéspedes",        icon: "visibility" },
+  ];
+
+  let currentStep = "photos";
+
+  // ── PHOTO STATE ──────────────────────────────────────────────
+  let photos = [
+    { id:"p1", src:"https://lh3.googleusercontent.com/aida-public/AB6AXuB61c_bNrtbDaW7hwcLqPbMpv9nIZ9EOJoPRgfoP0WvRMprlIG8FLbuSkiJeDeQA4YGuxh1G-4fCKDeWGQ407UrtrLGltbBOqRyxuoR5iK2YdiA5Hi9_pVhVyFrRzpSlXzk-qDXIcraxyIYYSgIsSRKJoWvxdXHLz8OmDmMEosmc8HYdPlljZ1EGKbIueb3D9xXVjuTSpzsRFdipvJoVvpkdEaBPgfchdMy8wmbW4jgImk_cA9KUDUyyrjipzPGm4MRHzd721SGP8s", alt:"Living" },
+    { id:"p2", src:"https://lh3.googleusercontent.com/aida-public/AB6AXuBlnGxJRM02f8Hw8sEGHoqo4LL66Qd5WLXbVS2SQtHLaVTjg-VlrSlb4cTctB3GcCJ16v9YejAGvB9CB2RabBOc0VIMmZ0uC8yCsnM7il-NVQtk_iGRPPq9XZpuF8KUwccLEIBKxPEqCWw3aXT5zXt2N3h8PEMJEr1qXp3Ry3NTCWEIM3PBqoNDosIX1-DbdbWO3Gn8VNk7Qw1B_VKOtBZp5aXcLvbj--3in1fx-MoM8-9YxoprqfOaBkFkKQMzWmMWTvf4rRWaiqw", alt:"Kitchen" },
+    { id:"p3", src:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80", alt:"Bedroom" },
+  ];
+  let dragSrcIndex = null;
+  let placeholderIndex = null;
+
+  // ── PANEL CONTENT BUILDERS ───────────────────────────────────
+  function buildPhotosPanel(container) {
+    container.innerHTML = "";
+
+    // Intro text
+    const intro = document.createElement("p");
+    intro.className = "text-[13px] text-text2 leading-relaxed mb-5";
+    intro.textContent = "Sube fotos de calidad para mostrar tu propiedad. Las imágenes claras y bien iluminadas aumentan las reservas.";
+    container.appendChild(intro);
+
+    // Upload button row
+    const row = document.createElement("div");
+    row.className = "flex items-center gap-3 mb-6";
+    row.innerHTML = `
+      <button id="uploadBtn-${container.id}" type="button"
+        class="flex items-center gap-2 bg-white border border-divider hover:bg-surface text-text px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all">
+        <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+        Subir fotos
+      </button>
+      <span id="msg-${container.id}" class="text-[12px] text-text3"></span>
+    `;
+    container.appendChild(row);
+
+    // Grid
+    const grid = document.createElement("div");
+    grid.id = `photoGrid-${container.id}`;
+    grid.className = "grid grid-cols-2 sm:grid-cols-3 gap-3";
+    container.appendChild(grid);
+
+    // Tip
+    const tip = document.createElement("div");
+    tip.className = "mt-6 p-4 bg-white border border-divider rounded-2xl flex items-start gap-3";
+    tip.innerHTML = `
+      <div class="w-9 h-9 bg-blue-50 rounded-full flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-blue-500 text-[18px]">lightbulb</span>
+      </div>
+      <div>
+        <h4 class="text-[13px] font-bold text-text mb-1">Consejo profesional</h4>
+        <p class="text-[13px] text-text2 leading-relaxed">Las propiedades con más de 10 fotos, incluyendo tomas del baño y el vecindario, tienen un 25% más de probabilidad de ser reservadas.</p>
+      </div>
+    `;
+    container.appendChild(tip);
+
+    renderPhotoGrid(grid, `msg-${container.id}`);
+
+    document.getElementById(`uploadBtn-${container.id}`).addEventListener("click", () => {
+      if (photos.length >= 30) return;
+      const toAdd = Math.min(2, 30 - photos.length);
+      for (let i = 0; i < toAdd; i++) {
+        photos.push({ id:`p${Date.now()}_${i}`, src:"https://images.unsplash.com/photo-1449247709967-d4461a6a6103?auto=format&fit=crop&w=800&q=80", alt:`Foto ${photos.length+1}` });
+      }
+      renderPhotoGrid(grid, `msg-${container.id}`);
+    });
+  }
+
+  function renderPhotoGrid(grid, msgId) {
+    const msgEl = document.getElementById(msgId);
+    grid.innerHTML = "";
+
+    photos.forEach((p, idx) => {
+      const tile = document.createElement("div");
+      tile.className = "photo-tile photo-card relative group bg-white rounded-xl overflow-hidden border border-divider aspect-square cursor-grab active:cursor-grabbing";
+      tile.draggable = true;
+      tile.dataset.index = idx;
+
+      if (placeholderIndex === idx) tile.classList.add("ghost-placeholder");
+
+      tile.innerHTML = `
+        <img src="${p.src}" alt="${p.alt}" class="w-full h-full object-cover" />
+        ${idx===0 ? `<div class="absolute top-2 left-2 z-10"><span class="badge-cover">Portada</span></div>` : ""}
+        <button type="button" data-action="delete"
+          class="absolute top-2 right-2 z-20 w-7 h-7 rounded-full bg-black/45 hover:bg-black/65 text-white flex items-center justify-center transition-all">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+        <div class="photo-overlay absolute inset-0 bg-black/30 opacity-0 flex flex-col justify-end p-2">
+          <span class="text-[10px] font-semibold text-white/80 text-center">Arrastrar para reordenar</span>
+        </div>
+      `;
+
+      tile.querySelector('[data-action="delete"]').addEventListener("click", e => {
+        e.stopPropagation();
+        photos.splice(Number(tile.dataset.index), 1);
+        placeholderIndex = null; dragSrcIndex = null;
+        renderPhotoGrid(grid, msgId);
+      });
+
+      tile.addEventListener("dragstart", e => {
+        dragSrcIndex = Number(tile.dataset.index);
+        tile.classList.add("dragging");
+        placeholderIndex = dragSrcIndex;
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", dragSrcIndex);
+      });
+      tile.addEventListener("dragend", () => {
+        tile.classList.remove("dragging");
+        placeholderIndex = null; dragSrcIndex = null;
+        Array.from(grid.children).forEach(el => el.classList.remove("drag-over"));
+        renderPhotoGrid(grid, msgId);
+      });
+      tile.addEventListener("dragover", e => {
+        e.preventDefault();
+        const over = Number(tile.dataset.index);
+        if (dragSrcIndex === null || over === dragSrcIndex) return;
+        placeholderIndex = over;
+        tile.classList.add("drag-over");
+      });
+      tile.addEventListener("dragleave", () => tile.classList.remove("drag-over"));
+      tile.addEventListener("drop", e => {
+        e.preventDefault();
+        const from = dragSrcIndex !== null ? dragSrcIndex : Number(e.dataTransfer.getData("text/plain"));
+        const to = Number(tile.dataset.index);
+        if (Number.isFinite(from) && Number.isFinite(to) && from !== to) {
+          const copy = photos.slice();
+          const [item] = copy.splice(from, 1);
+          copy.splice(to, 0, item);
+          photos = copy;
+        }
+        placeholderIndex = null; dragSrcIndex = null;
+        Array.from(grid.children).forEach(el => el.classList.remove("drag-over"));
+        renderPhotoGrid(grid, msgId);
+      });
+
+      grid.appendChild(tile);
+    });
+
+    // Add tile
+    if (photos.length < 30) {
+      const add = document.createElement("button");
+      add.type = "button";
+      add.className = "relative bg-white rounded-xl border-2 border-dashed border-divider hover:border-primary hover:bg-primary-light transition-all aspect-square flex flex-col items-center justify-center group";
+      add.innerHTML = `
+        <div class="w-9 h-9 rounded-full bg-[#F3F4F6] group-hover:bg-primary/10 flex items-center justify-center mb-2 transition-colors">
+          <span class="material-symbols-outlined text-text3 group-hover:text-primary">add</span>
+        </div>
+        <span class="text-[12px] font-medium text-text2 group-hover:text-primary">Agregar foto</span>
+      `;
+      add.addEventListener("click", () => {
+        photos.push({ id:`p${Date.now()}`, src:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80", alt:`Foto ${photos.length+1}` });
+        renderPhotoGrid(grid, msgId);
+      });
+      grid.appendChild(add);
+    }
+
+    if (msgEl) msgEl.textContent = photos.length < 5 ? `Sube al menos 5 fotos (${photos.length}/5)` : "";
+  }
+
+  function buildGenericPanel(step, container) {
+    container.innerHTML = `
+      <div class="flex flex-col items-center justify-center h-48 gap-3 text-center">
+        <div class="w-12 h-12 rounded-2xl bg-primary-light flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-[24px]">${step.icon}</span>
+        </div>
+        <p class="text-[14px] font-semibold text-text">${step.label}</p>
+        <p class="text-[13px] text-text2 max-w-[280px] leading-relaxed">${step.sub}</p>
+        <p class="text-[12px] text-text3 mt-2">Sección en desarrollo</p>
+      </div>
+    `;
+  }
+
+  // ── RENDER STEP INTO CONTAINER ───────────────────────────────
+  function renderStep(stepId, container) {
+    const step = steps.find(s => s.id === stepId);
+    if (!step) return;
+    container.innerHTML = "";
+    if (stepId === "photos") {
+      buildPhotosPanel(container);
+    } else {
+      buildGenericPanel(step, container);
+    }
+  }
+
+  // ── BUILD STEP LIST ITEM ─────────────────────────────────────
+  function makeStepItem(step, forMobile) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.dataset.step = step.id;
+    btn.className = `step-btn w-full text-left px-5 py-4 flex items-center gap-3 transition-colors ${step.id === currentStep && !forMobile ? "is-active" : ""}`;
+
+    if (step.id === "photos") {
+      // Show mini preview thumbnails for photos step
+      btn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] text-text3 shrink-0">${step.icon}</span>
+        <div class="flex-1 min-w-0">
+          <p class="text-[13px] font-bold text-primary mb-1">${step.label}</p>
+          <div class="flex gap-1.5 mb-1">
+            ${photos.slice(0,2).map(p=>`<img src="${p.src}" class="w-10 h-10 rounded-lg object-cover" alt="" />`).join("")}
+          </div>
+          <p class="text-[11px] text-text3">${step.sub}</p>
+        </div>
+        <span class="material-symbols-outlined text-[18px] text-text3">chevron_right</span>
+      `;
+    } else {
+      btn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] text-text3 shrink-0">${step.icon}</span>
+        <div class="flex-1 min-w-0">
+          <p class="text-[13px] font-semibold text-text">${step.label}</p>
+          <p class="text-[12px] text-text3 truncate mt-0.5">${step.sub}</p>
+        </div>
+        <span class="material-symbols-outlined text-[18px] text-text3">chevron_right</span>
+      `;
+    }
+
+    btn.addEventListener("click", () => {
+      currentStep = step.id;
+      if (forMobile) {
+        openMobilePanel(step);
+      } else {
+        // desktop: update active state and right panel
+        document.querySelectorAll("#desktop-steps-list .step-btn").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        document.getElementById("desktop-panel-title").textContent = step.label;
+        renderStep(step.id, document.getElementById("desktop-panel-body"));
+      }
+    });
+
+    return btn;
+  }
+
+  // ── MOBILE PANEL ─────────────────────────────────────────────
+  function openMobilePanel(step) {
+    document.getElementById("mobile-panel-title").textContent = step.label;
+    const body = document.getElementById("mobile-panel-body");
+    body.innerHTML = "";
+    const inner = document.createElement("div");
+    inner.id = "mobile-panel-inner";
+    inner.className = "p-4";
+    body.appendChild(inner);
+    renderStep(step.id, inner);
+    document.getElementById("mobile-panel").classList.add("open");
+    document.getElementById("mobile-list-view").style.display = "none";
+  }
+
+  function closeMobilePanel() {
+    document.getElementById("mobile-panel").classList.remove("open");
+    document.getElementById("mobile-list-view").style.display = "flex";
+    document.getElementById("mobile-list-view").style.flexDirection = "column";
+  }
+
+  document.getElementById("mobile-back").addEventListener("click", closeMobilePanel);
+  document.getElementById("mobile-cancel").addEventListener("click", closeMobilePanel);
+
+  // ── INIT: BUILD BOTH LISTS ────────────────────────────────────
+  const mobileList = document.getElementById("mobile-steps-list");
+  const desktopList = document.getElementById("desktop-steps-list");
+
+  steps.forEach(step => {
+    mobileList.appendChild(makeStepItem(step, true));
+    desktopList.appendChild(makeStepItem(step, false));
+  });
+
+  // Desktop: init first step
+  const firstStep = steps[0];
+  document.getElementById("desktop-panel-title").textContent = firstStep.label;
+  renderStep(firstStep.id, document.getElementById("desktop-panel-body"));
+
+})();
+</script>
+
+<!-- ═══════════════════════════════════════
+     MOBILE BOTTOM NAV
+═══════════════════════════════════════ -->
+<nav id="mobile-bottom-nav">
+  <a href="#" class="bnav-item" data-nav="hoy">
+    <span class="material-symbols-outlined">calendar_today</span>
+    <span>Hoy</span>
+  </a>
+  <a href="#" class="bnav-item" data-nav="anuncios">
+    <span class="material-symbols-outlined">campaign</span>
+    <span>Anuncios</span>
+  </a>
+  <a href="#" class="bnav-item" data-nav="calendario">
+    <span class="material-symbols-outlined">calendar_month</span>
+    <span>Calendario</span>
+  </a>
+  <a href="#" class="bnav-item" data-nav="mensajeria">
+    <span class="material-symbols-outlined">chat_bubble</span>
+    <span>Mensajería</span>
+  </a>
+  <a href="#" class="bnav-item active" data-nav="dashboard">
+    <span class="material-symbols-outlined">grid_view</span>
+    <span>Dashboard</span>
+  </a>
+</nav>
+
+<script>
+  // Bottom nav active state
+  document.querySelectorAll('.bnav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.bnav-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

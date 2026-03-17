@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Host Dashboard - JOM</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "background-base": "#F8F9FC",
+                        "border-light": "#E5E7EB",
+                        "penalty-red": "#DC2626",
+                        "secondary-text": "#6B7280",
+                        "jom-dark": "#1F2937"
+                    },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    borderRadius: { 'card': '16px' },
+                    maxWidth: { 'jom-container': '1360px' }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body { @apply bg-background-base font-sans text-slate-900; -webkit-font-smoothing: antialiased; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* ── SIDEBAR DESKTOP ACTIVE ── */
+        .sidebar-active {
+            @apply text-primary font-semibold relative bg-violet-50;
+        }
+        .sidebar-active::before {
+            content: '';
+            @apply absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-full;
+        }
+
+        /* ── BOTTOM NAV ACTIVE ── */
+        .bottomnav-active .nav-icon { @apply text-primary; }
+        .bottomnav-active .nav-label { @apply text-primary font-semibold; }
+
+        /* ── TABLAS ── */
+        .tbl-head th {
+            @apply px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500 bg-slate-50 border-b border-border-light whitespace-nowrap;
+        }
+        .tbl-body tr { @apply hover:bg-slate-50 transition-colors; }
+        .tbl-body td { @apply px-4 py-3 text-sm text-slate-700 border-b border-border-light align-middle; }
+        .tbl-body tr:last-child td { @apply border-b-0; }
+
+        /* ── MOBILE CARD ROWS (reemplaza tablas en mobile) ── */
+        .mobile-row {
+            @apply flex flex-col gap-1 p-4 border-b border-border-light last:border-b-0;
+        }
+        .mobile-row-header {
+            @apply flex items-center justify-between;
+        }
+        .mobile-row-sub {
+            @apply flex items-center justify-between mt-0.5;
+        }
+
+        /* ── BADGE ── */
+        .badge { @apply inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold; }
+        .badge-red    { @apply bg-red-50 text-red-600; }
+        .badge-green  { @apply bg-green-50 text-green-700; }
+        .badge-yellow { @apply bg-yellow-50 text-yellow-600; }
+
+        /* ── BOTONES ── */
+        .btn-secondary {
+            @apply bg-white border border-border-light text-jom-dark text-sm font-semibold rounded-xl h-10 px-5
+                   hover:bg-slate-50 active:scale-[0.98] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header class="h-14 md:h-16 w-full flex items-center justify-between px-4 md:px-8 bg-white border-b border-border-light fixed top-0 left-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs uppercase">Jom</span>
+            </div>
+            <span class="font-bold text-xl tracking-tight uppercase">JOM</span>
+        </div>
+        <div class="flex items-center gap-3 md:gap-6">
+            <!-- Language: hide on mobile -->
+            <div class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span>Español</span>
+                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+            </div>
+            <button class="relative text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[24px]">notifications</span>
+                <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary rounded-full border-2 border-white text-[9px] text-white font-bold flex items-center justify-center">3</span>
+            </button>
+            <div class="flex items-center gap-2 p-1 pl-2 md:pl-3 border border-border-light rounded-full cursor-pointer hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-slate-600 text-[20px]">menu</span>
+                <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-200 overflow-hidden">
+                    <img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOo8ch0FTi3aFw2ww4-3ZGYw9U6kzcu3P8XkbYdZoMmnlro7KMzZDslo6En149cv7QAylSo_iiascJSpgxm_SJ61JR5GyErowCZaVABIbS6KLOrqk4KEq0s7q_s321--tmlI_G4eCOe84mYAdPs7D4qmD0q4O7tLIwnby5TU62PumMGzG6y_w2579zNB8sB8RNkxbqfrLaetE0k1kIi9RRYTM1dTUdHCEQtW3iWFxZNBnhNdqtC81LiUjWGQVUudtNwv6cFRiVqg" class="w-full h-full object-cover"/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-14 md:pt-16">
+
+        <!-- ═══════════════ SIDEBAR (desktop only) ═══════════════ -->
+        <aside class="hidden md:block w-[240px] bg-white border-r border-border-light flex-shrink-0 fixed h-[calc(100vh-64px)] z-40 top-16">
+            <nav class="px-4 py-8 space-y-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    <span class="text-[14px]">Hoy</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[20px]">campaign</span>
+                    <span class="text-[14px]">Anuncios</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <span class="text-[14px]">Calendario</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                    <span class="text-[14px]">Mensajería</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-active" href="#">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                    <span class="text-[14px]">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ═══════════════ MAIN ═══════════════ -->
+        <main class="flex-1 md:ml-[240px] min-h-[calc(100vh-56px)] overflow-x-hidden pb-24 md:pb-8">
+            <div class="max-w-jom-container mx-auto px-4 md:px-6 py-5 md:py-8 space-y-5 md:space-y-6">
+
+                <!-- ── INGRESOS ── -->
+                <section>
+                    <div class="bg-white rounded-card border border-border-light overflow-hidden shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 px-4 md:px-6 pt-5 pb-3">
+                            <div>
+                                <h2 class="text-[15px] md:text-[18px] font-semibold text-jom-dark mb-1">Ingresos</h2>
+                                <p class="text-[18px] md:text-[22px] font-bold text-jom-dark leading-tight">Ganaste BOB 12.450,00 este mes</p>
+                            </div>
+                            <button class="text-primary font-semibold text-sm hover:underline self-start sm:mt-1 whitespace-nowrap">Ver análisis completo</button>
+                        </div>
+                        <!-- Bar chart -->
+                        <div class="h-32 md:h-40 flex items-end justify-between gap-1 md:gap-4 px-4 md:px-8 pb-4 md:pb-6">
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-16"></div><span class="text-[9px] md:text-[11px] text-slate-400">Oct</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-20"></div><span class="text-[9px] md:text-[11px] text-slate-400">Nov</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-14"></div><span class="text-[9px] md:text-[11px] text-slate-400">Dic</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-24"></div><span class="text-[9px] md:text-[11px] text-slate-400">Ene</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-28"></div><span class="text-[9px] md:text-[11px] text-slate-400">Feb</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-16"></div><span class="text-[9px] md:text-[11px] text-slate-400">Mar</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-24"></div><span class="text-[9px] md:text-[11px] text-slate-400">Abr</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-20"></div><span class="text-[9px] md:text-[11px] text-slate-400">May</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-32"></div><span class="text-[9px] md:text-[11px] text-slate-400">Jun</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-28"></div><span class="text-[9px] md:text-[11px] text-slate-400">Jul</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-slate-100 rounded-t-sm h-36"></div><span class="text-[9px] md:text-[11px] text-slate-400">Ago</span></div>
+                            <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-primary rounded-t-sm h-32"></div><span class="text-[9px] md:text-[11px] text-primary font-bold">Sep</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SANCIONES ACTIVAS ── -->
+                <section>
+                    <div class="bg-white rounded-card border border-border-light overflow-hidden shadow-sm">
+                        <div class="px-4 md:px-6 pt-5 pb-1 flex justify-between items-center">
+                            <div>
+                                <h2 class="text-[15px] md:text-[18px] font-semibold text-jom-dark">Sanciones activas <span class="text-secondary-text font-normal">(5)</span></h2>
+                                <p class="text-[12px] md:text-[13px] text-secondary-text mt-1">Se descuentan automáticamente de tus próximas reservas</p>
+                            </div>
+                        </div>
+
+                        <!-- DESKTOP table -->
+                        <div class="hidden sm:block overflow-x-auto mt-4">
+                            <table class="w-full min-w-[520px] text-left">
+                                <thead class="tbl-head">
+                                    <tr><th>Estado</th><th>Propiedad</th><th class="text-right">Monto</th><th class="text-right">Saldo pendiente</th></tr>
+                                </thead>
+                                <tbody class="tbl-body">
+                                    <tr>
+                                        <td><span class="badge badge-red">Activa</span></td>
+                                        <td class="font-medium text-slate-900">Casa Playa</td>
+                                        <td class="text-right text-penalty-red font-semibold">BOB 500,00</td>
+                                        <td class="text-right text-penalty-red font-semibold">BOB 500,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge badge-green">Cubierta</span></td>
+                                        <td class="font-medium text-slate-900">Condominio Urubo</td>
+                                        <td class="text-right text-penalty-red font-semibold">BOB 150,00</td>
+                                        <td class="text-right text-penalty-red font-semibold">BOB 150,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- MOBILE card rows -->
+                        <div class="sm:hidden mt-3">
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-slate-900 text-sm">Casa Playa</span>
+                                    <span class="badge badge-red">Activa</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto</span>
+                                    <span class="text-sm font-semibold text-penalty-red">BOB 500,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Saldo pendiente</span>
+                                    <span class="text-sm font-semibold text-penalty-red">BOB 500,00</span>
+                                </div>
+                            </div>
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-slate-900 text-sm">Condominio Urubo</span>
+                                    <span class="badge badge-green">Cubierta</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto</span>
+                                    <span class="text-sm font-semibold text-penalty-red">BOB 150,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Saldo pendiente</span>
+                                    <span class="text-sm font-semibold text-penalty-red">BOB 150,00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-4 md:px-6 py-4 flex justify-end border-t border-border-light">
+                            <button class="text-primary text-sm font-semibold hover:underline">Ver historial completo</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── INFORME DE INGRESOS ── -->
+                <section>
+                    <h3 class="text-[14px] md:text-[16px] font-semibold text-jom-dark mb-3">Informe de ingresos</h3>
+                    <div class="bg-white rounded-card border border-border-light overflow-hidden shadow-sm">
+                        <!-- DESKTOP table -->
+                        <div class="hidden sm:block overflow-x-auto">
+                            <table class="w-full min-w-[600px] text-left">
+                                <thead class="tbl-head">
+                                    <tr><th>Mes</th><th class="text-right">Ingresos brutos</th><th class="text-right">Ajustes</th><th class="text-right">Servicio</th><th class="text-right">Total neto</th></tr>
+                                </thead>
+                                <tbody class="tbl-body">
+                                    <tr>
+                                        <td class="font-semibold text-jom-dark">Sep 2024</td>
+                                        <td class="text-right">BOB 14.500,00</td>
+                                        <td class="text-right text-penalty-red">-BOB 300,00</td>
+                                        <td class="text-right text-secondary-text">-BOB 1.750,00</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 12.450,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-jom-dark">Ago 2024</td>
+                                        <td class="text-right">BOB 10.000,00</td>
+                                        <td class="text-right text-secondary-text">BOB 0,00</td>
+                                        <td class="text-right text-secondary-text">-BOB 1.200,00</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 8.800,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-jom-dark">Jul 2024</td>
+                                        <td class="text-right">BOB 11.200,00</td>
+                                        <td class="text-right text-secondary-text">BOB 0,00</td>
+                                        <td class="text-right text-secondary-text">-BOB 1.344,00</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 9.856,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- MOBILE card rows -->
+                        <div class="sm:hidden">
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-jom-dark text-sm">Sep 2024</span>
+                                    <span class="font-bold text-jom-dark text-sm">BOB 12.450,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ingresos brutos</span>
+                                    <span class="text-xs text-slate-700">BOB 14.500,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ajustes</span>
+                                    <span class="text-xs text-penalty-red">-BOB 300,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Servicio</span>
+                                    <span class="text-xs text-secondary-text">-BOB 1.750,00</span>
+                                </div>
+                            </div>
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-jom-dark text-sm">Ago 2024</span>
+                                    <span class="font-bold text-jom-dark text-sm">BOB 8.800,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ingresos brutos</span>
+                                    <span class="text-xs text-slate-700">BOB 10.000,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ajustes</span>
+                                    <span class="text-xs text-secondary-text">BOB 0,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Servicio</span>
+                                    <span class="text-xs text-secondary-text">-BOB 1.200,00</span>
+                                </div>
+                            </div>
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-jom-dark text-sm">Jul 2024</span>
+                                    <span class="font-bold text-jom-dark text-sm">BOB 9.856,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ingresos brutos</span>
+                                    <span class="text-xs text-slate-700">BOB 11.200,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Ajustes</span>
+                                    <span class="text-xs text-secondary-text">BOB 0,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Servicio</span>
+                                    <span class="text-xs text-secondary-text">-BOB 1.344,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-3">
+                        <button class="btn-secondary">Ver más</button>
+                    </div>
+                </section>
+
+                <!-- ── PRÓXIMOS PAGOS ── -->
+                <section>
+                    <h3 class="text-[14px] md:text-[16px] font-semibold text-jom-dark mb-3">Próximos pagos</h3>
+                    <div class="bg-white rounded-card border border-border-light overflow-hidden shadow-sm">
+                        <!-- DESKTOP -->
+                        <div class="hidden sm:block overflow-x-auto">
+                            <table class="w-full min-w-[500px] text-left">
+                                <thead class="tbl-head">
+                                    <tr><th>Fecha estimada</th><th>Inmueble</th><th class="text-right">Monto</th><th class="text-right">Estado</th></tr>
+                                </thead>
+                                <tbody class="tbl-body">
+                                    <tr>
+                                        <td>28 Feb, 2026</td>
+                                        <td>Casa Playa</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 7.500,00</td>
+                                        <td class="text-right"><span class="badge badge-yellow">Pendiente</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>10 Mar, 2026</td>
+                                        <td>Condominio Urubo</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 2.300,00</td>
+                                        <td class="text-right"><span class="badge badge-yellow">Pendiente</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- MOBILE -->
+                        <div class="sm:hidden">
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-slate-900 text-sm">Casa Playa</span>
+                                    <span class="badge badge-yellow">Pendiente</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Fecha estimada</span>
+                                    <span class="text-xs text-slate-700">28 Feb, 2026</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto</span>
+                                    <span class="text-sm font-bold text-jom-dark">BOB 7.500,00</span>
+                                </div>
+                            </div>
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-slate-900 text-sm">Condominio Urubo</span>
+                                    <span class="badge badge-yellow">Pendiente</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Fecha estimada</span>
+                                    <span class="text-xs text-slate-700">10 Mar, 2026</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto</span>
+                                    <span class="text-sm font-bold text-jom-dark">BOB 2.300,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-3">
+                        <button class="btn-secondary">Ver más</button>
+                    </div>
+                </section>
+
+                <!-- ── PAGOS REALIZADOS ── -->
+                <section>
+                    <h3 class="text-[14px] md:text-[16px] font-semibold text-jom-dark mb-3">Pagos realizados</h3>
+                    <div class="bg-white rounded-card border border-border-light overflow-hidden shadow-sm">
+                        <!-- DESKTOP -->
+                        <div class="hidden sm:block overflow-x-auto">
+                            <table class="w-full min-w-[640px] text-left">
+                                <thead class="tbl-head">
+                                    <tr><th>Fecha de pago</th><th>Inmueble</th><th class="text-right">Monto bruto</th><th class="text-right">Descuento</th><th class="text-right">Neto depositado</th><th>Cuenta</th></tr>
+                                </thead>
+                                <tbody class="tbl-body">
+                                    <tr>
+                                        <td class="font-medium text-jom-dark">15 Ago, 2024</td>
+                                        <td>Varias propiedades</td>
+                                        <td class="text-right">BOB 10.000,00</td>
+                                        <td class="text-right text-secondary-text">-BOB 1.200,00</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 8.800,00</td>
+                                        <td class="text-secondary-text">Visa **** 4421</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-jom-dark">15 Jul, 2024</td>
+                                        <td>Varias propiedades</td>
+                                        <td class="text-right">BOB 11.200,00</td>
+                                        <td class="text-right text-secondary-text">-BOB 1.344,00</td>
+                                        <td class="text-right font-bold text-jom-dark">BOB 9.856,00</td>
+                                        <td class="text-secondary-text">Visa **** 4421</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- MOBILE -->
+                        <div class="sm:hidden">
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-jom-dark text-sm">15 Ago, 2024</span>
+                                    <span class="font-bold text-jom-dark text-sm">BOB 8.800,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Inmueble</span>
+                                    <span class="text-xs text-slate-700">Varias propiedades</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto bruto</span>
+                                    <span class="text-xs text-slate-700">BOB 10.000,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Descuento</span>
+                                    <span class="text-xs text-secondary-text">-BOB 1.200,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Cuenta</span>
+                                    <span class="text-xs text-secondary-text">Visa **** 4421</span>
+                                </div>
+                            </div>
+                            <div class="mobile-row">
+                                <div class="mobile-row-header">
+                                    <span class="font-semibold text-jom-dark text-sm">15 Jul, 2024</span>
+                                    <span class="font-bold text-jom-dark text-sm">BOB 9.856,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Inmueble</span>
+                                    <span class="text-xs text-slate-700">Varias propiedades</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Monto bruto</span>
+                                    <span class="text-xs text-slate-700">BOB 11.200,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Descuento</span>
+                                    <span class="text-xs text-secondary-text">-BOB 1.344,00</span>
+                                </div>
+                                <div class="mobile-row-sub">
+                                    <span class="text-xs text-secondary-text">Cuenta</span>
+                                    <span class="text-xs text-secondary-text">Visa **** 4421</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-3 mb-2">
+                        <button class="btn-secondary">Ver más</button>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ═══════════════ BOTTOM NAV (mobile only) ═══════════════ -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border-light safe-bottom">
+        <div class="flex items-center justify-around h-16 px-2">
+            <a href="#" class="flex flex-col items-center gap-0.5 flex-1 py-2 text-slate-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined nav-icon text-[22px]">calendar_today</span>
+                <span class="nav-label text-[10px] font-medium">Hoy</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-0.5 flex-1 py-2 text-slate-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined nav-icon text-[22px]">campaign</span>
+                <span class="nav-label text-[10px] font-medium">Anuncios</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-0.5 flex-1 py-2 text-slate-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined nav-icon text-[22px]">calendar_month</span>
+                <span class="nav-label text-[10px] font-medium">Calendario</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-0.5 flex-1 py-2 text-slate-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined nav-icon text-[22px]">chat_bubble</span>
+                <span class="nav-label text-[10px] font-medium">Mensajes</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-0.5 flex-1 py-2 bottomnav-active transition-colors">
+                <span class="material-symbols-outlined nav-icon text-[22px] text-primary">grid_view</span>
+                <span class="nav-label text-[10px] font-semibold text-primary">Dashboard</span>
+            </a>
+        </div>
+        <!-- Safe area spacer for iOS -->
+        <div style="height: env(safe-area-inset-bottom, 0px);"></div>
+    </nav>
+
+</body>
+</html>

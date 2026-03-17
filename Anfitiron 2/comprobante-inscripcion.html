@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Comprobante de Inscripción — EDACE / UDI Virtual</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background: #b0b0b0;
+            color: #3a3a3a;
+        }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            max-width: 800px;
+            margin: 24px auto 12px;
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 8px;
+        }
+        .btn-print {
+            background: #4a4a4a;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-print:hover { background: #333; }
+
+        /* ── Hoja ── */
+        .card {
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border: none;
+            padding: 32px;
+        }
+
+        /* ── Encabezado ── */
+        .header {
+            text-align: center;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        .header .inst {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.5;
+            color: #3a3a3a;
+        }
+        .header .titulo {
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            color: #3a3a3a;
+        }
+        .header .no-comprobante {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px;
+            color: #3a3a3a;
+        }
+
+        /* ── Barra de módulo ── */
+        .meta-bar {
+            display: flex;
+            justify-content: space-between;
+            border: none;
+            background: transparent;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #3a3a3a;
+        }
+
+        /* ── Sección ── */
+
+        .section { margin-bottom: 20px; }
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #3a3a3a;
+            padding: 7px 12px;
+            margin-bottom: 14px;
+            letter-spacing: 0.06em;
+            text-align: left;
+            border-radius: 3px;
+        }
+
+        /* ── Grid de campos ── */
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px 20px;
+            padding: 0 8px;
+            align-items: start;
+        }
+        .field {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .field label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            color: #6a6a6a;
+            letter-spacing: 0.04em;
+        }
+        .field p {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* ── PIN ── */
+        .pin-section {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            border: none;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+        .pin-left {
+            flex: 1;
+            padding: 12px 16px;
+            border-right: none;
+        }
+        .pin-left .pin-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .pin-left .pin-value {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 10px;
+            margin-top: 4px;
+        }
+        .pin-right {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .pin-right .validez-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .pin-right .validez-value {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ── Tabla horario ── */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .schedule-table th {
+            background: #e0e0e0;
+            color: #3a3a3a;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 10px;
+            padding: 6px 8px;
+            text-align: left;
+            border: 1px solid #b0b0b0;
+        }
+        .schedule-table td {
+            padding: 5px 8px;
+            border: 1px solid #b0b0b0;
+            font-weight: 700;
+            vertical-align: middle;
+            background: #e0e0e0;
+        }
+        /* Filas de continuación (sin sigla) */
+        .schedule-table tr.continuation td {
+            font-weight: 400;
+            background: #e0e0e0;
+        }
+
+        /* ── Nota ── */
+        .nota {
+            border: none;
+            background: #fff;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 12px;
+            color: #3a3a3a;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            border-top: none;
+            margin-top: 24px;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 700;
+            color: #3a3a3a;
+        }
+
+        /* ── Print ── */
+        @media print {
+            body {
+                background: #fff;
+                font-size: 9px;
+            }
+            .toolbar { display: none; }
+            .card {
+                max-width: 100%;
+                margin: 0;
+                border: none;
+                border-top: 2px solid #5a5a5a;
+                border-bottom: 2px solid #5a5a5a;
+                padding: 10px 0;
+                box-shadow: none;
+            }
+            .header {
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+            .header .inst { font-size: 11px; }
+            .header .titulo { font-size: 13px; margin-top: 4px; }
+            .header .no-comprobante { font-size: 11px; }
+            .meta-bar {
+                padding: 4px 8px;
+                margin-bottom: 10px;
+                font-size: 8px;
+                border-left: none;
+                border-right: none;
+            }
+            .section { margin-bottom: 10px; }
+            .section-title {
+                font-size: 8px;
+                padding: 3px 8px;
+                margin-bottom: 6px;
+            }
+            .fields-grid { gap: 6px 12px; }
+            .field label { font-size: 7px; }
+            .field p { font-size: 9px; }
+            .pin-section {
+                border-left: none;
+                border-right: none;
+            }
+            .pin-left { padding: 6px 10px; }
+            .pin-left .pin-label { font-size: 7px; }
+            .pin-left .pin-value { font-size: 20px; letter-spacing: 6px; }
+            .pin-right { padding: 6px 10px; }
+            .pin-right .validez-label { font-size: 7px; }
+            .pin-right .validez-value { font-size: 9px; }
+            .schedule-table { font-size: 8px; }
+            .schedule-table th { font-size: 7px; padding: 4px 6px; }
+            .schedule-table td { padding: 3px 6px; }
+            .nota {
+                font-size: 8px;
+                padding: 5px 8px;
+                margin-top: 6px;
+                border-left: none;
+                border-right: none;
+            }
+            .footer {
+                margin-top: 10px;
+                padding-top: 6px;
+                font-size: 7px;
+                border-top: 1px solid #5a5a5a;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 8mm 10mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Botón imprimir -->
+    <div class="toolbar">
+        <button class="btn-print" onclick="window.print()">⬇ IMPRIMIR / GUARDAR PDF</button>
+    </div>
+
+    <!-- Hoja -->
+    <div class="card">
+
+        <!-- Encabezado -->
+        <div class="header">
+            <div class="inst">
+                FUNDACIÓN PARA LA EDUCACIÓN ACCIÓN Y EMPRENDIMIENTO EDACE
+            </div>
+            <div class="titulo">COMPROBANTE DE INSCRIPCIÓN</div>
+            <div class="no-comprobante">Inscripción N.° 71688</div>
+        </div>
+
+        <!-- Meta: módulo, revisión, usuario, fecha -->
+        <div class="meta-bar">
+            <span>Módulo Educativo: PR.01.00.05</span>
+            <span>Rev-01</span>
+            <span>Usuario: prodriguez</span>
+            <span>Lunes 2 de Febrero del 2026 — 03:49 p.m.</span>
+        </div>
+
+        <!-- Datos del estudiante -->
+        <div class="section">
+            <div class="section-title">Datos del Estudiante</div>
+            <div class="fields-grid">
+                <div class="field" style="grid-column: span 2;">
+                    <label>Nombre</label>
+                    <p>BURGOS CABRERA JORDAN AVIR</p>
+                </div>
+                <div class="field">
+                    <label>Código</label>
+                    <p>23994</p>
+                </div>
+                <div class="field">
+                    <label>Registro</label>
+                    <p>9624189SC</p>
+                </div>
+                <div class="field" style="grid-column: span 2;">
+                    <label>Carrera</label>
+                    <p>INGENIERÍA DE SISTEMAS</p>
+                </div>
+                <div class="field">
+                    <label>Período</label>
+                    <p>1er-Sem/2026</p>
+                </div>
+                <div class="field" style="grid-column: span 2;">
+                    <label>Correo UDI</label>
+                    <p>9624189sc@udivirtual.com.bo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN y Validez -->
+        <div class="section">
+            <div class="section-title">Credenciales de Acceso</div>
+            <div class="pin-section">
+                <div class="pin-left">
+                    <div class="pin-label">PIN de Inscripción</div>
+                    <div class="pin-value">24491</div>
+                </div>
+                <div class="pin-right">
+                    <div class="validez-label">Validez</div>
+                    <div class="validez-value">Del 02/02/2026 al 31/01/2027</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Horario -->
+        <div class="section">
+            <div class="section-title">Horario de Clases</div>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Sigla</th>
+                        <th>Descripción</th>
+                        <th>Grupo</th>
+                        <th>Docente</th>
+                        <th>Día</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Aula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- SOF520 -->
+                    <tr>
+                        <td>SOF520</td>
+                        <td>SISTEMAS DE INFORMACIÓN II</td>
+                        <td>5AN</td>
+                        <td>Hilera Vaca Daniel Ricardo</td>
+                        <td>Miércoles</td>
+                        <td>19:46</td>
+                        <td>21:15</td>
+                        <td>LAB202</td>
+                    </tr>
+                    <tr class="continuation">
+                        <td></td><td></td><td></td><td></td>
+                        <td>Miércoles</td>
+                        <td>21:16</td>
+                        <td>22:00</td>
+                        <td>LAB202</td>
+                    </tr>
+
+                    <!-- INU060 -->
+                    <tr>
+                        <td>INU060</td>
+                        <td>INGLÉS AVANZADO II</td>
+                        <td>6AM</td>
+                        <td>Sanchez Sandoval Katty Cinthya</td>
+                        <td>Lunes</td>
+                        <td>12:16</td>
+                        <td>13:45</td>
+                        <td>B203</td>
+                    </tr>
+                    <tr class="continuation">
+                        <td></td><td></td><td></td><td></td>
+                        <td>Miércoles</td>
+                        <td>12:16</td>
+                        <td>13:45</td>
+                        <td>B203</td>
+                    </tr>
+
+                    <!-- EMP030 -->
+                    <tr>
+                        <td>EMP030</td>
+                        <td>EMPRENDIMIENTO E INNOVACIÓN</td>
+                        <td>7AN</td>
+                        <td>Mendieta Kramer Alfredo Guillermo</td>
+                        <td>Jueves</td>
+                        <td>13:45</td>
+                        <td>16:30</td>
+                        <td>LAB104</td>
+                    </tr>
+
+                    <!-- FET020 -->
+                    <tr>
+                        <td>FET020</td>
+                        <td>ÉTICA PROFESIONAL</td>
+                        <td>7AN</td>
+                        <td>Alcocer Claros Miguel</td>
+                        <td>Viernes</td>
+                        <td>18:16</td>
+                        <td>19:45</td>
+                        <td>B105</td>
+                    </tr>
+
+                    <!-- GPR722 -->
+                    <tr>
+                        <td>GPR722</td>
+                        <td>GERENCIA DE TECNOLOGÍAS DE INFORMACIÓN</td>
+                        <td>7AN</td>
+                        <td>Benavente Blacutt Jose Antonio</td>
+                        <td>Sábado</td>
+                        <td>07:46</td>
+                        <td>10:45</td>
+                        <td>B201</td>
+                    </tr>
+
+                    <!-- CNU410 -->
+                    <tr>
+                        <td>CNU410</td>
+                        <td>COMPUTACIÓN EN LA NUBE</td>
+                        <td>7AN</td>
+                        <td>Vargas Quispe Marco Antonio</td>
+                        <td>Martes</td>
+                        <td>12:16</td>
+                        <td>15:45</td>
+                        <td>LAB103</td>
+                    </tr>
+                    <tr class="continuation">
+                        <td></td><td></td><td></td><td></td>
+                        <td>Miercoles</td>
+                        <td>16:16</td>
+                        <td>18:30</td>
+                        <td>LAB202</td>
+                    </tr>
+
+                    <!-- SOF712 -->
+                    <tr>
+                        <td>SOF712</td>
+                        <td>INGENIERÍA DE SOFTWARE ÁGIL</td>
+                        <td>7AN</td>
+                        <td>Senseve Gomez Luis Alejandro</td>
+                        <td>Sábado</td>
+                        <td>10:46</td>
+                        <td>13:00</td>
+                        <td>LAB101-Tecnologías Avanzadas</td>
+                    </tr>
+                    <tr class="continuation">
+                        <td></td><td></td><td></td><td></td>
+                        <td>Martes</td>
+                        <td>16:16</td>
+                        <td>18:30</td>
+                        <td>LAB103</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nota">
+                NOTA: Dicho horario está sujeto a cambios, favor imprimir nuevamente su boleta al inicio de semestre.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>Fundación EDACE · UDI Virtual · udivirtual.com.bo</span>
+            <span>Comprobante N.° 71688 · Emitido: 02/02/2026</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

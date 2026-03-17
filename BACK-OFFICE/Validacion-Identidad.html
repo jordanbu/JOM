@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOM Back-Office — Validación de Identidad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary:#0f1117; --bg-secondary:#181b25; --bg-card:#1e2230;
+    --bg-card-hover:#252a3a; --bg-active:#2a3048;
+    --accent:#4f6df5; --accent-light:#6b85ff;
+    --accent-glow:rgba(79,109,245,0.15); --accent-glow-strong:rgba(79,109,245,0.3);
+    --text-primary:#e8eaf0; --text-secondary:#8b90a5; --text-muted:#5a5f75;
+    --border:#2a2e3e; --success:#34d399; --warning:#fbbf24;
+    --danger:#f87171; --orange:#fb923c; --purple:#a78bfa;
+    --radius:12px; --radius-sm:8px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg-primary); color:var(--text-primary);
+    height:100vh; overflow:hidden; display:flex;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width:60px; background:var(--bg-secondary);
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column; align-items:center;
+    padding:20px 0; gap:8px; flex-shrink:0;
+  }
+  .sidebar-logo {
+    width:36px; height:36px; background:var(--accent); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:16px; margin-bottom:24px;
+    box-shadow:0 0 20px var(--accent-glow-strong);
+    text-decoration:none; color:#fff;
+  }
+  .sidebar-item {
+    width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all 0.2s; color:var(--text-muted);
+    position:relative; text-decoration:none;
+  }
+  .sidebar-item:hover { background:var(--bg-card); color:var(--text-secondary); }
+  .sidebar-item.active { background:var(--accent-glow); color:var(--accent-light); }
+  .sidebar-item.active::before {
+    content:''; position:absolute; left:-10px;
+    width:3px; height:20px; background:var(--accent); border-radius:0 3px 3px 0;
+  }
+  .sidebar-badge {
+    position:absolute; top:4px; right:4px;
+    width:8px; height:8px; border-radius:50%; border:2px solid var(--bg-secondary);
+  }
+  .sidebar-spacer { flex:1; }
+
+  /* MAIN */
+  .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+
+  /* TOPBAR */
+  .topbar {
+    padding:18px 28px; border-bottom:1px solid var(--border);
+    background:var(--bg-secondary);
+    display:flex; justify-content:space-between; align-items:center; flex-shrink:0;
+  }
+  .topbar-left h1 { font-size:19px; font-weight:700; display:flex; align-items:center; gap:10px; }
+  .topbar-left h1 svg { color:var(--accent-light); }
+  .topbar-left p { font-size:12px; color:var(--text-secondary); margin-top:2px; }
+
+  /* STATS STRIP */
+  .stats-strip {
+    display:flex; gap:0; border-bottom:1px solid var(--border); flex-shrink:0;
+  }
+  .strip-stat {
+    flex:1; padding:14px 24px; border-right:1px solid var(--border);
+    display:flex; align-items:center; gap:12px; background:var(--bg-secondary);
+  }
+  .strip-stat:last-child { border-right:none; }
+  .strip-icon {
+    width:36px; height:36px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .strip-val { font-family:'Space Mono',monospace; font-size:18px; font-weight:700; }
+  .strip-label { font-size:11px; color:var(--text-secondary); margin-top:1px; }
+
+  /* TOOLBAR */
+  .toolbar {
+    padding:12px 28px; border-bottom:1px solid var(--border);
+    background:var(--bg-secondary);
+    display:flex; gap:8px; align-items:center; flex-shrink:0;
+  }
+  .search-box {
+    display:flex; align-items:center; gap:8px;
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius-sm); padding:7px 12px;
+    transition:border-color 0.2s; min-width:240px;
+  }
+  .search-box:focus-within { border-color:var(--accent); }
+  .search-box input {
+    background:none; border:none; outline:none;
+    color:var(--text-primary); font-family:inherit; font-size:13px; width:100%;
+  }
+  .search-box input::placeholder { color:var(--text-muted); }
+  .filter-chip {
+    font-family:inherit; font-size:11px; font-weight:600;
+    padding:5px 12px; border-radius:20px; border:1px solid var(--border);
+    background:transparent; color:var(--text-muted); cursor:pointer; transition:all 0.2s;
+  }
+  .filter-chip.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .filter-chip:hover:not(.active) { color:var(--text-primary); border-color:var(--text-muted); }
+
+  /* CARD GRID */
+  .grid-wrap {
+    flex:1; overflow-y:auto; padding:24px 28px;
+    scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+  }
+  .ver-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:14px;
+  }
+
+  /* VERIFICATION CARD */
+  .ver-card {
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius); padding:18px;
+    cursor:pointer; transition:all 0.2s; display:flex; flex-direction:column; gap:14px;
+  }
+  .ver-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+  .ver-card.status-approved { border-color:rgba(52,211,153,0.3); }
+  .ver-card.status-approved:hover { border-color:var(--success); }
+  .ver-card.status-rejected { border-color:rgba(248,113,113,0.3); opacity:0.75; }
+  .ver-card.status-review { border-color:rgba(79,109,245,0.35); }
+  .ver-card.status-review:hover { border-color:var(--accent-light); box-shadow:0 8px 32px rgba(79,109,245,0.15); }
+
+  .card-head { display:flex; justify-content:space-between; align-items:flex-start; }
+  .card-user { display:flex; align-items:center; gap:12px; }
+  .card-avatar {
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; font-weight:700; color:#fff;
+  }
+  .card-user-info .card-name { font-size:14px; font-weight:700; }
+  .card-user-info .card-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+
+  .ver-status {
+    font-size:10px; font-weight:700; padding:3px 9px; border-radius:20px;
+    text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;
+  }
+  .vs-pending { background:rgba(251,191,36,0.15); color:var(--warning); }
+  .vs-review { background:rgba(79,109,245,0.15); color:var(--accent-light); }
+  .vs-approved { background:rgba(52,211,153,0.15); color:var(--success); }
+  .vs-rejected { background:rgba(248,113,113,0.15); color:var(--danger); }
+
+  /* Doc chips */
+  .doc-chips { display:flex; gap:5px; flex-wrap:wrap; }
+  .doc-chip {
+    font-size:10px; font-weight:600; padding:3px 8px; border-radius:6px;
+    border:1px solid var(--border);
+  }
+  .dc-ok { background:rgba(52,211,153,0.08); color:var(--success); border-color:rgba(52,211,153,0.25); }
+  .dc-pending { background:rgba(251,191,36,0.08); color:var(--warning); border-color:rgba(251,191,36,0.25); }
+  .dc-missing { background:rgba(248,113,113,0.08); color:var(--danger); border-color:rgba(248,113,113,0.25); }
+
+  /* Progress bar */
+  .progress-wrap { }
+  .progress-meta { display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-bottom:6px; }
+  .progress-bar-bg { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+  .progress-bar-fill { height:100%; border-radius:3px; transition:width 0.5s ease; }
+
+  /* Auto check row */
+  .auto-checks { display:flex; flex-direction:column; gap:4px; }
+  .ac-row { display:flex; align-items:center; gap:7px; font-size:11px; color:var(--text-secondary); }
+  .ac-icon { width:14px; height:14px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:8px; }
+  .ac-ok { background:rgba(52,211,153,0.2); color:var(--success); }
+  .ac-warn { background:rgba(251,191,36,0.2); color:var(--warning); }
+  .ac-fail { background:rgba(248,113,113,0.2); color:var(--danger); }
+
+  /* Card divider */
+  .card-divider { height:1px; background:var(--border); }
+
+  /* Card footer */
+  .card-footer-row { display:flex; justify-content:space-between; align-items:center; }
+  .card-date { font-size:10px; color:var(--text-muted); }
+  .card-actions { display:flex; gap:6px; }
+  .card-action-btn {
+    padding:5px 10px; border-radius:6px; font-family:inherit;
+    font-size:11px; font-weight:600; cursor:pointer; transition:all 0.2s;
+    border:1px solid var(--border); background:transparent; color:var(--text-secondary);
+  }
+  .card-action-btn.approve { color:var(--success); border-color:rgba(52,211,153,0.3); }
+  .card-action-btn.approve:hover { background:rgba(52,211,153,0.1); }
+  .card-action-btn.reject { color:var(--danger); border-color:rgba(248,113,113,0.3); }
+  .card-action-btn.reject:hover { background:rgba(248,113,113,0.08); }
+  .card-action-btn.review { color:var(--accent-light); border-color:rgba(79,109,245,0.3); }
+  .card-action-btn.review:hover { background:var(--accent-glow); }
+
+  /* DRAWER */
+  .drawer-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    z-index:50; backdrop-filter:blur(2px);
+  }
+  .drawer-overlay.open { display:block; }
+  .drawer {
+    position:fixed; right:0; top:0; bottom:0; width:400px;
+    background:var(--bg-secondary); border-left:1px solid var(--border);
+    display:flex; flex-direction:column; overflow-y:auto;
+    z-index:51; transform:translateX(100%); transition:transform 0.3s ease;
+    scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+  }
+  .drawer.open { transform:translateX(0); }
+
+  .drawer-header {
+    padding:18px 20px; border-bottom:1px solid var(--border);
+    position:sticky; top:0; background:var(--bg-secondary); z-index:2;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .drawer-header h3 { font-size:14px; font-weight:700; }
+  .drawer-close {
+    width:30px; height:30px; border-radius:8px;
+    background:var(--bg-card); border:1px solid var(--border);
+    color:var(--text-secondary); cursor:pointer; font-size:16px;
+    display:flex; align-items:center; justify-content:center; transition:all 0.2s;
+  }
+  .drawer-close:hover { color:var(--text-primary); }
+
+  .drawer-user-card {
+    margin:20px; background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius); padding:18px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .duw-avatar {
+    width:52px; height:52px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:19px; font-weight:700; color:#fff;
+  }
+  .duw-name { font-size:15px; font-weight:700; margin-bottom:3px; }
+  .duw-sub { font-size:12px; color:var(--text-secondary); }
+  .duw-badges { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  .role-badge {
+    font-size:9px; font-weight:700; padding:2px 7px; border-radius:5px;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .role-huesped { background:rgba(59,130,246,0.12); color:#60a5fa; }
+  .role-anfitrion { background:rgba(139,92,246,0.12); color:#a78bfa; }
+
+  .drawer-section { padding:14px 20px; border-bottom:1px solid var(--border); }
+  .drawer-section-title {
+    font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.8px; color:var(--text-muted); margin-bottom:12px;
+  }
+
+  /* Document review grid */
+  .doc-review-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .doc-rev-card {
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius-sm); overflow:hidden; transition:border-color 0.2s;
+  }
+  .doc-rev-card.ok { border-color:rgba(52,211,153,0.35); }
+  .doc-rev-card.fail { border-color:rgba(248,113,113,0.35); }
+  .doc-preview {
+    height:80px; background:var(--bg-secondary);
+    display:flex; align-items:center; justify-content:center; font-size:28px;
+    cursor:pointer; position:relative; transition:background 0.2s;
+    border-bottom:1px solid var(--border);
+  }
+  .doc-preview:hover { background:var(--bg-active); }
+  .doc-stamp {
+    position:absolute; bottom:4px; right:4px;
+    font-size:9px; font-weight:700; padding:2px 6px; border-radius:4px;
+  }
+  .stamp-ok { background:rgba(52,211,153,0.9); color:#052e16; }
+  .stamp-pending { background:rgba(251,191,36,0.9); color:#451a03; }
+  .stamp-missing { background:rgba(248,113,113,0.9); color:#450a0a; }
+  .doc-rev-footer { padding:8px 10px; }
+  .doc-rev-title { font-size:11px; font-weight:600; margin-bottom:6px; }
+  .doc-rev-btns { display:flex; gap:4px; }
+  .mini-btn {
+    flex:1; padding:4px 0; border-radius:5px; font-family:inherit;
+    font-size:10px; font-weight:600; cursor:pointer; transition:all 0.2s;
+    text-align:center; border:1px solid transparent;
+  }
+  .mb-approve { background:rgba(52,211,153,0.1); color:var(--success); border-color:rgba(52,211,153,0.25); }
+  .mb-approve:hover { background:rgba(52,211,153,0.2); }
+  .mb-reject { background:rgba(248,113,113,0.08); color:var(--danger); border-color:rgba(248,113,113,0.25); }
+  .mb-reject:hover { background:rgba(248,113,113,0.18); }
+
+  /* Checks */
+  .checks { display:flex; flex-direction:column; gap:0; }
+  .check-row {
+    display:flex; align-items:center; gap:10px; padding:9px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .check-row:last-child { border-bottom:none; }
+  .check-icon {
+    width:26px; height:26px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ci-ok { background:rgba(52,211,153,0.15); }
+  .ci-warn { background:rgba(251,191,36,0.15); }
+  .ci-fail { background:rgba(248,113,113,0.15); }
+  .check-text { flex:1; }
+  .check-text p { font-size:12px; }
+  .check-text span { font-size:10px; color:var(--text-muted); }
+  .check-result { font-size:11px; font-weight:700; }
+  .cr-ok { color:var(--success); } .cr-warn { color:var(--warning); } .cr-fail { color:var(--danger); }
+
+  /* Risk */
+  .risk-bar-bg { height:7px; background:var(--bg-card); border-radius:4px; overflow:hidden; margin-top:8px; }
+  .risk-bar-fill { height:100%; border-radius:4px; }
+  .risk-labels { display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted); margin-top:4px; }
+
+  /* Timeline */
+  .tl { display:flex; flex-direction:column; }
+  .tl-item { display:flex; gap:10px; padding:8px 0; position:relative; }
+  .tl-item:not(:last-child)::before {
+    content:''; position:absolute; left:10px; top:28px; bottom:0;
+    width:1px; background:var(--border);
+  }
+  .tl-dot {
+    width:20px; height:20px; border-radius:50%; flex-shrink:0; margin-top:1px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tl-text p { font-size:12px; }
+  .tl-text span { font-size:10px; color:var(--text-muted); }
+
+  /* Notes */
+  textarea.drawer-notes {
+    width:100%; background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius-sm); padding:10px 12px; color:var(--text-primary);
+    font-family:inherit; font-size:12px; resize:none; outline:none;
+    transition:border-color 0.2s;
+  }
+  textarea.drawer-notes:focus { border-color:var(--accent); }
+  textarea.drawer-notes::placeholder { color:var(--text-muted); }
+
+  /* Drawer actions */
+  .drawer-actions { padding:16px 20px; display:flex; flex-direction:column; gap:8px; }
+  .btn-full {
+    width:100%; padding:9px; border-radius:var(--radius-sm);
+    font-family:inherit; font-size:12px; font-weight:600;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .btn-full-green { background:var(--success); color:#052e16; border:none; }
+  .btn-full-green:hover { opacity:0.85; }
+  .btn-full-red { background:transparent; color:var(--danger); border:1px solid rgba(248,113,113,0.3); }
+  .btn-full-red:hover { background:rgba(248,113,113,0.08); }
+  .btn-full-warn { background:transparent; color:var(--warning); border:1px solid rgba(251,191,36,0.3); }
+  .btn-full-warn:hover { background:rgba(251,191,36,0.08); }
+  .btn-full-outline { background:transparent; color:var(--text-secondary); border:1px solid var(--border); }
+  .btn-full-outline:hover { border-color:var(--text-muted); color:var(--text-primary); }
+
+  /* TOAST */
+  @keyframes toastIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .toast {
+    position:fixed; bottom:24px; right:24px; z-index:200;
+    background:var(--bg-card); border-radius:10px;
+    font-size:13px; font-weight:600; padding:12px 20px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.4); animation:toastIn 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <a href="Dashboard.html" class="sidebar-logo">S</a>
+  <a href="Dashboard.html" class="sidebar-item" title="Dashboard">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </a>
+  <a href="Mensajeria.html" class="sidebar-item" title="Mensajería">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="sidebar-badge" style="background:var(--danger);"></div>
+  </a>
+  <a href="Usuarios.html" class="sidebar-item" title="Usuarios">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  </a>
+  <a href="Propiedades.html" class="sidebar-item" title="Propiedades">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  </a>
+  <a href="Transacciones.html" class="sidebar-item" title="Transacciones">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+  </a>
+  <a href="Validacion-Identidad.html" class="sidebar-item active" title="Validación de Identidad">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="sidebar-badge" style="background:var(--warning);"></div>
+  </a>
+  <div class="sidebar-spacer"></div>
+  <a href="#" class="sidebar-item" title="Configuración">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+  </a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Validación de Identidad
+      </h1>
+      <p>Revisión de documentos KYC de usuarios · Marzo 2026</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="strip-stat">
+      <div class="strip-icon" style="background:rgba(251,191,36,0.12);">
+        <svg width="18" height="18" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div><div class="strip-val" style="color:var(--warning);">8</div><div class="strip-label">Pendientes</div></div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-icon" style="background:rgba(79,109,245,0.12);">
+        <svg width="18" height="18" fill="none" stroke="#6b85ff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+      </div>
+      <div><div class="strip-val" style="color:var(--accent-light);">3</div><div class="strip-label">En revisión</div></div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-icon" style="background:rgba(52,211,153,0.12);">
+        <svg width="18" height="18" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div><div class="strip-val" style="color:var(--success);">24</div><div class="strip-label">Aprobados (mes)</div></div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-icon" style="background:rgba(248,113,113,0.12);">
+        <svg width="18" height="18" fill="none" stroke="#f87171" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+      <div><div class="strip-val" style="color:var(--danger);">4</div><div class="strip-label">Rechazados (mes)</div></div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Buscar usuario..." id="searchInput">
+    </div>
+    <button class="filter-chip active" data-filter="todos">Todos</button>
+    <button class="filter-chip" data-filter="pending">Pendientes</button>
+    <button class="filter-chip" data-filter="review">En revisión</button>
+    <button class="filter-chip" data-filter="approved">Aprobados</button>
+    <button class="filter-chip" data-filter="rejected">Rechazados</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="ver-grid" id="verGrid">
+
+      <!-- Jordan Avir - En revisión -->
+      <div class="ver-card status-review" data-status="review"
+        data-name="Jordan Avir" data-role="huesped" data-color="linear-gradient(135deg,#3b82f6,#2563eb)" data-initials="JA"
+        data-risk="42" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"ok"},{"name":"DNI Dorso","emoji":"🪪","status":"ok"},{"name":"Selfie","emoji":"🤳","status":"pending"},{"name":"Domicilio","emoji":"📄","status":"pending"}]'
+        data-date="04 Mar 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">JA</div>
+            <div class="card-user-info">
+              <div class="card-name">Jordan Avir</div>
+              <div class="card-sub">Huésped · 04 Mar 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-review">En revisión</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-ok">🪪 DNI ✓</span>
+          <span class="doc-chip dc-ok">🪪 Dorso ✓</span>
+          <span class="doc-chip dc-pending">🤳 Selfie ⏳</span>
+          <span class="doc-chip dc-pending">📄 Domicilio ⏳</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Progreso</span><span>2 / 4 aprobados</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:50%;background:var(--warning);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Coincidencia de nombre</div>
+          <div class="ac-row"><div class="ac-icon ac-warn">!</div>Selfie facial 61% — revisar</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Sin lista negra</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date">Prioridad media</span>
+          <div class="card-actions">
+            <button class="card-action-btn review" onclick="event.stopPropagation();openDrawer(this.closest('.ver-card'))">Revisar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carlos Méndez - Pendiente -->
+      <div class="ver-card" data-status="pending"
+        data-name="Carlos Méndez" data-role="anfitrion" data-color="linear-gradient(135deg,#8b5cf6,#7c3aed)" data-initials="CM"
+        data-risk="28" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"ok"},{"name":"DNI Dorso","emoji":"🪪","status":"ok"},{"name":"Selfie","emoji":"🤳","status":"ok"},{"name":"Domicilio","emoji":"📄","status":"missing"}]'
+        data-date="03 Mar 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">CM</div>
+            <div class="card-user-info">
+              <div class="card-name">Carlos Méndez</div>
+              <div class="card-sub">Anfitrión · 03 Mar 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-pending">Pendiente</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-ok">🪪 DNI ✓</span>
+          <span class="doc-chip dc-ok">🪪 Dorso ✓</span>
+          <span class="doc-chip dc-ok">🤳 Selfie ✓</span>
+          <span class="doc-chip dc-missing">📄 Domicilio ✗</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Progreso</span><span>3 / 4 aprobados</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:75%;background:linear-gradient(90deg,#34d399,#fbbf24);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Coincidencia de nombre</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Selfie facial 94%</div>
+          <div class="ac-row"><div class="ac-icon ac-warn">!</div>Falta comprobante domicilio</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date">Prioridad alta</span>
+          <div class="card-actions">
+            <button class="card-action-btn review" onclick="event.stopPropagation();openDrawer(this.closest('.ver-card'))">Revisar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- María López - Pendiente -->
+      <div class="ver-card" data-status="pending"
+        data-name="María López" data-role="anfitrion" data-color="linear-gradient(135deg,#ec4899,#db2777)" data-initials="ML"
+        data-risk="15" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"ok"},{"name":"DNI Dorso","emoji":"🪪","status":"ok"},{"name":"Selfie","emoji":"🤳","status":"ok"},{"name":"Domicilio","emoji":"📄","status":"ok"}]'
+        data-date="02 Mar 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#ec4899,#db2777);">ML</div>
+            <div class="card-user-info">
+              <div class="card-name">María López</div>
+              <div class="card-sub">Anfitrión · 02 Mar 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-pending">Pendiente</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-ok">🪪 DNI ✓</span>
+          <span class="doc-chip dc-ok">🪪 Dorso ✓</span>
+          <span class="doc-chip dc-ok">🤳 Selfie ✓</span>
+          <span class="doc-chip dc-ok">📄 Domicilio ✓</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Progreso</span><span>4 / 4 recibidos</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:100%;background:var(--success);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Todos los docs recibidos</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Selfie facial 89%</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Sin lista negra</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date">Lista para aprobar</span>
+          <div class="card-actions">
+            <button class="card-action-btn approve" onclick="event.stopPropagation();approveCard(this.closest('.ver-card'),'María López')">Aprobar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gary Test - Pendiente -->
+      <div class="ver-card" data-status="pending"
+        data-name="Gary Test" data-role="huesped" data-color="linear-gradient(135deg,#14b8a6,#0d9488)" data-initials="GT"
+        data-risk="68" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"pending"},{"name":"DNI Dorso","emoji":"🪪","status":"missing"},{"name":"Selfie","emoji":"🤳","status":"missing"},{"name":"Domicilio","emoji":"📄","status":"missing"}]'
+        data-date="01 Mar 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488);">GT</div>
+            <div class="card-user-info">
+              <div class="card-name">Gary Test</div>
+              <div class="card-sub">Huésped · 01 Mar 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-pending">Pendiente</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-pending">🪪 DNI ⏳</span>
+          <span class="doc-chip dc-missing">🪪 Dorso ✗</span>
+          <span class="doc-chip dc-missing">🤳 Selfie ✗</span>
+          <span class="doc-chip dc-missing">📄 Domicilio ✗</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Progreso</span><span>0 / 4 aprobados</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:10%;background:var(--danger);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-fail">✗</div>Docs insuficientes</div>
+          <div class="ac-row"><div class="ac-icon ac-warn">!</div>Alto riesgo (68/100)</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Sin lista negra</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date">Prioridad baja</span>
+          <div class="card-actions">
+            <button class="card-action-btn" style="color:var(--warning);border-color:rgba(251,191,36,0.3);" onclick="event.stopPropagation();showToast('Solicitud de docs enviada','info')">Solicitar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Franz Weber - Aprobado -->
+      <div class="ver-card status-approved" data-status="approved"
+        data-name="Franz Weber" data-role="huesped" data-color="linear-gradient(135deg,#6366f1,#4f46e5)" data-initials="FW"
+        data-risk="10" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"ok"},{"name":"DNI Dorso","emoji":"🪪","status":"ok"},{"name":"Selfie","emoji":"🤳","status":"ok"},{"name":"Domicilio","emoji":"📄","status":"ok"}]'
+        data-date="28 Feb 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">FW</div>
+            <div class="card-user-info">
+              <div class="card-name">Franz Weber</div>
+              <div class="card-sub">Huésped · 28 Feb 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-approved">Aprobado</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-ok">🪪 DNI ✓</span>
+          <span class="doc-chip dc-ok">🪪 Dorso ✓</span>
+          <span class="doc-chip dc-ok">🤳 Selfie ✓</span>
+          <span class="doc-chip dc-ok">📄 Domicilio ✓</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Verificación completa</span><span>4 / 4 ✓</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:100%;background:var(--success);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Identidad confirmada</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Riesgo bajo (10/100)</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Aprobado el 28 Feb</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date" style="color:var(--success);">✓ Verificado</span>
+          <div class="card-actions">
+            <button class="card-action-btn" onclick="event.stopPropagation();openDrawer(this.closest('.ver-card'))">Ver detalle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSERT User - Rechazado -->
+      <div class="ver-card status-rejected" data-status="rejected"
+        data-name="ASSERT User" data-role="huesped" data-color="linear-gradient(135deg,#64748b,#475569)" data-initials="AU"
+        data-risk="82" data-docs='[{"name":"DNI Frente","emoji":"🪪","status":"ok"},{"name":"DNI Dorso","emoji":"🪪","status":"missing"},{"name":"Selfie","emoji":"🤳","status":"missing"},{"name":"Domicilio","emoji":"📄","status":"missing"}]'
+        data-date="25 Feb 2026"
+        onclick="openDrawer(this)">
+        <div class="card-head">
+          <div class="card-user">
+            <div class="card-avatar" style="background:linear-gradient(135deg,#64748b,#475569);">AU</div>
+            <div class="card-user-info">
+              <div class="card-name">ASSERT User</div>
+              <div class="card-sub">Huésped · 25 Feb 2026</div>
+            </div>
+          </div>
+          <span class="ver-status vs-rejected">Rechazado</span>
+        </div>
+        <div class="doc-chips">
+          <span class="doc-chip dc-ok">🪪 DNI ✓</span>
+          <span class="doc-chip dc-missing">🪪 Dorso ✗</span>
+          <span class="doc-chip dc-missing">🤳 Selfie ✗</span>
+          <span class="doc-chip dc-missing">📄 Domicilio ✗</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span>Documentación incompleta</span><span>1 / 4</span></div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:25%;background:var(--danger);"></div></div>
+        </div>
+        <div class="auto-checks">
+          <div class="ac-row"><div class="ac-icon ac-fail">✗</div>Docs inválidos / incompletos</div>
+          <div class="ac-row"><div class="ac-icon ac-fail">✗</div>Riesgo alto (82/100)</div>
+          <div class="ac-row"><div class="ac-icon ac-ok">✓</div>Sin lista negra</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer-row">
+          <span class="card-date" style="color:var(--danger);">✗ Rechazado 25 Feb</span>
+          <div class="card-actions">
+            <button class="card-action-btn" onclick="event.stopPropagation();showToast('Solicitud reabierta','info')">Reabrir</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- DETAIL DRAWER -->
+<div class="drawer" id="detailDrawer">
+  <div class="drawer-header">
+    <h3 id="drawerTitle">Revisión de identidad</h3>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+
+  <div class="drawer-user-card">
+    <div class="duw-avatar" id="dAvatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">JA</div>
+    <div>
+      <div class="duw-name" id="dName">Jordan Avir</div>
+      <div class="duw-sub" id="dSub">Huésped · 04 Mar 2026</div>
+      <div class="duw-badges" id="dBadges"></div>
+    </div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Documentos</div>
+    <div class="doc-review-grid" id="dDocsGrid"></div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Verificaciones automáticas</div>
+    <div class="checks" id="dChecks"></div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Nivel de riesgo</div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+      <span>Puntuación</span><span id="dRiskVal" style="font-weight:700;">—</span>
+    </div>
+    <div class="risk-bar-bg">
+      <div class="risk-bar-fill" id="dRiskBar" style="width:0%;background:#34d399;"></div>
+    </div>
+    <div class="risk-labels"><span>Bajo</span><span>Medio</span><span>Alto</span></div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Historial</div>
+    <div class="tl" id="dTimeline"></div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Notas internas</div>
+    <textarea class="drawer-notes" rows="3" placeholder="Agrega notas visibles solo para el equipo de soporte..."></textarea>
+  </div>
+
+  <div class="drawer-actions">
+    <button class="btn-full btn-full-green" id="dBtnApprove" onclick="approveFromDrawer()">✓ Aprobar identidad</button>
+    <button class="btn-full btn-full-warn" onclick="showToast('Notificación enviada al usuario','info');closeDrawer()">Solicitar docs faltantes</button>
+    <button class="btn-full btn-full-red" onclick="rejectFromDrawer()">✗ Rechazar solicitud</button>
+    <button class="btn-full btn-full-outline" onclick="closeDrawer()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  let currentCard = null;
+
+  // FILTER
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.ver-card').forEach(c => {
+        c.style.display = (f === 'todos' || c.dataset.status === f) ? '' : 'none';
+      });
+    });
+  });
+
+  // SEARCH
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.ver-card').forEach(c => {
+      c.style.display = (!q || c.dataset.name.toLowerCase().includes(q)) ? '' : 'none';
+    });
+  });
+
+  // DRAWER
+  function openDrawer(card) {
+    currentCard = card;
+    const d = card.dataset;
+    const docs = JSON.parse(d.docs);
+    const risk = parseInt(d.risk);
+    const status = d.status;
+
+    document.getElementById('dAvatar').style.background = d.color;
+    document.getElementById('dAvatar').textContent = d.initials;
+    document.getElementById('dName').textContent = d.name;
+    document.getElementById('dSub').textContent = (d.role === 'anfitrion' ? 'Anfitrión' : 'Huésped') + ' · ' + d.date;
+    document.getElementById('drawerTitle').textContent = d.name;
+
+    const statusMap = {pending:'vs-pending',review:'vs-review',approved:'vs-approved',rejected:'vs-rejected'};
+    const statusLabel = {pending:'Pendiente',review:'En revisión',approved:'Aprobado',rejected:'Rechazado'};
+    document.getElementById('dBadges').innerHTML =
+      `<span class="role-badge role-${d.role}">${d.role === 'anfitrion' ? 'Anfitrión' : 'Huésped'}</span>` +
+      `<span class="ver-status ${statusMap[status]}">${statusLabel[status]}</span>`;
+
+    // Docs grid
+    const grid = document.getElementById('dDocsGrid');
+    grid.innerHTML = '';
+    const stampMap = {ok:'stamp-ok',pending:'stamp-pending',missing:'stamp-missing'};
+    const stampLabel = {ok:'✓ OK',pending:'⏳ Pendiente',missing:'✗ Faltante'};
+    docs.forEach(doc => {
+      grid.innerHTML += `
+        <div class="doc-rev-card ${doc.status === 'ok' ? 'ok' : doc.status === 'missing' ? 'fail' : ''}">
+          <div class="doc-preview">
+            ${doc.emoji}
+            <span class="doc-stamp ${stampMap[doc.status]}">${stampLabel[doc.status]}</span>
+          </div>
+          <div class="doc-rev-footer">
+            <div class="doc-rev-title">${doc.name}</div>
+            <div class="doc-rev-btns">
+              <button class="mini-btn mb-approve" onclick="approveDoc(this)">✓ Aprobar</button>
+              <button class="mini-btn mb-reject" onclick="rejectDoc(this)">✗ Rechazar</button>
+            </div>
+          </div>
+        </div>`;
+    });
+
+    // Checks
+    const checks = document.getElementById('dChecks');
+    const approved = docs.filter(d => d.status === 'ok').length;
+    const checkData = [
+      {icon:'ci-ok',ok:true,text:'Coincidencia de nombre con docs',sub:'Nombre en docs coincide con perfil'},
+      {icon:risk<30?'ci-ok':risk<60?'ci-warn':'ci-fail',ok:risk<60,text:`Selfie — coincidencia facial`,sub:risk<30?'Alta (>85%)':risk<60?`Media (${61}%) — revisar manualmente`:'Baja — posible fraude'},
+      {icon:'ci-ok',ok:true,text:'Lista negra global',sub:'Sin coincidencias en bases de fraude'},
+      {icon:approved===4?'ci-ok':'ci-warn',ok:approved===4,text:'Documentación completa',sub:`${approved}/4 documentos recibidos`},
+    ];
+    checks.innerHTML = checkData.map(c => `
+      <div class="check-row">
+        <div class="check-icon ${c.icon}">
+          <svg width="10" height="10" fill="none" stroke="${c.ok?'#34d399':risk>60?'#f87171':'#fbbf24'}" stroke-width="2.5" viewBox="0 0 24 24">
+            ${c.ok ? '<polyline points="20 6 9 17 4 12"/>' : '<line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'}
+          </svg>
+        </div>
+        <div class="check-text"><p>${c.text}</p><span>${c.sub}</span></div>
+        <span class="check-result ${c.ok?'cr-ok':risk>60?'cr-fail':'cr-warn'}">${c.ok?'OK':'Revisar'}</span>
+      </div>`).join('');
+
+    // Risk bar
+    const riskColor = risk < 30 ? '#34d399' : risk < 60 ? '#fbbf24' : '#f87171';
+    document.getElementById('dRiskBar').style.width = risk + '%';
+    document.getElementById('dRiskBar').style.background = `linear-gradient(90deg, #34d399, ${riskColor})`;
+    document.getElementById('dRiskVal').textContent = `${risk < 30 ? 'Bajo' : risk < 60 ? 'Medio' : 'Alto'} (${risk}/100)`;
+    document.getElementById('dRiskVal').style.color = riskColor;
+
+    // Timeline
+    document.getElementById('dTimeline').innerHTML = `
+      <div class="tl-item"><div class="tl-dot" style="background:rgba(79,109,245,0.2)"><svg width="10" height="10" fill="none" stroke="#6b85ff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div class="tl-text"><p>Solicitud iniciada</p><span>${d.date} · 10:00</span></div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:rgba(52,211,153,0.2)"><svg width="10" height="10" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="tl-text"><p>Documentos enviados por el usuario</p><span>${d.date} · 13:55</span></div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:rgba(251,191,36,0.2)"><svg width="10" height="10" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="9" x2="12" y2="13"/></svg></div><div class="tl-text"><p>Asignado a revisión manual</p><span>${d.date} · 14:20</span></div></div>`;
+
+    // Show/hide approve btn
+    document.getElementById('dBtnApprove').style.display = (status === 'approved' || status === 'rejected') ? 'none' : '';
+
+    document.getElementById('drawerOverlay').classList.add('open');
+    document.getElementById('detailDrawer').classList.add('open');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawerOverlay').classList.remove('open');
+    document.getElementById('detailDrawer').classList.remove('open');
+  }
+
+  function approveCard(card, name) {
+    card.dataset.status = 'approved';
+    card.classList.add('status-approved');
+    card.querySelector('.ver-status').className = 'ver-status vs-approved';
+    card.querySelector('.ver-status').textContent = 'Aprobado';
+    showToast(`✓ ${name} aprobado`, 'success');
+  }
+
+  function approveFromDrawer() {
+    if (currentCard) approveCard(currentCard, currentCard.dataset.name);
+    closeDrawer();
+  }
+
+  function rejectFromDrawer() {
+    if (currentCard) {
+      currentCard.dataset.status = 'rejected';
+      currentCard.classList.remove('status-review','status-approved');
+      currentCard.classList.add('status-rejected');
+      currentCard.querySelector('.ver-status').className = 'ver-status vs-rejected';
+      currentCard.querySelector('.ver-status').textContent = 'Rechazado';
+    }
+    showToast('Solicitud rechazada', 'danger');
+    closeDrawer();
+  }
+
+  function approveDoc(btn) {
+    btn.textContent = '✓ Aprobado';
+    btn.style.background = 'rgba(52,211,153,0.2)';
+    const card = btn.closest('.doc-rev-card');
+    card.classList.add('ok'); card.classList.remove('fail');
+    const stamp = card.querySelector('.doc-stamp');
+    if (stamp) { stamp.className = 'doc-stamp stamp-ok'; stamp.textContent = '✓ OK'; }
+    showToast('Documento aprobado', 'success');
+  }
+
+  function rejectDoc(btn) {
+    btn.textContent = '✗ Rechazado';
+    btn.style.background = 'rgba(248,113,113,0.2)';
+    btn.style.color = 'var(--danger)';
+    const card = btn.closest('.doc-rev-card');
+    card.classList.add('fail'); card.classList.remove('ok');
+    const stamp = card.querySelector('.doc-stamp');
+    if (stamp) { stamp.className = 'doc-stamp stamp-missing'; stamp.textContent = '✗ Rechazado'; }
+    showToast('Documento rechazado', 'danger');
+  }
+
+  // TOAST
+  function showToast(msg, type) {
+    const colors = {success:'#34d399',danger:'#f87171',info:'#6b85ff',gold:'#f59e0b'};
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.style.cssText += `border:1px solid ${colors[type]||'var(--border)'};color:${colors[type]||'var(--text-primary)'};`;
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+</script>
+</body>
+</html>

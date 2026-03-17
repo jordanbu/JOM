@@ -1,0 +1,161 @@
+ID Caso,Módulo,Submódulo,Descripción del Caso de Prueba,Prioridad
+TC-001,Dashboard,Sidebar - Hover,Al hacer hover sobre un ícono del sidebar → debe mostrar tooltip con el nombre del módulo,Media
+TC-002,Dashboard,Sidebar - Navegación,Al hacer clic en el ícono de Mensajería → debe abrir Mensajeria.html,Alta
+TC-003,Dashboard,Sidebar - Navegación,Al hacer clic en el ícono de Usuarios → debe abrir Usuarios.html,Alta
+TC-004,Dashboard,Sidebar - Navegación,Al hacer clic en el ícono de Propiedades → debe abrir Propiedades.html,Alta
+TC-005,Dashboard,Sidebar - Navegación,Al hacer clic en el ícono de Transacciones → debe abrir Transacciones.html,Alta
+TC-006,Dashboard,Sidebar - Navegación,Al hacer clic en el ícono de Validación → debe abrir Validacion-Identidad.html,Alta
+TC-007,Dashboard,Sidebar - Navegación,Al hacer clic en el logo → debe abrir Dashboard.html,Alta
+TC-008,Dashboard,Transacciones Recientes,Al hacer clic en "Ver todas →" → debe abrir Transacciones.html,Alta
+TC-009,Dashboard,Filtro de Rango,Al hacer clic en "7D" → el gráfico debe actualizarse con datos de 7 días y el botón quedar activo,Media
+TC-010,Dashboard,Filtro de Rango,Al hacer clic en "30D" → el gráfico debe actualizarse con datos de 30 días,Media
+TC-011,Dashboard,Filtro de Rango,Al hacer clic en "90D" → el gráfico debe actualizarse con datos de 90 días,Media
+TC-012,Mensajería,Lista de Tickets - Selección,Al hacer clic en un ticket → debe cargarse la conversación correspondiente en el panel de chat,Alta
+TC-013,Mensajería,Lista de Tickets - Selección,Al hacer clic en un ticket → el ticket debe quedar resaltado visualmente como activo,Alta
+TC-014,Mensajería,Lista de Tickets - Hover,Al hacer hover sobre un ticket → debe cambiar su fondo para indicar que es clickeable,Media
+TC-015,Mensajería,Chat - Input,Al hacer clic en el input de mensaje → debe recibir foco y mostrar borde resaltado,Alta
+TC-016,Mensajería,Chat - Input,Al presionar Enter con texto escrito → el mensaje debe enviarse y aparecer en el chat,Alta
+TC-017,Mensajería,Chat - Envío,Al hacer clic en el botón de envío → el mensaje debe aparecer en el chat como mensaje propio,Alta
+TC-018,Mensajería,Chat - Envío,Al enviar un mensaje → el input debe limpiarse automáticamente,Media
+TC-019,Mensajería,Chat - Mensajes Rápidos,Al hacer clic en la opción de mensajes rápidos → debe desplegarse una lista de respuestas predefinidas,Alta
+TC-020,Mensajería,Chat - Mensajes Rápidos,Al seleccionar una respuesta rápida → debe insertarse automáticamente en el input de mensaje,Alta
+TC-021,Mensajería,Chat - Mensajes Rápidos,Al hacer hover sobre una respuesta rápida → debe resaltarse visualmente,Media
+TC-022,Mensajería,Panel Lateral - Opciones,Al hacer clic en la opción "Resolver" del panel lateral → el estado del ticket debe cambiar a Resuelto,Alta
+TC-023,Mensajería,Panel Lateral - Opciones,Al hacer clic en la opción "Escalar" del panel lateral → el ticket debe marcarse como escalado,Alta
+TC-024,Mensajería,Panel Lateral - Opciones,Al hacer clic en la opción "Asignar agente" → debe abrirse un selector de agentes disponibles,Alta
+TC-025,Mensajería,Panel Lateral - Opciones,Al seleccionar un agente y confirmar → el ticket debe quedar asignado a ese agente,Alta
+TC-026,Mensajería,Panel Lateral - Opciones,Al hacer clic en "Ver perfil del usuario" → debe mostrar datos básicos del usuario que escribió,Media
+TC-027,Usuarios,Filtro - Todos,Al hacer clic en el chip "Todos" → deben mostrarse todas las tarjetas de usuarios,Alta
+TC-028,Usuarios,Filtro - Huéspedes,Al hacer clic en el chip "Huéspedes" → deben mostrarse solo tarjetas con rol Huésped,Alta
+TC-029,Usuarios,Filtro - Anfitriones,Al hacer clic en el chip "Anfitriones" → deben mostrarse solo tarjetas con rol Anfitrión,Alta
+TC-030,Usuarios,Filtro - Super Anfitrión,Al hacer clic en el chip "Super Anfitrión" → deben mostrarse solo tarjetas con badge dorado,Alta
+TC-031,Usuarios,Filtro - Suspendidos,Al hacer clic en el chip "Suspendidos" → deben mostrarse solo tarjetas con borde rojo,Alta
+TC-032,Usuarios,Búsqueda,Al escribir un nombre en el buscador → las tarjetas deben filtrarse en tiempo real,Alta
+TC-033,Usuarios,Búsqueda,Al hacer clic en el input de búsqueda → debe recibir foco con borde resaltado,Media
+TC-034,Usuarios,Búsqueda,Al borrar el texto del buscador → deben volver a mostrarse todas las tarjetas,Media
+TC-035,Usuarios,Cards - Hover,Al hacer hover sobre una tarjeta de usuario → debe elevarse con sombra o cambio de fondo,Media
+TC-036,Usuarios,Drawer - Abrir,Al hacer clic en "Ver perfil" → debe abrirse el drawer lateral con datos completos del usuario,Alta
+TC-037,Usuarios,Drawer - Cerrar,Al hacer clic en el overlay → el drawer debe cerrarse sin cambios,Media
+TC-038,Usuarios,Drawer - Cerrar,Al hacer clic en el botón X del drawer → el drawer debe cerrarse,Media
+TC-039,Usuarios,Drawer - Rol,Al abrir el drawer de un Huésped → la sección "Super Anfitrión" NO debe aparecer,Alta
+TC-040,Usuarios,Drawer - Rol,Al abrir el drawer de un Anfitrión → la sección "Super Anfitrión" DEBE aparecer,Alta
+TC-041,Usuarios,Modal Suspensión - Abrir,Al hacer clic en "Suspender" del drawer → debe abrirse el modal de suspensión,Alta
+TC-042,Usuarios,Modal Suspensión - Temporal,Al seleccionar "Temporal" → deben aparecer los chips de duración 3 / 7 / 15 / 30 días,Alta
+TC-043,Usuarios,Modal Suspensión - Indefinida,Al seleccionar "Indefinida" → los chips de duración deben ocultarse,Alta
+TC-044,Usuarios,Modal Suspensión - Validación,Al hacer clic en "Confirmar" sin motivo → debe mostrar error de campo requerido y no cerrar el modal,Alta
+TC-045,Usuarios,Modal Suspensión - Confirmar,Al confirmar la suspensión → la tarjeta debe cambiar a borde rojo con opacidad reducida,Alta
+TC-046,Usuarios,Modal Suspensión - Confirmar,Al confirmar la suspensión → debe aparecer toast verde de confirmación y cerrarse el modal,Alta
+TC-047,Usuarios,Modal Suspensión - Cancelar,Al hacer clic en "Cancelar" → el modal debe cerrarse sin cambios,Media
+TC-048,Usuarios,Modal Super Anfitrión - Otorgar,Al activar el toggle de Super Anfitrión → debe abrirse el modal de confirmación,Alta
+TC-049,Usuarios,Modal Super Anfitrión - Confirmar,Al confirmar "Otorgar" → la tarjeta debe adquirir borde dorado y badge,Alta
+TC-050,Usuarios,Modal Super Anfitrión - Revocar,Al activar el toggle de un Super Anfitrión existente → debe abrirse el modal para revocar,Alta
+TC-051,Usuarios,Modal Super Anfitrión - Confirmar,Al confirmar "Revocar" → la tarjeta debe perder borde dorado y badge,Alta
+TC-052,Usuarios,Crear Usuario - Abrir,Al hacer clic en el botón "Nuevo usuario" → debe abrirse el modal o panel de creación de usuario,Alta
+TC-053,Usuarios,Crear Usuario - Campos,Al abrir el formulario de nuevo usuario → deben mostrarse campos: nombre / email / teléfono / rol / contraseña,Alta
+TC-054,Usuarios,Crear Usuario - Input Focus,Al hacer clic en cada campo del formulario → debe recibir foco con borde resaltado,Media
+TC-055,Usuarios,Crear Usuario - Rol,Al seleccionar el rol "Huésped" en el formulario → deben mostrarse solo los campos aplicables a ese rol,Alta
+TC-056,Usuarios,Crear Usuario - Rol,Al seleccionar el rol "Anfitrión" → deben mostrarse campos adicionales (CUIT / datos bancarios),Alta
+TC-057,Usuarios,Crear Usuario - Rol,Al seleccionar el rol "Admin" → deben mostrarse opciones de permisos del panel Back-Office,Alta
+TC-058,Usuarios,Crear Usuario - Permisos Admin,Al seleccionar rol Admin → debe mostrarse un selector de módulos accesibles (Usuarios / Propiedades / Transacciones / etc.),Alta
+TC-059,Usuarios,Crear Usuario - Permisos Admin,Al marcar un módulo en los permisos → debe quedar resaltado como habilitado para ese admin,Alta
+TC-060,Usuarios,Crear Usuario - Validación,Al hacer clic en "Guardar" con campos vacíos → deben mostrarse errores de validación en los campos requeridos,Alta
+TC-061,Usuarios,Crear Usuario - Validación,Al ingresar un email con formato inválido → debe mostrarse mensaje de error bajo el campo,Alta
+TC-062,Usuarios,Crear Usuario - Confirmar,Al completar el formulario y hacer clic en "Guardar" → debe crearse el usuario y aparecer su tarjeta en la grilla,Alta
+TC-063,Usuarios,Crear Usuario - Confirmar,Al guardar el nuevo usuario → debe mostrarse un toast de confirmación,Alta
+TC-064,Usuarios,Crear Usuario - Cancelar,Al hacer clic en "Cancelar" del formulario → debe cerrarse sin crear ningún usuario,Media
+TC-065,Propiedades,Filtro - Activas,Al hacer clic en el chip "Activas" → deben mostrarse solo propiedades con badge verde,Alta
+TC-066,Propiedades,Filtro - Pendientes,Al hacer clic en el chip "Pendientes" → deben mostrarse solo propiedades con badge amarillo,Alta
+TC-067,Propiedades,Filtro - Suspendidas,Al hacer clic en el chip "Suspendidas" → deben mostrarse solo propiedades con badge rojo,Alta
+TC-068,Propiedades,Búsqueda,Al escribir en el buscador → las propiedades deben filtrarse por nombre o ubicación en tiempo real,Alta
+TC-069,Propiedades,Búsqueda - Input,Al hacer clic en el input de búsqueda → debe recibir foco con borde resaltado,Media
+TC-070,Propiedades,Cards - Hover,Al hacer hover sobre una tarjeta de propiedad → debe elevarse visualmente,Media
+TC-071,Propiedades,Toggle de Vista,Al hacer clic en el ícono de lista → las propiedades deben cambiar de grid a lista,Media
+TC-072,Propiedades,Panel de Detalle - Abrir,Al hacer clic en una tarjeta → debe cargarse el panel de detalle derecho,Alta
+TC-073,Propiedades,Panel de Detalle - Suspender,Al hacer clic en "Suspender propiedad" → el badge de la tarjeta debe cambiar a Suspendida,Alta
+TC-074,Propiedades,Panel de Detalle - Contactar,Al hacer clic en "Contactar anfitrión" → debe abrirse mensajería o datos de contacto,Media
+TC-075,Transacciones,Búsqueda,Al escribir ID o nombre → la tabla debe filtrarse mostrando solo coincidencias,Alta
+TC-076,Transacciones,Búsqueda - Input,Al hacer clic en el input de búsqueda → debe recibir foco con borde resaltado,Media
+TC-077,Transacciones,Filtro de Fecha,Al ingresar fecha inicio y fin → la tabla debe mostrar solo transacciones dentro del rango,Alta
+TC-078,Transacciones,Ordenar Columna,Al hacer clic en encabezado de columna (↕) → la tabla debe ordenarse por esa columna,Media
+TC-079,Transacciones,Tabla - Hover,Al hacer hover sobre una fila → debe resaltarse el fondo de la fila,Media
+TC-080,Transacciones,Panel de Detalle - Abrir,Al hacer clic en una fila → debe abrirse el panel derecho con desglose financiero,Alta
+TC-081,Transacciones,Panel de Detalle - Contenido,Al abrir el detalle → debe mostrar monto base / comisión JOM / neto anfitrión,Alta
+TC-082,Transacciones,Reembolso - Abrir,Al hacer clic en "Iniciar reembolso" → debe abrirse el modal de confirmación,Alta
+TC-083,Transacciones,Reembolso - Confirmar,Al confirmar el reembolso → el estado de la transacción debe cambiar a "Reembolsado",Alta
+TC-084,Transacciones,Reembolso - Cancelar,Al cancelar el reembolso → el modal debe cerrarse sin cambios,Media
+TC-085,Validación de Identidad,Filtro - Pendientes,Al hacer clic en "Pendientes" → solo deben mostrarse tarjetas con estado pendiente,Alta
+TC-086,Validación de Identidad,Filtro - En Revisión,Al hacer clic en "En revisión" → solo deben mostrarse tarjetas con borde azul,Alta
+TC-087,Validación de Identidad,Filtro - Aprobados,Al hacer clic en "Aprobados" → solo deben mostrarse tarjetas con borde verde,Alta
+TC-088,Validación de Identidad,Filtro - Rechazados,Al hacer clic en "Rechazados" → solo deben mostrarse tarjetas con borde rojo y opacidad reducida,Alta
+TC-089,Validación de Identidad,Búsqueda,Al escribir un nombre → las tarjetas deben filtrarse en tiempo real,Alta
+TC-090,Validación de Identidad,Cards - Hover,Al hacer hover sobre una tarjeta → debe elevarse o cambiar fondo visualmente,Media
+TC-091,Validación de Identidad,Drawer - Abrir,Al hacer clic en "Revisar" → debe abrirse el drawer con la grilla de documentos,Alta
+TC-092,Validación de Identidad,Drawer - Documentos,Al abrir el drawer → deben mostrarse los 4 docs en grilla 2x2 (DNI frente / DNI dorso / Selfie / Domicilio),Alta
+TC-093,Validación de Identidad,Drawer - Aprobar Doc,Al hacer clic en "Aprobar" de un documento → debe aparecer sello verde sobre ese documento,Alta
+TC-094,Validación de Identidad,Drawer - Rechazar Doc,Al hacer clic en "Rechazar" de un documento → debe aparecer sello rojo sobre ese documento,Alta
+TC-095,Validación de Identidad,Drawer - Botones Doc,Al hacer hover sobre los botones Aprobar/Rechazar de un documento → deben resaltarse visualmente,Media
+TC-096,Validación de Identidad,Drawer - Cerrar,Al hacer clic en el overlay o botón X → el drawer debe cerrarse sin cambios,Media
+TC-097,Validación de Identidad,Acción - Aprobar Identidad,Al hacer clic en "Aprobar identidad" → la tarjeta debe cambiar a estado Aprobado con borde verde,Alta
+TC-098,Validación de Identidad,Acción - Rechazar,Al hacer clic en "Rechazar" → la tarjeta debe cambiar a estado Rechazado con borde rojo,Alta
+TC-099,Validación de Identidad,Acción - Toast,Al aprobar o rechazar → debe aparecer un toast de confirmación con el resultado,Alta
+TC-100,Validación de Identidad,Acción - Solicitar Info,Al hacer clic en "Solicitar info" → el estado debe mantenerse en Pendiente y el drawer cerrarse,Media
+TC-101,Navegación Global,Sidebar - Estado activo,Al estar en cada módulo → el ícono correspondiente del sidebar debe estar resaltado con color acento,Alta
+TC-102,Navegación Global,Sidebar - Hover,Al hacer hover sobre íconos del sidebar → deben cambiar de color o fondo sutilmente,Media
+TC-103,Navegación Global,Modales - Cerrar,Al hacer clic en el overlay exterior de cualquier modal → debe cerrarse sin guardar cambios,Media
+TC-104,Navegación Global,Modales - Cerrar,Al hacer clic en Cancelar o X de cualquier modal → debe cerrarse sin guardar cambios,Media
+TC-105,Navegación Global,Toasts - Éxito,Al ejecutarse una acción exitosa → debe aparecer toast verde que se cierre automáticamente,Media
+TC-106,Navegación Global,Toasts - Error,Al ejecutarse una acción de rechazo o error → debe aparecer toast rojo que se cierre automáticamente,Media
+TC-107,Dashboard,Hover - KPI Card,Hacer hover sobre una KPI card → la card debe elevarse y mostrar borde azul resaltado,Media
+TC-108,Dashboard,Hover - Gráfico,Hacer hover sobre una barra del gráfico → debe mostrar tooltip con semana y cantidad de reservas,Alta
+TC-109,Dashboard,Hover - Tabla,Hacer hover sobre una fila de transacciones → la fila debe cambiar de fondo indicando que es clickeable,Media
+TC-110,Dashboard,Selección - Rango 7D,Seleccionar "7D" en el filtro de rango → el gráfico se actualiza con datos de 7 días y el botón queda activo,Media
+TC-111,Dashboard,Selección - Rango 90D,Seleccionar "90D" en el filtro de rango → el gráfico se actualiza con datos de 90 días,Media
+TC-112,Usuarios,Hover - Card,Hacer hover sobre una tarjeta de usuario → la card debe elevarse con sombra,Media
+TC-113,Usuarios,Hover - Sidebar,Hacer hover sobre un ícono del sidebar → debe aparecer tooltip con el nombre del módulo,Media
+TC-114,Usuarios,Búsqueda - Tiempo real,Escribir nombre en el buscador → las tarjetas que no coinciden se ocultan en tiempo real,Alta
+TC-115,Usuarios,Búsqueda - Limpiar,Borrar todo el texto del buscador → deben volver a mostrarse todas las tarjetas,Alta
+TC-116,Usuarios,Selección - Chip Temporal,Seleccionar "Temporal" en el modal de suspensión → deben aparecer chips de duración 3 / 7 / 15 / 30 días,Alta
+TC-117,Usuarios,Selección - Chip Indefinida,Seleccionar "Indefinida" en el modal de suspensión → los chips de duración deben desaparecer,Alta
+TC-118,Usuarios,Selección - Duración,Seleccionar un chip de duración (ej: "15 días") → el chip queda resaltado y los demás sin selección,Alta
+TC-119,Usuarios,Selección - Rol Huésped,Seleccionar rol "Huésped" en formulario de nuevo usuario → deben mostrarse solo campos básicos (nombre / email / teléfono),Alta
+TC-120,Usuarios,Selección - Rol Anfitrión,Seleccionar rol "Anfitrión" en formulario → deben aparecer campos adicionales de CUIT y datos bancarios,Alta
+TC-121,Usuarios,Selección - Rol Admin,Seleccionar rol "Admin" en formulario → debe mostrarse el panel de permisos con checkboxes de módulos,Alta
+TC-122,Usuarios,Selección - Permiso Admin,Marcar checkbox de un módulo en los permisos (ej: "Transacciones") → el módulo queda habilitado visualmente,Alta
+TC-123,Usuarios,Selección - Permiso Admin,Desmarcar un módulo ya habilitado → el módulo vuelve a estado sin permisos,Alta
+TC-124,Usuarios,Campo - Drawer Suspensión,Escribir motivo en el textarea del modal de suspensión → el campo debe aceptar texto libre,Alta
+TC-125,Usuarios,Campo - Email Inválido,Escribir email con formato inválido (ej: "usuario@") → debe aparecer error debajo del campo al salir del input,Alta
+TC-126,Usuarios,Campo - Requerido,Dejar campo "Nombre" vacío y hacer clic en Guardar → el campo debe marcarse en rojo con texto "Campo requerido",Alta
+TC-127,Usuarios,Campo - Guardar OK,Completar todos los campos correctamente y hacer clic en Guardar → se crea el usuario y aparece su tarjeta en la grilla con toast verde,Alta
+TC-128,Usuarios,Acción - Abrir Drawer,Hacer clic en "Ver perfil" → se abre el drawer lateral con todos los datos del usuario,Alta
+TC-129,Usuarios,Acción - Drawer Anfitrión,Abrir drawer de un Anfitrión → aparece la sección "Super Anfitrión" con toggle visible,Alta
+TC-130,Usuarios,Acción - Drawer Huésped,Abrir drawer de un Huésped → la sección "Super Anfitrión" NO aparece,Alta
+TC-131,Usuarios,Acción - Modal Suspensión,Hacer clic en "Suspender" del drawer → se abre el modal con opciones Temporal / Indefinida,Alta
+TC-132,Usuarios,Acción - Modal Super Anfitrión,Hacer clic en el toggle de Super Anfitrión → se abre el modal con beneficios y botón confirmar,Alta
+TC-133,Propiedades,Hover - Card,Hacer hover sobre una tarjeta de propiedad → la card debe elevarse con sombra,Media
+TC-134,Propiedades,Búsqueda - Tiempo real,Escribir nombre o ubicación en el buscador → las propiedades se filtran en tiempo real,Alta
+TC-135,Propiedades,Selección - Toggle Lista,Hacer clic en ícono de vista lista → las propiedades cambian de grilla a filas tipo lista,Media
+TC-136,Propiedades,Selección - Toggle Grilla,Hacer clic en ícono de vista grilla → las propiedades vuelven a mostrarse como cards,Media
+TC-137,Propiedades,Acción - Panel Detalle,Hacer clic en una tarjeta de propiedad → se carga el panel derecho con métricas: ocupación / ingresos / comisión / amenidades,Alta
+TC-138,Transacciones,Hover - Fila Tabla,Hacer hover sobre una fila de transacción → la fila debe resaltarse visualmente,Media
+TC-139,Transacciones,Búsqueda - ID,Escribir ID de transacción (ej: "TX-4820") → la tabla muestra solo esa fila,Alta
+TC-140,Transacciones,Campo - Fecha Inicio,Ingresar fecha inicio → la tabla filtra mostrando solo transacciones desde esa fecha,Alta
+TC-141,Transacciones,Campo - Rango Fechas,Ingresar fecha inicio y fin → la tabla muestra solo transacciones dentro del rango,Alta
+TC-142,Transacciones,Selección - Ordenar Columna,Hacer clic en encabezado "Monto" → la tabla se ordena de mayor a menor con indicador ↑↓,Media
+TC-143,Transacciones,Acción - Panel Detalle,Hacer clic en una fila → se abre el panel derecho con desglose financiero completo,Alta
+TC-144,Transacciones,Acción - Modal Reembolso,Hacer clic en "Iniciar reembolso" → se abre modal de confirmación con monto y datos de la transacción,Alta
+TC-145,Validación de Identidad,Hover - Card,Hacer hover sobre una tarjeta de verificación → debe elevarse o cambiar fondo visualmente,Media
+TC-146,Validación de Identidad,Hover - Botones Doc,Hacer hover sobre botón "Aprobar" o "Rechazar" de un documento → el botón debe cambiar de color,Media
+TC-147,Validación de Identidad,Búsqueda - Tiempo real,Escribir nombre de usuario → las tarjetas de verificación se filtran en tiempo real,Alta
+TC-148,Validación de Identidad,Campo - Notas Drawer,Escribir texto en el campo "Notas" del drawer → el campo debe aceptar texto libre,Media
+TC-149,Validación de Identidad,Acción - Abrir Drawer,Hacer clic en "Revisar" → se abre el drawer con grilla 2×2 de documentos del usuario,Alta
+TC-150,Validación de Identidad,Acción - Aprobar Documento,Hacer clic en "Aprobar" de un documento → aparece sello verde sobre ese documento y el botón cambia a estado aprobado,Alta
+TC-151,Validación de Identidad,Acción - Rechazar Documento,Hacer clic en "Rechazar" de un documento → aparece sello rojo sobre ese documento y el botón cambia a estado rechazado,Alta
+TC-152,Mensajería,Hover - Ticket,Hacer hover sobre un ticket de la lista → el fondo del ticket debe cambiar indicando que es clickeable,Media
+TC-153,Mensajería,Campo - Input Mensaje,Escribir texto en el input de mensaje → el texto debe aparecer y el botón de envío debe activarse,Alta
+TC-154,Mensajería,Campo - Limpiar Input,Borrar todo el texto del input → el botón de envío debe desactivarse o quedar inactivo,Media
+TC-155,Mensajería,Acción - Seleccionar Ticket,Hacer clic en un ticket → se carga la conversación en el panel de chat y el ticket queda resaltado,Alta
+TC-156,Mensajería,Acción - Enviar Mensaje,Hacer clic en el botón de envío → el mensaje aparece en el chat y el input se limpia,Alta
+TC-157,Mensajería,Acción - Mensajes Rápidos,Hacer clic en el ícono de respuestas rápidas → se despliega la lista de mensajes predefinidos,Alta
+TC-158,Mensajería,Selección - Respuesta Rápida,Hacer clic en una respuesta rápida de la lista → el texto se inserta automáticamente en el input,Alta
+TC-159,Mensajería,Acción - Escalar Ticket,Hacer clic en "Escalar" del panel lateral → el ticket cambia su estado a escalado con badge correspondiente,Alta
+TC-160,Mensajería,Selección - Asignar Agente,Seleccionar un agente en el selector "Asignar agente" → el ticket queda asignado y muestra el nombre del agente,Alta

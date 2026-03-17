@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM Reservation: Check Out</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5B55C8",
+                        "primary-subtle": "#EFEEFF",
+                        destructive: "#DC2626",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#0F172A",
+                        "neutral-subtle-light": "#F8F9FC",
+                        "neutral-subtle-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'lg': '16px',
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+        body {
+          font-family: 'Inter', sans-serif;
+        }
+      }
+      .text-section-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .link-refined {
+        font-size: 14px;
+        font-weight: 500;
+        color: #5B55C8;
+      }
+      .price-bold {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1F2937;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .material-symbols-outlined.filled {
+        font-variation-settings: 'FILL' 1;
+      }
+      .bottom-sheet {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bottom-sheet:not(.expanded) {
+            transform: translateY(calc(100% - 64px));
+        }
+        .bottom-sheet:not(.expanded) .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+        }
+        .bottom-sheet.expanded {
+            transform: translateY(0);
+        }
+        .bottom-sheet.expanded .content-wrapper {
+            max-height: calc(100vh - 140px);
+        }
+        @media (min-width: 1024px) {
+            .bottom-sheet {
+                transform: translateY(0) !important;
+            }
+            .bottom-sheet .content-wrapper {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 h-20 flex items-center">
+        <div class="max-w-[1200px] w-full mx-auto px-8 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="size-8 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+            </div>
+            <div class="flex items-center gap-8">
+                <button class="hidden md:flex items-center gap-2 text-[#5B55C8] hover:text-[#4A45B0] font-medium text-sm transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">language</span>
+                    Español (BO)
+                </button>
+                <button class="relative text-[#5B55C8] hover:text-[#4A45B0] flex items-center transition-colors">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span class="absolute -top-1 -right-1 size-4 bg-primary rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">3</span>
+                </button>
+                <div class="flex items-center gap-2 pl-2 cursor-pointer group">
+                    <div class="size-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+                        <img alt="Perfil" class="size-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc"/>
+                    </div>
+                    <span class="material-symbols-outlined text-[20px] text-[#5B55C8] group-hover:text-[#4A45B0] transition-colors">menu</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12">
+        <div class="flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16">
+            <div class="w-full lg:flex-1 min-w-0">
+                <div class="mb-6">
+                    <span class="px-4 py-1.5 bg-[#F8F9FC] text-[#1F2937] text-sm font-semibold rounded-full border border-[#E5E7EB] tracking-wider">
+                        Check Out - Próximo
+                    </span>
+                </div>
+                <div class="grid grid-cols-4 grid-rows-2 gap-3 h-[400px] mb-8 overflow-hidden rounded-lg">
+                    <div class="col-span-2 row-span-2">
+                        <img alt="Living room" class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" />
+                    </div>
+                    <div class="col-span-1 row-span-1">
+                        <img alt="Bedroom" class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer" src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=400&q=80" />
+                    </div>
+                    <div class="col-span-1 row-span-1">
+                        <img alt="Kitchen" class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" />
+                    </div>
+                    <div class="col-span-2 row-span-1">
+                        <img alt="Detail" class="w-full h-full object-cover hover:opacity-95 transition-opacity cursor-pointer" src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80" />
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h1 class="text-[28px] font-semibold leading-tight text-slate-900 dark:text-white mb-2">Stratto Departamento</h1>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                            <img alt="Host Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEwDJosCD45FtTyZdT5z485H7qbsTUAYYpQiUn0DfBId8Z8DkKg8o5dzPf7t1NtiJ-2t91F3ygdseDK-nGxVHzMb6DZV_Tn-1J3A2fq2YoTwmW7R53Z5rns6HwlK4Fg4Wqrbpo8CVZWT-orA_PRjrO3Gel2GS7baHj9v84FXFQ7RNbhgV6scWDCyGwg3rDdOS_c7Li4ppfDgcYKDUcaqgWQ5_eH7bdew9r1ggqB6sT6O3f0XEPQWC7_1gr8lRlNmtiVLKjgzs4Unu2" />
+                        </div>
+                        <div>
+                            <p class="font-medium">Jordan Avir Burgos Cabrera</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Bolivia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 bg-[#F8F9FC] dark:bg-neutral-subtle-dark rounded-2xl border border-slate-200 dark:border-slate-800 mb-6 overflow-hidden">
+                    <div class="p-4 border-r border-slate-200 dark:border-slate-800">
+                        <p class="text-[14px] font-semibold text-slate-500 dark:text-slate-400 mb-1">llegada</p>
+                        <p class="font-semibold">lun, 26 ene</p>
+                        <p class="text-sm text-slate-500">10:00</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[14px] font-semibold text-slate-500 dark:text-slate-400 mb-1">salida</p>
+                        <p class="font-semibold">mar, 27 ene</p>
+                        <p class="text-sm text-slate-500">07:00</p>
+                    </div>
+                </div>
+                <div class="space-y-4 mb-16">
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-[20px] text-[#5B55C8]">forum</span>
+                        <div>
+                            <p class="text-[14px] font-bold text-slate-500 dark:text-slate-400 mb-4">Mensajes con el anfitrión</p>
+                            <a href="#" class="link-refined hover:underline">Jordan Avir Burgos Cabrera</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-[20px] text-[#5B55C8]">home</span>
+                        <div>
+                            <p class="text-[14px] font-bold text-slate-500 dark:text-slate-400 mb-2">Hospedaje</p>
+                            <a href="#" class="link-refined hover:underline">Stratto Departamento</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 mb-16"></div>
+                <section class="mb-16">
+                    <h2 class="text-section-title mb-6">Detalles de la reservación</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-medium mb-1">¿Quién te acompaña?</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">1 huésped(es)</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 mb-16"></div>
+                <section class="mb-16">
+                    <h2 class="text-section-title mb-6">Políticas de cancelación</h2>
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Los huéspedes recibirán un reembolso completo si cancelan hasta un día antes del check-in.
+                        </p>
+                        <button class="link-refined hover:underline decoration-2">Sigue leyendo</button>
+                    </div>
+                </section>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 mb-16"></div>
+                <section class="mb-16">
+                    <h2 class="text-section-title mb-6">Reglas e instrucciones</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-medium mb-1">Reglas de la casa</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">1 huésped(es) como máximo, no se admiten mascotas</p>
+                        </div>
+                        <button class="link-refined hover:underline decoration-2">Mostrar más</button>
+                    </div>
+                </section>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 mb-16"></div>
+                <section class="mb-16">
+                    <h2 class="text-section-title mb-6">Información de precio</h2>
+                    <div class="space-y-2">
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Monto pagado</p>
+                        <p class="price-bold">1.15 BOB.</p>
+                    </div>
+                </section>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 mb-16"></div>
+                <section class="mb-16">
+                    <h2 class="text-section-title mb-6">Obtén asistencia en todo momento</h2>
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-600 dark:text-slate-400">
+                            Si necesitas ayuda, estamos disponibles 24/7 desde cualquier parte del mundo.
+                        </p>
+                        <button class="link-refined hover:underline decoration-2">Contactarme con el Servicio al cliente de JOM</button>
+                    </div>
+                </section>
+            </div>
+            <aside class="w-full lg:w-[360px] fixed lg:relative bottom-0 left-0 right-0 lg:bottom-auto lg:left-auto lg:right-auto z-40 bottom-sheet">
+                <div class="sticky top-[120px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-t-3xl lg:rounded-2xl shadow-lg lg:shadow-sm">
+                    <div onclick="toggleBottomSheet(event)" class="lg:hidden flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700 cursor-pointer active:bg-slate-50 dark:active:bg-slate-700 transition-colors">
+                        <h3 class="text-[16px] font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                            <div class="w-4 h-4 rounded-full border-2 border-primary bg-white dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                            </div>
+                            Check Out
+                        </h3>
+                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400 chevron-icon transition-transform">keyboard_arrow_up</span>
+                    </div>
+                    <div class="content-wrapper p-6 overflow-y-auto transition-all duration-300">
+                    <div class="space-y-6 mb-8">
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-[#EFEEFF] flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[#5B55C8] text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-slate-200 -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Solicitud de reserva</p>
+                                <p class="text-xs text-slate-500 tracking-wide">enviada</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-[#EFEEFF] flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[#5B55C8] text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-slate-200 -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Confirmación de solicitud</p>
+                                <p class="text-xs text-slate-500 tracking-wide">confirmada</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full bg-[#EFEEFF] flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[#5B55C8] text-[16px]">check</span>
+                                </div>
+                                <div class="w-0.5 h-6 bg-slate-200 -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">Pago realizado</p>
+                                <p class="text-xs text-primary tracking-wide">pagado</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full border-2 border-primary bg-white dark:bg-slate-800 flex items-center justify-center">
+                                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                </div>
+                                <div class="w-0.5 h-6 bg-slate-200 -mt-1"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">Check-out</p>
+                                <p class="text-xs text-primary tracking-wide">en curso</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-6 h-6 rounded-full border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
+                                    <span class="text-[10px] font-bold text-slate-500">6</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">Reseña</p>
+                                <p class="text-xs text-slate-500 font-semibold tracking-wide">pendiente</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-center">
+                            <a class="link-refined underline hover:text-[#4A45B0] transition-colors" href="#">Política de cancelación</a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <footer class="bg-neutral-subtle-light dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 mt-12">
+        <div class="max-w-[1200px] mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+                    <span>© 2024 JOM Platform.</span>
+                    <a class="hover:underline" href="#">Privacidad</a>
+                    <a class="hover:underline" href="#">Términos</a>
+                    <a class="hover:underline" href="#">Mapa del sitio</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="flex items-center gap-1 text-sm font-semibold text-[#5B55C8] hover:text-[#4A45B0] transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">language</span>
+                        Español (BO)
+                    </button>
+                    <button class="flex items-center gap-1 text-sm font-semibold">
+                        <span>$</span>
+                        BOB
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleBottomSheet(event) {
+            if (window.innerWidth >= 1024) return;
+            const bottomSheet = document.querySelector('.bottom-sheet');
+            const chevron = document.querySelector('.chevron-icon');
+            bottomSheet.classList.toggle('expanded');
+            if (bottomSheet.classList.contains('expanded')) {
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            const chevron = document.querySelector('.chevron-icon');
+            if (window.innerWidth < 1024) {
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        });
+    </script>
+</body>
+</html>

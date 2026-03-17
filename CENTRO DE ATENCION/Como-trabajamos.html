@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <style>
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6B7280;
+        text-decoration: none;
+        transition: background 0.15s, color 0.15s;
+        border-left: 2px solid transparent;
+      }
+      .nav-item:hover {
+        background: #F8F9FC;
+        color: #1F2937;
+      }
+      .nav-item.active {
+        background: #EFEEFF;
+        color: #5B55C8;
+        border-left-color: #5B55C8;
+        font-weight: 600;
+      }
+      .nav-item .nav-num {
+        font-size: 11px;
+        font-weight: 700;
+        color: #5B55C8;
+        opacity: 0.6;
+        min-width: 18px;
+        letter-spacing: 0.04em;
+      }
+      .nav-item.active .nav-num { opacity: 1; }
+      .sidebar-sticky { position: sticky; top: 100px; }
+      .tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .tag-pill:hover {
+        border-color: #5B55C8;
+        background: #EFEEFF;
+      }
+      .tag-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #5B55C8;
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .right-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+      }
+      .right-card .icon-wrap {
+        width: 32px; height: 32px;
+        background: #EFEEFF;
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .right-card .icon-wrap .material-symbols-outlined {
+        font-size: 16px;
+        color: #5B55C8;
+      }
+    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Cómo Trabajamos</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  </style>
+  <style>
+    /* ── Animations ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; animation: slideUp 0.45s ease forwards; }
+    .anim-1 { animation-delay: .04s }
+    .anim-2 { animation-delay: .09s }
+    .anim-3 { animation-delay: .14s }
+    .anim-4 { animation-delay: .19s }
+    .anim-5 { animation-delay: .24s }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 48px 0 44px;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 500; color: #6B7280;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active { background: #EFEEFF; color: #5B55C8; border-left-color: #5B55C8; font-weight: 600; }
+    .nav-icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; background: #F8F9FC; flex-shrink: 0; }
+    .nav-item.active .nav-icon { background: #EFEEFF; }
+    .nav-icon .material-symbols-outlined { font-size: 14px; color: #9CA3AF; }
+    .nav-item.active .nav-icon .material-symbols-outlined { color: #5B55C8; }
+
+    @media (min-width: 768px) { .sidebar-sticky { position: sticky; top: 100px; } }
+
+    /* ── Audience tab toggle ── */
+    .audience-tab {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; border: none; background: none;
+    }
+    .audience-tab.inactive { color: #6B7280; }
+    .audience-tab.inactive:hover { background: #F8F9FC; color: #1F2937; }
+    .audience-tab.active-guest { background: #EFEEFF; color: #5B55C8; }
+    .audience-tab.active-host { background: #F0FDF4; color: #15803D; }
+
+    /* ── Steps ── */
+    .steps-container { display: flex; flex-direction: column; gap: 0; }
+
+    .step-row {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 24px 0;
+      border-bottom: 1px solid #E5E7EB;
+      position: relative;
+    }
+    .step-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-row:first-child { padding-top: 0; }
+
+    .step-left { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
+
+    .step-num-bubble {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-num-bubble.guest { background: #EFEEFF; color: #5B55C8; }
+    .step-num-bubble.host  { background: #DCFCE7; color: #15803D; }
+
+    .step-connector {
+      width: 2px; flex: 1; min-height: 24px;
+      background: #E5E7EB; margin-top: 6px;
+    }
+    .step-row:last-child .step-connector { display: none; }
+
+    .step-icon-wrap {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-icon-wrap.guest { background: #EFEEFF; }
+    .step-icon-wrap.guest .material-symbols-outlined { color: #5B55C8; font-size: 18px; }
+    .step-icon-wrap.host  { background: #DCFCE7; }
+    .step-icon-wrap.host  .material-symbols-outlined { color: #16A34A; font-size: 18px; }
+
+    .step-content { flex: 1; }
+    .step-title { font-size: 16px; font-weight: 600; color: #1F2937; margin-bottom: 6px; line-height: 1.3; }
+    .step-body  { font-size: 14px; color: #6B7280; line-height: 1.65; }
+
+    /* ── Section card wrapper ── */
+    .section-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .section-card-header {
+      padding: 20px 24px 18px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-card-body { padding: 24px; }
+
+    .header-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; margin-bottom: 2px; }
+    .sec-title { font-size: 18px; font-weight: 600; color: #1F2937; line-height: 1.25; }
+
+    /* ── Pillar cards ── */
+    .pillar-card {
+      background: #F8F9FC;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pillar-card:hover {
+      border-color: #C7C4E8;
+      box-shadow: 0 3px 12px rgba(91,85,200,0.07);
+    }
+    .pillar-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #EFEEFF;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pillar-icon .material-symbols-outlined { font-size: 20px; color: #5B55C8; }
+    .pillar-name { font-size: 15px; font-weight: 600; color: #1F2937; }
+    .pillar-desc { font-size: 13px; color: #6B7280; line-height: 1.55; }
+
+    /* ── Audience toggle panel ── */
+    .audience-panel { display: none; }
+    .audience-panel.visible { display: block; }
+
+    /* ── Tab container ── */
+    .tab-bar {
+      display: inline-flex;
+      background: #F8F9FC;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 4px;
+      gap: 2px;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+      </div>
+      <
+      <div class="flex items-center gap-3">
+        <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="page-hero">
+    <div class="max-content-width">
+      <!-- Breadcrumb -->
+    
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div class="max-w-xl">
+          <h1 class="text-[28px] font-semibold text-neutral-text leading-tight mb-3">Cómo Trabajamos</h1>
+          <p class="text-sm text-neutral-secondary leading-relaxed">
+            JOM es una comunidad basada en la confianza. Conectamos a viajeros que buscan experiencias auténticas con anfitriones locales que ofrecen espacios únicos.
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 self-start md:self-auto shrink-0">
+          <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">calendar_today</span>
+            <span class="text-xs text-neutral-secondary font-medium">Actualización:</span>
+            <span class="text-xs font-semibold text-neutral-text">26 feb 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick-jump chips -->
+      
+    </div>
+  </section>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="max-content-width py-12">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden md:block w-56 shrink-0 sidebar-sticky">
+        <p class="text-[11px] font-bold text-neutral-secondary uppercase tracking-widest mb-3 px-2">Secciones</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#huespedes" class="nav-item active" data-section="huespedes">
+           01 Para Huéspedes
+          </a>
+          <a href="#anfitriones" class="nav-item" data-section="anfitriones">
+           02 Para Anfitriones
+          </a>
+          <a href="#confianza" class="nav-item" data-section="confianza">
+           03 Confianza y Calidad
+          </a>
+        </nav>
+
+        <!-- Mini stats -->
+        <div class="mt-6 grid grid-cols-2 gap-2">
+         
+       
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-4 bg-soft-highlight border border-[#5B55C8]/20 rounded-card p-4 flex flex-col gap-3">
+          <p class="text-xs font-semibold text-neutral-text">¿Listo para empezar?</p>
+          <a href="#" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">search</span>
+            Explorar hospedajes
+          </a>
+          <a href="#" class="flex items-center justify-center gap-2 bg-white border border-neutral-border text-neutral-text text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-neutral-bg transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">add_home</span>
+            Publicar mi espacio
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="flex-1 flex flex-col gap-6 min-w-0">
+
+        <!-- ══ Para Huéspedes ══ -->
+        <div id="huespedes" class="section-card anim anim-1">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+            </div>
+            <div>
+              <h2 class="sec-title">Para Huéspedes</h2>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <div class="steps-container">
+
+              <!-- Step 1 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble guest">1</div>
+                  <div class="step-connector"></div>
+                </div>
+               
+                <div class="step-content">
+                  <p class="step-title">Encuentra tu lugar ideal</p>
+                  <p class="step-body">Explora miles de opciones en nuestra plataforma. Puedes filtrar por precio, ubicación, servicios y tipo de propiedad. Lee las evaluaciones de otros viajeros para elegir con confianza.</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble guest">2</div>
+                  <div class="step-connector"></div>
+                </div>
+                
+                <div class="step-content">
+                  <p class="step-title">Reserva con seguridad</p>
+                  <p class="step-body">Una vez que encuentres el alojamiento perfecto, solicita la reserva. Tu pago se procesa a través de nuestra plataforma segura y el dinero se retiene hasta <strong style="color:#1F2937;font-weight:600">24 horas después de tu llegada</strong> para garantizar tu tranquilidad.</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble guest">3</div>
+                  <div class="step-connector"></div>
+                </div>
+               
+                <div class="step-content">
+                  <p class="step-title">Disfruta tu estancia</p>
+                  <p class="step-body">Comunícate con tu anfitrión a través de nuestro chat para coordinar la llegada. Vive una experiencia local y, al finalizar, deja una reseña para ayudar a la comunidad.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ Para Anfitriones ══ -->
+        <div id="anfitriones" class="section-card anim anim-2">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:20px">home</span>
+            </div>
+            <div>
+              <h2 class="sec-title">Para Anfitriones</h2>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <div class="steps-container">
+
+              <!-- Step 1 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble host">1</div>
+                  <div class="step-connector"></div>
+                </div>
+                
+                <div class="step-content">
+                  <p class="step-title">Publica tu espacio gratis</p>
+                  <p class="step-body">Crear un anuncio en JOM es sencillo y <strong style="color:#1F2937;font-weight:600">completamente gratuito</strong>. Describe tu espacio, sube fotos atractivas y establece tus propias reglas y precios. Tú tienes el control total de tu calendario.</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble host">2</div>
+                  <div class="step-connector"></div>
+                </div>
+              
+                <div class="step-content">
+                  <p class="step-title">Recibe a tus huéspedes</p>
+                  <p class="step-body">Cuando recibas una solicitud de reserva, revisa el perfil del huésped y acepta. Utiliza nuestras herramientas de mensajería para responder dudas y coordinar el check-in.</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="step-row">
+                <div class="step-left">
+                  <div class="step-num-bubble host">3</div>
+                  <div class="step-connector"></div>
+                </div>
+               
+                <div class="step-content">
+                  <p class="step-title">Recibe tus pagos</p>
+                  <p class="step-body">Nosotros nos encargamos del cobro. Transferimos tus ganancias (menos la comisión de servicio) a tu cuenta bancaria o método de pago preferido <strong style="color:#1F2937;font-weight:600">24 horas después de la llegada del huésped</strong>.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ Confianza y Calidad ══ -->
+        <div id="confianza" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:20px">verified</span>
+            </div>
+            <div>
+              <h2 class="sec-title">Confianza y Calidad</h2>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <p class="text-sm text-neutral-secondary mb-6 leading-relaxed">Para mantener la calidad en JOM, nos basamos en tres pilares fundamentales que garantizan una experiencia segura y auténtica para toda la comunidad.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Verificación -->
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <span class="material-symbols-outlined">badge</span>
+                </div>
+                <div>
+                  <p class="pillar-name">Verificación</p>
+                  <p class="pillar-desc mt-1">Validamos la identidad de anfitriones y huéspedes para construir una comunidad de confianza.</p>
+                </div>
+                <div class="flex items-center gap-1.5 mt-auto">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#5B55C8;opacity:0.6;display:inline-block;flex-shrink:0"></span>
+                  <span class="text-xs font-medium text-primary">Identidad validada</span>
+                </div>
+              </div>
+
+              <!-- Reseñas -->
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <span class="material-symbols-outlined">rate_review</span>
+                </div>
+                <div>
+                  <p class="pillar-name">Reseñas Reales</p>
+                  <p class="pillar-desc mt-1">Solo usuarios que han completado una estancia pueden opinar. Sin reseñas falsas.</p>
+                </div>
+                <div class="flex items-center gap-1.5 mt-auto">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#5B55C8;opacity:0.6;display:inline-block;flex-shrink:0"></span>
+                  <span class="text-xs font-medium text-primary">100% verificadas</span>
+                </div>
+              </div>
+
+              <!-- Soporte -->
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <span class="material-symbols-outlined">support_agent</span>
+                </div>
+                <div>
+                  <p class="pillar-name">Soporte 24/7</p>
+                  <p class="pillar-desc mt-1">Nuestro equipo está listo para ayudarte en cualquier etapa del viaje, todos los días.</p>
+                </div>
+                <div class="flex items-center gap-1.5 mt-auto">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#16A34A;animation:pulse 2s infinite;display:inline-block;flex-shrink:0;border-radius:50%"></span>
+                  <span class="text-xs font-medium" style="color:#15803D">Activo ahora</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-2">
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">
+            Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor confianza.
+          </p>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors font-semibold" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <div class="flex gap-4">
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">camera</span></a>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés (US)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+  </style>
+
+  <script>
+    /* Sidebar active on scroll */
+    const sections = document.querySelectorAll('#huespedes, #anfitriones, #confianza');
+    const navLinks = document.querySelectorAll('.nav-item[data-section]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

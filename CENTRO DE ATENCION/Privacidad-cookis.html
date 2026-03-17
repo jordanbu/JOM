@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Privacidad y Cookies</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 32px; padding-right: 32px; }
+  </style>
+  <style>
+    /* Sidebar nav */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 10px;
+      font-size: 13px; font-weight: 500; color: #6B7280;
+      text-decoration: none; transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active { background: #EFEEFF; color: #5B55C8; border-left-color: #5B55C8; font-weight: 600; }
+    .nav-item .nav-num { font-size: 11px; font-weight: 700; color: #5B55C8; opacity: 0.6; min-width: 18px; letter-spacing: 0.04em; }
+    .nav-item.active .nav-num { opacity: 1; }
+
+    /* Hero */
+    .privacy-hero { background: #F8F9FC; border-bottom: 1px solid #E5E7EB; padding: 48px 0 40px; }
+
+    /* Single big card */
+    .big-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: slideUp 0.35s ease 0.05s forwards;
+    }
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* Section inside card */
+    .doc-section { padding: 28px 32px; }
+    .doc-section + .doc-section { border-top: 1px solid #E5E7EB; }
+
+    .section-num {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #5B55C8; opacity: 0.65;
+      margin-bottom: 5px;
+    }
+    .section-title {
+      font-size: 16px; font-weight: 700; color: #1F2937;
+      margin-bottom: 10px; line-height: 1.35; letter-spacing: -0.01em;
+    }
+    .section-body { font-size: 13.5px; line-height: 1.7; color: #6B7280; }
+    .section-body strong { color: #1F2937; font-weight: 600; }
+
+    /* Inner divider */
+    .inner-hr { border: none; border-top: 1px solid #F3F4F6; margin: 14px 0; }
+
+    /* Tag pill */
+    .tag-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #F8F9FC; border: 1px solid #E5E7EB; border-radius: 8px;
+      padding: 4px 11px; font-size: 12.5px; font-weight: 500; color: #374151;
+    }
+    .tag-dot { width: 5px; height: 5px; border-radius: 50%; background: #5B55C8; opacity: 0.5; flex-shrink: 0; }
+
+    /* List */
+    .doc-list { margin: 0; padding-left: 1.4rem; display: flex; flex-direction: column; gap: 5px; }
+    .doc-list li { font-size: 13.5px; color: #374151; font-weight: 500; }
+
+    /* Right cards (small inline) */
+    .right-card {
+      display: flex; align-items: center; gap: 10px;
+      background: #F8F9FC; border: 1px solid #E5E7EB;
+      border-radius: 10px; padding: 11px 14px;
+      font-size: 13px; font-weight: 500; color: #1F2937;
+    }
+    .icon-wrap {
+      width: 30px; height: 30px; background: #EFEEFF; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .icon-wrap .material-symbols-outlined { font-size: 15px; color: #5B55C8; }
+
+    /* Contact row */
+    .contact-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13.5px; color: #1F2937;
+      padding: 10px 14px; background: #F8F9FC;
+      border: 1px solid #E5E7EB; border-radius: 10px;
+    }
+    .contact-row a { color: #5B55C8; text-decoration: none; font-weight: 500; }
+    .contact-row a:hover { text-decoration: underline; }
+    .contact-row .material-symbols-outlined { font-size: 17px; color: #5B55C8; }
+
+    /* Sticky sidebar */
+    @media (min-width: 768px) { .sidebar-sticky { position: sticky; top: 88px; } }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- HEADER -->
+  <header class="w-full border-b border-neutral-border h-[60px] bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-5 text-primary">
+          <svg fill="none" viewBox="0 0 48 48"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"/></svg>
+        </div>
+        <span class="text-xl font-black tracking-tight text-primary">jom</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#" class="text-sm font-medium text-neutral-secondary px-3 py-1.5 rounded-lg hover:bg-neutral-bg transition-colors">Inicio</a>
+        <a href="#" class="text-sm font-medium text-neutral-secondary px-3 py-1.5 rounded-lg hover:bg-neutral-bg transition-colors">Hospedajes</a>
+        <a href="#" class="text-sm font-medium text-neutral-secondary px-3 py-1.5 rounded-lg hover:bg-neutral-bg transition-colors">Anfitriones</a>
+        <a href="#" class="text-sm font-medium text-neutral-text bg-neutral-bg px-3 py-1.5 rounded-lg">Legal</a>
+      </nav>
+      <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all">
+        <span class="material-symbols-outlined">account_circle</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="privacy-hero">
+    <div class="max-content-width">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#9CA3AF;margin-bottom:12px;">Documentación legal</p>
+          <h1 class="text-[26px] font-bold text-neutral-text leading-tight mb-2" style="letter-spacing:-.02em;">Privacidad y Cookies</h1>
+          <p class="text-sm text-neutral-secondary">Cómo recopilamos, usamos y protegemos tus datos en JOM.</p>
+        </div>
+        <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5 self-start md:self-auto shrink-0">
+          <span class="material-symbols-outlined text-neutral-secondary" style="font-size:15px">calendar_today</span>
+          <span class="text-xs text-neutral-secondary font-medium">Última actualización:</span>
+          <span class="text-xs font-semibold text-neutral-text">26 febrero 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="max-content-width py-10">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden md:block w-52 shrink-0 sidebar-sticky">
+        <p class="text-[10px] font-bold text-neutral-secondary uppercase tracking-widest mb-3 px-1">Contenido</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#info"      class="nav-item active"><span class="nav-num">01</span>Recopilación</a>
+          <a href="#uso"       class="nav-item"><span class="nav-num">02</span>Uso de datos</a>
+          <a href="#compartir" class="nav-item"><span class="nav-num">03</span>Compartir</a>
+          <a href="#seguridad" class="nav-item"><span class="nav-num">04</span>Seguridad</a>
+          <a href="#derechos"  class="nav-item"><span class="nav-num">05</span>Tus derechos</a>
+          <a href="#cookies"   class="nav-item"><span class="nav-num">06</span>Cookies</a>
+          <a href="#cambios"   class="nav-item"><span class="nav-num">07</span>Cambios</a>
+          <a href="#contacto"  class="nav-item"><span class="nav-num">08</span>Contacto</a>
+        </nav>
+
+        <div class="mt-5 p-4 bg-soft-highlight border border-[#5B55C8]/20 rounded-card">
+          <p class="text-xs font-semibold text-neutral-text mb-1">¿Tienes dudas?</p>
+          <p class="text-xs text-neutral-secondary mb-3 leading-relaxed">Contáctanos sobre tu privacidad.</p>
+          <a href="mailto:privacidad@jom.com" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:13px">mail</span>
+            Escribirnos
+          </a>
+        </div>
+      </aside>
+
+      <!-- SINGLE BIG CARD -->
+      <div class="flex-1 min-w-0">
+        <div class="big-card">
+
+          <!-- 01 -->
+          <div class="doc-section" id="info">
+            <div class="section-num">01 — Recopilación</div>
+            <h2 class="section-title">Información que Recopilamos</h2>
+            <p class="section-body">En JOM valoramos tu privacidad y nos comprometemos a proteger tus datos personales. Recopilamos únicamente la información necesaria para ofrecerte el mejor servicio posible.</p>
+            <hr class="inner-hr" />
+            <ul class="doc-list" style="list-style:disc;">
+              <li>Nombre y apellido</li>
+              <li>Correo electrónico</li>
+              <li>Número de teléfono</li>
+              <li>Fotografía de perfil</li>
+              <li>Preferencias de hospedaje</li>
+              <li>Fechas y propiedades reservadas</li>
+              <li>Datos de pago</li>
+              <li>Cookies y dirección IP</li>
+              <li>Tipo de navegador y dispositivo</li>
+            </ul>
+          </div>
+
+          <!-- 02 -->
+          <div class="doc-section" id="uso">
+            <div class="section-num">02 — Uso</div>
+            <h2 class="section-title">Uso de la Información</h2>
+            <p class="section-body">Utilizamos tus datos para brindarte una experiencia fluida y segura dentro de la plataforma JOM.</p>
+            <hr class="inner-hr" />
+            <ul class="doc-list" style="list-style:disc;">
+              <li>Procesar y gestionar reservas</li>
+              <li>Mejorar nuestros servicios</li>
+              <li>Comunicaciones relacionadas con tu reserva</li>
+              <li>Cumplimiento de obligaciones legales</li>
+              <li>Prevención de fraudes y actividades ilícitas</li>
+            </ul>
+          </div>
+
+          <!-- 03 -->
+          <div class="doc-section" id="compartir">
+            <div class="section-num">03 — Compartir</div>
+            <h2 class="section-title">Compartir Información</h2>
+            <p class="section-body">No vendemos ni alquilamos tu información personal a terceros. Compartimos datos únicamente cuando es estrictamente necesario para el funcionamiento del servicio.</p>
+            <hr class="inner-hr" />
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-pill"><span class="tag-dot"></span>Con anfitriones para tus reservas</span>
+              <span class="tag-pill"><span class="tag-dot"></span>Con proveedores de la plataforma</span>
+              <span class="tag-pill"><span class="tag-dot"></span>Cuando lo exija la ley</span>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="doc-section" id="seguridad">
+            <div class="section-num">04 — Seguridad</div>
+            <h2 class="section-title">Seguridad de los Datos</h2>
+            <p class="section-body">Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra acceso no autorizado, pérdida o alteración.</p>
+            <hr class="inner-hr" />
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">lock</span></div>
+                <span>Encriptación de datos</span>
+              </div>
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">person_off</span></div>
+                <span>Acceso restringido</span>
+              </div>
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">monitoring</span></div>
+                <span>Monitoreo constante</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="doc-section" id="derechos">
+            <div class="section-num">05 — Derechos</div>
+            <h2 class="section-title">Tus Derechos</h2>
+            <p class="section-body">Como usuario de JOM, tienes pleno control sobre tus datos personales. Puedes ejercer cualquiera de estos derechos contactándonos en cualquier momento.</p>
+            <hr class="inner-hr" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">visibility</span></div>
+                <span>Acceder a tu información</span>
+              </div>
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">edit</span></div>
+                <span>Corregir datos inexactos</span>
+              </div>
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">delete</span></div>
+                <span>Solicitar eliminación</span>
+              </div>
+              <div class="right-card">
+                <div class="icon-wrap"><span class="material-symbols-outlined">block</span></div>
+                <span>Oponerte al procesamiento</span>
+              </div>
+              <div class="right-card sm:col-span-2">
+                <div class="icon-wrap"><span class="material-symbols-outlined">move_to_inbox</span></div>
+                <span>Solicitar portabilidad de datos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 06 -->
+          <div class="doc-section" id="cookies">
+            <div class="section-num">06 — Cookies</div>
+            <h2 class="section-title">Cookies</h2>
+            <p class="section-body">Utilizamos cookies y tecnologías similares para mejorar tu experiencia, analizar el uso del sitio y personalizar el contenido. Puedes controlar su uso desde la configuración de tu navegador en cualquier momento.</p>
+            <hr class="inner-hr" />
+            <div class="flex gap-2">
+              <span class="tag-pill"><span class="tag-dot"></span>Mejora de experiencia</span>
+              <span class="tag-pill"><span class="tag-dot"></span>Análisis de uso del sitio</span>
+              <span class="tag-pill"><span class="tag-dot"></span>Personalización de contenido</span>
+            </div>
+          </div>
+
+          <!-- 07 -->
+          <div class="doc-section" id="cambios">
+            <div class="section-num">07 — Actualizaciones</div>
+            <h2 class="section-title">Cambios a esta Política</h2>
+            <p class="section-body">Podemos actualizar esta política periódicamente. Te notificaremos sobre cambios significativos publicando la nueva versión en esta página y actualizando la fecha visible en el encabezado.</p>
+          </div>
+
+          <!-- 08 -->
+          <div class="doc-section" id="contacto">
+            <div class="section-num">08 — Contacto</div>
+            <h2 class="section-title">Contacto</h2>
+            <p class="section-body">Si tienes preguntas sobre esta política o cómo manejamos tus datos, no dudes en comunicarte.</p>
+            <hr class="inner-hr" />
+            <div class="flex flex-col gap-2">
+              <div class="contact-row">
+                <span class="material-symbols-outlined">mail</span>
+                <span class="text-neutral-secondary text-sm">Email:</span>
+                <a href="mailto:privacidad@jom.com">privacidad@jom.com</a>
+              </div>
+              <div class="contact-row">
+                <span class="material-symbols-outlined">location_on</span>
+                <span class="text-neutral-secondary text-sm">Dirección:</span>
+                <span class="font-medium text-sm">Santa Cruz, Bolivia</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /big-card -->
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-12 pb-10">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div class="flex flex-col gap-5">
+          <div class="flex items-center gap-2">
+            <div class="size-5 text-primary">
+              <svg fill="none" viewBox="0 0 48 48"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"/></svg>
+            </div>
+            <span class="text-xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">Gestión profesional inmobiliaria en Bolivia.</p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-2.5">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-2.5">
+            <a class="text-sm font-semibold text-neutral-text" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-2.5">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex gap-4">
+          <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+          <button class="text-xs font-medium text-neutral-secondary hover:text-primary">English (US)</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.doc-section[id]');
+    const navLinks = document.querySelectorAll('.nav-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -65% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>

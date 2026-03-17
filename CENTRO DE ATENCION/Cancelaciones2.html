@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOM — Política de Cancelación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAFA;
+      --surface: #FFFFFF;
+      --border: #E4E4E7;
+      --border-light: #F0F0F2;
+      --text-primary: #18181B;
+      --text-secondary: #52525B;
+      --text-muted: #A1A1AA;
+      --accent: #5A4B9E; /* JOM Brand Lilac */
+      --accent-light: #EFEEFF; /* Soft highlight lila */
+      --accent-hover: #4A45B0; /* Hover lila */
+      --green: #166534;
+      --green-bg: #F0FDF4;
+      --green-border: #BBF7D0;
+      --red: #991B1B;
+      --red-bg: #FFF1F2;
+      --red-border: #FECACA;
+      --amber: #92400E;
+      --amber-bg: #FFFBEB;
+      --amber-border: #FDE68A;
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    body {
+      font-family: 'Geist', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    #prog { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; width: 0; transition: width .08s linear; }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,250,250,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px; display: flex; align-items: center;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .logo { display: flex; align-items: center; gap: 7px; text-decoration: none; }
+    .logo-mark { width: 18px; height: 18px; }
+    .logo-text { font-size: 18px; font-weight: 800; color: var(--text-primary); letter-spacing: -.04em; }
+    .header-nav { display: flex; align-items: center; gap: 2px; }
+    .header-nav a {
+      padding: 5px 12px; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 500; color: var(--accent);
+      text-decoration: none; transition: background .12s, color .12s;
+    }
+    .header-nav a:hover { background: var(--accent-light); color: var(--accent); }
+    .header-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero { border-bottom: 1px solid var(--border); padding: 52px 0 44px; background: var(--surface); }
+    .hero-tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: block; }
+    .hero h1 { font-size: 28px; font-weight: 800; color: var(--text-primary); letter-spacing: -.03em; line-height: 1.2; margin-bottom: 14px; }
+    .hero p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; max-width: 520px; }
+    .hero p strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ── LAYOUT ── */
+    .main-layout { display: flex; gap: 32px; padding-top: 36px; padding-bottom: 80px; align-items: flex-start; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { width: 196px; flex-shrink: 0; }
+    @media (min-width: 1024px) { .sidebar { position: sticky; top: 80px; } }
+    .sidebar-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-muted); padding: 0 8px; margin-bottom: 3px; margin-top: 18px; display: block;
+    }
+    .sidebar-label:first-child { margin-top: 0; }
+    .sidebar a {
+      display: block; padding: 6px 8px; border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 500; color: var(--accent);
+      text-decoration: none; border-left: 2px solid transparent; transition: all .12s;
+    }
+    .sidebar a:hover { color: var(--accent-hover); background: var(--accent-light); }
+    .sidebar a.on { color: var(--accent-hover); font-weight: 600; border-left-color: var(--accent); background: var(--accent-light); }
+    .sidebar-help { margin-top: 20px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+    .sidebar-help p { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+    .sidebar-help a {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px; font-weight: 600; padding: 9px 12px;
+      border-radius: var(--radius-sm); text-decoration: none; transition: opacity .12s, background .12s;
+      border-left: none !important;
+    }
+    .sidebar-help a:hover { opacity: .92; background: var(--accent-hover) !important; color: #fff !important; }
+
+    /* ── CONTENT ── */
+    .content { flex: 1; min-width: 0; }
+
+    /* ── SINGLE BIG CARD ── */
+    .big-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    /* ── DOC SECTION ── */
+    .doc-section { padding: 28px 28px; }
+    .doc-section + .doc-section { border-top: 1px solid var(--border-light); }
+
+    /* Section number label */
+    .sec-num {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 5px; display: block;
+    }
+    /* Section heading */
+    .sec-title {
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+      letter-spacing: -.02em; line-height: 1.35; margin-bottom: 10px;
+    }
+    /* Sub-label (policy type) */
+    .sec-policy {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    /* Body text */
+    .prose { font-size: 13px; color: var(--text-secondary); line-height: 1.75; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+
+    /* Inner divider */
+    .inner-hr { border: none; border-top: 1px solid var(--border-light); margin: 14px 0; }
+
+    /* ── GROUP DIVIDER (between big groups) ── */
+    .group-divider {
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px 28px 0;
+      border-top: 1px solid var(--border-light);
+    }
+    .group-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+    .group-divider span {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-secondary); background: var(--accent-light);
+      border: 1px solid var(--border); padding: 3px 12px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── RULES ── */
+    .rules { display: flex; flex-direction: column; }
+    .rule { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border-light); }
+    .rule:last-child { border-bottom: none; padding-bottom: 0; }
+    .rule:first-child { padding-top: 0; }
+    .rule-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .rule p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+    .rule p strong { color: var(--text-primary); font-weight: 600; }
+    .dot-n { background: var(--text-muted); }
+    .dot-r { background: #EF4444; }
+    .dot-a { background: #F59E0B; }
+
+    /* ── NOTICE ── */
+    .notice { font-size: 13px; line-height: 1.65; padding: 11px 14px; border-radius: var(--radius-sm); }
+    .notice strong { font-weight: 600; }
+    .notice-neutral { background: var(--accent-light); border: 1px solid var(--border); color: var(--text-secondary); }
+    .notice-red { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
+    .notice-amber { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+
+    /* ── TIMELINE ── */
+    .tl-wrapper { background: var(--bg); border: 1px solid var(--border-light); border-radius: var(--radius); padding: 24px 20px 20px; }
+    .tl-labels { position: relative; height: 44px; margin-bottom: 10px; }
+    .tl-lbl { position: absolute; display: flex; flex-direction: column; }
+    .tl-lbl.left { left: 0; align-items: flex-start; }
+    .tl-lbl.center { left: 55%; transform: translateX(-50%); align-items: center; }
+    .tl-lbl.right { right: 0; align-items: flex-end; }
+    .tl-lbl-name { font-size: 12px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+    .tl-lbl-name.muted { color: var(--text-muted); }
+    .tl-lbl-sub { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+    .tl-track { position: relative; height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 10px; }
+    .tl-zone { position: absolute; top: 0; height: 100%; border-radius: 2px; }
+    .tl-zone.ok { left: 0; width: 55%; background: #BBF7D0; }
+    .tl-zone.ko { left: 55%; right: 0; background: #FECACA; }
+    .tl-node { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1.5px currentColor; }
+    .tl-node.s { left: 0%; color: #9CA3AF; background: #9CA3AF; }
+    .tl-node.m { left: 55%; color: #18181B; background: #18181B; }
+    .tl-node.e { left: 100%; color: #18181B; background: #18181B; }
+    .tl-zone-labels { display: flex; margin-bottom: 14px; }
+    .tl-zone-labels .ok-lbl { width: 55%; font-size: 11px; color: var(--green); font-weight: 600; text-align: center; }
+    .tl-zone-labels .ko-lbl { width: 45%; font-size: 11px; color: var(--red); font-weight: 600; text-align: center; }
+    .tl-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tl-box { padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .tl-box.ok { background: var(--green-bg); border-color: var(--green-border); }
+    .tl-box.ko { background: var(--red-bg); border-color: var(--red-border); }
+    .tl-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 5px; border-radius: 3px; padding: 1px 6px; }
+    .tl-box.ok .tl-tag { background: var(--green-border); color: var(--green); }
+    .tl-box.ko .tl-tag { background: var(--red-border); color: var(--red); }
+    .tl-box p { font-size: 12px; line-height: 1.55; color: var(--text-secondary); }
+    .tl-box p strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ── POLICY INTRO GRID ── */
+    .policy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .policy-card { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+    .policy-card-name { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .policy-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3,1fr); gap: 40px; margin-bottom: 32px; }
+    .footer-label { font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; }
+    .footer-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+    .footer-links a:hover { color: var(--text-primary); }
+    .footer-links a.active-link { font-weight: 600; color: var(--text-primary); }
+    .footer-bottom { border-top: 1px solid var(--border-light); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 12px; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1023px) { .sidebar { display: none; } }
+    @media (max-width: 700px) {
+      .policy-grid { grid-template-columns: 1fr; }
+      .tl-boxes { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .hero h1 { font-size: 22px; }
+      .doc-section { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div id="prog"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <svg class="logo-mark" fill="none" viewBox="0 0 48 48">
+          <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"/>
+        </svg>
+        <span class="logo-text">jom</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#">Inicio</a>
+        <a href="#">Hospedajes</a>
+        <a href="#">Anfitriones</a>
+        <a href="#" class="active">Legal</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Política de Cancelación</h1>
+    <p>
+      El reembolso depende de cuándo cancelas</strong> en relación al check-in.
+      Con más de 5 días de anticipación</strong>, el Huésped recibe reembolso total.
+      Dentro de los últimos 5 días, no se devuelve ningún pago.
+    </p>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="wrap">
+  <div class="main-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <span class="sidebar-label">Introducción</span>
+      <a href="#intro"    class="nav-a" data-s="intro">Las tres políticas</a>
+      <a href="#timeline" class="nav-a" data-s="timeline">Ventanas de tiempo</a>
+
+      <span class="sidebar-label">Huésped cancela</span>
+      <a href="#h-normal" class="nav-a" data-s="h-normal">Política Normal</a>
+      <a href="#h-flex"   class="nav-a" data-s="h-flex">Política Flexible</a>
+      <a href="#h-mod"    class="nav-a" data-s="h-mod">Política Moderada</a>
+
+      <span class="sidebar-label">Anfitrión cancela</span>
+      <a href="#a-normal" class="nav-a" data-s="a-normal">Política Normal</a>
+      <a href="#a-flex"   class="nav-a" data-s="a-flex">Política Flexible</a>
+      <a href="#a-mod"    class="nav-a" data-s="a-mod">Política Moderada</a>
+
+      <span class="sidebar-label">Otras condiciones</span>
+      <a href="#pasarela" class="nav-a" data-s="pasarela">Costo de pasarela</a>
+      <a href="#fuerza"   class="nav-a" data-s="fuerza">Fuerza mayor</a>
+
+      <div class="sidebar-help">
+        <p>¿Problema con tu reserva?</p>
+        <a href="#">Contactar soporte</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="content">
+      <div class="big-card">
+
+        <!-- ══ 01 — INTRO ══ -->
+        <div class="doc-section" id="intro">
+          <span class="sec-num">01 — Introducción</span>
+          <h2 class="sec-title">Las tres políticas disponibles</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            Cada anuncio en JOM tiene asignada una de tres políticas de cancelación, elegida por el Anfitrión.
+            <strong>Revisa siempre qué política aplica antes de confirmar tu reserva.</strong>
+          </p>
+          <div class="policy-grid" style="margin-bottom:14px;">
+            <div class="policy-card">
+              <div class="policy-card-name">Normal</div>
+              <div class="policy-card-desc">Reembolso si cancelas con más de 5 días de anticipación al check-in.</div>
+            </div>
+            <div class="policy-card">
+              <div class="policy-card-name">Flexible</div>
+              <div class="policy-card-desc">Reembolso hasta 24 horas antes del check-in. La primera noche no se devuelve si cancelas tarde.</div>
+            </div>
+            <div class="policy-card">
+              <div class="policy-card-name">Moderada</div>
+              <div class="policy-card-desc">Sin reembolso por cancelación del Huésped. Precios más competitivos a cambio de compromiso firme.</div>
+            </div>
+          </div>
+          <div class="notice notice-neutral">
+            La política es visible en el anuncio antes de confirmar. Una vez confirmada, aplica sin excepciones salvo causas extraordinarias documentadas.
+          </div>
+        </div>
+
+        <!-- ══ 02 — TIMELINE ══ -->
+        <div class="doc-section" id="timeline">
+          <span class="sec-num">02 — Fundamento</span>
+          <h2 class="sec-title">El check-in como punto de referencia</h2>
+          <p class="prose" style="margin-bottom:16px;">
+            La regla es simple: <strong>cancelar con más de 5 días de anticipación al check-in</strong> da derecho a reembolso total.
+            Cancelar dentro de ese umbral significa no recibir ninguna devolución.
+          </p>
+
+          <div class="tl-wrapper" style="margin-bottom:16px;">
+            <div class="tl-labels">
+              <div class="tl-lbl left">
+                <span class="tl-lbl-name muted">Reserva</span>
+                <span class="tl-lbl-sub">Fecha de pago</span>
+              </div>
+              <div class="tl-lbl center">
+                <span class="tl-lbl-name">5 días antes</span>
+                <span class="tl-lbl-sub">Límite de cancelación</span>
+              </div>
+              <div class="tl-lbl right">
+                <span class="tl-lbl-name">Check-in</span>
+                <span class="tl-lbl-sub">Inicio de estancia</span>
+              </div>
+            </div>
+            <div class="tl-track">
+              <div class="tl-zone ok"></div>
+              <div class="tl-zone ko"></div>
+              <div class="tl-node s"></div>
+              <div class="tl-node m"></div>
+              <div class="tl-node e"></div>
+            </div>
+            <div class="tl-zone-labels">
+              <div class="ok-lbl">Cancelación con reembolso</div>
+              <div class="ko-lbl">Sin reembolso</div>
+            </div>
+            <div class="tl-boxes">
+              <div class="tl-box ok">
+                <div class="tl-tag">Reembolso total</div>
+                <p>Cancelas <strong>con más de 5 días</strong> antes del check-in → recuperas todo lo pagado.</p>
+              </div>
+              <div class="tl-box ko">
+                <div class="tl-tag">Sin reembolso</div>
+                <p>Cancelas <strong>dentro de los 5 días</strong> previos al check-in → no se devuelve ningún pago.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rules">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p><strong>Más de 5 días de anticipación:</strong> el Huésped recibe reembolso total de lo pagado.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p><strong>Dentro de los 5 días previos:</strong> no se devuelve ningún pago bajo ningún concepto ordinario.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ GRUPO: HUÉSPED CANCELA ══ -->
+        <div class="group-divider"><span>Cuando cancela el Huésped</span></div>
+
+        <!-- §H-NORMAL -->
+        <div class="doc-section" id="h-normal">
+          <span class="sec-policy">Política Normal — Huésped cancela</span>
+          <h2 class="sec-title">Reembolso total solo si cancelas con más de 5 días de anticipación</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            El Huésped puede cancelar y recibir reembolso total <strong>solo si lo hace con más de 5 días de anticipación al check-in</strong>. Dentro de ese umbral, no se devuelve ningún pago.
+          </p>
+          <div class="rules">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>Cancela <strong>con más de 5 días de anticipación:</strong> reembolso total de las noches.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Cancela <strong>dentro de los 5 días previos al check-in:</strong> sin reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El <strong>costo de pasarela de pago</strong> no se devuelve en ningún caso.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §H-FLEX -->
+        <div class="doc-section" id="h-flex">
+          <span class="sec-policy">Política Flexible — Huésped cancela</span>
+          <h2 class="sec-title">Reembolso total si cancelas con más de 24 horas de anticipación</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            La política Flexible cierra la ventana gratuita <strong>24 horas antes de la hora de check-in</strong>. Cancelar antes garantiza el reembolso total.
+          </p>
+          <div class="rules" style="margin-bottom:14px;">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p><strong>Más de 24 horas de anticipación:</strong> reembolso total de las noches. Sin penalización.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-a"></div>
+              <p><strong>Menos de 24 horas de anticipación:</strong> la primera noche no se reembolsa. El resto sí se devuelve.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p><strong>No-show</strong> (no se presenta sin avisar): sin reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Si el Huésped <strong>abandona antes del check-out</strong>, solo se reembolsan las noches que no comenzaron.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El <strong>costo de pasarela</strong> no se devuelve en ningún escenario.</p>
+            </div>
+          </div>
+          <div class="notice notice-neutral">
+            La hora de check-in es generalmente las 15:00 hora local, salvo indicación contraria del Anfitrión en el anuncio.
+          </div>
+        </div>
+
+        <!-- §H-MOD -->
+        <div class="doc-section" id="h-mod">
+          <span class="sec-policy">Política Moderada — Huésped cancela</span>
+          <h2 class="sec-title">Sin reembolso por cancelación del Huésped</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            Con la política Moderada, <strong>el Huésped no recibe reembolso si cancela</strong>, independientemente de cuándo lo haga. Generalmente asociada a precios más competitivos.
+          </p>
+          <div class="rules" style="margin-bottom:14px;">
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Cancela <strong>con días de anticipación:</strong> sin reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Cancela <strong>el mismo día del check-in:</strong> sin reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p><strong>No-show:</strong> sin reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El <strong>costo de pasarela</strong> no se devuelve.</p>
+            </div>
+          </div>
+          <div class="notice notice-amber">
+            <strong>Antes de reservar bajo esta política:</strong> verifica que puedes cumplir con las fechas. El cargo es definitivo sin importar el motivo de cancelación.
+          </div>
+        </div>
+
+        <!-- ══ GRUPO: ANFITRIÓN CANCELA ══ -->
+        <div class="group-divider"><span>Cuando cancela el Anfitrión</span></div>
+
+        <!-- Regla general -->
+        <div class="doc-section" style="padding-top:16px;padding-bottom:16px;">
+          <div class="notice notice-red">
+            <strong>Regla general:</strong> cuando el Anfitrión cancela sin causa válida, el Huésped recibe reembolso total y el Anfitrión puede recibir sanciones. Las cancelaciones reiteradas afectan la visibilidad del anuncio y pueden derivar en la suspensión de la cuenta.
+          </div>
+        </div>
+
+        <!-- §A-NORMAL -->
+        <div class="doc-section" id="a-normal">
+          <span class="sec-policy">Política Normal — Anfitrión cancela</span>
+          <h2 class="sec-title">El Huésped recibe reembolso completo. El Anfitrión no cobra.</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            Si el Anfitrión cancela una reserva activa bajo la política Normal, el Huésped recibe la <strong>devolución íntegra</strong>. El Anfitrión pierde el cobro de esa reserva.
+          </p>
+          <div class="rules">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El Huésped recibe <strong>reembolso completo</strong> de las noches reservadas.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>El Anfitrión <strong>no recibe ningún pago</strong>. JOM puede recuperar cobros parciales ya procesados.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-a"></div>
+              <p>Sin causa válida, JOM puede aplicar: reducción de visibilidad, advertencia formal o suspensión en casos reiterados.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §A-FLEX -->
+        <div class="doc-section" id="a-flex">
+          <span class="sec-policy">Política Flexible — Anfitrión cancela</span>
+          <h2 class="sec-title">El Huésped recibe reembolso completo. El Anfitrión asume el costo de pasarela.</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            En política Flexible, si el Anfitrión cancela, el Huésped recibe devolución completa incluyendo el costo de pasarela, que es absorbido por el Anfitrión.
+          </p>
+          <div class="rules">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El Huésped recibe <strong>reembolso completo</strong> de lo pagado, incluyendo fees.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>El Anfitrión <strong>no cobra nada</strong> y asume el costo de pasarela generado al confirmar la reserva.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-a"></div>
+              <p>Cancelar sin motivo válido puede derivar en <strong>sanciones adicionales</strong> por parte de JOM.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §A-MOD -->
+        <div class="doc-section" id="a-mod">
+          <span class="sec-policy">Política Moderada — Anfitrión cancela</span>
+          <h2 class="sec-title">El Huésped recibe reembolso completo. El Anfitrión recibe penalización económica.</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            La política Moderada es la más exigente para el Anfitrión. Además de no cobrar la reserva, <strong>recibe una penalización económica</strong> directa.
+          </p>
+          <div class="rules" style="margin-bottom:14px;">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>El Huésped recibe <strong>reembolso completo</strong> de todo lo pagado.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>El Anfitrión <strong>no cobra</strong> y recibe una penalización económica. JOM puede descontarla de cobros futuros.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Si el Huésped <strong>ya hizo check-in</strong>, la penalización es mayor. El Huésped recibe reembolso de noches restantes.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p>Cancelaciones reiteradas pueden derivar en <strong>suspensión del anuncio o de la cuenta</strong>.</p>
+            </div>
+          </div>
+          <div class="notice notice-red">
+            <strong>Para Anfitriones:</strong> si enfrentas una situación que te impide recibir huéspedes, contacta a soporte de JOM antes de cancelar. En fuerza mayor documentada, la penalización puede eximirse.
+          </div>
+        </div>
+
+        <!-- ══ GRUPO: OTRAS CONDICIONES ══ -->
+        <div class="group-divider"><span>Otras condiciones</span></div>
+
+        <!-- §PASARELA -->
+        <div class="doc-section" id="pasarela">
+          <span class="sec-num">Costo de pasarela de pago</span>
+          <h2 class="sec-title">No se devuelve en ningún caso ordinario</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            El costo de pasarela corresponde a la comisión del proveedor de pagos (QR, tarjeta, Tigo Money, etc.). Se genera al confirmar el pago y <strong>no es recuperable bajo ninguna política ordinaria</strong>.
+          </p>
+          <div class="rules">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>Si el <strong>Huésped cancela:</strong> el costo de pasarela no se incluye en el reembolso.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p>Si el <strong>Anfitrión cancela:</strong> el costo de pasarela lo absorbe el Anfitrión, no el Huésped.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-a"></div>
+              <p><strong>Excepción:</strong> en fuerza mayor aprobada por JOM, puede devolverse el total menos el costo de pasarela. No es automático.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §FUERZA -->
+        <div class="doc-section" id="fuerza">
+          <span class="sec-num">Circunstancias extraordinarias y fuerza mayor</span>
+          <h2 class="sec-title">Cuándo aplica una excepción a la política de cancelación</h2>
+          <p class="prose" style="margin-bottom:14px;">
+            La Política de Anulación por Circunstancias Extraordinarias permite a JOM intervenir en situaciones fuera del control razonable de las partes. Cuando aplica, tiene <strong>prioridad sobre la política del anuncio</strong>.
+          </p>
+          <div class="rules" style="margin-bottom:14px;">
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p><strong>Desastres naturales, pandemias u emergencias declaradas</strong> que impidan el acceso o el viaje, con documentación.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-n"></div>
+              <p><strong>Emergencias médicas graves</strong> que impidan cumplir con la reserva, con documentación médica oficial.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-r"></div>
+              <p><strong>Cambios de planes, errores al reservar o motivos laborales</strong> no se consideran circunstancias extraordinarias.</p>
+            </div>
+            <div class="rule">
+              <div class="rule-dot dot-a"></div>
+              <p>Contacta a <strong>soporte de JOM antes de cancelar</strong> y aporta la documentación correspondiente. JOM evalúa cada caso.</p>
+            </div>
+          </div>
+          <div class="notice notice-neutral">
+            JOM decide a su discreción si una situación califica como circunstancia extraordinaria. La aprobación no es automática.
+          </div>
+        </div>
+
+      </div><!-- /big-card -->
+    </div><!-- /content -->
+  </div><!-- /main-layout -->
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+          <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 48 48">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"/>
+          </svg>
+          <span style="font-size:17px;font-weight:800;letter-spacing:-.04em;">jom</span>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Gestión profesional inmobiliaria en Bolivia.</p>
+      </div>
+      <div>
+        <div class="footer-label">Compañía</div>
+        <div class="footer-links">
+          <a href="#">Sobre JOM</a>
+          <a href="#">Cómo trabajamos</a>
+          <a href="#">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-label">Legal</div>
+        <div class="footer-links">
+          <a href="#">Privacidad</a>
+          <a href="#">Términos y condiciones</a>
+          <a href="#" class="active-link">Política de cancelación</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-label">Soporte</div>
+        <div class="footer-links">
+          <a href="#">Centro de Ayuda</a>
+          <a href="#">Confianza y seguridad</a>
+          <a href="#">Reportar un problema</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 JOM SRL. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:10px;">
+        <button style="font-size:12px;color:#fff;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:6px 16px;cursor:pointer;transition:background .12s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent)'">Español (BO)</button>
+        <button style="font-size:12px;color:#fff;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:6px 16px;cursor:pointer;transition:background .12s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent)'">English (US)</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('prog').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+  const sections = document.querySelectorAll('[id]');
+  const links = document.querySelectorAll('.nav-a[data-s]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('on'));
+        const a = document.querySelector(`.nav-a[data-s="${e.target.id}"]`);
+        if (a) a.classList.add('on');
+      }
+    });
+  }, { rootMargin: '-15% 0px -72% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

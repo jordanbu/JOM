@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JOM – Calendario Individual</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --brand:#5B55C8;
+  --brand-light:#EFEEFF;
+  --brand-dark:#4A45B0;
+  --text:#1A1A2E;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --bg:#F7F8FC;
+  --white:#FFFFFF;
+  --weekend:#F3F4F6;
+  --weekend-text:#6B7280;
+  --blocked-bg:repeating-linear-gradient(135deg,#F9FAFB 0px,#F9FAFB 5px,#EBEBEB 5px,#EBEBEB 10px);
+  --today:#5B55C8;
+  --sat:#F97316;
+  --sun:#EF4444;
+}
+body{font-family:'Sora',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;}
+
+/* TOP BAR */
+.topbar{height:60px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:8px;}
+.logo-box{width:32px;height:32px;background:var(--brand);border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:11px;letter-spacing:-0.5px;}
+.logo-text{font-size:17px;font-weight:800;color:var(--text);letter-spacing:-0.5px;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--brand-light);border:2px solid var(--brand);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--brand);cursor:pointer;}
+.notif{position:relative;cursor:pointer;color:var(--muted);}
+.notif-dot{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:var(--brand);border-radius:50%;border:2px solid white;font-size:8px;color:white;font-weight:700;display:flex;align-items:center;justify-content:center;}
+
+/* LAYOUT */
+.app{display:flex;flex:1;overflow:hidden;}
+.sidenav{width:220px;background:var(--white);border-right:1px solid var(--border);padding:18px 10px;flex-shrink:0;overflow-y:auto;}
+.nav-link{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;font-size:12.5px;font-weight:500;color:var(--muted);text-decoration:none;transition:all 0.12s;margin-bottom:2px;}
+.nav-link:hover{background:#F3F4F6;color:var(--text);}
+.nav-link.active{background:var(--brand-light);color:var(--brand);font-weight:700;}
+.nav-link .material-symbols-outlined{font-size:18px;}
+.nav-section{font-size:10px;font-weight:700;color:#C4C4D0;text-transform:uppercase;letter-spacing:0.1em;padding:14px 12px 6px;}
+
+.main{flex:1;overflow-y:auto;padding:24px;}
+
+/* BREADCRUMB + HEADER */
+.page-header{margin-bottom:20px;}
+.breadcrumb{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.breadcrumb a{color:var(--brand);text-decoration:none;font-weight:600;}
+.breadcrumb .sep{color:#D1D5DB;}
+.prop-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.prop-info{display:flex;align-items:center;gap:14px;}
+.prop-thumb{width:56px;height:56px;border-radius:12px;object-fit:cover;border:2px solid var(--border);}
+.prop-thumb-icon{width:56px;height:56px;border-radius:12px;background:var(--brand-light);display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:24px;border:2px solid transparent;}
+.prop-title{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.4px;}
+.prop-sub{font-size:12.5px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:6px;}
+.prop-badge{background:var(--brand-light);color:var(--brand);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;}
+.header-actions{display:flex;align-items:center;gap:8px;}
+.btn-primary{background:var(--brand);color:white;border:none;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:background 0.12s;display:flex;align-items:center;gap:6px;}
+.btn-primary:hover{background:var(--brand-dark);}
+.btn-outline{background:var(--white);color:var(--text);border:1.5px solid var(--border);border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;transition:all 0.12s;display:flex;align-items:center;gap:6px;}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand);}
+.btn-icon{width:36px;height:36px;background:var(--white);border:1.5px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:all 0.12s;}
+.btn-icon:hover{border-color:var(--brand);color:var(--brand);}
+
+/* CONTENT GRID */
+.content-grid{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;}
+
+/* CALENDAR CARD */
+.cal-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 22px 14px;border-bottom:1px solid var(--border);}
+.cal-month-title{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.5px;}
+.cal-nav-btns{display:flex;align-items:center;gap:6px;}
+.month-selector{display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 10px;border-radius:8px;transition:background 0.1s;}
+.month-selector:hover{background:#F3F4F6;}
+.month-selector .material-symbols-outlined{font-size:18px;color:var(--muted);}
+
+/* DAY HEADERS */
+.day-headers{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border);}
+.day-header{text-align:center;padding:10px 0 8px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+
+/* CALENDAR GRID */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+
+.cal-day{
+  border-right:1px solid #F0F0F0;
+  border-bottom:1px solid #F0F0F0;
+  min-height:82px;
+  padding:8px 10px;
+  cursor:pointer;
+  position:relative;
+  transition:background 0.12s;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.cal-day:nth-child(7n){border-right:none;}
+.cal-day:hover:not(.empty):not(.blocked){background:#F5F4FF;}
+.cal-day.empty{cursor:default;background:#FAFAFA;}
+.cal-day.other-month{opacity:0.35;}
+
+/* Day number */
+.day-num{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:var(--text);
+  margin-bottom:4px;
+  flex-shrink:0;
+}
+.cal-day.is-today .day-num{background:var(--today);color:white;}
+
+/* Price tag */
+.day-price{font-size:11.5px;font-weight:600;color:var(--text);line-height:1;}
+.day-price span{font-size:10px;color:var(--muted);font-weight:400;}
+
+/* States */
+.cal-day.is-weekend{background:var(--weekend);}
+.cal-day.is-weekend .day-price{color:var(--weekend-text);}
+.cal-day.selected{background:var(--brand) !important;}
+.cal-day.selected .day-num{background:rgba(255,255,255,0.25);color:white;}
+.cal-day.selected .day-price{color:rgba(255,255,255,0.9);}
+.cal-day.selected .day-price span{color:rgba(255,255,255,0.6);}
+.cal-day.blocked{background:var(--blocked-bg) !important;cursor:not-allowed;}
+.cal-day.blocked .day-price{color:#C4C4C4;}
+.cal-day.blocked .day-num{color:#C4C4C4;}
+.cal-day.past{opacity:0.4;cursor:default;}
+.cal-day.past:hover{background:transparent !important;}
+
+/* Selection range */
+.cal-day.range-start,.cal-day.range-end{background:var(--brand) !important;}
+.cal-day.range-start .day-num,.cal-day.range-end .day-num{color:white;background:rgba(255,255,255,0.2);}
+.cal-day.range-start .day-price,.cal-day.range-end .day-price{color:white;}
+.cal-day.in-range{background:#DDDCF7 !important;}
+
+/* BOOKING CHIP */
+.booking-chip{position:absolute;bottom:6px;left:8px;right:8px;background:#F3F4F6;color:#6B7280;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* RIGHT PANEL */
+.right-panel{display:flex;flex-direction:column;gap:14px;}
+.panel-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border);cursor:pointer;}
+.panel-header-left{display:flex;align-items:center;gap:10px;}
+.panel-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.panel-title{font-size:13.5px;font-weight:700;color:var(--text);}
+.panel-chevron{color:var(--muted);transition:transform 0.2s;}
+.panel-body{padding:16px 18px;}
+.panel-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F3F4F6;}
+.panel-row:last-child{border-bottom:none;}
+.panel-label{font-size:12px;color:var(--muted);font-weight:500;}
+.panel-value{font-size:13px;font-weight:700;color:var(--text);text-align:right;}
+.panel-value.accent{color:var(--brand);}
+.panel-value.green{color:#16A34A;}
+
+/* EDIT PANEL FOOTER */
+.panel-edit-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;background:var(--brand-light);color:var(--brand);font-size:12.5px;font-weight:700;border:none;border-radius:0 0 14px 14px;cursor:pointer;font-family:'Sora',sans-serif;transition:background 0.12s;}
+.panel-edit-btn:hover{background:#E0DEFF;}
+
+/* LEGEND */
+.legend-row{display:flex;flex-wrap:wrap;gap:10px;padding:12px 18px;border-top:1px solid var(--border);}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:500;}
+.leg-swatch{width:14px;height:14px;border-radius:4px;flex-shrink:0;}
+
+/* STATS STRIP */
+.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;}
+.stat-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.stat-value{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.5px;}
+.stat-value.brand{color:var(--brand);}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* MONTH TABS */
+.month-tabs{display:flex;gap:4px;padding:0 22px 14px;}
+.mtab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'Sora',sans-serif;transition:all 0.12s;}
+.mtab.active{background:var(--brand);color:white;}
+.mtab:not(.active){background:#F3F4F6;color:var(--muted);}
+.mtab:not(.active):hover{background:var(--brand-light);color:var(--brand);}
+
+/* MATERIAL ICONS */
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-box">JOM</div>
+    <span class="logo-text">jom</span>
+  </div>
+  <div class="topbar-right">
+    <button style="display:flex;align-items:center;gap:5px;color:var(--muted);font-size:12.5px;font-weight:600;background:none;border:none;cursor:pointer;font-family:'Sora',sans-serif;"><span class="material-symbols-outlined" style="font-size:17px;">language</span>Español (BO)</button>
+    <div class="notif"><span class="material-symbols-outlined" style="font-size:22px;">notifications</span><span class="notif-dot">3</span></div>
+    <div class="avatar">MR</div>
+  </div>
+</header>
+
+<div class="app">
+  <!-- SIDENAV -->
+  <aside class="sidenav">
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">today</span>Hoy</a>
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">home</span>Anuncios</a>
+    <a href="#" class="nav-link active"><span class="material-symbols-outlined">calendar_month</span>Calendario</a>
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">chat</span>Mensajería</a>
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+    <div class="nav-section">Gestión</div>
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">tune</span>Configuración</a>
+    <a href="#" class="nav-link"><span class="material-symbols-outlined">bar_chart</span>Reportes</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- BREADCRUMB -->
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="#">Calendario</a>
+        <span class="sep material-symbols-outlined" style="font-size:14px;">chevron_right</span>
+        <span>Casa Tarija Hermosa</span>
+      </div>
+      <div class="prop-header">
+        <div class="prop-info">
+          <img class="prop-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" alt="Casa"/>
+          <div>
+            <div class="prop-title">Casa Tarija Hermosa</div>
+            <div class="prop-sub">
+              <span class="material-symbols-outlined" style="font-size:14px;">location_on</span>
+              Tarija, Bolivia
+              <span class="prop-badge">Activo</span>
+            </div>
+          </div>
+        </div>
+        <div class="header-actions">
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- MAIN GRID -->
+    <div class="content-grid">
+
+      <!-- CALENDAR CARD -->
+      <div class="cal-card">
+        <div class="cal-nav">
+          <div class="month-selector" id="monthDisplay">
+            <span class="cal-month-title" id="monthTitle">febrero</span>
+            <span class="cal-month-title" id="yearTitle" style="font-weight:300;color:var(--muted);margin-left:4px;">2026</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </div>
+          <div class="cal-nav-btns">
+            <button class="btn-icon" id="prevMonth"><span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span></button>
+            <button class="btn-outline" id="todayBtn" style="padding:7px 14px;font-size:12px;">Hoy</button>
+            <button class="btn-icon" id="nextMonth"><span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span></button>
+          </div>
+        </div>
+
+        <!-- MONTH QUICK TABS -->
+        <div class="month-tabs" id="monthTabs"></div>
+
+        <!-- DAY HEADERS -->
+        <div class="day-headers">
+          <div class="day-header">Lun</div>
+          <div class="day-header">Mar</div>
+          <div class="day-header">Mié</div>
+          <div class="day-header">Jue</div>
+          <div class="day-header is-sat">Vie</div>
+          <div class="day-header is-sat">Sáb</div>
+          <div class="day-header is-sun">Dom</div>
+        </div>
+
+        <!-- CALENDAR GRID -->
+        <div class="cal-grid" id="calGrid"></div>
+
+        <!-- LEGEND -->
+        <div class="legend-row">
+          <div class="leg"><div class="leg-swatch" style="background:var(--brand);"></div>Seleccionado</div>
+          <div class="leg"><div class="leg-swatch" style="background:var(--weekend);border:1px solid #FED7AA;"></div>Fin de semana</div>
+          <div class="leg"><div class="leg-swatch" style="background:var(--blocked-bg);border:1px solid #E5E7EB;"></div>Bloqueado</div>
+          <div class="leg"><div class="leg-swatch" style="background:#DDDCF7;"></div>Rango seleccionado</div>
+          <div class="leg"><div class="leg-swatch" style="background:#FEF3C7;border:1px solid #FDE68A;"></div>Reservado</div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+
+        <!-- PRICE CONFIG -->
+        <div class="panel-card" id="price-config">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <div class="panel-icon" style="background:#EEF2FF;color:#6366F1;"><span class="material-symbols-outlined" style="font-size:19px;">payments</span></div>
+              <div>
+                <div class="panel-title">Configuración de precios</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px;">Precios base y tarifas</div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined panel-chevron">expand_more</span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-row">
+              <span class="panel-label">Precio entre semana</span>
+              <span class="panel-value" style="color:var(--muted);">Bs. 127.5</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Precio viernes / sábado</span>
+              <span class="panel-value" style="color:var(--muted);">Bs. 180.0</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Precio domingo</span>
+              <span class="panel-value" style="color:var(--muted);">Bs. 200.0</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Descuento semanal</span>
+              <span class="panel-value" style="color:var(--muted);">5%</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Descuento mensual</span>
+              <span class="panel-value" style="color:var(--muted);">12%</span>
+            </div>
+          </div>
+          <button class="panel-edit-btn" onclick="showEditPriceCard()"><span class="material-symbols-outlined" style="font-size:16px;">edit</span>Editar precios</button>
+        </div>
+
+        <!-- Card para editar precios -->
+        <div class="panel-card" id="edit-price-card" style="display:none;">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <div class="panel-icon" style="background:#EEF2FF;color:#6366F1;"><span class="material-symbols-outlined" style="font-size:19px;">payments</span></div>
+              <div>
+                <div class="panel-title">Editar precios</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px;">Modifica los valores y descuentos</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form id="editPriceForm">
+              <div class="panel-row">
+                <span class="panel-label">Precio entre semana</span>
+                <input type="number" step="0.01" min="0" value="127.5" style="width:120px;padding:6px;border:1px solid #E5E7EB;border-radius:8px;">
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Precio viernes / sábado</span>
+                <input type="number" step="0.01" min="0" value="180.0" style="width:120px;padding:6px;border:1px solid #E5E7EB;border-radius:8px;">
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Precio domingo</span>
+                <input type="number" step="0.01" min="0" value="200.0" style="width:120px;padding:6px;border:1px solid #E5E7EB;border-radius:8px;">
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Descuento semanal (%)</span>
+                <input type="number" step="0.01" min="0" value="5" style="width:120px;padding:6px;border:1px solid #E5E7EB;border-radius:8px;">
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Descuento mensual (%)</span>
+                <input type="number" step="0.01" min="0" value="12" style="width:120px;padding:6px;border:1px solid #E5E7EB;border-radius:8px;">
+              </div>
+              <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px;">
+                <button type="button" onclick="hideEditPriceCard()" style="background:#F3F4F6;color:#374151;border:none;border-radius:8px;padding:8px 18px;font-weight:600;">Volver atrás</button>
+                <button type="submit" style="background:#5B55C8;color:white;border:none;border-radius:8px;padding:8px 18px;font-weight:600;">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- AVAILABILITY CONFIG -->
+        <div class="panel-card" id="availability-config">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <div class="panel-icon" style="background:#F0FDF4;color:#16A34A;"><span class="material-symbols-outlined" style="font-size:19px;">event_available</span></div>
+              <div>
+                <div class="panel-title">Disponibilidad</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px;">Reglas de estancia</div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined panel-chevron">expand_more</span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-row">
+              <span class="panel-label">Mínimo de noches</span>
+              <span class="panel-value">2 noches</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Máximo de noches</span>
+              <span class="panel-value">365 noches</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Preaviso mínimo</span>
+              <span class="panel-value">2 días</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-label">Ventana de reserva</span>
+              <span class="panel-value">12 meses</span>
+            </div>
+          </div>
+          <button class="panel-edit-btn"><span class="material-symbols-outlined" style="font-size:16px;">edit</span>Editar disponibilidad</button>
+        </div>
+
+        <!-- SELECTED DAYS ACTION -->
+        <div class="panel-card" id="selectionPanel" style="display:none;">
+          <div class="panel-header" style="cursor:default;">
+            <div class="panel-header-left">
+              <div class="panel-icon" style="background:#FEF3C7;color:#92400E;"><span class="material-symbols-outlined" style="font-size:19px;">edit_calendar</span></div>
+              <div>
+                <div class="panel-title" id="selectionTitle">0 días seleccionados</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px;" id="selectionRange">—</div>
+              </div>
+            </div>
+            <button onclick="clearSelection()" style="background:none;border:none;cursor:pointer;color:var(--muted);"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
+          </div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:8px;">
+            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="alert('Editar precio para los días seleccionados')"><span class="material-symbols-outlined" style="font-size:16px;">attach_money</span>Cambiar precio</button>
+            <button class="btn-outline" style="width:100%;justify-content:center;" onclick="alert('Bloquear días seleccionados')"><span class="material-symbols-outlined" style="font-size:16px;">block</span>Bloquear días</button>
+            <button class="btn-outline" style="width:100%;justify-content:center;border-color:#FCA5A5;color:#EF4444;" onclick="clearSelection()"><span class="material-symbols-outlined" style="font-size:16px;">clear_all</span>Limpiar selección</button>
+          </div>
+        </div>
+
+      </div><!-- /right-panel -->
+    </div><!-- /content-grid -->
+  </main>
+</div>
+
+<script>
+const MONTHS_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const MONTHS_SHORT = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+// State
+let currentYear = 2026;
+let currentMonth = 1; // 0-indexed, Feb = 1
+const today = new Date(2026, 1, 25); // Feb 25 2026
+
+// Prices
+const basePrice = 127.5;
+const friSatPrice = 180.0;
+const sunPrice = 200.0;
+
+// Blocked ranges [start, end] inclusive (0-indexed month, day)
+const blocked = [
+  // Row 2 type: Feb 14-16
+  {y:2026,m:1,start:14,end:16},
+];
+
+// Bookings
+const bookings = [
+  {y:2026,m:1,start:1,end:8,guest:'Ana García'},
+  {y:2026,m:2,start:5,end:9,guest:'Carlos M.'},
+];
+
+// Selection
+let selectedDays = new Set();
+let rangeStart = null;
+
+function isBlocked(y,m,d){
+  return blocked.some(b=>b.y===y&&b.m===m&&d>=b.start&&d<=b.end);
+}
+
+function getBooking(y,m,d){
+  return bookings.find(b=>b.y===y&&b.m===m&&d>=b.start&&d<=b.end);
+}
+
+function getPrice(dow){
+  // dow: 0=Mon..6=Sun (our grid starts Monday)
+  // fri=4,sat=5,sun=6
+  if(dow===4||dow===5) return friSatPrice;
+  if(dow===6) return sunPrice;
+  return basePrice;
+}
+
+function renderCalendar(){
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  // Monday-first: Mon=0, Sun=6
+  let startDow = firstDay.getDay(); // 0=Sun..6=Sat
+  startDow = (startDow + 6) % 7; // convert to Mon=0
+
+  const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
+  const prevDays = new Date(currentYear, currentMonth, 0).getDate();
+  const totalCells = Math.ceil((startDow + daysInMonth) / 7) * 7;
+
+  for(let i=0; i<totalCells; i++){
+    const cell = document.createElement('div');
+    let day, month, year, dow;
+
+    if(i < startDow){
+      day = prevDays - startDow + 1 + i;
+      month = currentMonth - 1;
+      year = currentYear;
+      if(month<0){month=11;year--;}
+      dow = i % 7;
+      cell.className='cal-day other-month empty';
+      cell.innerHTML=`<div class="day-num">${day}</div>`;
+    } else if(i >= startDow + daysInMonth){
+      day = i - startDow - daysInMonth + 1;
+      month = currentMonth + 1;
+      year = currentYear;
+      if(month>11){month=0;year++;}
+      dow = i % 7;
+      cell.className='cal-day other-month empty';
+      cell.innerHTML=`<div class="day-num">${day}</div>`;
+    } else {
+      day = i - startDow + 1;
+      month = currentMonth;
+      year = currentYear;
+      dow = i % 7; // 0=Mon..6=Sun
+
+      const isToday = (year===today.getFullYear()&&month===today.getMonth()&&day===today.getDate());
+      const isSat = dow === 5;
+      const isSun = dow === 6;
+      const isFriSat = dow === 4 || dow === 5;
+      const isWeekend = isFriSat || isSun;
+      const isPast = new Date(year,month,day) < new Date(today.getFullYear(),today.getMonth(),today.getDate());
+      const blocked_ = isBlocked(year,month,day);
+      const booking = getBooking(year,month,day);
+      const price = getPrice(dow);
+      const key = `${year}-${month}-${day}`;
+      const isSel = selectedDays.has(key);
+
+      let classes = 'cal-day';
+      if(isToday) classes+=' is-today';
+      if(isSat) classes+=' is-sat';
+      if(isSun) classes+=' is-sun';
+      if(isWeekend&&!blocked_&&!isSel) classes+=' is-weekend';
+      if(blocked_) classes+=' blocked';
+      if(isPast&&!isToday) classes+=' past';
+      if(isSel) classes+=' selected';
+
+      cell.className = classes;
+      cell.dataset.key = key;
+      cell.dataset.day = day;
+      cell.dataset.month = month;
+      cell.dataset.year = year;
+
+      let priceHTML = blocked_ ? '<div class="day-price" style="color:#C4C4C4;">—</div>'
+        : `<div class="day-price">Bs. ${price.toFixed(0)}<br><span>BOB</span></div>`;
+
+      let bookingChip = '';
+      if(booking && booking.start === day){
+        bookingChip = `<div class="booking-chip">${booking.guest}</div>`;
+      }
+
+      cell.innerHTML = `<div class="day-num">${day}</div>${priceHTML}${bookingChip}`;
+
+      if(!blocked_ && !isPast){
+        cell.addEventListener('click', ()=>toggleDay(key, cell));
+        cell.addEventListener('mouseenter', ()=>cell.title=`${day} de ${MONTHS_ES[month]}: Bs. ${price.toFixed(1)}`);
+      }
+    }
+
+    grid.appendChild(cell);
+  }
+
+  // Update month title
+  document.getElementById('monthTitle').textContent = MONTHS_ES[currentMonth];
+  document.getElementById('yearTitle').textContent = currentYear;
+
+  updateMonthTabs();
+  updateSelectionPanel();
+}
+
+function toggleDay(key, cell){
+  if(selectedDays.has(key)){
+    selectedDays.delete(key);
+    cell.classList.remove('selected');
+    if(cell.classList.contains('is-weekend')) cell.classList.add('is-weekend');
+  } else {
+    selectedDays.add(key);
+    cell.classList.add('selected');
+    cell.classList.remove('is-weekend');
+  }
+  updateSelectionPanel();
+}
+
+function clearSelection(){
+  selectedDays.clear();
+  renderCalendar();
+}
+
+function updateSelectionPanel(){
+  const panel = document.getElementById('selectionPanel');
+  const count = selectedDays.size;
+  if(count===0){panel.style.display='none';return;}
+  panel.style.display='';
+  document.getElementById('selectionTitle').textContent = `${count} día${count>1?'s':''} seleccionado${count>1?'s':''}`;
+
+  const days = Array.from(selectedDays).map(k=>{
+    const [y,m,d]=k.split('-').map(Number);
+    return new Date(y,m,d);
+  }).sort((a,b)=>a-b);
+
+  const fmt = d=>`${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`;
+  if(days.length===1){
+    document.getElementById('selectionRange').textContent = fmt(days[0]);
+  } else {
+    document.getElementById('selectionRange').textContent = `${fmt(days[0])} – ${fmt(days[days.length-1])}`;
+  }
+}
+
+function updateMonthTabs(){
+  const tabs = document.getElementById('monthTabs');
+  tabs.innerHTML='';
+  for(let i=0;i<4;i++){
+    let m=(currentMonth-1+i);
+    let y=currentYear;
+    if(m<0){m+=12;y--;}
+    if(m>11){m-=12;y++;}
+    const btn=document.createElement('button');
+    btn.className='mtab'+(m===currentMonth&&y===currentYear?' active':'');
+    btn.textContent=MONTHS_SHORT[m]+(y!==currentYear?` '${y%100}`:'');
+    const cm=m,cy=y;
+    btn.addEventListener('click',()=>{currentMonth=cm;currentYear=cy;renderCalendar();});
+    tabs.appendChild(btn);
+  }
+}
+
+document.getElementById('prevMonth').addEventListener('click',()=>{
+  currentMonth--;
+  if(currentMonth<0){currentMonth=11;currentYear--;}
+  renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click',()=>{
+  currentMonth++;
+  if(currentMonth>11){currentMonth=0;currentYear++;}
+  renderCalendar();
+});
+document.getElementById('todayBtn').addEventListener('click',()=>{
+  currentMonth=today.getMonth();
+  currentYear=today.getFullYear();
+  renderCalendar();
+});
+
+function showEditPriceCard() {
+  document.getElementById('price-config').style.display = 'none';
+  document.getElementById('availability-config').style.display = 'none';
+  document.getElementById('edit-price-card').style.display = '';
+}
+function hideEditPriceCard() {
+  document.getElementById('price-config').style.display = '';
+  document.getElementById('availability-config').style.display = '';
+  document.getElementById('edit-price-card').style.display = 'none';
+}
+document.getElementById('editPriceForm').onsubmit = function(e) {
+  e.preventDefault();
+  hideEditPriceCard();
+};
+
+// Abrir edición de precio al hacer click en un día
+function openEditPriceFromDay() {
+  showEditPriceCard();
+}
+// Agregar evento a cada día del calendario
+function addEditPriceDayListeners() {
+  const days = document.querySelectorAll('.cal-day:not(.empty):not(.blocked):not(.past)');
+  days.forEach(day => {
+    day.addEventListener('click', openEditPriceFromDay);
+  });
+}
+// Llamar después de renderCalendar
+const originalRenderCalendar = renderCalendar;
+renderCalendar = function() {
+  originalRenderCalendar();
+  addEditPriceDayListeners();
+};
+renderCalendar();
+</script>
+</body>
+</html>

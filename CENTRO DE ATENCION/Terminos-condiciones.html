@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <style>
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6B7280;
+        text-decoration: none;
+        transition: background 0.15s, color 0.15s;
+        border-left: 2px solid transparent;
+      }
+      .nav-item:hover {
+        background: #F8F9FC;
+        color: #1F2937;
+      }
+      .nav-item.active {
+        background: #EFEEFF;
+        color: #5B55C8;
+        border-left-color: #5B55C8;
+        font-weight: 600;
+      }
+      .nav-item .nav-num {
+        font-size: 11px;
+        font-weight: 700;
+        color: #5B55C8;
+        opacity: 0.6;
+        min-width: 18px;
+        letter-spacing: 0.04em;
+      }
+      .nav-item.active .nav-num { opacity: 1; }
+      .sidebar-sticky { position: sticky; top: 100px; }
+      .tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .tag-pill:hover {
+        border-color: #5B55C8;
+        background: #EFEEFF;
+      }
+      .tag-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #5B55C8;
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .right-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #F8F9FC;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1F2937;
+      }
+      .right-card .icon-wrap {
+        width: 32px; height: 32px;
+        background: #EFEEFF;
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .right-card .icon-wrap .material-symbols-outlined {
+        font-size: 16px;
+        color: #5B55C8;
+      }
+    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JOM — Términos y Condiciones</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5B55C8",
+            "ui-primary": "#5B55C8",
+            "ui-primary-hover": "#4A45B0",
+            "soft-highlight": "#EFEEFF",
+            "neutral-bg": "#F8F9FC",
+            "neutral-text": "#1F2937",
+            "neutral-secondary": "#6B7280",
+            "neutral-border": "#E5E7EB",
+          },
+          fontFamily: { "sans": ["Inter", "sans-serif"] },
+          borderRadius: { "jom": "12px", "card": "16px" },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Inter', sans-serif; color: #1F2937; -webkit-font-smoothing: antialiased; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .max-content-width {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  </style>
+  <style>
+    /* ── Animations ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; animation: slideUp 0.4s ease forwards; }
+    .anim-1 { animation-delay: .04s }
+    .anim-2 { animation-delay: .08s }
+    .anim-3 { animation-delay: .12s }
+    .anim-4 { animation-delay: .16s }
+    .anim-5 { animation-delay: .20s }
+    .anim-6 { animation-delay: .24s }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 48px 0 44px;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-group-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #9CA3AF; padding: 0 10px;
+      margin-top: 16px; margin-bottom: 4px;
+    }
+    .nav-group-label:first-child { margin-top: 0; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 10px;
+      font-size: 13px; font-weight: 500; color: #6B7280;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+      line-height: 1.3;
+    }
+    .nav-item:hover { background: #F8F9FC; color: #1F2937; }
+    .nav-item.active { background: #EFEEFF; color: #5B55C8; border-left-color: #5B55C8; font-weight: 600; }
+    .nav-num { font-size: 10px; font-weight: 700; color: #5B55C8; opacity: 0.55; min-width: 20px; flex-shrink: 0; }
+    .nav-item.active .nav-num { opacity: 1; }
+
+    @media (min-width: 768px) { .sidebar-sticky { position: sticky; top: 88px; max-height: calc(100vh - 112px); overflow-y: auto; } }
+
+    /* ── Section card ── */
+    .section-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .section-card-header {
+      padding: 18px 24px 16px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-card-body { padding: 24px; }
+
+    .header-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; margin-bottom: 2px; }
+    .sec-title { font-size: 17px; font-weight: 600; color: #1F2937; line-height: 1.25; }
+
+    /* ── Article block ── */
+    .article-block {
+      padding: 16px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .article-block:last-child { border-bottom: none; padding-bottom: 0; }
+    .article-block:first-child { padding-top: 0; }
+
+    .article-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #5B55C8; opacity: 0.6;
+      margin-bottom: 4px;
+    }
+    .article-title {
+      font-size: 14px; font-weight: 600; color: #1F2937;
+      margin-bottom: 8px; line-height: 1.35;
+    }
+    .article-body {
+      font-size: 13px; color: #6B7280; line-height: 1.7;
+    }
+    .article-body strong { color: #1F2937; font-weight: 600; }
+
+    /* ── Rule list ── */
+    .rule-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 12px; border-radius: 8px;
+      font-size: 13px; color: #6B7280; line-height: 1.55;
+      transition: background 0.12s;
+    }
+    .rule-item:hover { background: #F8F9FC; }
+    .rule-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+    .rule-icon .material-symbols-outlined { font-size: 16px; }
+    .rule-ok { color: #16A34A; }
+    .rule-no { color: #DC2626; }
+
+    /* ── Notice ── */
+    .notice {
+      background: #EFEEFF; border: 1px solid rgba(91,85,200,0.2);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: #1F2937; line-height: 1.6;
+    }
+    .notice .material-symbols-outlined { color: #5B55C8; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    .notice-warn {
+      background: #FFFBEB; border: 1px solid #FDE68A;
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: #1F2937; line-height: 1.6;
+    }
+    .notice-warn .material-symbols-outlined { color: #D97706; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Arbitration big notice ── */
+    .arbitration-banner {
+      background: #FFF1F2; border: 1px solid #FECACA;
+      border-radius: 12px; padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .arbitration-banner .material-symbols-outlined { color: #DC2626; font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .arbitration-banner p { font-size: 13px; color: #7F1D1D; line-height: 1.6; font-weight: 500; }
+    .arbitration-banner strong { color: #991B1B; }
+
+    /* ── Address box ── */
+    .address-box {
+      background: #F8F9FC; border: 1px solid #E5E7EB;
+      border-radius: 10px; padding: 12px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: #1F2937; line-height: 1.6;
+    }
+    .address-box .material-symbols-outlined { color: #5B55C8; font-size: 17px; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Tag pill ── */
+    .tag-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #F8F9FC; border: 1px solid #E5E7EB;
+      border-radius: 8px; padding: 4px 10px;
+      font-size: 12px; font-weight: 500; color: #1F2937;
+    }
+    .tag-dot { width: 5px; height: 5px; border-radius: 50%; background: #5B55C8; opacity: 0.5; }
+
+    /* ── Progress tracker ── */
+    .progress-bar { height: 3px; background: #E5E7EB; border-radius: 2px; position: fixed; top: 0; left: 0; z-index: 100; background: #5B55C8; width: 0; transition: width 0.1s; }
+
+    /* ── TOC link ── */
+    .toc-link {
+      display: block; font-size: 13px; color: #6B7280;
+      text-decoration: none; padding: 3px 0;
+      transition: color 0.15s;
+    }
+    .toc-link:hover { color: #5B55C8; }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="w-full border-b border-neutral-border h-20 bg-white sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-8 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+      </div>
+    
+      <div class="flex items-center gap-3">
+        <button class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <button class="w-11 h-11 flex items-center justify-center hover:bg-neutral-bg text-neutral-secondary transition-all duration-200">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="page-hero">
+    <div class="max-content-width">
+      <div class="flex items-center gap-2 mb-6">
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+        <div class="max-w-2xl">
+          <h1 class="text-[28px] font-semibold text-neutral-text leading-tight mb-3">Términos y Condiciones</h1>
+          <p class="text-sm text-neutral-secondary leading-relaxed">
+            La plataforma JOM conecta a Huéspedes con Anfitriones a través de su tecnología. Al usar la Plataforma JOM, usted celebra un contrato vinculante con JOM SRL bajo los presentes Términos de Servicio.
+          </p>
+          <!-- Quick chips -->
+          <div class="flex flex-wrap gap-2 mt-4">
+          
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 self-start md:self-auto shrink-0">
+          <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">calendar_today</span>
+            <span class="text-xs text-neutral-secondary font-medium">Actualización:</span>
+            <span class="text-xs font-semibold text-neutral-text">26 feb 2026</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white border border-neutral-border rounded-jom px-4 py-2.5">
+            <span class="material-symbols-outlined text-neutral-secondary" style="font-size:16px">import_contacts</span>
+            <span class="text-xs text-neutral-secondary font-medium">Secciones:</span>
+            <span class="text-xs font-semibold text-neutral-text">26 artículos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="max-content-width py-12">
+    <div class="flex gap-8 items-start">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden lg:block w-60 shrink-0 sidebar-sticky">
+
+        <p class="nav-group-label" style="margin-top:0">Términos para Huéspedes</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#s1" class="nav-item active" data-section="s1"><span class="nav-num">01</span>Búsqueda y Reservación</a>
+          <a href="#s2" class="nav-item" data-section="s2"><span class="nav-num">02</span>Cancelaciones y Reembolsos</a>
+          <a href="#s3" class="nav-item" data-section="s3"><span class="nav-num">03</span>Responsabilidades</a>
+        </nav>
+
+        <p class="nav-group-label">Términos para Anfitriones</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#s4" class="nav-item" data-section="s4"><span class="nav-num">04</span>Ser Anfitrión</a>
+          <a href="#s5" class="nav-item" data-section="s5"><span class="nav-num">05</span>Gestión del Anuncio</a>
+          <a href="#s6" class="nav-item" data-section="s6"><span class="nav-num">06</span>Cancelaciones (Anfitrión)</a>
+          <a href="#s7" class="nav-item" data-section="s7"><span class="nav-num">07</span>Impuestos</a>
+        </nav>
+
+        <p class="nav-group-label">Términos Generales</p>
+        <nav class="flex flex-col gap-0.5">
+          <a href="#s8" class="nav-item" data-section="s8"><span class="nav-num">08</span>Evaluaciones</a>
+          <a href="#s9" class="nav-item" data-section="s9"><span class="nav-num">09</span>Contenido</a>
+          <a href="#s10" class="nav-item" data-section="s10"><span class="nav-num">10</span>Tarifas</a>
+          <a href="#s11" class="nav-item" data-section="s11"><span class="nav-num">11</span>Reglas de la Plataforma</a>
+          <a href="#s12" class="nav-item" data-section="s12"><span class="nav-num">12</span>Terminación y Suspensión</a>
+          <a href="#s13" class="nav-item" data-section="s13"><span class="nav-num">13</span>Modificación</a>
+          <a href="#s14" class="nav-item" data-section="s14"><span class="nav-num">14</span>Resolución de Quejas</a>
+          <a href="#s15" class="nav-item" data-section="s15"><span class="nav-num">15</span>Rol de JOM</a>
+          <a href="#s16" class="nav-item" data-section="s16"><span class="nav-num">16</span>Cuentas de Miembros</a>
+          <a href="#s17" class="nav-item" data-section="s17"><span class="nav-num">17</span>Limitación de Garantías</a>
+          <a href="#s18" class="nav-item" data-section="s18"><span class="nav-num">18</span>Limitación de Responsabilidad</a>
+          <a href="#s19" class="nav-item" data-section="s19"><span class="nav-num">19</span>Indemnización</a>
+          <a href="#s22" class="nav-item" data-section="s22"><span class="nav-num">22</span>Arbitraje</a>
+          <a href="#s26" class="nav-item" data-section="s26"><span class="nav-num">26</span>Disposiciones Generales</a>
+        </nav>
+
+        <!-- Contact shortcut -->
+        <div class="mt-5 bg-soft-highlight border border-[#5B55C8]/20 rounded-card p-4 flex flex-col gap-3">
+          <p class="text-xs font-semibold text-neutral-text">¿Dudas sobre estos términos?</p>
+          <a href="mailto:legal@jom.com" class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold px-3 py-2.5 rounded-jom hover:bg-ui-primary-hover transition-colors">
+            <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+            Contactar al equipo legal
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="flex-1 flex flex-col gap-4 min-w-0">
+
+        <!-- ══ INTRO ══ -->
+        <div class="notice anim anim-1">
+          <span class="material-symbols-outlined">info</span>
+          <span>Los presentes Términos son un <strong>contrato de adhesión vinculante</strong> entre usted y JOM SRL. Al acceder o usar la Plataforma JOM, usted acepta quedar obligado por estos Términos. Léalos detenidamente antes de continuar.</span>
+        </div>
+
+        <!-- ══ SECCIÓN: Huéspedes ══ -->
+        <div id="huespedes" class="flex items-center gap-3 pt-2 anim anim-1">
+          <div class="flex-1 h-px bg-neutral-border"></div>
+          <span class="text-xs font-bold text-neutral-secondary uppercase tracking-widest px-2 flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#5B55C8">luggage</span>
+            Términos para Huéspedes
+          </span>
+          <div class="flex-1 h-px bg-neutral-border"></div>
+        </div>
+
+        <!-- §1 -->
+        <div id="s1" class="section-card anim anim-2">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">search</span>
+            </div>
+            <div class="flex-1">
+              <p class="sec-num" style="color:#5B55C8;">Artículo 1 — Huéspedes</p>
+              <h2 class="sec-title">Búsqueda y Reservación en JOM</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+
+            <div class="article-block">
+              <p class="article-num">1.1 — Búsqueda</p>
+              <p class="article-title">Cómo funciona la búsqueda</p>
+              <p class="article-body">Puede buscar Servicios del Anfitrión por tipo, destino, fechas, número de huéspedes y filtros adicionales. Los resultados se clasifican por relevancia, teniendo en cuenta precio, disponibilidad, Evaluaciones, historial del Anfitrión, popularidad y preferencias del Huésped.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">1.2 — Reservaciones</p>
+              <p class="article-title">Proceso de reserva y pago</p>
+              <p class="article-body">Al reservar, usted acepta pagar el <strong>Precio Total</strong> (precio del anuncio + tarifas de servicio + impuestos). Si paga en divisa diferente a la del anfitrión, el tipo de cambio es determinado por JOM. La confirmación de reserva constituye un contrato directo entre usted y el Anfitrión.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">1.3 — Alojamientos</p>
+              <p class="article-title">Licencia de uso del alojamiento</p>
+              <p class="article-body">Una reserva de alojamiento es una <strong>licencia limitada</strong> para ingresar, ocupar y usar el espacio. El anfitrión puede reingresar cuando sea razonablemente necesario. No puede superar el número máximo de huéspedes ni extenderse más allá de la fecha de salida sin consecuencias.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">1.4 — Servicios y Experiencias</p>
+              <p class="article-title">Reservas de Servicios, Experiencias y otros</p>
+              <p class="article-body">Su reserva le da derecho a participar en el Servicio o Experiencia. Usted es responsable de confirmar que cumple con los requisitos de edad, condición física u otros establecidos. Debe informar al Anfitrión de cualquier condición médica relevante antes de participar.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- §2 -->
+        <div id="s2" class="section-card anim anim-2">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">event_busy</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#5B55C8;">Artículo 2 — Huéspedes</p>
+              <h2 class="sec-title">Cancelaciones, Reembolsos y Modificaciones</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">2.1 — Cancelaciones y Reembolsos</p>
+              <p class="article-body">El monto reembolsado depende de la <strong>política de cancelación del Anfitrión</strong>. En casos de fuerza mayor, puede aplicar la Política de Anulación por Circunstancias Extraordinarias. Si el Anfitrión cancela, puede recibir reembolso total o asistencia para reubicar su reserva.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">2.2 — Modificaciones</p>
+              <p class="article-body">Anfitriones y Huéspedes son responsables de las modificaciones aceptadas a través de la Plataforma, incluidos cargos adicionales, tarifas e impuestos que correspondan a dichos cambios.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §3 -->
+        <div id="s3" class="section-card anim anim-2">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">assignment_ind</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#5B55C8;">Artículo 3 — Huéspedes</p>
+              <h2 class="sec-title">Sus Responsabilidades y Riesgos</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">3.1 — Responsabilidades</p>
+              <p class="article-body">Usted es responsable de sus actos y los de sus acompañantes. Debe devolver el alojamiento en el estado en que lo encontró, pagar daños si los causó, y actuar con integridad. Si reserva para menores, debe estar legalmente autorizado para hacerlo.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">3.2 — Asunción de Riesgos</p>
+              <p class="article-body">Usted asume todos los riesgos derivados del uso de la Plataforma, incluyendo estancias en alojamientos y participación en experiencias. Es su responsabilidad verificar si un Servicio del Anfitrión es adecuado para usted, incluidos riesgos de salud o seguridad.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ SECCIÓN: Anfitriones ══ -->
+        <div id="anfitriones" class="flex items-center gap-3 pt-2 anim anim-3">
+          <div class="flex-1 h-px bg-neutral-border"></div>
+          <span class="text-xs font-bold text-neutral-secondary uppercase tracking-widest px-2 flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#16A34A">home</span>
+            Términos para Anfitriones
+          </span>
+          <div class="flex-1 h-px bg-neutral-border"></div>
+        </div>
+
+        <!-- §4 -->
+        <div id="s4" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:19px">home</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#16A34A;">Artículo 4 — Anfitriones</p>
+              <h2 class="sec-title">Ser Anfitrión en JOM</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">4.1 — Rol del Anfitrión</p>
+              <p class="article-body">JOM le otorga el derecho de usar la Plataforma para compartir su espacio y ganar dinero. Usted controla el precio, la disponibilidad y las reglas de cada anuncio. Crear un anuncio es <strong>gratuito</strong>.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">4.2 — Contratar con Huéspedes</p>
+              <p class="article-body">Al aceptar una reserva, celebra un contrato directo con el Huésped. Es responsable de brindar el servicio en los términos pactados y pagar las tarifas de JOM. Condiciones adicionales en contratos complementarios deben ser coherentes con estos Términos.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">4.3 — Independencia</p>
+              <p class="article-body">Su relación con JOM es la de un <strong>proveedor independiente</strong>, no empleado ni agente. JOM no dirige ni controla su servicio. Usted tiene total discreción sobre cuándo, cómo y a qué precio ofrecer sus servicios.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §5 -->
+        <div id="s5" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:19px">edit_note</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#16A34A;">Artículo 5 — Anfitriones</p>
+              <h2 class="sec-title">Administración de su Anuncio</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">5.1 — Creación y Administración</p>
+              <p class="article-body">Su anuncio debe incluir información completa y precisa sobre el servicio, precio y normas. Debe mantener actualizado el calendario de disponibilidad y el contenido fotográfico. Se permite un anuncio por alojamiento (salvo espacios múltiples en la misma propiedad).</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">5.2 — Obligaciones Legales</p>
+              <p class="article-body">Usted es responsable de cumplir todas las leyes locales aplicables: permisos, licencias, normativas de zonificación, registro de huéspedes, leyes de arrendamiento, e impuestos. JOM provee información de carácter informativo únicamente; usted debe verificar de forma independiente sus obligaciones.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">5.3 — Resultados de Búsqueda</p>
+              <p class="article-body">La clasificación de anuncios depende de múltiples factores: parámetros de búsqueda del huésped, precio, disponibilidad, calidad de imágenes, evaluaciones, popularidad, historial del anfitrión y preferencias del usuario. JOM puede permitir anuncios promocionados mediante pago adicional.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">5.4 — Responsabilidades del Anfitrión</p>
+              <p class="article-body">Usted fija el precio y las reglas de su anuncio. Todos los cargos adicionales deben estar descritos en el anuncio. <strong>No puede cobrar tarifas fuera de la Plataforma</strong>, salvo excepciones autorizadas por la Política de Tarifas Fuera de Línea.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §6 -->
+        <div id="s6" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:19px">cancel</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#16A34A;">Artículo 6 — Anfitriones</p>
+              <h2 class="sec-title">Cancelaciones y Modificaciones (Anfitrión)</h2>
+            </div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">6.1 — Cancelaciones</p>
+              <p class="article-body">Como Anfitrión, <strong>no debe cancelar sin motivo válido</strong>. Cancelaciones injustificadas pueden resultar en tarifas penales y otras consecuencias. Si un Huésped sufre un contratiempo de reserva, JOM puede reducir su cobro en el monto reembolsado al Huésped.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">6.2 — Modificaciones</p>
+              <p class="article-body">Anfitriones y Huéspedes son responsables de las modificaciones de reservación aceptadas en la Plataforma, incluyendo importes adicionales, tarifas e impuestos asociados.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §7 -->
+        <div id="s7" class="section-card anim anim-3">
+          <div class="section-card-header" style="background:#F0FDF4;">
+            <div class="header-icon" style="background:#DCFCE7;">
+              <span class="material-symbols-outlined" style="color:#16A34A;font-size:19px">receipt_long</span>
+            </div>
+            <div>
+              <p class="sec-num" style="color:#16A34A;">Artículo 7 — Anfitriones</p>
+              <h2 class="sec-title">Impuestos</h2>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <div class="notice-warn">
+              <span class="material-symbols-outlined">warning</span>
+              <span>Como Anfitrión, usted es <strong>único responsable</strong> de declarar, recaudar y liquidar IVA, impuestos sobre el alojamiento, tasas turísticas, impuestos a la renta y cualquier otro gravamen aplicable en su jurisdicción. JOM no actúa como agente fiscal.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ SECCIÓN: Generales ══ -->
+        <div id="generales" class="flex items-center gap-3 pt-2 anim anim-4">
+          <div class="flex-1 h-px bg-neutral-border"></div>
+          <span class="text-xs font-bold text-neutral-secondary uppercase tracking-widest px-2 flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#6B7280">description</span>
+            Términos Generales
+          </span>
+          <div class="flex-1 h-px bg-neutral-border"></div>
+        </div>
+
+        <!-- §8 -->
+        <div id="s8" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">star</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 8</p><h2 class="sec-title">Evaluaciones</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">Tras cada estancia, Huéspedes y Anfitriones pueden evaluarse mutuamente. Las evaluaciones deben ser precisas y no contener lenguaje discriminatorio, ofensivo o difamatorio. JOM no verifica la exactitud de las evaluaciones y no garantiza que sean correctas.</p>
+          </div>
+        </div>
+
+        <!-- §9 -->
+        <div id="s9" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">photo_library</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 9</p><h2 class="sec-title">Contenido</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body mb-4">Al proporcionar Contenido (textos, fotos, videos, etc.), usted otorga a JOM una <strong>licencia no exclusiva, mundial, libre de regalías y perpetua</strong> para usar, almacenar, copiar, modificar, distribuir y explotar dicho contenido para operar y promover la Plataforma. Usted garantiza ser titular o estar autorizado a conceder dichos derechos. El Contenido no puede ser discriminatorio, obsceno, acosador, engañoso ni violento.</p>
+            <div class="notice">
+              <span class="material-symbols-outlined">translate</span>
+              <span>JOM puede ofrecer herramientas de traducción automática. No garantiza la precisión de las traducciones; los Miembros son responsables de verificarlas.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- §10 -->
+        <div id="s10" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">payments</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 10</p><h2 class="sec-title">Tarifas</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">JOM puede cobrar tarifas de servicio a Anfitriones y Huéspedes por el uso de la Plataforma. Las tarifas aplicables se informan antes de confirmar la reserva. Salvo disposición contraria, <strong>las tarifas de servicio no son reembolsables</strong>. JOM puede modificar tarifas notificando con anticipación; los cambios no afectan reservas ya realizadas.</p>
+          </div>
+        </div>
+
+        <!-- §11 -->
+        <div id="s11" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">rule</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 11</p><h2 class="sec-title">Reglas de la Plataforma JOM</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="text-sm text-neutral-secondary mb-4 leading-relaxed">Todos los Miembros deben seguir estas reglas. Incumplirlas puede resultar en suspensión o cancelación de cuenta.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1 mb-4">
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-ok">check_circle</span></div>
+                <span>Actúe con integridad y respeto hacia los demás.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-ok">check_circle</span></div>
+                <span>Cumpla sus obligaciones legales en todo momento.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-ok">check_circle</span></div>
+                <span>Lea y siga los Términos, Políticas y Estándares de JOM.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No mienta, tergiverse ni finja ser otra persona.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No utilice bots, IA ni medios automatizados no autorizados.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No solicite pagos ni reservas fuera de la Plataforma.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No discrimine ni acose a otros usuarios o miembros.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No organice eventos o fiestas no autorizados.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No realice ingeniería inversa ni comprometa la plataforma.</span>
+              </div>
+              <div class="rule-item">
+                <div class="rule-icon"><span class="material-symbols-outlined rule-no">cancel</span></div>
+                <span>No ofrezca ni facilite servicios de prostitución o trata.</span>
+              </div>
+            </div>
+
+            <div class="article-block" style="padding-top:16px">
+              <p class="article-num">11.2 — Denuncias</p>
+              <p class="article-body">Si un Miembro representa riesgo inminente de daño, contacte primero a las autoridades locales. Luego puede reportar a JOM. Ante infracciones de Normas, comunique sus inquietudes directamente a JOM a través de los canales de soporte.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §12 -->
+        <div id="s12" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">manage_accounts</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 12</p><h2 class="sec-title">Terminación, Suspensión y Medidas</h2></div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">12.2 — Resolución</p>
+              <p class="article-body">Usted puede rescindir este contrato en cualquier momento eliminando su cuenta. JOM puede rescindir con <strong>15 días de anticipación</strong> por cualquier motivo, o de inmediato si usted incumple estos Términos. Cuentas inactivas por más de 2 años pueden cancelarse sin previo aviso.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">12.3 — Infracciones</p>
+              <p class="article-body">Ante incumplimientos, JOM puede: suspender el acceso, eliminar anuncios o contenido, cancelar reservas y revocar estados especiales. En infracciones menores, JOM notificará con anticipación y dará oportunidad de resolver el problema.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">12.5 — Efectos de la Terminación</p>
+              <p class="article-body">Si un Anfitrión cancela su cuenta, sus reservas confirmadas se cancelan y los Huéspedes reciben reembolso total. Si un Huésped cancela su cuenta, los reembolsos se rigen por la política de cancelación aplicable. Una vez rescindido el contrato, <strong>no hay derecho a restauración de cuenta</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- §13 -->
+        <div id="s13" class="section-card anim anim-4">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">update</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 13</p><h2 class="sec-title">Modificación de Términos</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">JOM puede modificar estos Términos en cualquier momento. Los cambios importantes se notificarán por correo electrónico u otros medios con <strong>al menos 30 días de anticipación</strong>. Si no está de acuerdo, debe rescindir el contrato antes de la fecha de entrada en vigor. El uso continuo implica aceptación.</p>
+          </div>
+        </div>
+
+        <!-- §14 -->
+        <div id="s14" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">report_problem</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 14</p><h2 class="sec-title">Resolución de Quejas y Reportes de Daños</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">Si un Miembro aporta evidencia válida de daños a bienes muebles o inmuebles, pérdida de ingresos o costos de limpieza extraordinarios causados por otro Miembro, puede notificarlo a JOM y solicitar indemnización a través del Centro de Resoluciones. JOM determinará a su discreción la validez del reclamo y puede cobrar el monto correspondiente a través de JOM Pagos.</p>
+          </div>
+        </div>
+
+        <!-- §15 -->
+        <div id="s15" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">corporate_fare</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 15</p><h2 class="sec-title">El Rol de JOM</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">JOM provee la plataforma pero <strong>no controla la conducta de Huéspedes ni Anfitriones</strong>. No es propietaria, no ofrece ni administra los servicios publicados. Tiene derecho —mas no obligación— de supervisar el uso, editar contenidos, cancelar reservas o tomar medidas para proteger la seguridad y el cumplimiento de los Términos.</p>
+          </div>
+        </div>
+
+        <!-- §16 -->
+        <div id="s16" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">person</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 16</p><h2 class="sec-title">Cuentas de los Miembros</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">El registro está disponible para personas mayores de <strong>18 años</strong> y entidades jurídicas. Debe proporcionar información precisa y mantenerla actualizada. No puede transferir su cuenta. Es responsable de la confidencialidad de sus credenciales y de notificar a JOM si sospecha un acceso no autorizado.</p>
+          </div>
+        </div>
+
+        <!-- §17 -->
+        <div id="s17" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#FFFBEB;">
+            <div class="header-icon" style="background:#FEF3C7;">
+              <span class="material-symbols-outlined" style="color:#D97706;font-size:19px">warning</span>
+            </div>
+            <div><p class="sec-num" style="color:#D97706;">Artículo 17</p><h2 class="sec-title">Alcance y Limitación de las Garantías</h2></div>
+          </div>
+          <div class="section-card-body">
+            <div class="notice-warn">
+              <span class="material-symbols-outlined">info</span>
+              <span>La Plataforma JOM se proporciona <strong>"tal cual es"</strong>, sin garantías expresas ni implícitas. JOM no garantiza la conducta, calidad ni legalidad de los Anfitriones, Servicios o Anuncios; ni la disponibilidad ininterrumpida de la Plataforma; ni que la verificación de identidad prevenga conductas indebidas futuras.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- §18 -->
+        <div id="s18" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#FFFBEB;">
+            <div class="header-icon" style="background:#FEF3C7;">
+              <span class="material-symbols-outlined" style="color:#D97706;font-size:19px">gavel</span>
+            </div>
+            <div><p class="sec-num" style="color:#D97706;">Artículo 18</p><h2 class="sec-title">Limitaciones de Responsabilidad</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">JOM y sus filiales no serán responsables por daños incidentales, especiales, consecuentes o ejemplares: lucro cesante, pérdida de datos, daño a la reputación, interrupciones de servicio o daños personales que surjan del uso —o imposibilidad de uso— de la Plataforma, ya sea por contrato, agravio u otra teoría jurídica.</p>
+          </div>
+        </div>
+
+        <!-- §19 -->
+        <div id="s19" class="section-card anim anim-5">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">shield</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 19</p><h2 class="sec-title">Indemnización</h2></div>
+          </div>
+          <div class="section-card-body">
+            <p class="article-body">Usted acepta indemnizar y liberar a JOM y sus afiliados de cualquier reclamo, daño o gasto que surja de: (i) incumplimiento de estos Términos, (ii) uso inadecuado de la Plataforma, (iii) interacción con otros Miembros, (iv) incumplimiento de obligaciones fiscales, o (v) infracción de leyes o derechos de terceros.</p>
+          </div>
+        </div>
+
+        <!-- ══ SECCIÓN: Arbitraje ══ -->
+        <div id="arbitraje" class="flex items-center gap-3 pt-2 anim anim-5">
+          <div class="flex-1 h-px bg-neutral-border"></div>
+          <span class="text-xs font-bold text-neutral-secondary uppercase tracking-widest px-2 flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#DC2626">gavel</span>
+            Resolución de Controversias
+          </span>
+          <div class="flex-1 h-px bg-neutral-border"></div>
+        </div>
+
+        <!-- §22 -->
+        <div id="s22" class="section-card anim anim-6">
+          <div class="section-card-header" style="background:#FFF1F2;">
+            <div class="header-icon" style="background:#FFE4E6;">
+              <span class="material-symbols-outlined" style="color:#DC2626;font-size:19px">gavel</span>
+            </div>
+            <div class="flex-1">
+              <p class="sec-num" style="color:#DC2626;">Artículo 22</p>
+              <h2 class="sec-title">Acuerdo de Arbitraje — Bolivia</h2>
+            </div>
+            <span class="hidden sm:inline-flex items-center gap-1.5 bg-[#FFE4E6] border border-[#FECACA] text-[#B91C1C] text-xs font-semibold px-3 py-1.5 rounded-full shrink-0">
+              <span class="material-symbols-outlined" style="font-size:13px">priority_high</span>Leer detenidamente
+            </span>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+
+            <div class="arbitration-banner">
+              <span class="material-symbols-outlined">warning</span>
+              <p>FAVOR DE LEER DETENIDAMENTE. Usted y JOM acuerdan resolver todas las disputas mediante <strong>arbitraje individual vinculante</strong>. Esto incluye una <strong>renuncia a demanda colectiva</strong> y una <strong>renuncia a juicio con jurado</strong>. Este acuerdo reemplaza todas las versiones anteriores.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.1 — Ámbito de Aplicación</p>
+              <p class="article-body">Válido para Miembros residentes o establecidos en <strong>Bolivia</strong>. El arbitraje se llevará ante el Centro de Conciliación y Arbitraje de CAINCO, Santa Cruz de la Sierra.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.2 — Proceso en Dos Etapas</p>
+              <p class="article-body"><strong>1.</strong> Negociación informal con el equipo de atención al cliente de JOM. <strong>2.</strong> Si no se resuelve, arbitraje vinculante. Ambas partes también pueden recurrir al tribunal de reclamos menores.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.3 — Notificación Previa Obligatoria</p>
+              <p class="article-body">Al menos <strong>30 días antes</strong> del arbitraje, debe enviar una notificación escrita individualizada a JOM e intentar resolver la disputa de buena fe.</p>
+              <div class="address-box mt-3">
+                <span class="material-symbols-outlined">location_on</span>
+                <div>
+                  <p class="font-semibold text-sm text-neutral-text mb-0.5">Dirección para notificaciones</p>
+                  <p class="text-xs text-neutral-secondary">TORRES ALAS I, Piso 14 — Equipetrol, Santa Cruz, Bolivia</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.5 — Excepciones al Arbitraje</p>
+              <p class="article-body">Se exceptúan del arbitraje: (i) reclamos de propiedad intelectual, (ii) medidas cautelares de emergencia, (iii) recursos de medidas cautelares públicas, (iv) litigios vejatorios, y (v) reclamos individuales de agresión o acoso sexual.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.11 — Renuncia a Juicio por Jurado</p>
+              <p class="article-body">Usted y JOM <strong>renuncian al derecho a juicio con jurado</strong> en todas las disputas sometidas a arbitraje.</p>
+            </div>
+
+            <div class="article-block">
+              <p class="article-num">22.12 — Sin Demandas Colectivas</p>
+              <p class="article-body">Ambas partes <strong>renuncian al derecho de participar en demandas colectivas</strong> o procedimientos representativos. El árbitro no puede consolidar más de una reclamación de una persona.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- §26 -->
+        <div id="s26" class="section-card anim anim-6">
+          <div class="section-card-header" style="background:#F8F9FC;">
+            <div class="header-icon" style="background:#EFEEFF;">
+              <span class="material-symbols-outlined text-primary" style="font-size:19px">menu_book</span>
+            </div>
+            <div><p class="sec-num" style="color:#5B55C8;">Artículo 26</p><h2 class="sec-title">Disposiciones Generales</h2></div>
+          </div>
+          <div class="section-card-body flex flex-col gap-0">
+            <div class="article-block">
+              <p class="article-num">26.1 — Contrato Completo</p>
+              <p class="article-body">Estos Términos constituyen el <strong>acuerdo completo</strong> entre usted y JOM, y sustituyen cualquier acuerdo anterior, escrito u oral.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">26.3 — Cesión</p>
+              <p class="article-body">Usted no puede ceder este contrato sin consentimiento escrito previo de JOM. JOM puede cederlo con 30 días de anticipación.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">26.5 — Servicios de Terceros</p>
+              <p class="article-body">La Plataforma puede contener enlaces a servicios de terceros. JOM no es responsable de su disponibilidad ni exactitud. Los enlaces no constituyen respaldo de dichos servicios.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">26.9 — Fuerza Mayor</p>
+              <p class="article-body">JOM no será responsable por incumplimientos causados por circunstancias fuera de su control razonable: desastres naturales, guerra, pandemias, actos de autoridades, huelgas u otras causas imprevisibles e inevitables.</p>
+            </div>
+            <div class="article-block">
+              <p class="article-num">26.12 — Contáctenos</p>
+              <p class="article-body">Si tiene preguntas sobre estos Términos, puede contactarnos por correo electrónico a través de los canales habilitados en la Plataforma JOM.</p>
+              <div class="address-box mt-3">
+                <span class="material-symbols-outlined">mail</span>
+                <div>
+                  <p class="font-semibold text-sm text-neutral-text mb-0.5">Equipo Legal JOM</p>
+                  <a href="mailto:legal@jom.com" class="text-xs text-primary hover:underline">legal@jom.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="bg-neutral-bg border-t border-neutral-border pt-16 pb-12">
+    <div class="max-content-width">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-2">
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-primary">jom</span>
+          </div>
+          <p class="text-neutral-secondary text-sm leading-relaxed">
+            Gestión profesional inmobiliaria. Descubre lugares increíbles en toda Bolivia con la mayor confianza.
+          </p>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Compañía</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Sobre Jom</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Cómo trabajamos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Contáctanos</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Prensa</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Legal</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Privacidad y cookies</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors font-semibold" href="#">Términos y condiciones</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Política de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Seguridad</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-neutral-text font-semibold text-sm">Soporte</h4>
+          <div class="flex flex-col gap-3">
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Centro de Ayuda</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Opciones de cancelación</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Confianza y seguridad</a>
+            <a class="text-neutral-secondary hover:text-primary text-sm transition-colors" href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-neutral-secondary text-xs">© 2026 JOM SRL. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-6">
+          <div class="flex gap-4">
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
+            <a class="text-neutral-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">camera</span></a>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Español (BO)</button>
+            <button class="text-xs font-medium text-neutral-secondary hover:text-primary">Inglés (US)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Reading progress bar */
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+      document.getElementById('progressBar').style.width = (scrolled * 100) + '%';
+    });
+
+    /* Sidebar active on scroll */
+    const sections = document.querySelectorAll('[id^="s"]');
+    const navLinks = document.querySelectorAll('.nav-item[data-section]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

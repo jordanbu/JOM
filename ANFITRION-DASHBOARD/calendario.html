@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JOM - Calendario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',sans-serif;background:#F8F9FC;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+        .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;}
+        .top-bar{height:64px;background:white;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;justify-content:space-between;padding:0 32px;flex-shrink:0;z-index:100;}
+        .logo{display:flex;align-items:center;gap:8px;}
+        .logo-box{width:32px;height:32px;background:#5B55C8;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:11px;}
+        .logo-text{font-size:18px;font-weight:900;color:#1F2937;letter-spacing:-0.5px;}
+        .app-body{display:flex;flex:1;overflow:hidden;}
+        .sidenav{width:224px;background:white;border-right:1px solid #E5E7EB;padding:20px 12px;flex-shrink:0;}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:500;color:#6B7280;text-decoration:none;transition:background 0.12s;margin-bottom:2px;}
+        .nav-link:hover{background:#F3F4F6;}
+        .nav-link.active{background:#EFEEFF;color:#5B55C8;font-weight:600;}
+        .main{flex:1;display:flex;flex-direction:column;padding:20px;gap:16px;overflow:hidden;}
+        .page-hdr{background:white;border:1px solid #E5E7EB;border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;flex-wrap:wrap;gap:12px;}
+        .page-hdr h1{font-size:17px;font-weight:700;color:#1F2937;}
+        .page-hdr p{font-size:12px;color:#9CA3AF;margin-top:2px;}
+        .btn-primary{background:#5B55C8;color:white;border:none;border-radius:9px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+        .btn-primary:hover{background:#4A45B0;}
+        .btn-outline{background:white;color:#374151;border:1px solid #E5E7EB;border-radius:9px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+        .btn-outline:hover{background:#F9FAFB;}
+        .btn-ghost{background:white;width:30px;height:30px;border:1px solid #E5E7EB;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#374151;flex-shrink:0;}
+        .btn-ghost:hover{background:#F3F4F6;}
+        .legend{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+        .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:#6B7280;}
+        .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+        .cal-card{flex:1;background:white;border:1px solid #E5E7EB;border-radius:14px;overflow:hidden;min-height:0;display:flex;flex-direction:column;}
+        .cal-scroll{flex:1;overflow:auto;min-height:0;}
+        .cal-table{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;}
+
+        /* STICKY PROPERTY COLUMN */
+        .col-prop{position:sticky;left:0;z-index:15;width:230px;min-width:230px;background:white;border-right:2px solid #E5E7EB;}
+        thead .col-prop{z-index:30;}
+
+        /* DAY COLUMNS */
+        .col-day{width:76px;min-width:76px;text-align:center;border-right:1px solid #F0F0F0;}
+        .col-day:last-child{border-right:none;}
+
+        /* MONTH HEADER ROW */
+        thead tr.row-months th{height:40px;background:#F9FAFB;border-bottom:1px solid #E5E7EB;font-size:12px;font-weight:700;color:#374151;text-align:center;position:sticky;top:0;z-index:20;}
+        thead tr.row-months th.col-prop{position:sticky;left:0;top:0;z-index:31;font-size:11px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.06em;text-align:left;padding:0 16px;}
+
+        /* DAYS HEADER ROW */
+        thead tr.row-days th{height:52px;background:white;border-bottom:2px solid #E5E7EB;position:sticky;top:40px;z-index:20;text-align:center;}
+        thead tr.row-days th.col-prop{position:sticky;left:0;top:40px;z-index:31;padding:0 14px;}
+
+        .day-name{font-size:10px;font-weight:500;color:#9CA3AF;}
+        .day-num{font-size:14px;font-weight:700;color:#1F2937;margin-top:1px;}
+        .d-sat{}
+        .d-sat .day-name{}
+        .d-sun{}
+        .d-sun .day-name{}
+        .d-today{background:#EFEEFF !important;}
+        .d-today .day-name,.d-today .day-num{color:#5B55C8;}
+        .m-sep{border-right:2px solid #D1D5DB !important;}
+
+        /* BODY ROWS */
+        tbody tr{height:66px;}
+        tbody tr:not(:last-child) td{border-bottom:1px solid #F3F4F6;}
+        tbody tr:hover td.col-prop{background:#FAFAFA;}
+        tbody td.col-prop{height:66px;background:white;padding:0 14px;}
+        .prop-inner{display:flex;align-items:center;gap:10px;height:100%;}
+        .prop-thumb{width:40px;height:40px;border-radius:9px;object-fit:cover;flex-shrink:0;border:1px solid #F0F0F0;}
+        .prop-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .prop-name{font-size:12px;font-weight:700;color:#1F2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+        .prop-city{font-size:11px;color:#9CA3AF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+
+        /* PRICE CELLS */
+        tbody td.col-day{text-align:center;cursor:pointer;vertical-align:middle;transition:background 0.1s;}
+        tbody td.col-day:hover{background:rgba(91,85,200,0.1) !important;}
+        .pv{font-size:12px;font-weight:600;color:#374151;line-height:1;}
+        .pu{font-size:10px;color:#9CA3AF;margin-top:2px;}
+
+        /* CELL STATES */
+        .c-sel{background:#5B55C8 !important;}
+        .c-sel .pv{color:white;}
+        .c-sel .pu{color:rgba(255,255,255,0.55);}
+        .c-sat{}
+        .c-sat .pv{}
+        .c-sun{}
+        .c-sun .pv{}
+        .c-today{background:#EFEEFF;}
+        .c-today .pv{color:#5B55C8;}
+        .c-today .pu{color:#A5B4FC;}
+        .c-blocked{background:repeating-linear-gradient(135deg,#F9FAFB 0px,#F9FAFB 4px,#EBEBEB 4px,#EBEBEB 8px) !important;cursor:not-allowed !important;}
+        .c-blocked .pv{color:#C4C4C4;}
+        .c-blocked .pu{display:none;}
+    </style>
+</head>
+<body>
+<header class="top-bar">
+    <div class="logo">
+        <div class="logo-box">JOM</div>
+        <span class="logo-text">jom</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px;">
+        <button style="display:flex;align-items:center;gap:5px;color:#6B7280;font-size:13px;font-weight:500;background:none;border:none;cursor:pointer;"><span class="material-symbols-outlined" style="font-size:18px;">language</span>Español (BO)</button>
+        <button style="position:relative;background:none;border:none;cursor:pointer;color:#6B7280;"><span class="material-symbols-outlined" style="font-size:22px;">notifications</span><span style="position:absolute;top:-2px;right:-2px;width:15px;height:15px;background:#5B55C8;border-radius:50%;border:2px solid white;font-size:9px;color:white;font-weight:700;display:flex;align-items:center;justify-content:center;">3</span></button>
+        <div style="display:flex;align-items:center;gap:8px;cursor:pointer;"><div style="width:34px;height:34px;border-radius:50%;overflow:hidden;border:1px solid #E5E7EB;"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAatbGIJ3D6LCFuOJXnyiZAl5lApDDaIQkA2Ea24LuYAYP4gq2Drd_V5m77Ix4Z9reeHXN3KwH25TAQbiMFzLVFkgUI2rwswEwjO5Bi_N3_1CRaSWO7ooIIQectBDWJnuC2u-BFGv7hZSPUft_nbd4wNCga6BpixQCHHOXoE7ixYfi7A6nMlm9WsYyuhuT2dl7wBXPPYS20fdxozGZ9xTUJee3ZEeSsY5QZ-58iVGHwNroLFBtysTRiyGL_JOo2e5sxCm0jEV9C7ILc" style="width:100%;height:100%;object-fit:cover;" alt=""/></div><span class="material-symbols-outlined" style="font-size:20px;color:#6B7280;">menu</span></div>
+    </div>
+</header>
+<div class="app-body">
+    <aside class="sidenav">
+        <a href="#" class="nav-link"><span class="material-symbols-outlined" style="font-size:18px;">today</span>Hoy</a>
+        <a href="#" class="nav-link"><span class="material-symbols-outlined" style="font-size:18px;">home</span>Anuncios</a>
+        <a href="#" class="nav-link active"><span class="material-symbols-outlined" style="font-size:18px;">calendar_month</span>Calendario</a>
+        <a href="#" class="nav-link"><span class="material-symbols-outlined" style="font-size:18px;">chat</span>Mensajería</a>
+        <a href="#" class="nav-link"><span class="material-symbols-outlined" style="font-size:18px;">dashboard</span>Dashboard</a>
+    </aside>
+    <main class="main">
+        <div class="page-hdr">
+            <div><h1>Calendario de precios</h1><p>Gestiona disponibilidad y precios por día</p></div>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                <div class="legend">
+                    <div class="leg"><div class="leg-dot" style="background:#5B55C8;"></div>Seleccionado</div>
+                    <div class="leg"><div class="leg-dot" style="background:repeating-linear-gradient(135deg,#F9FAFB,#F9FAFB 3px,#E0E0E0 3px,#E0E0E0 6px);border:1px solid #E5E7EB;"></div>Bloqueado</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                </div>
+            </div>
+        </div>
+        <div class="cal-card">
+            <div class="cal-scroll">
+                <table class="cal-table">
+                    <thead>
+                        <tr class="row-months">
+                            <th class="col-prop">Anuncio</th>
+                            <th class="col-day m-sep" colspan="3">Enero 2026</th>
+                            <th class="col-day" colspan="28" style="border-right:none;">Febrero 2026</th>
+                        </tr>
+                        <tr class="row-days">
+                            <th class="col-prop">
+                                <div style="position:relative;">
+                                    <span class="material-symbols-outlined" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:16px;color:#9CA3AF;pointer-events:none;">search</span>
+                                    <input type="text" placeholder="Buscar propiedad" style="width:100%;padding:7px 8px 7px 30px;border:1px solid #E5E7EB;border-radius:8px;font-size:12px;outline:none;color:#374151;background:white;" onfocus="this.style.borderColor='#5B55C8'" onblur="this.style.borderColor='#E5E7EB'">
+                                </div>
+                            </th>
+                            <th class="col-day"><div class="day-name">Mié</div><div class="day-num">29</div></th>
+                            <th class="col-day"><div class="day-name">Jue</div><div class="day-num">30</div></th>
+                            <th class="col-day m-sep"><div class="day-name">Vie</div><div class="day-num">31</div></th>
+                            <th class="col-day d-sat"><div class="day-name">Sáb</div><div class="day-num">1</div></th>
+                            <th class="col-day d-sun"><div class="day-name">Dom</div><div class="day-num">2</div></th>
+                            <th class="col-day"><div class="day-name">Lun</div><div class="day-num">3</div></th>
+                            <th class="col-day"><div class="day-name">Mar</div><div class="day-num">4</div></th>
+                            <th class="col-day"><div class="day-name">Mié</div><div class="day-num">5</div></th>
+                            <th class="col-day"><div class="day-name">Jue</div><div class="day-num">6</div></th>
+                            <th class="col-day"><div class="day-name">Vie</div><div class="day-num">7</div></th>
+                            <th class="col-day d-sat"><div class="day-name">Sáb</div><div class="day-num">8</div></th>
+                            <th class="col-day d-sun"><div class="day-name">Dom</div><div class="day-num">9</div></th>
+                            <th class="col-day"><div class="day-name">Lun</div><div class="day-num">10</div></th>
+                            <th class="col-day"><div class="day-name">Mar</div><div class="day-num">11</div></th>
+                            <th class="col-day d-today"><div class="day-name">Mié</div><div class="day-num">12</div></th>
+                            <th class="col-day"><div class="day-name">Jue</div><div class="day-num">13</div></th>
+                            <th class="col-day"><div class="day-name">Vie</div><div class="day-num">14</div></th>
+                            <th class="col-day d-sat"><div class="day-name">Sáb</div><div class="day-num">15</div></th>
+                            <th class="col-day d-sun"><div class="day-name">Dom</div><div class="day-num">16</div></th>
+                            <th class="col-day"><div class="day-name">Lun</div><div class="day-num">17</div></th>
+                            <th class="col-day"><div class="day-name">Mar</div><div class="day-num">18</div></th>
+                            <th class="col-day"><div class="day-name">Mié</div><div class="day-num">19</div></th>
+                            <th class="col-day"><div class="day-name">Jue</div><div class="day-num">20</div></th>
+                            <th class="col-day"><div class="day-name">Vie</div><div class="day-num">21</div></th>
+                            <th class="col-day d-sat"><div class="day-name">Sáb</div><div class="day-num">22</div></th>
+                            <th class="col-day d-sun"><div class="day-name">Dom</div><div class="day-num">23</div></th>
+                            <th class="col-day"><div class="day-name">Lun</div><div class="day-num">24</div></th>
+                            <th class="col-day"><div class="day-name">Mar</div><div class="day-num">25</div></th>
+                            <th class="col-day"><div class="day-name">Mié</div><div class="day-num">26</div></th>
+                            <th class="col-day"><div class="day-name">Jue</div><div class="day-num">27</div></th>
+                            <th class="col-day" style="border-right:none;"><div class="day-name">Vie</div><div class="day-num">28</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ROW 1: Casa Tarija -->
+                        <tr>
+                            <td class="col-prop"><div class="prop-inner"><img class="prop-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE7ypAsdVKRmiKgOLihAEM9lkK-cFtap5WajuR-noEyTeJEMT7JH9LjLIarwevU_HTUmoGDnKvdejSTBIGBOYfnXjHP4Fjw2HEqfBXKmpx13dSoGPOmcYyp1_W8AFy3VA7DREq15w3Vsox57A0txr5igJNlcJvs-8FHA3dGwQMDMnF81G0MZeWlKUbV0-Hfjh6Qy84PT_2eMeikI_d30k6pqOrH8tIGBxhKAvHlL-ywSFtuUXXFsAD5j5KnUerbSFBGAS0CQSBrSRK" alt=""/><div><div class="prop-name">Casa Tarija Hermosa</div><div class="prop-city">Tarija, Bolivia</div></div></div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day m-sep"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sel"><div class="pv">180.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">150.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">200.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-today"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">150.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">200.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">150.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">200.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                            <td class="col-day" style="border-right:none;"><div class="pv">127.5</div><div class="pu">BOB</div></td>
+                        </tr>
+                        <!-- ROW 2: Departamento Centro -->
+                        <tr>
+                            <td class="col-prop"><div class="prop-inner"><img class="prop-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfuZOlhWzIcFNpp-XPACSBmZc_hd3Rfa-urnaTCCgAFX9QE7iuWx1HiZj0loPSLHx2J1k-g_2BFcvzLeXk0RCXp_odBFtY4pkMKW1i32uVaJ3M8BUPmdqKNDmmAbdfTzUjOZRR4_rsgf93LSIobe7BTW0TWwuzziLFl5xjmwJIDpsRTXEKSSyolqihPD0HMJZeK6ugI7rVOFzQyC_rtwFZHbygkBBJZom1IquuBcSxvTxJMefhNB0nucc1VKDdHx_sO4Mz4HRmUzM" alt=""/><div><div class="prop-name">Departamento Centro</div><div class="prop-city">Santa Cruz, Bolivia</div></div></div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day m-sep"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">320.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">400.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">320.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">400.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-today"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">320.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">400.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day" style="border-right:none;"><div class="pv">280.0</div><div class="pu">BOB</div></td>
+                        </tr>
+                        <!-- ROW 3: Cabana -->
+                        <tr>
+                            <td class="col-prop"><div class="prop-inner"><img class="prop-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUAcsMCRwXrOx90JG806IWdEaJWwpfU50P26sGrZ7aXBpIcX99AJckaARYUNE-1P6LFrfJAcPHGJlqXfQTyLVWurViiIqyZhm4WtxBN0SKU67MNyhrf9ApBZOJbTn0p2BTt3a0-lT0zvIXs8PC9WIosyNxDwnanbtdY_Q5jWu2CadjTwfMhcNzmnDKRjTnLU90-HyntsSyhWzHdcul5sHjyO06sNtVPoyb60-i5HNT3fg1LnZ1uTFDEUE4Mrdmf5whTqjs-zRfLVb" alt=""/><div><div class="prop-name">Cabaña Cochabamba</div><div class="prop-city">Cochabamba, Bolivia</div></div></div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day m-sep"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">650.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">750.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">650.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">750.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-today"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">650.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">750.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">650.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">750.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day" style="border-right:none;"><div class="pv">550.0</div><div class="pu">BOB</div></td>
+                        </tr>
+                        <!-- ROW 4: Loft -->
+                        <tr>
+                            <td class="col-prop"><div class="prop-inner"><div class="prop-icon" style="background:#EFEEFF;color:#5B55C8;"><span class="material-symbols-outlined" style="font-size:20px;">apartment</span></div><div><div class="prop-name">Loft Zona Sur</div><div class="prop-city">La Paz, Bolivia</div></div></div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day m-sep"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">440.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">500.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">440.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">500.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-today"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">440.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">500.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day c-blocked"><div class="pv">—</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day" style="border-right:none;"><div class="pv">380.0</div><div class="pu">BOB</div></td>
+                        </tr>
+                        <!-- ROW 5: Villa -->
+                        <tr>
+                            <td class="col-prop"><div class="prop-inner"><div class="prop-icon" style="background:#DCFCE7;color:#16A34A;"><span class="material-symbols-outlined" style="font-size:20px;">cottage</span></div><div><div class="prop-name">Villa El Trompillo</div><div class="prop-city">Santa Cruz, Bolivia</div></div></div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day m-sep"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">720.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">820.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">720.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">820.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-today"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">720.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">820.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sat"><div class="pv">720.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day c-sun"><div class="pv">820.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                            <td class="col-day" style="border-right:none;"><div class="pv">620.0</div><div class="pu">BOB</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
